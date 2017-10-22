@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        style="@style/Header_Text"
+        android:text="PAY YOUR BILL" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@drawable/bckgrd_text_fields"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Text_Tiny"
+            android:text="Enter your phone number"
+            android:textColor="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/country_code"
+                style="@style/Text_Tiny"
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:text="+254"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/user_phone"
+                style="@style/Edit_Text"
+                android:layout_width="0dp"
+                android:layout_margin="0dp"
+                android:layout_weight="0.9"
+                android:digits="0123456789"
+                android:inputType="phone"
+                android:maxLength="13"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/user_phone_display"
+                style="@style/Text_Tiny"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:text="+254 716 140 603"
+                android:textColor="@color/grey" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/text_bold_left"
+        android:text="To pay your bill, Please enter the total amount in your bill below" />
+
+    <EditText
+        android:id="@+id/user_amount"
+        style="@style/Edit_Text"
+        android:digits="0123456789."
+        android:inputType="number"
+        android:maxLines="1" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtCancel"
+            style="@style/Button_No"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="CANCEL" />
+
+        <TextView
+            android:id="@+id/txtOk"
+            style="@style/Button_Yes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="PAY NOW" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

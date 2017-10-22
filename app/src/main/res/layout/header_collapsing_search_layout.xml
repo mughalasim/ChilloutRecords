@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_collapseMode="pin"
+    app:layout_scrollFlags="scroll|enterAlways"
+    android:background="@color/dark_grey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:background="@color/dark_grey">
+
+            <TextView
+                android:id="@+id/search_bar_text"
+                android:onClick="START_SEARCH"
+                style="@style/Edit_Text"
+                android:gravity="center"/>
+
+            <ImageView
+                android:id="@+id/search_bar_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/ic_search"/>
+
+            <ImageView
+                android:id="@+id/search_bar_cancel"
+                android:layout_width="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/ic_cancel"
+                android:tint="@color/grey"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="@dimen/edit_text_height" />
+
+        </RelativeLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--android:paddingTop="15dp"-->
+            <!--android:paddingBottom="1dp">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/search_criteria"-->
+                    <!--style="@style/Edit_Text"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:hint="search here..." />-->
+
+                <!--<TextView-->
+                    <!--style="@style/Button_Yes"-->
+                    <!--android:layout_weight="5"-->
+                    <!--android:onClick="SEARCH"-->
+                    <!--android:text="SEARCH" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Text_Tiny"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="COUNTRY"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:textColor="@color/white" />-->
+
+                <!--<TextView-->
+                    <!--style="@style/Text_Tiny"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="AREA"-->
+                    <!--android:textColor="@color/white" />-->
+
+                <!--<TextView-->
+                    <!--style="@style/Text_Tiny"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="CUISINE"-->
+                    <!--android:textColor="@color/white" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/spinner_country"-->
+                    <!--style="@style/Button_Yes"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:text="KENYA" />-->
+
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinner_area"-->
+                    <!--style="@style/Spinner_Text"-->
+                    <!--android:layout_weight="1" />-->
+
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinner_cuisine"-->
+                    <!--style="@style/Spinner_Text"-->
+                    <!--android:layout_weight="1" />-->
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="15dp"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <TextView
+                android:id="@+id/category_nearby"
+                style="@style/Button_Yes_Search"
+                android:layout_weight="1"
+                android:onClick="CATEGORIZE"
+                android:layout_marginRight="-5dp"
+                android:text="NEARBY" />
+
+            <TextView
+                android:id="@+id/category_featured"
+                style="@style/Button_Yes_Search"
+                android:layout_weight="1"
+                android:onClick="CATEGORIZE"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="-5dp"
+                android:text="FEATURED" />
+
+            <TextView
+                android:id="@+id/category_az"
+                style="@style/Button_Yes_Search"
+                android:layout_weight="1"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="-5dp"
+                android:onClick="CATEGORIZE"
+                android:text="A-Z" />
+
+            <TextView
+                android:id="@+id/category_rating"
+                style="@style/Button_Yes_Search"
+                android:layout_weight="1"
+                android:layout_marginLeft="-5dp"
+                android:onClick="CATEGORIZE"
+                android:text="RATING" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+

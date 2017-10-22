@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+<!--0-->
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+
+<!--1-->
+        <item
+            android:id="@+id/find_restaurants"
+            android:icon="@drawable/ic_search"
+            android:title="Find Restaurants" />
+
+<!--2-->
+        <item
+            android:id="@+id/favorites"
+            android:icon="@drawable/ic_favorite_grey"
+            android:title="Favourites" />
+
+<!--3-->
+        <item
+            android:id="@+id/how_it_works"
+            android:icon="@drawable/ic_settings"
+            android:title="How It Works" />
+
+<!--4-->
+        <item
+            android:id="@+id/change_location"
+            android:icon="@drawable/ic_location"
+            android:title="Change Location" />
+
+<!--5-->
+        <item
+            android:id="@+id/my_account"
+            android:icon="@drawable/ic_person"
+            android:title="My Account" />
+
+<!--6-->
+        <item
+            android:id="@+id/log_in"
+            android:icon="@drawable/ic_lock_grey"
+            android:title="Log In" />
+
+<!--7-->
+        <item
+            android:id="@+id/about_us"
+            android:icon="@drawable/ic_info"
+            android:title="About Us" />
+    </group>
+
+</menu>

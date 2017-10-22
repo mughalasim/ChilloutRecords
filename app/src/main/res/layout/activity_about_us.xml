@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end">
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="asimmughal.chilloutrecords.main_pages.activities.RestaurantSearchActivity">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/toolbar" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginBottom="35dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/Header_Text"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_eatout_site_and_apps" />
+
+                    <TextView
+                        style="@style/Text_Normal"
+                        android:gravity="start"
+                        android:text="@string/about1" />
+
+                    <TextView
+                        style="@style/Header_Text"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_yummy_card" />
+
+                    <TextView
+                        style="@style/Text_Normal"
+                        android:gravity="start"
+                        android:text="@string/about2" />
+
+                    <TextView
+                        style="@style/Header_Text"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_yummy_magazine" />
+
+                    <TextView
+                        style="@style/Text_Normal"
+                        android:gravity="start"
+                        android:text="@string/about3" />
+
+                    <TextView
+                        style="@style/Header_Text"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_nairobi_restaurant_week" />
+
+                    <TextView
+                        style="@style/Text_Normal"
+                        android:gravity="start"
+                        android:text="@string/about4" />
+
+                    <TextView
+                        style="@style/Header_Text"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_taste_awards" />
+
+                    <TextView
+                        style="@style/Text_Normal"
+                        android:gravity="start"
+                        android:text="@string/about5" />
+
+
+                    <TextView
+                        style="@style/Header_Text"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/txt_app_version" />
+
+                    <TextView
+                        android:id="@+id/version_number"
+                        style="@style/Text_Normal"
+                        android:gravity="start"
+                        android:layout_gravity="start"/>
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/header_navigation"
+        app:menu="@menu/drawer_menu" />
+
+</android.support.v4.widget.DrawerLayout>

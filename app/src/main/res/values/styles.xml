@@ -1,0 +1,300 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <item name="android:windowAnimationStyle">@style/customTransition</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+        <item name="drawerArrowStyle">@style/WhiteDrawerIconStyle</item>
+        <item name="actionOverflowMenuStyle">@style/WhiteDrawerIconStyle</item>
+    </style>
+
+
+    <style name="WhiteDrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+
+
+    <!-- TRANSITIONS ============================================================================-->
+
+    <style name="customTransition">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+
+    <!-- HEADER =================================================================================-->
+
+    <style name="Header_Text" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_header</item>
+    </style>
+
+
+    <!--TOOLBAR TEXTS ===========================================================================-->
+
+    <style name="Toolbar_Text" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">2sp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- NAVIGATION DRAWER ======================================================================-->
+
+    <style name="Navigation_Drawer" parent="AppTheme">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+
+    <!--SPINNER TEXTS ===========================================================================-->
+
+    <style name="Spinner_Text" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">@drawable/bckgrd_text_fields</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+    </style>
+
+
+    <style name="Spinner_Search" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:selectable">false</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+
+    <!--EDIT TEXTS =============================================================================-->
+
+    <style name="Edit_Text" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:background">@drawable/bckgrd_text_fields</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
+        <item name="android:selectable">false</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Edit_Text_Form" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
+        <item name="android:selectable">false</item>
+        <item name="android:paddingLeft">@dimen/text_size_normal_margin</item>
+        <item name="android:background">@color/grey</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Edit_Text_Layout" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:longClickable">false</item>
+        <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
+        <item name="android:selectable">false</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+
+    <!-- NORMAL TEXT ============================================================================-->
+
+    <style name="Text_Normal" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Text_Small" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/text_size_small_margin</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="Text_Tiny" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">@dimen/text_size_tiny_margin</item>
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+    </style>
+
+    <style name="text_left" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="text_bold_left" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+
+    <style name="Text_Normal_digital_card" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_digital_card</item>
+    </style>
+
+    <style name="Text_Large_digital_card" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_digital_card_percentage</item>
+    </style>
+
+
+    <!--BUTTON STYLES ==========================================================================-->
+
+    <style name="Button_Yes" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@drawable/bckgrd_button_yes</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Button_No" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bckgrd_button_no</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Button_Inactive" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bckgrd_button_inactive</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="Button_Yes_Search" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@drawable/bckgrd_button_yes_search</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="Button_No_Search" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bckgrd_button_no_search</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="Button_green" parent="AppTheme">
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bckgrd_button_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+</resources>

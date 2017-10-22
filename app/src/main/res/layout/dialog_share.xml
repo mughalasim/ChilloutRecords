@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bckgrd_text_fields">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/Header_Text"
+                android:text="@string/txt_share" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_gravity="center"
+                android:scrollbars="none"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/share_facebook"
+                        android:layout_width="@dimen/restaurant_details_share_icons"
+                        android:layout_height="@dimen/restaurant_details_share_icons"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/share_facebook"/>
+
+                    <ImageView
+                        android:id="@+id/share_whatsapp"
+                        android:layout_width="@dimen/restaurant_details_share_icons"
+                        android:layout_height="@dimen/restaurant_details_share_icons"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/share_whatsapp"/>
+
+                    <ImageView
+                        android:id="@+id/share_messenger"
+                        android:layout_width="@dimen/restaurant_details_share_icons"
+                        android:layout_height="@dimen/restaurant_details_share_icons"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:padding="3dp"
+                        android:src="@drawable/share_messenger"/>
+
+                    <ImageView
+                        android:id="@+id/share_email"
+                        android:layout_width="@dimen/restaurant_details_share_icons"
+                        android:layout_height="@dimen/restaurant_details_share_icons"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/share_email"/>
+
+                    <ImageView
+                        android:id="@+id/share_sms"
+                        android:layout_width="@dimen/restaurant_details_share_icons"
+                        android:layout_height="@dimen/restaurant_details_share_icons"
+                        android:padding="5dp"
+                        android:src="@drawable/share_sms"/>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+</RelativeLayout>

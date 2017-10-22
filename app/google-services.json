@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "339530129008",
+    "firebase_url": "https://chillout-records.firebaseio.com",
+    "project_id": "chillout-records",
+    "storage_bucket": "chillout-records.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339530129008:android:a8ab02586b4fd5da",
+        "android_client_info": {
+          "package_name": "asimmughal.chilloutrecords"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339530129008-tp0fd3onoqtktgvhkueaj4g1h1kt2p91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "asimmughal.chilloutrecords",
+            "certificate_hash": "9d6ef4cbcfc8d5258c41a45d2dc4f85ef3c13305"
+          }
+        },
+        {
+          "client_id": "339530129008-eequg3nlaj56aph2aiuerrggtd6ka8jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq_io43Sxc4sOaXpMXEEmLC-RzGtlpGL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339530129008-eequg3nlaj56aph2aiuerrggtd6ka8jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

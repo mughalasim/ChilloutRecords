@@ -1,0 +1,208 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context="asimmughal.chilloutrecords.start_up.LoginActivity">
+
+    <ImageView
+        android:id="@+id/mainLogo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:padding="5dp"
+        android:src="@drawable/main_logo_white" />
+
+    <LinearLayout
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/username"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/password"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_password"
+            android:inputType="textPassword" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Button_No"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="back"
+                android:text="@string/txt_back" />
+
+            <TextView
+                style="@style/Button_Yes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="LoginBTN"
+                android:text="@string/txt_login" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/Text_Normal"
+            android:onClick="ResetPassword"
+            android:text="@string/txt_forgot_password"
+            android:textColor="@color/white" />
+
+        <TextView
+            style="@style/Text_Tiny"
+            android:onClick="termsAndConditions"
+            android:text="@string/txt_terms"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/startup_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Button_No"
+                android:layout_weight="1"
+                android:onClick="SignUp"
+                android:text="@string/txt_sign_up" />
+
+            <TextView
+                style="@style/Button_Yes"
+                android:layout_weight="1"
+                android:onClick="login"
+                android:text="@string/txt_login" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/Text_Tiny"
+            android:onClick="termsAndConditions"
+            android:text="@string/txt_policy"
+            android:textColor="@color/white" />
+
+
+        <TextView
+            style="@style/Text_Normal"
+            android:visibility="gone"
+            android:layout_height="50dp"
+            android:onClick="skipLogin"
+            android:text="@string/txt_skip_login"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/registration_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/register_first_name"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_first_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/register_last_name"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_last_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/register_email"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/register_password"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/register_password_confirm"
+            style="@style/Edit_Text"
+            android:hint="@string/et_hint_confirm_password"
+            android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/register_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:text="@string/txt_terms2"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Button_No"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="back"
+                android:text="@string/txt_back" />
+
+            <TextView
+                style="@style/Button_Yes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="registerBTN"
+                android:text="@string/txt_register" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

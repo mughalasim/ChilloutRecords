@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="?actionBarSize"
+    app:layout_collapseMode="parallax"
+    app:layout_scrollFlags="scroll|enterAlways">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/restaurant_name"
+                style="@style/Header_Text"
+                android:gravity="start"
+                android:text="Panari Hotel"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/restaurant_location"
+                style="@style/text_left"
+                android:layout_gravity="start"
+                android:text="Location, Mombasa Road"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
+

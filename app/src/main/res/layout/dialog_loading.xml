@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center_vertical"
+    android:padding="15dp"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/main_logo_white" />
+
+    <TextView
+        android:id="@+id/messageText"
+        style="@style/Text_Normal"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:text="Loading....please wait as we are messing with your head" />
+
+    <ProgressBar
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:progressTint="@color/colorPrimary"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

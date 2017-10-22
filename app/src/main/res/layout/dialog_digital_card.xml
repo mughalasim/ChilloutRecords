@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/digital_card_title"
+        style="@style/Text_Normal"
+        android:text="Card Title"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/digital_card_background"
+            android:layout_width="match_parent"
+            app:riv_corner_radius="10dp"
+            android:src="@color/black"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:id="@+id/digital_card_top_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/digital_card_discount"
+                android:text="10"
+                style="@style/Text_Large_digital_card" />
+
+            <TextView
+                android:id="@+id/digital_card_discount_sign"
+                android:layout_margin="0dp"
+                android:paddingTop="10dp"
+                android:text="@string/txt_percentage"
+                style="@style/Text_Normal_digital_card"
+                android:textSize="@dimen/text_size_header" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/digital_card_restaurant_name"
+                style="@style/Text_Normal_digital_card"
+                android:text="The Restaurant" />
+
+            <TextView
+                android:id="@+id/digital_card_user_name"
+                style="@style/Text_Normal_digital_card"
+                android:text="Asim Mughal" />
+
+            <TextView
+                android:id="@+id/digital_card_time"
+                style="@style/Text_Normal_digital_card"
+                android:text="Monday 19th August 2017, 4:25 pm" />
+
+            <TextView
+                android:id="@+id/digital_card_support_number"
+                style="@style/Text_Normal_digital_card"
+                android:text="Call Support: +254 0712 122 122" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/digital_card_desc"
+            style="@style/Text_Normal" />
+
+        <EditText
+            android:id="@+id/digital_card_confirmation_code"
+            style="@style/Edit_Text"
+            android:gravity="center"
+            android:hint="Passport Code"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtCancel"
+                style="@style/Button_No"
+                android:layout_weight="1"
+                android:text="@string/txt_back" />
+
+            <TextView
+                android:id="@+id/txtOk"
+                style="@style/Button_Yes"
+                android:layout_weight="1"
+                android:text="@string/txt_ok" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

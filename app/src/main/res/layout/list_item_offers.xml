@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:background="@drawable/bckgrd_text_fields"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/offer_name"
+                style="@style/text_bold_left"
+                android:layout_width="match_parent"
+                android:layout_toLeftOf="@+id/offer_icon" />
+
+            <TextView
+                android:id="@+id/offer_excerpt"
+                style="@style/text_left"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/offer_name"
+                android:layout_toLeftOf="@+id/offer_icon"
+                android:layout_toStartOf="@+id/offer_icon" />
+
+            <TextView
+                android:id="@+id/offer_terms"
+                style="@style/Text_Tiny"
+                android:gravity="start"
+                android:textStyle="italic"
+                android:paddingLeft="2dp"
+                android:paddingStart="2dp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/txt_terms3"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/offer_excerpt"
+                android:layout_toLeftOf="@+id/offer_icon"
+                android:layout_toStartOf="@+id/offer_icon" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/offer_icon"
+                android:layout_width="@dimen/restaurant_review_image_size"
+                android:layout_height="@dimen/restaurant_review_image_size"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                app:riv_border_width="0dp"
+                app:riv_corner_radius="8dp"
+                app:riv_mutate_background="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/offer_btn"
+            style="@style/Button_green" />
+
+        <TextView
+            android:id="@+id/offer_id"
+            style="@style/Text_Normal"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/offer_discount_amount"
+            style="@style/Text_Normal"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>
