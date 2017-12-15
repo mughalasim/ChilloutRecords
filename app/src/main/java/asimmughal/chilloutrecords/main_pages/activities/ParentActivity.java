@@ -18,25 +18,25 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.Database;
 import asimmughal.chilloutrecords.utils.Helpers;
 import asimmughal.chilloutrecords.utils.SharedPrefs;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public static Helpers helper;
-    public Database db;
-    public Toolbar toolbar;
-    public DrawerLayout drawer;
-    public ActionBarDrawerToggle toggle;
-    public NavigationView navigationView;
-    public View header;
-    public BroadcastReceiver receiver;
-    public TextView userName, userEmail;
-    public CircleImageView userPic;
-    public int drawer_id;
-    public String toolbarTitle;
+    protected static Helpers helper;
+    protected Database db;
+    protected Toolbar toolbar;
+    protected DrawerLayout drawer;
+    protected ActionBarDrawerToggle toggle;
+    protected NavigationView navigationView;
+    protected View header;
+    protected BroadcastReceiver receiver;
+    protected TextView userName, userEmail;
+    protected CircleImageView userPic;
+    protected int drawer_id;
+    protected String toolbarTitle;
 
     public void initialize(int drawer_id, String toolbarTitle) {
         helper = new Helpers(ParentActivity.this);
@@ -66,7 +66,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
         if (toolbarTitle.equals("")) {
             toolbar_image.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             toolbar_image.setVisibility(View.GONE);
         }
 
@@ -85,27 +85,9 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
     }
 
     public void updateDrawer() {
-        MenuItem log_in = navigationView.getMenu().getItem(6);
-        MenuItem myAccount = navigationView.getMenu().getItem(5);
-        MenuItem fav = navigationView.getMenu().getItem(2);
-        MenuItem change_locations = navigationView.getMenu().getItem(4);
-        if (helper.validateIsLoggedInDrawer()) {
-            log_in.setVisible(false);
-            myAccount.setVisible(true);
-            fav.setVisible(true);
-            change_locations.setVisible(true);
-            userName.setText(SharedPrefs.getUserFullName());
-            Glide.with(this).load(SharedPrefs.getUserPic()).into(userPic);
-            userEmail.setText(SharedPrefs.getUserEmail());
-        } else {
-            log_in.setVisible(true);
-            myAccount.setVisible(false);
-            fav.setVisible(false);
-            change_locations.setVisible(false);
-            userName.setText(SharedPrefs.getWelcomeTitle());
-            Glide.with(this).load(SharedPrefs.getUserPic()).into(userPic);
-            userEmail.setText(SharedPrefs.getWelcomeTitleDescription());
-        }
+        userName.setText(SharedPrefs.getUserFullName());
+        Glide.with(this).load(SharedPrefs.getUserPic()).into(userPic);
+        userEmail.setText(SharedPrefs.getUserEmail());
 
         navigationView.getMenu().findItem(drawer_id).setChecked(true);
     }

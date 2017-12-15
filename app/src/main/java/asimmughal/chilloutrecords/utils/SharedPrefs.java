@@ -168,40 +168,6 @@ public class SharedPrefs {
         settings.edit().clear().apply();
     }
 
-    public static String getWelcomeTitle() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("WELCOME", "");
-    }
-    public static void setWelcomeTitle(String welcomeTitle) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("WELCOME", welcomeTitle);
-        editor.apply();
-    }
-
-    public static String getWelcomeTitleDescription() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("WELCOMEDESC", "");
-    }
-    public static void setWelcomeTitleDescription(String welcomeTitle) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("WELCOMEDESC", welcomeTitle);
-        editor.apply();
-    }
-
-    public static Boolean getFirstTimeLogin() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(LOGIN_PREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getBoolean("FIRST_TIME_LOGIN", true);
-    }
-    public static void setFirstTimeLogin(Boolean loginFirstTime) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(LOGIN_PREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putBoolean("FIRST_TIME_LOGIN", loginFirstTime);
-        editor.apply();
-    }
-
-
     // NON_DELETABLE_PREFS =========================================================================
     // DATABASE VERSION NUMBER =====================================================================
 

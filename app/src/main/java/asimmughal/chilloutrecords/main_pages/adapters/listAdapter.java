@@ -1,29 +1,19 @@
 package asimmughal.chilloutrecords.main_pages.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
 import asimmughal.chilloutrecords.R;
-import asimmughal.chilloutrecords.main_pages.activities.HomeActivity;
-import asimmughal.chilloutrecords.main_pages.activities.RestaurantDetailsActivity;
-import asimmughal.chilloutrecords.main_pages.models.RestaurantModel;
+import asimmughal.chilloutrecords.main_pages.activities.ArtistActivity;
 import asimmughal.chilloutrecords.utils.Helpers;
-
-import static asimmughal.chilloutrecords.utils.Helpers.ADAPTER_DEFAULT;
-import static asimmughal.chilloutrecords.utils.Helpers.ADAPTER_DISTANCE;
 
 public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
     private Context context;
@@ -81,7 +71,7 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
                         String name = holder.txtName.getText().toString();
 //                        helper.ToastMessage(context, name);
 
-                        HomeActivity.setNewDatabaseRef(name);
+                        ArtistActivity.setNewDatabaseRef(name);
 
 //                        holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),
 //                                RestaurantDetailsActivity.class)

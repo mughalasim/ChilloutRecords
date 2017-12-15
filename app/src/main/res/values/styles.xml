@@ -178,46 +178,6 @@
         <item name="android:textSize">@dimen/text_size_tiny</item>
     </style>
 
-    <style name="text_left" parent="AppTheme">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:gravity">start</item>
-        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-    <style name="text_bold_left" parent="AppTheme">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:gravity">start</item>
-        <item name="android:layout_gravity">left</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-
-    <style name="Text_Normal_digital_card" parent="AppTheme">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">start</item>
-        <item name="android:layout_gravity">left</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_size_digital_card</item>
-    </style>
-
-    <style name="Text_Large_digital_card" parent="AppTheme">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:gravity">start</item>
-        <item name="android:layout_gravity">left</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_size_digital_card_percentage</item>
-    </style>
 
 
     <!--BUTTON STYLES ==========================================================================-->
@@ -246,55 +206,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-    <style name="Button_Inactive" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/bckgrd_button_inactive</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
-        <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-    <style name="Button_Yes_Search" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:background">@drawable/bckgrd_button_yes_search</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_small</item>
-    </style>
-
-    <style name="Button_No_Search" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/bckgrd_button_no_search</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_small</item>
-    </style>
-
-    <style name="Button_green" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/bckgrd_button_green</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
 </resources>

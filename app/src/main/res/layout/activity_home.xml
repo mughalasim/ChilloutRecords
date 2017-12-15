@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end">
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="asimmughal.chilloutrecords.main_pages.activities.RestaurantSearchActivity">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/toolbar" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/button_margin"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:onClick="ARTISTS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/button_margin"
+                        android:layout_marginLeft="@dimen/button_margin"
+                        android:layout_marginRight="@dimen/button_margin"
+                        android:background="@drawable/bckgrd_button_yes"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Header_Text"
+                            android:text="ARTISTS" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:onClick="VIDEOS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/button_margin"
+                        android:layout_marginLeft="@dimen/button_margin"
+                        android:layout_marginRight="@dimen/button_margin"
+                        android:background="@drawable/bckgrd_button_yes"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Header_Text"
+                            android:text="VIDEOS" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:onClick="EQUIPMENTS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/button_margin"
+                        android:layout_marginLeft="@dimen/button_margin"
+                        android:layout_marginRight="@dimen/button_margin"
+                        android:background="@drawable/bckgrd_button_yes"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Header_Text"
+                            android:text="EQUIPMENTS" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:onClick="UPCOMING"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/button_margin"
+                        android:layout_marginLeft="@dimen/button_margin"
+                        android:layout_marginRight="@dimen/button_margin"
+                        android:background="@drawable/bckgrd_button_yes"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Header_Text"
+                            android:text="UPCOMING PROJECTS" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <include layout="@layout/navigation_view"/>
+
+</android.support.v4.widget.DrawerLayout>

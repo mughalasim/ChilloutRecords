@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -9,11 +8,10 @@
     tools:openDrawer="end">
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="asimmughal.chilloutrecords.main_pages.activities.RestaurantSearchActivity">
+        tools:context="eatout.restaurantguide.main_pages.eo_activities.RestaurantSearchActivity">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -39,63 +37,63 @@
                         style="@style/Header_Text"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/txt_eatout_site_and_apps" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Text_Normal"
                         android:gravity="start"
-                        android:text="@string/about1" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Header_Text"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/txt_yummy_card" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Text_Normal"
                         android:gravity="start"
-                        android:text="@string/about2" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Header_Text"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/txt_yummy_magazine" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Text_Normal"
                         android:gravity="start"
-                        android:text="@string/about3" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Header_Text"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/txt_nairobi_restaurant_week" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Text_Normal"
                         android:gravity="start"
-                        android:text="@string/about4" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Header_Text"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/txt_taste_awards" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         style="@style/Text_Normal"
                         android:gravity="start"
-                        android:text="@string/about5" />
+                        android:text="@string/app_name" />
 
 
                     <TextView
                         style="@style/Header_Text"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/txt_app_version" />
+                        android:text="@string/app_name" />
 
                     <TextView
                         android:id="@+id/version_number"
@@ -112,13 +110,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/header_navigation"
-        app:menu="@menu/drawer_menu" />
+    <include layout="@layout/navigation_view"/>
 
 </android.support.v4.widget.DrawerLayout>

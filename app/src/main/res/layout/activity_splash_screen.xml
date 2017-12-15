@@ -29,7 +29,7 @@
             style="@style/Text_Normal"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:text="@string/txt_loading_please_wait"
+            android:text="@string/progress_loading_initializing"
             android:textColor="@color/white" />
 
     </LinearLayout>

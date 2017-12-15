@@ -5,6 +5,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_padding">40dp</dimen>
+    <dimen name="button_margin">10dp</dimen>
+
+    <dimen name="restaurant_adapter_padding">10dp</dimen>
+
+    <dimen name="my_account_profile_pic">140dp</dimen>
 
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">110dp</dimen>
@@ -16,20 +21,6 @@
 
     <dimen name="country_flag_image_size">55dp</dimen>
 
-    <dimen name="restaurant_details_bottom_toolbar_height">55dp</dimen>
-    <dimen name="restaurant_details_bottom_toolbar_padding">24dp</dimen>
-    <dimen name="restaurant_details_bottom_toolbar_margin">-20dp</dimen>
-    <dimen name="restaurant_details_working_hrs_text">65dp</dimen>
-    <dimen name="restaurant_details_gallery_small">80dp</dimen>
-    <dimen name="restaurant_details_gallery_large">210dp</dimen>
-    <dimen name="restaurant_details_share_icons">45dp</dimen>
-
-    <dimen name="collapsing_search_toolbar_height">250dp</dimen>
-    <dimen name="collapsing_normal_toolbar_height">100dp</dimen>
-    <dimen name="collapsing_details_toolbar_height">180dp</dimen>
-
-    <dimen name="text_size_digital_card_percentage">80sp</dimen>
-    <dimen name="text_size_digital_card">16sp</dimen>
     <dimen name="text_size_header">22sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_small">14sp</dimen>

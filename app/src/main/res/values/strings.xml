@@ -20,13 +20,6 @@
     <string name="error_connection">Offline Mode, Please check your internet connection</string>
     <string name="error_session_expiry">Session Expired, Please Login again</string>
 
-    <!-- About Us ===============================================================================-->
-    <string name="about1">EatOut is an online and mobile platform that puts the local dining scene in the palm of your hand. Our web and mobile apps enable users to browse, discover and get access to discounts and offers at hundreds of restaurants in the East Africa. In the mood for Japanese? We’ll show you the closest Sushi place. Users can search for restaurants based on location, cuisine or budget and get comprehensive information including contact details, menus, maps, opening hours, photos, reviews and much more.</string>
-    <string name="about2">Since launching in 2015, Yummy Card has become Nairobi’s largest dining club, with a current membership base of over 15,000 members. The program offers an unparalleled, one-of-a-kind marketing strategy for your restaurant; one that has helped restaurants fill seats and build loyalty. Our research shows that over 50% of our members choose to eat out at a Yummy Card restaurant at least once a week. Members have the option of using their physical cards or displaying a digital version on the EatOut App. Discounts apply on the entire bill and at all times, however cannot be used at the same time as another offer. Some restaurants may exclude holidays and celebration days. Order you card today by visiting www.joinyummy.com.</string>
-    <string name="about3">Yummy Magazine is the region’s only lifestyle magazine focused on food and drink. With a print run of 12,000 distributed through over 15,000 copies publication launching in 2015, Yummy Card has become Nairobi’s largest dining club, with a current Yummy is Nairobi’s premier urban lifestyle magazine specifically for foodies with 12,000 copies are distributed monthly through over 100 locations (cafes, restaurants, shopping malls) in Nairobi, reaching a broad spectrum individuals with high disposable income, young professionals, corporate executives, decision makers, expats and tourists. Download back issues at www.yummymagaizne.com.</string>
-    <string name="about4">Since inception in 2013, the annual Nairobi Restaurant Week has quickly become the most anticipated event in the culinary calendar. Each year the top chefs from 50+ of the best restaurants in Nairobi are invited to create one of a kind, limited edition, prix-fixed menus, in the city’s biggest celebration of food and drink. For a list of this year\'s participants visit www.nairobirestaurantweek.com.</string>
-    <string name="about5">The third edition of the bi-annual Taste Bar &amp; Restaurant Awards took place at the dusitD2 Nairobi on September 1st 2015. Restaurant &amp; bar owners, managers, chefs, mixologists and Nairobi’s movers and shakers turned out to celebrate the very best of Kenya’s bar &amp; restaurant industry. For a full list of winners visit www.taste.co.ke.</string>
-
     <!--LOADING DIALOGS =========================================================================-->
     <string name="progress_loading_fb_login">Logging in with Facebook…please wait…</string>
     <string name="progress_loading_login">Logging in. Please wait…</string>
@@ -46,7 +39,6 @@
     <string name="progress_loading_area_update">Updating areas to the selected location..</string>
 
     <!--EDIT TEXT HINTS =========================================================================-->
-    <string name="et_hint_user_name">User Name</string>
     <string name="et_hint_first_name">First Name</string>
     <string name="et_hint_last_name">Last Name</string>
     <string name="et_hint_email">Email</string>
@@ -59,66 +51,7 @@
     <string name="et_hint_dob">Date Of Birth (YYYY-MM-DD)</string>
     <string name="et_hint_new_password">Set new password</string>
     <string name="et_hint_confirm_new_password">Confirm new password</string>
-
-    <!-- SET TEXT ===============================================================================-->
-    <string name="txt_login">LOG IN</string>
-    <string name="txt_share">SHARE</string>
-    <string name="txt_cancel">"Cancel"</string>
-    <string name="txt_ok">OK</string>
-    <string name="txt_retry">RETRY</string>
-    <string name="txt_loading_please_wait">Loading… please wait…</string>
-    <string name="txt_call_now">CALL NOW&#160;&#160;</string>
-    <string name="txt_welcome">Welcome to the Eatout App, Please select your country, you can always change it later</string>
-    <string name="txt_pay_bill">Pay Bill</string>
-    <string name="txt_restaurant_description">Restaurant Description</string>
-    <string name="txt_operating_hours">Operating Hours</string>
-    <string name="txt_mon">Mon:</string>
-    <string name="txt_to">to</string>
-    <string name="txt_tue">Tue:</string>
-    <string name="txt_wed">Wed:</string>
-    <string name="txt_thu">Thu:</string>
-    <string name="txt_fri">Fri:</string>
-    <string name="txt_sat">Sat:</string>
-    <string name="txt_sun">Sun:</string>
-    <string name="txt_photo_gallery">Photo Gallery</string>
-    <string name="txt_review_and_win">Review and win an Iphone 7</string>
-    <string name="txt_loading_restaurant_info">Loading Restaurant Information Please wait…</string>
-    <string name="txt_error_connecting">There seems to be a connection problem, please try again later</string>
-    <string name="txt_info">Info</string>
-    <string name="txt_menu">Menu</string>
-    <string name="txt_map">Map</string>
-    <string name="txt_reviews">Reviews</string>
-    <string name="txt_percentage">%</string>
-    <string name="txt_post_your_review">POST YOUR REVIEW</string>
-    <string name="txt_average_rating">AVERAGE RATING</string>
-    <string name="txt_full_review">full Review</string>
-    <string name="txt_post">POST</string>
-    <string name="txt_explore_restaurants">Explore Restaurants</string>
-    <string name="txt_explore_nearby">EXPLORE NEARBY</string>
-    <string name="txt_back">BACK</string>
-    <string name="txt_forgot_password">Forgot Password</string>
-    <string name="txt_terms">By Signing up, You agree to our Terms and Conditions</string>
-    <string name="txt_sign_up">SIGN UP</string>
-    <string name="txt_policy">We will never post on your behalf, By tapping on \'Log In\' or \'Log in with facebook\', you agree to our Terms and Conditions and our Privacy Poilcy</string>
-    <string name="txt_skip_login">Skip Login</string>
-    <string name="txt_terms2">I agree to the Terms and Conditions</string>
-    <string name="txt_terms3">Click here to see the Terms and Conditions</string>
-    <string name="txt_register">REGISTER</string>
-    <string name="txt_acc_update">Edit / Update your Account Details</string>
-    <string name="txt_update_details">UPDATE DETAILS</string>
-    <string name="txt_acc_update_2">Edit / Update your account password</string>
-    <string name="txt_update_password">UPDATE PASSWORD</string>
-    <string name="txt_eatout_site_and_apps">EatOut Site and Apps</string>
-    <string name="txt_yummy_card">Yummy Card</string>
-    <string name="txt_yummy_magazine">Yummy Magazine</string>
-    <string name="txt_nairobi_restaurant_week">Nairobi Restaurant Week</string>
-    <string name="txt_taste_awards">Taste Awards</string>
-    <string name="txt_app_version">App Version</string>
-    <string name="txt_no_gallery_images">No Gallery Images</string>
-    <string name="txt_no_favourites">No Restaurants Liked</string>
-    <string name="txt_no_favourites2">Why not search for some</string>
-    <string name="txt_error_swipe">Oops something went wrong, Please swipe down to refresh</string>
-    <string name="error_unknown">OOps, something went wrong, please try again later</string>
+    <string name="et_hint_amount">Enter Amount</string>
 
 
 </resources>

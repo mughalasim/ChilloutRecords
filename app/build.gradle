@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.firebase-perf'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
@@ -9,22 +7,22 @@ android {
     flavorDimensions "versionCode"
     defaultConfig {
         applicationId "asimmughal.chilloutrecords"
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 1
-        versionName "0.1"
+        minSdkVersion rootProject.minSDK
+        targetSdkVersion rootProject.targetSDK
+        versionCode rootProject.versionCode
+        versionName "$rootProject.versionName"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
         release {
-            debuggable true
+            debuggable rootProject.debugMode
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            debuggable true
+            debuggable rootProject.debugMode
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -33,22 +31,21 @@ android {
     productFlavors {
         prod {
             buildConfigField 'String', 'MAIN_URL', '"https://api.eatout.co.ke/api/v2/"'
-            buildConfigField 'Boolean', 'LOGGING', 'true'
+            buildConfigField 'Boolean', 'LOGGING', "$rootProject.debugMode"
             buildConfigField 'Integer', 'connection_timeOut', '20'
-            buildConfigField 'Integer', 'DATABASE_VERSION', '1'
+            buildConfigField 'Integer', 'DATABASE_VERSION', "$rootProject.versionCode"
             buildConfigField 'Integer', 'YUMMY_CARD', '3'
-            buildConfigField 'Integer', 'PIZZA_CARD', '4'
         }
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:customtabs:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:support-vector-drawable:26.1.0'
+    compile "com.android.support:cardview-v7:$rootProject.SupportLibrary"
+    compile "com.android.support:customtabs:$rootProject.SupportLibrary"
+    compile "com.android.support:design:$rootProject.SupportLibrary"
+    compile "com.android.support:recyclerview-v7:$rootProject.SupportLibrary"
+    compile "com.android.support:support-vector-drawable:$rootProject.SupportLibrary"
 
     // RETROFIT ENDPOINT CALLING
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -66,17 +63,19 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
 
     // FIREBASE AUTHENTICATION
-    compile 'com.google.firebase:firebase-auth:11.4.2'
+    compile "com.google.firebase:firebase-auth:$rootProject.GooglePlaySDK"
+
     // FIREBASE PUSH NOTIFICATIONS
-    compile 'com.google.firebase:firebase-messaging:11.4.2'
+    compile "com.google.firebase:firebase-messaging:$rootProject.GooglePlaySDK"
+
     // FIREBASE DEEP LINKING
-    compile 'com.google.firebase:firebase-invites:11.4.2'
+    compile "com.google.firebase:firebase-invites:$rootProject.GooglePlaySDK"
+
     // FIREBASE PERFORMANCE TESTING
-    compile 'com.google.firebase:firebase-perf:11.4.2'
-    // FIREBASE CLOUD STORAGE
-    compile 'com.google.firebase:firebase-storage:11.4.2'
-    // FIREASE REALITIME DATABASE
-    compile 'com.google.firebase:firebase-database:11.4.2'
+    compile "com.google.firebase:firebase-perf:$rootProject.GooglePlaySDK"
+
+    // FIREBASE REALTIME DATABASE
+    compile "com.google.firebase:firebase-database:$rootProject.GooglePlaySDK"
 
     // FACEBOOK SDK
     compile 'com.facebook.android:facebook-android-sdk:4.27.0'
@@ -84,11 +83,16 @@ dependencies {
     // FACEBOOK NOTIFICATIONS
     compile 'com.facebook.android:notifications:1.0.2'
 
-    // MAPS
-    compile 'com.google.android.gms:play-services-maps:11.4.2'
+    // GOOGLE MAPS
+    compile "com.google.android.gms:play-services-maps:$rootProject.GooglePlaySDK"
+
+    // FABRIC CRASH TOOLS
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
 
     // GOOGLE ANALYTICS
-    compile 'com.google.android.gms:play-services-analytics:11.4.2'
+    compile "com.google.android.gms:play-services-analytics:$rootProject.GooglePlaySDK"
 
     // YOYO ANIMATIONS
     compile 'com.daimajia.easing:library:2.0@aar'
@@ -96,6 +100,14 @@ dependencies {
 
     // NOTIFICATION BADGES
     compile "me.leolin:ShortcutBadger:1.1.19@aar"
+
+    // GIF VIEWER
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
+
+    // VIDEO PAYER
+    compile 'com.afollestad:easyvideoplayer:0.3.0'
+
 }
 
+apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.google-services'

@@ -34,12 +34,9 @@ import java.util.regex.Pattern;
 import asimmughal.chilloutrecords.BuildConfig;
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.main_pages.activities.AboutUsActivity;
-import asimmughal.chilloutrecords.main_pages.activities.ChangeLocationActivity;
-import asimmughal.chilloutrecords.main_pages.activities.FavoritesActivity;
+import asimmughal.chilloutrecords.main_pages.activities.ArtistActivity;
 import asimmughal.chilloutrecords.main_pages.activities.HomeActivity;
-import asimmughal.chilloutrecords.main_pages.activities.HowItWorksActivity;
 import asimmughal.chilloutrecords.main_pages.activities.MyAccountActivity;
-import asimmughal.chilloutrecords.main_pages.activities.RestaurantSearchActivity;
 import asimmughal.chilloutrecords.start_up.LoginActivity;
 import asimmughal.chilloutrecords.start_up.SplashScreenActivity;
 
@@ -58,7 +55,7 @@ public class Helpers {
     public static String ADAPTER_DISTANCE = "DISTANCE";
 
     public static String STR_LOGGED_OUT_EXTRA = "logged_out";
-    public static String STR_LOGGED_OUT_TRUE= "true";
+    public static String STR_LOGGED_OUT_TRUE = "true";
     public static String STR_LOGGED_OUT_FALSE = "false";
 
     private Context context;
@@ -81,22 +78,14 @@ public class Helpers {
     public void Drawer_Item_Clicked(Context context, int id) {
         if (id == R.id.home) {
             context.startActivity(new Intent(context, HomeActivity.class));
-        } else if (id == R.id.find_restaurants) {
-            context.startActivity(new Intent(context, RestaurantSearchActivity.class));
-        } else if (id == R.id.favorites) {
-            context.startActivity(new Intent(context, FavoritesActivity.class));
-        } else if (id == R.id.how_it_works) {
-            context.startActivity(new Intent(context, HowItWorksActivity.class));
-        } else if (id == R.id.change_location) {
-            context.startActivity(new Intent(context, ChangeLocationActivity.class));
-        } else if (id == R.id.log_in) {
-            SharedPrefs.deleteAllSharedPrefs();
-            context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            context.sendBroadcast(new Intent().setAction(BroadcastValue));
         } else if (id == R.id.my_account) {
             context.startActivity(new Intent(context, MyAccountActivity.class));
         } else if (id == R.id.about_us) {
             context.startActivity(new Intent(context, AboutUsActivity.class));
+        } else if (id == R.id.log_out) {
+            SharedPrefs.deleteAllSharedPrefs();
+            context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            context.sendBroadcast(new Intent().setAction(BroadcastValue));
         }
     }
 
@@ -230,22 +219,14 @@ public class Helpers {
         return pattern.matcher(email).matches();
     }
 
-    public boolean validateIsLoggedIn() {
-        if (SharedPrefs.getWelcomeTitle().equals("")) {
-            return true;
-        } else {
-            myDialog(context, "Alert", "Please login to use this feature");
-            return false;
-        }
-    }
-
-    public boolean validateIsLoggedInDrawer() {
-        if (SharedPrefs.getWelcomeTitle().equals("")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean validateIsLoggedIn() {
+//        if (SharedPrefs.getWelcomeTitle().equals("")) {
+//            return true;
+//        } else {
+//            myDialog(context, "Alert", "Please login to use this feature");
+//            return false;
+//        }
+//    }
 
     public boolean validateAppIsInstalled(String uri) {
         PackageManager pm = context.getPackageManager();
@@ -286,7 +267,7 @@ public class Helpers {
         }
     }
 
-    public void fetchLocation(){
+    public void fetchLocation() {
 
     }
 
@@ -326,7 +307,6 @@ public class Helpers {
             }
         });
     }
-
 
 
     // ANIMATIONS ==================================================================================

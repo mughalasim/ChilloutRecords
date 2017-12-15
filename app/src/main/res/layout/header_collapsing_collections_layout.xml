@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/restaurant_location"
-                style="@style/text_left"
+                style="@style/Text_Normal"
                 android:layout_gravity="start"
                 android:text="Location, Mombasa Road"
                 android:textColor="@color/white" />

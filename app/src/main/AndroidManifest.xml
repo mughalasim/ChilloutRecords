@@ -40,15 +40,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
-                <!--<data android:host="eatout.co.ke"  android:path="/app" android:scheme="https" />-->
-                <!--<data android:host="play.google.com"  android:path="/store/apps/details?id=asimmughal.chilloutrecords&amp;referrer=utm_source=eo&amp;anid=admob" android:scheme="https" />-->
-                <!--<data android:host="play.google.com"  android:path="/store/apps/details?id=asimmughal.chilloutrecords" android:scheme="https" />-->
-            <!--</intent-filter>-->
-
         </activity>
 
         <activity
@@ -58,9 +49,14 @@
 
 
         <!-- MAIN PAGES =========================================================================-->
-
         <activity
             android:name=".main_pages.activities.HomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".main_pages.activities.ArtistActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -72,50 +68,11 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.FavoritesActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".main_pages.activities.ChangeLocationActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
             android:name=".main_pages.activities.MyAccountActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity
-            android:name=".main_pages.activities.HowItWorksActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".main_pages.activities.HomePageCollectionActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".main_pages.activities.RestaurantSearchActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".main_pages.activities.RestaurantDetailsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name=".start_up.FirstTimeLogin"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
 
 
         <!-- FACEBOOK PAGES =====================================================================-->

@@ -13,7 +13,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="asimmughal.chilloutrecords.main_pages.activities.RestaurantSearchActivity">
+        tools:context="eatout.restaurantguide.main_pages.eo_activities.RestaurantSearchActivity">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -33,9 +33,81 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/activity_padding">
+
+                        <!--IMAGE-->
+                       <ProgressBar
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_centerInParent="true"/>
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/user_thumbnail"
+                            android:layout_width="@dimen/my_account_profile_pic"
+                            android:layout_height="@dimen/my_account_profile_pic"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="@dimen/button_margin"
+                            android:layout_marginRight="@dimen/button_margin"
+                            android:scaleType="centerCrop"
+                            app:riv_border_width="0dp"
+                            app:riv_corner_radius="8dp"
+                            app:riv_mutate_background="true" />
+
+
+                        <LinearLayout
+                            android:layout_width="@dimen/my_account_profile_pic"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:layout_toEndOf="@+id/user_thumbnail"
+                            android:layout_toRightOf="@+id/user_thumbnail"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/picture_add"
+                                style="@style/Button_Yes"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/restaurant_adapter_padding"
+                                android:textSize="@dimen/text_size_tiny" />
+
+                            <TextView
+                                android:id="@+id/picture_delete"
+                                style="@style/Button_No"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/restaurant_adapter_padding"
+                                android:textSize="@dimen/text_size_tiny" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/button_margin"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/Text_Normal"
+                                    android:textSize="@dimen/text_size_tiny" />
+
+                                <TextView
+                                    android:id="@+id/user_points"
+                                    style="@style/Header_Text"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
                     <TextView
                         style="@style/Text_Normal"
-                        android:text="@string/txt_acc_update" />
+                        android:text="Your Account details" />
 
                     <EditText
                         android:id="@+id/register_first_name"
@@ -58,10 +130,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:padding="5dp"
                         android:layout_margin="3dp"
                         android:background="@drawable/bckgrd_text_fields"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <TextView
                             style="@style/Text_Normal"
@@ -69,9 +141,9 @@
 
                         <TextView
                             android:id="@+id/register_country_code"
+                            style="@style/Text_Normal"
                             android:layout_width="match_parent"
-                            android:gravity="start"
-                            style="@style/Text_Normal" />
+                            android:gravity="start" />
 
                     </LinearLayout>
 
@@ -90,29 +162,8 @@
                     <TextView
                         style="@style/Button_Yes"
                         android:onClick="UpdateDetails"
-                        android:text="@string/txt_update_details" />
+                        android:text="UPDATE" />
 
-                    <TextView
-                        style="@style/Text_Normal"
-                        android:paddingTop="30dp"
-                        android:text="@string/txt_acc_update_2" />
-
-                    <EditText
-                        android:id="@+id/register_password"
-                        style="@style/Edit_Text"
-                        android:hint="@string/et_hint_new_password"
-                        android:inputType="textPassword" />
-
-                    <EditText
-                        android:id="@+id/register_password_confirm"
-                        style="@style/Edit_Text"
-                        android:hint="@string/et_hint_confirm_new_password"
-                        android:inputType="textPassword" />
-
-                    <TextView
-                        style="@style/Button_Yes"
-                        android:onClick="UpdatePassword"
-                        android:text="@string/txt_update_password" />
 
                 </LinearLayout>
 
@@ -122,13 +173,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/header_navigation"
-        app:menu="@menu/drawer_menu" />
+    <include layout="@layout/navigation_view" />
 
 </android.support.v4.widget.DrawerLayout>

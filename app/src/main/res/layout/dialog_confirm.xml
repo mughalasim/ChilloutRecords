@@ -51,14 +51,14 @@
                         android:id="@+id/txtCancel"
                         style="@style/Button_No"
                         android:layout_weight="1"
-                        android:text="@string/txt_cancel"
+                        android:text="CANCEL"
                         android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/txtOk"
                         style="@style/Button_Yes"
                         android:layout_weight="1"
-                        android:text="@string/txt_ok" />
+                        android:text="OK" />
 
                 </LinearLayout>
 
