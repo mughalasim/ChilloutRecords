@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -84,6 +86,8 @@ public class Helpers {
             context.startActivity(new Intent(context, AboutUsActivity.class));
         } else if (id == R.id.log_out) {
             SharedPrefs.deleteAllSharedPrefs();
+            AccessToken.setCurrentAccessToken(null);
+            LoginManager.getInstance().logOut();
             context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             context.sendBroadcast(new Intent().setAction(BroadcastValue));
         }

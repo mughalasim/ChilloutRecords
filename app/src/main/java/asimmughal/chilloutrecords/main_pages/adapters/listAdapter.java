@@ -9,25 +9,37 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.util.ArrayList;
 
 import asimmughal.chilloutrecords.R;
-import asimmughal.chilloutrecords.main_pages.activities.ArtistActivity;
+import asimmughal.chilloutrecords.main_pages.models.ArtistModel;
 import asimmughal.chilloutrecords.utils.Helpers;
 
 public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<String> mDataset;
+    private ArrayList<ArtistModel> mDataset;
     private Helpers helper;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtName;
+        private TextView txtsName;
+        private TextView txtYear_since;
+        private TextView txtInfo;
+        private RoundedImageView ppic;
+
         private RelativeLayout no_list_item, list_item;
 
         public ViewHolder(View v) {
             super(v);
             txtName = (TextView) v.findViewById(R.id.name);
+            txtsName = (TextView) v.findViewById(R.id.sname);
+            txtYear_since = (TextView) v.findViewById(R.id.year_since);
+            txtInfo = (TextView) v.findViewById(R.id.info);
+            ppic = v.findViewById(R.id.ppic);
             no_list_item = (RelativeLayout) v.findViewById(R.id.no_list_items);
             list_item = (RelativeLayout) v.findViewById(R.id.list_items);
 
@@ -36,7 +48,7 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
 
     }
 
-    public listAdapter(Context context, ArrayList<String> myDataset) {
+    public listAdapter(Context context, ArrayList<ArtistModel> myDataset) {
         this.context = context;
         this.mDataset = myDataset;
         helper = new Helpers(context);
@@ -46,15 +58,15 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
     @Override
     public listAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_restaurant, parent, false);
+                .inflate(R.layout.list_item_artists, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final String restaurantModel = mDataset.get(position);
-        if (restaurantModel == null || restaurantModel.equals("")) {
+        final ArtistModel artistModel = mDataset.get(position);
+        if (artistModel == null || artistModel.name.equals("")) {
             holder.no_list_item.setVisibility(View.VISIBLE);
             holder.list_item.setVisibility(View.GONE);
 
@@ -62,20 +74,24 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
             holder.no_list_item.setVisibility(View.GONE);
             holder.list_item.setVisibility(View.VISIBLE);
 
-            holder.txtName.setText(restaurantModel);
+            holder.txtName.setText(artistModel.name);
+            holder.txtsName.setText("Stage Name: "+artistModel.sname);
+            holder.txtInfo.setText(artistModel.info);
+            holder.txtYear_since.setText(artistModel.year_since);
+            Glide.with(context).load(artistModel.ppic).into(holder.ppic);
 
             holder.itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (!helper.validateInternetNotPresent() && holder.txtName.getText().toString().length() > 0) {
-                        String name = holder.txtName.getText().toString();
+//                        String name = holder.txtName.getText().toString();
 //                        helper.ToastMessage(context, name);
 
-                        ArtistActivity.setNewDatabaseRef(name);
+//                        ArtistActivity.setNewDatabaseRef(name);
 
 //                        holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),
 //                                RestaurantDetailsActivity.class)
-//                                .putExtra("restaurant_name", name)
+//                                .putExtra("name", name)
 //                        );
 
                     } else {

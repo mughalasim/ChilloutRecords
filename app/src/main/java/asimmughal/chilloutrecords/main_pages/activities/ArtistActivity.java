@@ -11,16 +11,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.main_pages.adapters.listAdapter;
+import asimmughal.chilloutrecords.main_pages.models.ArtistModel;
 import asimmughal.chilloutrecords.utils.Helpers;
 
 public class ArtistActivity extends ParentActivity {
-    public static ArrayList<String> arrayList = new ArrayList<>();
+    public static ArrayList<ArtistModel> arrayList = new ArrayList<>();
     public static RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     public static listAdapter adapter;
@@ -38,7 +45,7 @@ public class ArtistActivity extends ParentActivity {
         helper.setProgressDialogMessage("Loading Artists.. Please wait");
         helper.progressDialog(true);
 
-       setNewDatabaseRef(DB_REFERENCE);
+        setNewDatabaseRef(DB_REFERENCE);
     }
 
     private void findAllViews() {
@@ -49,13 +56,10 @@ public class ArtistActivity extends ParentActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                layoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
     }
 
-    public static void setNewDatabaseRef(String dbRef){
+    public static void setNewDatabaseRef(String dbRef) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(dbRef);
 
@@ -63,7 +67,41 @@ public class ArtistActivity extends ParentActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 helper.progressDialog(false);
-                getHashMap((Map<String, String>) dataSnapshot.getValue());
+                Object value = dataSnapshot.getValue();
+                if (value instanceof List) {
+                    List<Object> values = (List<Object>) value;
+                    int length = values.size();
+                    Helpers.LogThis(values.toString());
+                    arrayList.clear();
+                    try {
+                        for (int i = 0; i < length; i++) {
+//                            ArtistModel artistModel = new ArtistModel();
+//                            JSONArray jsonArray = (JSONArray) values.get(i);
+
+                            getHashMap((Map<String, String>) values.get(i));
+//                            artistModel.name = jsonObject.getString("name");
+//                            artistModel.sname = jsonObject.getString("sname");
+//                            artistModel.ppic = jsonObject.getString("ppic");
+//                            artistModel.year_since = jsonObject.getString("year_since");
+//                            artistModel.info = jsonObject.getString("info");
+
+//                        {sname=SG / Speedy G / South C Gangster, name=Asim Mughal, year_since=2007, info=Love HipHop to the max, ppic=https//www.google.com}
+
+//                            arrayList.add(artistModel);
+                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                        Helpers.LogThis(e.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Helpers.LogThis(e.toString());
+                    }
+                } else {
+                    // handle other possible types
+                    getHashMap((Map<String, String>) dataSnapshot.getValue());
+                }
+
+
             }
 
             @Override
@@ -78,30 +116,33 @@ public class ArtistActivity extends ParentActivity {
 
     public static void noLists() {
         arrayList.clear();
-        arrayList.add("");
+//        arrayList.add("");
         recyclerView.setAdapter(adapter);
     }
 
-    public static void getHashMap(Map<String, String> users) {
-        // Iterate through each element, ignoring their ID
-        if (users != null) {
-            arrayList.clear();
-            for (Map.Entry<String, String> entry : users.entrySet()) {
+    public static void getHashMap(Map<String, String> data) {
+        if (data != null) {
+            ArtistModel artistModel = new ArtistModel();
+            for (Map.Entry<String, String> entry : data.entrySet()) {
                 String ListItem = (String) entry.getValue();
-                Helpers.LogThis(ListItem);
-                arrayList.add(ListItem);
+                if (entry.toString().contains("name")) {
+                    artistModel.name = ListItem;
+                } else if (entry.toString().contains("sname")) {
+                    artistModel.sname = ListItem;
+                } else if (entry.toString().contains("ppic")) {
+                    artistModel.ppic = ListItem;
+                } else if (entry.toString().contains("info")) {
+                    artistModel.info = ListItem;
+                } else if (entry.toString().contains("year_since")) {
+                    artistModel.year_since = ListItem;
+                }
             }
+            arrayList.add(artistModel);
             adapter.notifyDataSetChanged();
 
         } else {
             noLists();
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateDrawer();
     }
 
 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/no_list_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:alpha="0.8"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            app:srcCompat="@drawable/ic_sad_face" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Header_Text"
+                android:text="No Data Found" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/list_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/button_margin">
+
+        <!--IMAGE-->
+        <ProgressBar
+            android:layout_width="@dimen/my_account_profile_pic"
+            android:layout_height="@dimen/my_account_profile_pic"
+            android:layout_centerVertical="true"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ppic"
+            android:layout_width="@dimen/my_account_profile_pic"
+            android:layout_height="@dimen/my_account_profile_pic"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/button_margin"
+            android:layout_marginRight="@dimen/button_margin"
+            android:scaleType="centerCrop"
+            app:riv_border_width="0dp"
+            app:riv_corner_radius="8dp"
+            app:riv_mutate_background="true" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ppic"
+            android:layout_toRightOf="@+id/ppic"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/Header_Text"
+                android:text="@string/app_name"
+                android:gravity="start"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="@dimen/text_size_small_margin"
+                android:textSize="@dimen/text_size_header" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sname"
+                    style="@style/Text_Normal"
+                    android:layout_gravity="start"
+                    android:text="@string/app_name"
+                    android:textSize="@dimen/text_size_tiny" />
+
+                <TextView
+                    style="@style/Text_Normal"
+                    android:text="Basic Information:"
+                    android:textStyle="bold"
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/text_size_tiny" />
+
+                <TextView
+                    android:id="@+id/info"
+                    style="@style/Text_Normal"
+                    android:layout_gravity="start"
+                    android:gravity="start" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/button_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/Text_Normal"
+                        android:text="Since:"
+                        android:textStyle="bold"
+                        android:layout_gravity="start"
+                        android:textSize="@dimen/text_size_tiny" />
+
+                    <TextView
+                        android:id="@+id/year_since"
+                        style="@style/Text_Normal"
+                        android:text="2004"
+                        android:layout_gravity="start"
+                        android:textSize="@dimen/text_size_tiny" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
