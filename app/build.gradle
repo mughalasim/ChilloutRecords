@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.compileSDK
+    buildToolsVersion rootProject.buildTools
     flavorDimensions "versionCode"
     defaultConfig {
         applicationId "asimmughal.chilloutrecords"
@@ -18,12 +18,12 @@ android {
     buildTypes {
         release {
             debuggable rootProject.debugMode
-            minifyEnabled true
+            minifyEnabled rootProject.proGuard
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             debuggable rootProject.debugMode
-            minifyEnabled true
+            minifyEnabled rootProject.proGuard
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

@@ -46,14 +46,12 @@
         <!--IMAGE-->
         <ProgressBar
             android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic"
-            android:layout_centerVertical="true"/>
+            android:layout_height="@dimen/my_account_profile_pic"/>
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ppic"
             android:layout_width="@dimen/my_account_profile_pic"
             android:layout_height="@dimen/my_account_profile_pic"
-            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
@@ -88,7 +86,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/sname"
+                    android:id="@+id/stage_name"
                     style="@style/Text_Normal"
                     android:layout_gravity="start"
                     android:text="@string/app_name"

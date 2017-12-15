@@ -2,24 +2,9 @@ package asimmughal.chilloutrecords.main_pages.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Map;
-
 import asimmughal.chilloutrecords.R;
-import asimmughal.chilloutrecords.main_pages.adapters.listAdapter;
-import asimmughal.chilloutrecords.utils.Helpers;
 
 public class HomeActivity extends ParentActivity {
 

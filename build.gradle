@@ -40,6 +40,7 @@ ext {
 
     // Debug the App
     debugMode = true
+    proGuard = false
 
     // App Versioning
     versionCode = 1
