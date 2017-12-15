@@ -31,7 +31,7 @@ public class ArtistActivity extends ParentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artists);
 
-        initialize(R.id.home, "Artists");
+        initialize(R.id.home, "");
 
         findAllViews();
 
