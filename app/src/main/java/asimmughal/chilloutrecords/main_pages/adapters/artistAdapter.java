@@ -90,6 +90,7 @@ public class artistAdapter extends RecyclerView.Adapter<artistAdapter.ViewHolder
                                 ArtistDetailsActivity.class)
                                 .putExtra("id", artistModel.id)
                                 .putExtra("name", artistModel.name)
+                                .putExtra("ppic", artistModel.ppic)
                         );
 
                     } else {

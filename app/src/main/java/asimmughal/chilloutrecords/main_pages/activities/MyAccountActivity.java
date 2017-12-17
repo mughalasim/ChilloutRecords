@@ -71,19 +71,19 @@ public class MyAccountActivity extends ParentActivity {
             helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Last Name");
         } else if (register_email.getText().toString().length() < 1) {
             helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Email");
-        } else if (helper.validateEmail(register_email.getText().toString())) {
+        } else if (!helper.validateEmail(register_email.getText().toString())) {
             helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Invalid Email");
         } else if (helper.validateMobileNumber(register_phone.getText().toString().trim())) {
             helper.myDialog(MyAccountActivity.this, "Update Failure", helper.Mobile_Number_Error);
         } else if (register_dob.getText().toString().length() < 1) {
             helper.myDialog(MyAccountActivity.this, "Update Failure", "Set your Date of Birth");
         } else {
-
             SharedPrefs.setUserFirstName(register_first_name.getText().toString());
             SharedPrefs.setUserLastName(register_last_name.getText().toString());
             SharedPrefs.setUserEmail(register_email.getText().toString());
             SharedPrefs.setUserPhone(register_phone.getText().toString());
             SharedPrefs.setUserDOB(register_dob.getText().toString());
+            helper.ToastMessage(MyAccountActivity.this, "Successfully Updated");
         }
     }
 

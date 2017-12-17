@@ -50,7 +50,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:onClick="VIDEOS"
+                        android:onClick="MUSIC_VIDEOS"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_padding"
@@ -61,12 +61,12 @@
 
                         <TextView
                             style="@style/Header_Text"
-                            android:text="VIDEOS" />
+                            android:text="MUSIC VIDEOS" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:onClick="EQUIPMENTS"
+                        android:onClick="FREESTYLES"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_padding"
@@ -77,7 +77,7 @@
 
                         <TextView
                             style="@style/Header_Text"
-                            android:text="EQUIPMENTS" />
+                            android:text="FREESTYLE FRIDAYS" />
 
                     </LinearLayout>
 

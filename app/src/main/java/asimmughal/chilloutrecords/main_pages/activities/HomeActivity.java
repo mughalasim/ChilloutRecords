@@ -30,11 +30,11 @@ public class HomeActivity extends ParentActivity {
         startActivity(new Intent(HomeActivity.this, ArtistActivity.class));
     }
 
-    public void VIDEOS(View view) {
+    public void MUSIC_VIDEOS(View view) {
 
     }
 
-    public void EQUIPMENTS(View view) {
+    public void FREESTYLES(View view) {
 
     }
 

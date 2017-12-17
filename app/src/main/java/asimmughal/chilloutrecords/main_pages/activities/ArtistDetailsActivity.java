@@ -1,14 +1,19 @@
 package asimmughal.chilloutrecords.main_pages.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.share.widget.LikeView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,9 +23,11 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import asimmughal.chilloutrecords.R;
+import asimmughal.chilloutrecords.main_pages.models.TrackModel;
 import asimmughal.chilloutrecords.utils.Helpers;
 
 public class ArtistDetailsActivity extends ParentActivity {
@@ -32,12 +39,14 @@ public class ArtistDetailsActivity extends ParentActivity {
             LL_album,
             LL_mixtapes,
             LL_singles;
+    private ImageView ppic;
 
     private TextView information;
 
     private String
             STR_ID = "",
             STR_NAME = "",
+            STR_PPIC = "",
             DB_REFERENCE = "";
 
     @Override
@@ -46,11 +55,11 @@ public class ArtistDetailsActivity extends ParentActivity {
 
         setContentView(R.layout.activity_artist_details);
 
+        findAllViews();
+
         handleExtraBundles();
 
         initialize(R.id.about_us, STR_NAME);
-
-        findAllViews();
 
         fetchData(DB_REFERENCE);
 
@@ -58,6 +67,7 @@ public class ArtistDetailsActivity extends ParentActivity {
 
     private void findAllViews() {
         information = findViewById(R.id.information);
+        ppic = findViewById(R.id.ppic);
 
         scroll_albums = findViewById(R.id.scroll_albums);
         scroll_mixtapes = findViewById(R.id.scroll_mixtapes);
@@ -67,10 +77,6 @@ public class ArtistDetailsActivity extends ParentActivity {
         LL_mixtapes = findViewById(R.id.LL_mixtapes);
         LL_singles = findViewById(R.id.LL_singles);
 
-        LL_album.setVisibility(View.GONE);
-        LL_mixtapes.setVisibility(View.GONE);
-        LL_singles.setVisibility(View.GONE);
-
     }
 
     private void handleExtraBundles() {
@@ -78,7 +84,9 @@ public class ArtistDetailsActivity extends ParentActivity {
         if (extras != null) {
             STR_ID = extras.getString("id");
             STR_NAME = extras.getString("name");
+            STR_PPIC = extras.getString("ppic");
             DB_REFERENCE = "Music/" + STR_ID;
+            Glide.with(ArtistDetailsActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
             helper.ToastMessage(ArtistDetailsActivity.this, getString(R.string.error_500));
@@ -102,33 +110,12 @@ public class ArtistDetailsActivity extends ParentActivity {
 
                     information.setText(jsonObject.getString("info"));
 
-                    LayoutInflater albumInflater;
-                    albumInflater = LayoutInflater.from(ArtistDetailsActivity.this);
-                    JSONArray albumArray = jsonObject.getJSONArray("Albums");
-                    int albumLength = albumArray.length();
-                    for(int i = 0;i<albumLength; i++){
-                        // FIND ALL THE VIEWS ON THE CARD
-                        @SuppressLint("InflateParams")
-                        View child = albumInflater.inflate(R.layout.list_item_music, null);
-                        final RoundedImageView album_art = child.findViewById(R.id.album_art);
-                        final TextView name = child.findViewById(R.id.name);
-                        final TextView release_year = child.findViewById(R.id.release_year);
+                    addMusicLayout(jsonObject, "Albums", scroll_albums);
 
-                        JSONObject albumObject = albumArray.getJSONObject(i);
-                        name.setText(albumObject.getString("name"));
-                        release_year.setText(albumObject.getString("release_year"));
-                        Glide.with(ArtistDetailsActivity.this).load(albumObject.getString("album_art")).into(album_art);
+                    addMusicLayout(jsonObject, "Mixtape", scroll_mixtapes);
 
-                        JSONArray tracks = albumObject.getJSONArray("tracks");
-                        int trackLength = albumArray.length();
-                        for(int x = 0;x<trackLength; x++){
-                            JSONObject trackObject = tracks.getJSONObject(i);
-                            String track_name = trackObject.getString("track_name");
-                            String track_no = trackObject.getString("track_no");
-                        }
-                        LL_album.addView(child);
-                        LL_album.setVisibility(View.VISIBLE);
-                    }
+                    addMusicLayout(jsonObject, "Singles", scroll_singles);
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -146,6 +133,74 @@ public class ArtistDetailsActivity extends ParentActivity {
             }
         });
 
+    }
+
+    private void addMusicLayout(final JSONObject jsonObject, final String flag_name, final LinearLayout LL) throws JSONException {
+        LayoutInflater layoutInflater;
+        layoutInflater = LayoutInflater.from(ArtistDetailsActivity.this);
+        LL.removeAllViews();
+        JSONArray jsonArray = jsonObject.getJSONArray(flag_name);
+        int jsonArrayLength = jsonArray.length();
+        if (jsonArrayLength > 0) {
+            for (int i = 0; i < jsonArrayLength; i++) {
+                // FIND ALL THE VIEWS ON THE CARD
+                @SuppressLint("InflateParams")
+                View child = layoutInflater.inflate(R.layout.list_item_music, null);
+//                child.setLayoutParams(childParams);
+                final RoundedImageView album_art = child.findViewById(R.id.album_art);
+                final TextView name = child.findViewById(R.id.name);
+                final TextView release_year = child.findViewById(R.id.release_year);
+
+                JSONObject albumObject = jsonArray.getJSONObject(i);
+                String str_album_name = albumObject.getString("name");
+                String str_album_release_year = albumObject.getString("name");
+                String str_album_art = albumObject.getString("name");
+
+                name.setText(albumObject.getString("name"));
+                release_year.setText(albumObject.getString("release_year"));
+                Glide.with(ArtistDetailsActivity.this).load(albumObject.getString("album_art")).into(album_art);
+
+                if (flag_name.equals("Singles")) {
+                    String str_track_url = albumObject.getString("track_url");
+                    final TrackModel trackModel = new TrackModel();
+                    trackModel.track_name = str_album_name;
+                    trackModel.track_release_year = str_album_release_year;
+                    trackModel.track_album_art = str_album_art;
+                    trackModel.track_no = "1";
+                    trackModel.track_url = str_track_url;
+
+                    child.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            startActivity(new Intent(ArtistDetailsActivity.this, MusicActivity.class).putExtra("trackModel",trackModel));
+//                            Movie movie = (Movie) getIntent().getParcelableExtra("parcel_data");
+                        }
+                    });
+
+                } else {
+                    JSONArray tracks = albumObject.getJSONArray("tracks");
+                    int trackLength = tracks.length();
+                    for (int x = 0; x < trackLength; x++) {
+                        JSONObject trackObject = tracks.getJSONObject(i);
+                        String str_track_name = trackObject.getString("track_name");
+                        String str_track_no = trackObject.getString("track_no");
+                        String str_track_url = trackObject.getString("track_url");
+                        TrackModel trackModel = new TrackModel();
+                        trackModel.track_name = str_track_name;
+                        trackModel.track_release_year = str_album_release_year;
+                        trackModel.track_album_art = str_album_art;
+                        trackModel.track_no = str_track_no;
+                        trackModel.track_url = str_track_url;
+
+                    }
+                }
+
+                LL.addView(child);
+            }
+            LL.setVisibility(View.VISIBLE);
+        } else {
+            LL.setVisibility(View.GONE);
+        }
     }
 
 }
