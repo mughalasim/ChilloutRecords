@@ -71,14 +71,14 @@
                                 android:id="@+id/picture_add"
                                 style="@style/Button_Yes"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/restaurant_adapter_padding"
+                                android:padding="@dimen/activity_padding"
                                 android:textSize="@dimen/text_size_tiny" />
 
                             <TextView
                                 android:id="@+id/picture_delete"
                                 style="@style/Button_No"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/restaurant_adapter_padding"
+                                android:padding="@dimen/activity_padding"
                                 android:textSize="@dimen/text_size_tiny" />
 
                             <LinearLayout

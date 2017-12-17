@@ -25,77 +25,139 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:paddingBottom="@dimen/activity_padding"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:onClick="ARTISTS"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/home_button_height"
                         android:layout_marginLeft="@dimen/activity_padding"
                         android:layout_marginRight="@dimen/activity_padding"
-                        android:background="@drawable/bckgrd_button_yes"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:onClick="ARTISTS">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="2dp"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/home_artists" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/bckgrd_home_buttons" />
+
 
                         <TextView
                             style="@style/Header_Text"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"
                             android:text="ARTISTS" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                    <LinearLayout
-                        android:onClick="MUSIC_VIDEOS"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/home_button_height"
                         android:layout_marginLeft="@dimen/activity_padding"
                         android:layout_marginRight="@dimen/activity_padding"
-                        android:background="@drawable/bckgrd_button_yes"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:onClick="MUSIC_VIDEOS">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:padding="2dp"
+                            android:src="@drawable/home_music_videos" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/bckgrd_home_buttons" />
 
                         <TextView
                             style="@style/Header_Text"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"
                             android:text="MUSIC VIDEOS" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                    <LinearLayout
-                        android:onClick="FREESTYLES"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/home_button_height"
                         android:layout_marginLeft="@dimen/activity_padding"
                         android:layout_marginRight="@dimen/activity_padding"
-                        android:background="@drawable/bckgrd_button_yes"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:onClick="FREESTYLES">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:padding="2dp"
+                            android:src="@drawable/home_freestyle_fridays" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/bckgrd_home_buttons" />
 
                         <TextView
                             style="@style/Header_Text"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"
                             android:text="FREESTYLE FRIDAYS" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                    <LinearLayout
-                        android:onClick="UPCOMING"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/home_button_height"
                         android:layout_marginLeft="@dimen/activity_padding"
                         android:layout_marginRight="@dimen/activity_padding"
-                        android:background="@drawable/bckgrd_button_yes"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:onClick="UPCOMING">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:padding="2dp"
+                            android:alpha="0.5"
+                            android:src="@drawable/home_upcoming" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/bckgrd_home_buttons" />
 
                         <TextView
                             style="@style/Header_Text"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"
                             android:text="UPCOMING PROJECTS" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                 </LinearLayout>
 
@@ -105,6 +167,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <include layout="@layout/navigation_view"/>
+    <include layout="@layout/navigation_view" />
 
 </android.support.v4.widget.DrawerLayout>

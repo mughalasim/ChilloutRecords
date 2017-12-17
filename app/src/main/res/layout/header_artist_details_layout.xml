@@ -7,13 +7,26 @@
     app:layout_collapseMode="parallax"
     app:layout_scrollFlags="scroll|enterAlways">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/ppic"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/main_logo_white"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_logo_white" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bckgrd_home_buttons" />
+
+    </RelativeLayout>
 
 
 </android.support.v4.widget.NestedScrollView>
