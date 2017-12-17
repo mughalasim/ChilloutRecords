@@ -17,12 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.Database;
 import asimmughal.chilloutrecords.utils.Helpers;
 import asimmughal.chilloutrecords.utils.SharedPrefs;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected Helpers helper;
@@ -34,7 +34,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
     protected View header;
     protected BroadcastReceiver receiver;
     protected TextView userName, userEmail;
-    protected CircleImageView userPic;
+    protected RoundedImageView userPic;
     protected int drawer_id;
     protected String toolbarTitle;
 
@@ -45,9 +45,9 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         this.drawer_id = drawer_id;
         this.toolbarTitle = toolbarTitle;
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar =  findViewById(R.id.toolbar);
+        drawer =  findViewById(R.id.drawer_layout);
+        navigationView =  findViewById(R.id.nav_view);
 
         listenExitBroadcast();
 
@@ -62,7 +62,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle(toolbarTitle);
         toolbar.setTitle(toolbarTitle);
-        LinearLayout toolbar_image = (LinearLayout) toolbar.findViewById(R.id.toolbar_image);
+        LinearLayout toolbar_image = toolbar.findViewById(R.id.toolbar_image);
 
         if (toolbarTitle.equals("")) {
             toolbar_image.setVisibility(View.VISIBLE);
@@ -77,9 +77,9 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
         navigationView.setNavigationItemSelectedListener(this);
         header = navigationView.getHeaderView(0);
-        userName = (TextView) header.findViewById(R.id.username);
-        userEmail = (TextView) header.findViewById(R.id.userEmail);
-        userPic = (CircleImageView) header.findViewById(R.id.userPic);
+        userName = header.findViewById(R.id.username);
+        userEmail =  header.findViewById(R.id.userEmail);
+        userPic =  header.findViewById(R.id.userPic);
 
 
     }

@@ -37,7 +37,7 @@
 
     </LinearLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/userPic"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -45,7 +45,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/white"/>
+        app:riv_border_color="@color/white"
+        app:riv_border_width="1dp"
+        android:src="@color/black"
+        app:riv_corner_radius="50dp"/>
 
 </RelativeLayout>
