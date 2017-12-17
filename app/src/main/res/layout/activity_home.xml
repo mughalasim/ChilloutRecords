@@ -25,7 +25,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:paddingBottom="@dimen/button_margin"
+                android:paddingBottom="@dimen/activity_padding"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
@@ -37,9 +37,9 @@
                         android:onClick="ARTISTS"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/button_margin"
-                        android:layout_marginLeft="@dimen/button_margin"
-                        android:layout_marginRight="@dimen/button_margin"
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_marginLeft="@dimen/activity_padding"
+                        android:layout_marginRight="@dimen/activity_padding"
                         android:background="@drawable/bckgrd_button_yes"
                         android:orientation="horizontal">
 
@@ -53,9 +53,9 @@
                         android:onClick="VIDEOS"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/button_margin"
-                        android:layout_marginLeft="@dimen/button_margin"
-                        android:layout_marginRight="@dimen/button_margin"
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_marginLeft="@dimen/activity_padding"
+                        android:layout_marginRight="@dimen/activity_padding"
                         android:background="@drawable/bckgrd_button_yes"
                         android:orientation="horizontal">
 
@@ -69,9 +69,9 @@
                         android:onClick="EQUIPMENTS"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/button_margin"
-                        android:layout_marginLeft="@dimen/button_margin"
-                        android:layout_marginRight="@dimen/button_margin"
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_marginLeft="@dimen/activity_padding"
+                        android:layout_marginRight="@dimen/activity_padding"
                         android:background="@drawable/bckgrd_button_yes"
                         android:orientation="horizontal">
 
@@ -85,9 +85,9 @@
                         android:onClick="UPCOMING"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/button_margin"
-                        android:layout_marginLeft="@dimen/button_margin"
-                        android:layout_marginRight="@dimen/button_margin"
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_marginLeft="@dimen/activity_padding"
+                        android:layout_marginRight="@dimen/activity_padding"
                         android:background="@drawable/bckgrd_button_yes"
                         android:orientation="horizontal">
 

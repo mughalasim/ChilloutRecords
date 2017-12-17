@@ -30,9 +30,9 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list_item"
-                    android:paddingLeft="@dimen/button_margin"
-                    android:paddingRight="@dimen/button_margin"
-                    android:paddingTop="@dimen/button_margin"
+                    android:paddingLeft="@dimen/activity_padding"
+                    android:paddingRight="@dimen/activity_padding"
+                    android:paddingTop="@dimen/activity_padding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

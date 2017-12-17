@@ -25,7 +25,7 @@ import asimmughal.chilloutrecords.utils.SharedPrefs;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    static Helpers helper;
+    protected Helpers helper;
     protected Database db;
     protected Toolbar toolbar;
     protected DrawerLayout drawer;

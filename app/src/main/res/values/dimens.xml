@@ -4,8 +4,7 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="activity_padding">40dp</dimen>
-    <dimen name="button_margin">10dp</dimen>
+    <dimen name="activity_padding">10dp</dimen>
 
     <dimen name="restaurant_adapter_padding">10dp</dimen>
 

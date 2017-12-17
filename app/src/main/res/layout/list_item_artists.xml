@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginBottom="@dimen/button_margin">
+        android:layout_marginBottom="@dimen/activity_padding">
 
         <!--IMAGE-->
         <ProgressBar
@@ -53,8 +53,8 @@
             android:layout_width="@dimen/my_account_profile_pic"
             android:layout_height="@dimen/my_account_profile_pic"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/button_margin"
-            android:layout_marginRight="@dimen/button_margin"
+            android:layout_marginEnd="@dimen/activity_padding"
+            android:layout_marginRight="@dimen/activity_padding"
             android:scaleType="centerCrop"
             app:riv_border_width="0dp"
             app:riv_corner_radius="8dp"
@@ -82,7 +82,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_marginBottom="@dimen/activity_padding"
                 android:orientation="vertical">
 
                 <TextView
@@ -108,7 +108,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/button_margin"
+                    android:layout_marginBottom="@dimen/activity_padding"
                     android:orientation="horizontal">
 
                     <TextView

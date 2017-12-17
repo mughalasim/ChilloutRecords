@@ -10,6 +10,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,7 @@ public class ArtistActivity extends ParentActivity {
         helper.setProgressDialogMessage("Loading Artists.. Please wait");
         helper.progressDialog(true);
 
-        setNewDatabaseRef(DB_REFERENCE);
+        fetchData(DB_REFERENCE);
     }
 
     private void findAllViews() {
@@ -52,30 +56,46 @@ public class ArtistActivity extends ParentActivity {
 
     }
 
-    public static void setNewDatabaseRef(String dbRef) {
+    public void fetchData(String dbRef) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(dbRef);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                helper.progressDialog(false);
                 try {
-                    helper.progressDialog(false);
-                    Object value = dataSnapshot.getValue();
-                    if (value instanceof List) {
-                        List<Object> values = (List<Object>) value;
-                        int length = values.size();
-                        Helpers.LogThis(values.toString());
+
+                    Gson gson = new Gson();
+                    JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
+                    Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
+
+                    int length = jsonArray.length();
+                    if (length > 1) {
                         arrayList.clear();
                         for (int i = 0; i < length; i++) {
-                            getHashMap((Map<String, String>) values.get(i));
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            ArtistModel artistModel = new ArtistModel();
+                            artistModel.id = object.getString("id");
+                            artistModel.info = object.getString("info");
+                            artistModel.name = object.getString("name");
+                            artistModel.ppic = object.getString("ppic");
+                            artistModel.stage_name = object.getString("stage_name");
+                            artistModel.year_since = object.getString("year_since");
+                            arrayList.add(artistModel);
                         }
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        noLists();
                     }
+
                 } catch (Exception e) {
+                    noLists();
                     e.printStackTrace();
                     Helpers.LogThis(e.toString());
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 helper.progressDialog(false);
@@ -90,33 +110,5 @@ public class ArtistActivity extends ParentActivity {
         arrayList.clear();
         recyclerView.setAdapter(adapter);
     }
-
-    public static void getHashMap(Map<String, String> data) {
-        if (data != null) {
-            ArtistModel artistModel = new ArtistModel();
-            for (Map.Entry<String, String> entry : data.entrySet()) {
-                String ListItem = entry.getValue();
-                if (entry.toString().contains("id")) {
-                    artistModel.id = ListItem;
-                } else if (entry.toString().contains("name")) {
-                    artistModel.name = ListItem;
-                } else if (entry.toString().contains("stage_name")) {
-                    artistModel.stage_name = ListItem;
-                } else if (entry.toString().contains("ppic")) {
-                    artistModel.ppic = ListItem;
-                } else if (entry.toString().contains("info")) {
-                    artistModel.info = ListItem;
-                } else if (entry.toString().contains("year_since")) {
-                    artistModel.year_since = ListItem;
-                }
-            }
-            arrayList.add(artistModel);
-            adapter.notifyDataSetChanged();
-
-        } else {
-            noLists();
-        }
-    }
-
 
 }

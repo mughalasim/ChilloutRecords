@@ -13,7 +13,8 @@
         android:layout_centerInParent="true"
         android:contentDescription="@string/app_name"
         android:scaleType="centerInside"
-        android:src="@drawable/main_logo_icon_white" />
+        android:padding="@dimen/activity_padding"
+        android:src="@drawable/main_logo_white" />
 
     <LinearLayout
         android:id="@+id/progress_text_panel"
