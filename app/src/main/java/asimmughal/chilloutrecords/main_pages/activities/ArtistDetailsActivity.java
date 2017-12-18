@@ -74,6 +74,10 @@ public class ArtistDetailsActivity extends ParentActivity {
         LL_mixtapes = findViewById(R.id.LL_mixtapes);
         LL_singles = findViewById(R.id.LL_singles);
 
+        LL_album.setVisibility(View.GONE);
+        LL_singles.setVisibility(View.GONE);
+        LL_mixtapes.setVisibility(View.GONE);
+
     }
 
     private void handleExtraBundles() {
@@ -105,16 +109,16 @@ public class ArtistDetailsActivity extends ParentActivity {
 
                     information.setText(jsonObject.getString("info"));
 
-                    addMusicLayout(jsonObject, "Albums", scroll_albums);
+                    addMusicLayout(jsonObject, "Albums", LL_album, scroll_albums);
 
-                    addMusicLayout(jsonObject, "Mixtape", scroll_mixtapes);
+                    addMusicLayout(jsonObject, "Mixtape", LL_mixtapes, scroll_mixtapes);
 
-                    addMusicLayout(jsonObject, "Singles", scroll_singles);
+                    addMusicLayout(jsonObject, "Singles", LL_singles, scroll_singles);
 
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    information.setText("No Information available just yet! ;)");
+                    noData();
                     Helpers.LogThis(e.toString());
                 }
                 helper.progressDialog(false);
@@ -123,18 +127,24 @@ public class ArtistDetailsActivity extends ParentActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 helper.progressDialog(false);
-//                noLists();
-                information.setText("No Information available just yet! ;)");
+                noData();
                 Log.w("HOMEPAGE: ", "Failed to read value.", error.toException());
             }
         });
 
     }
 
-    private void addMusicLayout(final JSONObject jsonObject, final String flag_name, final LinearLayout LL) throws JSONException {
+    public void noData(){
+        information.setText("No Information available just yet! ;)");
+        LL_album.setVisibility(View.GONE);
+        LL_singles.setVisibility(View.GONE);
+        LL_mixtapes.setVisibility(View.GONE);
+    }
+
+    private void addMusicLayout(final JSONObject jsonObject, final String flag_name, final LinearLayout LL_outer, final LinearLayout LL_inner) throws JSONException {
         LayoutInflater layoutInflater;
         layoutInflater = LayoutInflater.from(ArtistDetailsActivity.this);
-        LL.removeAllViews();
+        LL_inner.removeAllViews();
         JSONArray jsonArray = jsonObject.getJSONArray(flag_name);
         int jsonArrayLength = jsonArray.length();
         if (jsonArrayLength > 0) {
@@ -169,11 +179,11 @@ public class ArtistDetailsActivity extends ParentActivity {
                     }
                 });
 
-                LL.addView(child);
+                LL_inner.addView(child);
             }
-            LL.setVisibility(View.VISIBLE);
+            LL_outer.setVisibility(View.VISIBLE);
         } else {
-            LL.setVisibility(View.GONE);
+            LL_outer.setVisibility(View.GONE);
         }
     }
 

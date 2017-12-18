@@ -1,40 +1,27 @@
 package asimmughal.chilloutrecords.main_pages.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.afollestad.easyvideoplayer.EasyVideoCallback;
+import com.afollestad.easyvideoplayer.EasyVideoPlayer;
 import com.bumptech.glide.Glide;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.DefaultRenderersFactory;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,12 +29,16 @@ import org.json.JSONObject;
 
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.Helpers;
+import pl.droidsonroids.gif.GifImageView;
 
-public class MusicActivity extends ParentActivity {
+public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     LinearLayout
             no_list_items,
             LL_tracks;
+
+    RelativeLayout
+            LL_player;
 
     private ImageView
             ppic;
@@ -58,11 +49,12 @@ public class MusicActivity extends ParentActivity {
             DB_REFERENCE = "",
             STR_PPIC = "";
 
-    private SimpleExoPlayerView
-            playerView;
+    private SeekBar loading_progress;
 
-    SimpleExoPlayer
-            player;
+    private EasyVideoPlayer player;
+
+    private GifImageView current_animation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,44 +70,30 @@ public class MusicActivity extends ParentActivity {
 
         fetchData(DB_REFERENCE);
 
+        player = findViewById(R.id.player);
+
+        player.setCallback(MusicActivity.this);
+
     }
 
     private void findAllViews() {
         ppic = findViewById(R.id.ppic);
         LL_tracks = findViewById(R.id.LL_tracks);
+        LL_player = findViewById(R.id.LL_player);
         no_list_items = findViewById(R.id.no_list_items);
         no_list_items.setVisibility(View.GONE);
 
-        playerView = (SimpleExoPlayerView) findViewById(R.id.video_view);
+        loading_progress = findViewById(R.id.loading_progress);
+        loading_progress.setProgress(0);
+        loading_progress.setMax(100);
+        loading_progress.setClickable(false);
+        loading_progress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
 
-        final DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        final TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
-        final TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-
-        final LoadControl loadControl = new DefaultLoadControl();
-
-        player = ExoPlayerFactory.newSimpleInstance(MusicActivity.this, trackSelector, loadControl);
-
-    }
-
-    private void initializePlayer() {
-        Uri uri = Uri.parse(STR_TRACK_URL);
-        MediaSource mediaSource = buildMediaSource(uri);
-        player.prepare(mediaSource, true, false);
-        player = ExoPlayerFactory.newSimpleInstance(
-                new DefaultRenderersFactory(MusicActivity.this),
-                new DefaultTrackSelector(), new DefaultLoadControl());
-
-        playerView.setPlayer(player);
-
-//        player.setPlayWhenReady(playWhenReady);
-//        player.seekTo(currentWindow, playbackPosition);
-    }
-
-    private MediaSource buildMediaSource(Uri uri) {
-        return new ExtractorMediaSource(uri,
-                new DefaultHttpDataSourceFactory("ua"),
-                new DefaultExtractorsFactory(), null, null);
     }
 
     private void handleExtraBundles() {
@@ -123,54 +101,11 @@ public class MusicActivity extends ParentActivity {
         if (extras != null) {
             STR_NAME = extras.getString("album_name");
             STR_PPIC = extras.getString("album_art");
-            DB_REFERENCE ="Tracks/" + extras.getString("track_url");
+            DB_REFERENCE = "Tracks/" + extras.getString("track_url");
             Glide.with(MusicActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
             helper.ToastMessage(MusicActivity.this, getString(R.string.error_500));
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (Util.SDK_INT <= 23) {
-            releasePlayer();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (Util.SDK_INT > 23) {
-            releasePlayer();
-        }
-    }
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        if (Util.SDK_INT > 23) {
-//            initializePlayer();
-//        }
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-////        hideSystemUi();
-//        if ((Util.SDK_INT <= 23 || player == null)) {
-//            initializePlayer();
-//        }
-//    }
-
-    private void releasePlayer() {
-        if (player != null) {
-//            playbackPosition = player.getCurrentPosition();
-//            currentWindow = player.getCurrentWindowIndex();
-//            playWhenReady = player.getPlayWhenReady();
-            player.release();
-            player = null;
         }
     }
 
@@ -191,7 +126,7 @@ public class MusicActivity extends ParentActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    no_list_items.setVisibility(View.VISIBLE);
+                    noData();
                     Helpers.LogThis(e.toString());
                 }
 
@@ -201,8 +136,8 @@ public class MusicActivity extends ParentActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 helper.progressDialog(false);
-                no_list_items.setVisibility(View.VISIBLE);
-                Log.w("HOMEPAGE: ", "Failed to read value.", error.toException());
+                noData();
+                Log.e("HOMEPAGE: ", "Failed to read value.", error.toException());
             }
         });
 
@@ -217,12 +152,13 @@ public class MusicActivity extends ParentActivity {
         if (jsonArrayLength > 0) {
             for (int i = 0; i < jsonArrayLength; i++) {
                 // FIND ALL THE VIEWS ON THE CARD
-                @SuppressLint("InflateParams")
-                View child = layoutInflater.inflate(R.layout.list_item_track, null);
+                @SuppressLint("InflateParams") final View child = layoutInflater.inflate(R.layout.list_item_track, null);
 
                 final TextView track_name = child.findViewById(R.id.track_name);
                 final TextView track_no = child.findViewById(R.id.track_no);
                 final TextView track_url = child.findViewById(R.id.track_url);
+                final GifImageView music_playing = child.findViewById(R.id.music_playing);
+                final ImageView download = child.findViewById(R.id.download);
 
                 JSONObject albumObject = jsonArray.getJSONObject(i);
                 final String str_track_name = albumObject.getString("track_name");
@@ -233,21 +169,97 @@ public class MusicActivity extends ParentActivity {
                 track_no.setText(str_track_no);
                 track_url.setText(STR_TRACK_URL);
 
-
                 child.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                       initializePlayer();
+                        updateAnimation(current_animation, false);
+                        current_animation = music_playing;
+                        helper.animate_flash(child, 10000, 5);
+                        player.setSource(Uri.parse(track_url.getText().toString()));
+                    }
+                });
+
+                download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        helper.myDialog(MusicActivity.this, "Alert", "Oops! Feature coming soon, so hang in there buddy!");
                     }
                 });
 
                 LL.addView(child);
             }
             LL.setVisibility(View.VISIBLE);
+            LL_player.setVisibility(View.VISIBLE);
         } else {
             LL.setVisibility(View.GONE);
-            no_list_items.setVisibility(View.VISIBLE);
+            noData();
         }
+    }
+
+    public void noData() {
+        no_list_items.setVisibility(View.VISIBLE);
+        LL_player.setVisibility(View.GONE);
+    }
+
+    public void updateAnimation(GifImageView view, Boolean show) {
+        if (current_animation != null) {
+            if (show) {
+                view.setVisibility(View.VISIBLE);
+            } else {
+                view.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    // Methods for the implemented EasyVideoCallback ===============================================
+
+    @Override
+    public void onPreparing(EasyVideoPlayer player) {
+    }
+
+    @Override
+    public void onPrepared(EasyVideoPlayer player) {
+        player.start();
+    }
+
+    @Override
+    public void onBuffering(int percent) {
+        loading_progress.setProgress(percent);
+        if (percent > 1) {
+            player.start();
+        }
+    }
+
+    @Override
+    public void onError(EasyVideoPlayer player, Exception e) {
+        helper.ToastMessage(MusicActivity.this, getString(R.string.error_500));
+        finish();
+    }
+
+    @Override
+    public void onCompletion(EasyVideoPlayer player) {
+        updateAnimation(current_animation, false);
+    }
+
+    @Override
+    public void onRetry(EasyVideoPlayer player, Uri source) {
+        // TODO handle if used
+    }
+
+    @Override
+    public void onSubmit(EasyVideoPlayer player, Uri source) {
+        // TODO handle if used
+    }
+
+    @Override
+    public void onStarted(EasyVideoPlayer player) {
+        updateAnimation(current_animation, true);
+    }
+
+    @Override
+    public void onPaused(EasyVideoPlayer player) {
+        // TODO handle if needed
+        updateAnimation(current_animation, false);
     }
 
 }

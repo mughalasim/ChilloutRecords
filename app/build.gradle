@@ -104,8 +104,6 @@ dependencies {
     // VIDEO PAYER
     compile 'com.afollestad:easyvideoplayer:0.3.0'
 
-    //MUSIC PLAYER
-    compile 'com.google.android.exoplayer:exoplayer:r2.4.0'
 
 }
 

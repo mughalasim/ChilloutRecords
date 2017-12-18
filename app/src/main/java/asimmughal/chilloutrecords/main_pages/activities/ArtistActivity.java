@@ -109,6 +109,7 @@ public class ArtistActivity extends ParentActivity {
     public static void noLists() {
         arrayList.clear();
         recyclerView.setAdapter(adapter);
+
     }
 
 }

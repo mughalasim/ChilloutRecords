@@ -8,6 +8,8 @@
 
     <dimen name="home_button_height">180dp</dimen>
 
+    <dimen name="music_player_height">80dp</dimen>
+
     <dimen name="text_size_header">32sp</dimen>
     <dimen name="text_size_normal">18sp</dimen>
     <dimen name="text_size_small">16sp</dimen>

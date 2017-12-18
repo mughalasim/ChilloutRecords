@@ -1,32 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_padding"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/activity_padding"
     android:background="@drawable/bckgrd_activity_panels"
     android:orientation="horizontal">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/music_playing"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/music_playing" />
 
     <TextView
         android:id="@+id/track_no"
         style="@style/Text_Normal"
         android:layout_gravity="start"
         android:gravity="start"
-        android:text="01"
-        android:padding="@dimen/activity_padding" />
+        android:padding="@dimen/activity_padding"
+        android:text="01" />
 
     <TextView
         android:id="@+id/track_name"
         style="@style/Text_Normal"
         android:layout_gravity="start"
-        android:text="Track Name"
+        android:layout_toRightOf="@+id/track_no"
         android:padding="@dimen/activity_padding"
+        android:text="Track Name"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/download"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_download"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"/>
+
 
     <TextView
         android:id="@+id/track_url"
         style="@style/Text_Normal"
-        android:visibility="gone"
         android:layout_gravity="start"
-        android:gravity="start" />
+        android:gravity="start"
+        android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>
