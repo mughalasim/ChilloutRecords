@@ -53,5 +53,8 @@
     <string name="et_hint_confirm_new_password">Confirm new password</string>
     <string name="et_hint_amount">Enter Amount</string>
 
+    <!--LAYOUT AND IN APP STRINGS-->
+    <string name="txt_version">Version:</string>
+
 
 </resources>

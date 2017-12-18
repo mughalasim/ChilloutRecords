@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,7 +35,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
     protected NavigationView navigationView;
     protected View header;
     protected BroadcastReceiver receiver;
-    protected TextView userName, userEmail;
+    protected TextView userName, userEmail, toolbar_text;
     protected RoundedImageView userPic;
     protected int drawer_id;
     protected String toolbarTitle;
@@ -45,9 +47,11 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         this.drawer_id = drawer_id;
         this.toolbarTitle = toolbarTitle;
 
-        toolbar =  findViewById(R.id.toolbar);
-        drawer =  findViewById(R.id.drawer_layout);
-        navigationView =  findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar_text = toolbar.findViewById(R.id.toolbar_text);
+
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         listenExitBroadcast();
 
@@ -59,15 +63,18 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
     public void setUpToolBarAndDrawer() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle(toolbarTitle);
-        toolbar.setTitle(toolbarTitle);
+//        getSupportActionBar().setDisplayShowTitleEnabled(true);
+//        getSupportActionBar().setTitle(toolbarTitle);
+//        toolbar.setTitle(toolbarTitle);
         LinearLayout toolbar_image = toolbar.findViewById(R.id.toolbar_image);
 
         if (toolbarTitle.equals("")) {
             toolbar_image.setVisibility(View.VISIBLE);
+            toolbar_text.setVisibility(View.GONE);
         } else {
             toolbar_image.setVisibility(View.GONE);
+            toolbar_text.setVisibility(View.VISIBLE);
+            toolbar_text.setText(toolbarTitle);
         }
 
         toggle = new ActionBarDrawerToggle(
@@ -78,8 +85,8 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
         header = navigationView.getHeaderView(0);
         userName = header.findViewById(R.id.username);
-        userEmail =  header.findViewById(R.id.userEmail);
-        userPic =  header.findViewById(R.id.userPic);
+        userEmail = header.findViewById(R.id.userEmail);
+        userPic = header.findViewById(R.id.userPic);
 
 
     }
@@ -88,6 +95,14 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         userName.setText(SharedPrefs.getUserFullName());
         Glide.with(this).load(SharedPrefs.getUserPic()).into(userPic);
         userEmail.setText(SharedPrefs.getUserEmail());
+
+        TextView app_version = findViewById(R.id.app_version);
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            app_version.setText(getString(R.string.txt_version).concat(pInfo.versionName));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         navigationView.getMenu().findItem(drawer_id).setChecked(true);
     }

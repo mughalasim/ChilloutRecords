@@ -5,15 +5,13 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:openDrawer="end">
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="eatout.restaurantguide.main_pages.eo_activities.RestaurantSearchActivity">
+        android:layout_height="match_parent">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -126,26 +124,6 @@
                         style="@style/Edit_Text"
                         android:hint="@string/et_hint_email"
                         android:inputType="textEmailAddress" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_margin="3dp"
-                        android:background="@drawable/bckgrd_text_fields"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
-
-                        <TextView
-                            style="@style/Text_Normal"
-                            android:hint="@string/et_hint_country_code" />
-
-                        <TextView
-                            android:id="@+id/register_country_code"
-                            style="@style/Text_Normal"
-                            android:layout_width="match_parent"
-                            android:gravity="start" />
-
-                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/register_phone"

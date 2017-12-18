@@ -103,7 +103,7 @@ public class MyAccountActivity extends ParentActivity {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance(TimeZone.getDefault());
                 DatePickerDialog datePicker = new DatePickerDialog(MyAccountActivity.this,
-                        R.style.AppTheme, datePickerListener,
+                        R.style.ThemeOverlay_AppCompat_Dark, datePickerListener,
                         cal.get(Calendar.YEAR),
                         cal.get(Calendar.MONTH),
                         cal.get(Calendar.DAY_OF_MONTH));

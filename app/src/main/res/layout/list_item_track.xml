@@ -12,16 +12,14 @@
         android:layout_gravity="start"
         android:gravity="start"
         android:text="01"
-        android:padding="@dimen/activity_padding"
-        android:textSize="@dimen/text_size_tiny" />
+        android:padding="@dimen/activity_padding" />
 
     <TextView
         android:id="@+id/track_name"
         style="@style/Text_Normal"
         android:layout_gravity="start"
-        android:text="Basic Information:"
+        android:text="Track Name"
         android:padding="@dimen/activity_padding"
-        android:textSize="@dimen/text_size_tiny"
         android:textStyle="bold" />
 
     <TextView

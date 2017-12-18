@@ -4,16 +4,16 @@
     <item android:state_focused="true" android:state_pressed="true">
         <shape>
             <gradient
-                android:startColor="@color/colorAccent"
-                android:centerColor="@color/colorAccent"
-                android:endColor="@color/colorAccentDark"
+                android:startColor="@color/colorPrimary"
+                android:centerColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryDark"
                 android:angle="270"
                 />
             <stroke
                 android:width="1dp"
-                android:color="@color/white" />
+                android:color="@color/green" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 
@@ -22,16 +22,16 @@
     <item android:state_focused="false" android:state_pressed="true">
         <shape>
             <gradient
-                android:startColor="@color/colorAccent"
-                android:centerColor="@color/colorAccent"
-                android:endColor="@color/colorAccentDark"
+                android:startColor="@color/colorPrimary"
+                android:centerColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryDark"
                 android:angle="270"
                 />
             <stroke
                 android:width="1dp"
-                android:color="@color/white" />
+                android:color="@color/green" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 
@@ -40,16 +40,16 @@
     <item android:state_pressed="false" android:state_focused="false">
         <shape>
             <gradient
-                android:startColor="@color/colorAccentDark"
-                android:centerColor="@color/colorAccent"
-                android:endColor="@color/colorAccent"
+                android:startColor="@color/colorPrimaryDark"
+                android:centerColor="@color/colorPrimaryDark"
+                android:endColor="@color/colorPrimaryDark"
                 android:angle="270"
                 />
             <stroke
                 android:width="1dp"
-                android:color="@color/colorAccent" />
+                android:color="@color/colorPrimary" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 

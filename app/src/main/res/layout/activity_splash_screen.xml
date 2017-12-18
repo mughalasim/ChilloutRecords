@@ -20,17 +20,15 @@
         android:layout_width="match_parent"
         android:background="@drawable/bckgrd_activity_panels"
         android:layout_height="wrap_content"
-        android:padding="14dp"
+        android:padding="@dimen/activity_padding"
+        android:layout_margin="@dimen/activity_padding"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/progress_text"
             style="@style/Text_Normal"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:text="@string/progress_loading_initializing"
-            android:textColor="@color/white" />
+            android:text="@string/progress_loading_initializing" />
 
     </LinearLayout>
 

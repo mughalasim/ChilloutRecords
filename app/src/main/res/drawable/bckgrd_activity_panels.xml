@@ -5,15 +5,15 @@
         <shape>
             <gradient
                 android:startColor="@color/very_dark_grey_transparent"
-                android:centerColor="@color/transparent"
+                android:centerColor="@color/very_dark_grey_transparent"
                 android:endColor="@color/very_dark_grey_transparent"
                 android:angle="270"
                 />
             <stroke
-                android:width="0dp"
-                android:color="@color/light_grey" />
+                android:width="1dp"
+                android:color="@color/colorPrimary" />
             <corners
-                android:radius="3dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 

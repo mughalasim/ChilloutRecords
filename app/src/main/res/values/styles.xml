@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <!--<item name="android:fontFamily">sans-serif</item>-->
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:windowAnimationStyle">@style/customTransition</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -46,31 +46,6 @@
     </style>
 
 
-    <!--TOOLBAR TEXTS ===========================================================================-->
-
-    <style name="Toolbar_Text" parent="AppTheme">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_margin">2sp</item>
-        <item name="android:textSize">10sp</item>
-    </style>
-
-    <!-- NAVIGATION DRAWER ======================================================================-->
-
-    <style name="Navigation_Drawer" parent="AppTheme">
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_gravity">start</item>
-        <item name="android:fitsSystemWindows">true</item>
-    </style>
-
-
     <!--SPINNER TEXTS ===========================================================================-->
 
     <style name="Spinner_Text" parent="AppTheme">
@@ -82,23 +57,6 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text_size_tiny</item>
     </style>
-
-
-    <style name="Spinner_Search" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center_vertical|left</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:longClickable">false</item>
-        <item name="android:selectable">false</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
-        <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
 
     <!--EDIT TEXTS =============================================================================-->
 
@@ -115,35 +73,9 @@
         <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
         <item name="android:selectable">false</item>
         <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorAccentDark</item>
         <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-    <style name="Edit_Text_Form" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">start|center_vertical</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:longClickable">false</item>
-        <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
-        <item name="android:selectable">false</item>
-        <item name="android:paddingLeft">@dimen/text_size_normal_margin</item>
-        <item name="android:background">@color/grey</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-    <style name="Edit_Text_Layout" parent="AppTheme">
-        <item name="android:layout_height">@dimen/edit_text_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:longClickable">false</item>
-        <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
-        <item name="android:selectable">false</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:background">@color/white</item>
     </style>
 
 

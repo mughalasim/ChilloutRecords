@@ -13,7 +13,7 @@
                 android:width="1dp"
                 android:color="@color/green" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 
@@ -31,7 +31,7 @@
                 android:width="1dp"
                 android:color="@color/green" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 
@@ -49,7 +49,7 @@
                 android:width="0dp"
                 android:color="@color/dark_grey" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
         </shape>
     </item>
 
