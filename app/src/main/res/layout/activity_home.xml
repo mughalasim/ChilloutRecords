@@ -67,7 +67,7 @@
                         android:layout_marginLeft="@dimen/activity_padding"
                         android:layout_marginRight="@dimen/activity_padding"
                         android:layout_marginTop="@dimen/activity_padding"
-                        android:onClick="MUSIC_VIDEOS">
+                        android:onClick="VIDEOS">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                             style="@style/Header_Text"
                             android:textColor="@color/white"
                             android:layout_centerInParent="true"
-                            android:text="MUSIC VIDEOS" />
+                            android:text="VIDEOS" />
 
                     </RelativeLayout>
 

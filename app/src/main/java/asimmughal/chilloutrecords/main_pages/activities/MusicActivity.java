@@ -74,6 +74,8 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
         player.setCallback(MusicActivity.this);
 
+        LL_player.setVisibility(View.GONE);
+
     }
 
     private void findAllViews() {
@@ -158,11 +160,12 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 final TextView track_no = child.findViewById(R.id.track_no);
                 final TextView track_url = child.findViewById(R.id.track_url);
                 final GifImageView music_playing = child.findViewById(R.id.music_playing);
-                final ImageView download = child.findViewById(R.id.download);
+                final ImageView lyrics = child.findViewById(R.id.lyrics);
 
                 JSONObject albumObject = jsonArray.getJSONObject(i);
                 final String str_track_name = albumObject.getString("track_name");
                 final String str_track_no = albumObject.getString("track_no");
+                final String str_track_lyrics = albumObject.getString("track_lyrics");
                 STR_TRACK_URL = albumObject.getString("track_url");
 
                 track_name.setText(str_track_name);
@@ -176,20 +179,20 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                         current_animation = music_playing;
                         helper.animate_flash(child, 10000, 5);
                         player.setSource(Uri.parse(track_url.getText().toString()));
+                        LL_player.setVisibility(View.VISIBLE);
                     }
                 });
 
-                download.setOnClickListener(new View.OnClickListener() {
+                lyrics.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        helper.myDialog(MusicActivity.this, "Alert", "Oops! Feature coming soon, so hang in there buddy!");
+                        helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
                     }
                 });
 
                 LL.addView(child);
             }
             LL.setVisibility(View.VISIBLE);
-            LL_player.setVisibility(View.VISIBLE);
         } else {
             LL.setVisibility(View.GONE);
             noData();
@@ -232,7 +235,7 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     @Override
     public void onError(EasyVideoPlayer player, Exception e) {
-        helper.ToastMessage(MusicActivity.this, getString(R.string.error_500));
+//        helper.ToastMessage(MusicActivity.this, e.toString());
         finish();
     }
 

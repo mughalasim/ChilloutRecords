@@ -52,6 +52,9 @@
 
 
         <!-- MAIN PAGES =========================================================================-->
+
+        <activity android:name=".main_pages.activities.ParentActivity" />
+
         <activity
             android:name=".main_pages.activities.HomeActivity"
             android:launchMode="singleTask"
@@ -59,7 +62,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.ArtistActivity"
+            android:name=".main_pages.activities.GeneralListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -84,6 +87,12 @@
 
         <activity
             android:name=".main_pages.activities.MusicActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".main_pages.activities.VideoPlayerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
@@ -116,7 +125,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".main_pages.activities.ParentActivity" />
+
+
 
 
         <!--META DATA ===========================================================================-->

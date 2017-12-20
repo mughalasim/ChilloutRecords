@@ -34,12 +34,12 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/download"
+        android:id="@+id/lyrics"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/ic_download"
+        android:background="@drawable/ic_lyrics"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/activity_padding"
         android:layout_marginRight="@dimen/activity_padding"/>

@@ -26,21 +26,23 @@ import asimmughal.chilloutrecords.utils.Database;
 import asimmughal.chilloutrecords.utils.Helpers;
 import asimmughal.chilloutrecords.utils.SharedPrefs;
 
-public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    protected Helpers helper;
-    protected Database db;
-    protected Toolbar toolbar;
-    protected DrawerLayout drawer;
-    protected ActionBarDrawerToggle toggle;
-    protected NavigationView navigationView;
-    protected View header;
-    protected BroadcastReceiver receiver;
-    protected TextView userName, userEmail, toolbar_text;
-    protected RoundedImageView userPic;
-    protected int drawer_id;
-    protected String toolbarTitle;
+public class ParentActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    public void initialize(int drawer_id, String toolbarTitle) {
+    Helpers helper;
+    Database db;
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
+    NavigationView navigationView;
+    private View header;
+    private BroadcastReceiver receiver;
+    TextView userName, userEmail, toolbar_text;
+    private RoundedImageView userPic;
+    private int drawer_id;
+    String toolbarTitle;
+
+    void initialize(int drawer_id, String toolbarTitle) {
         helper = new Helpers(ParentActivity.this);
         db = new Database();
 
@@ -61,11 +63,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
     }
 
-    public void setUpToolBarAndDrawer() {
-        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(true);
-//        getSupportActionBar().setTitle(toolbarTitle);
-//        toolbar.setTitle(toolbarTitle);
+    private void setUpToolBarAndDrawer() {
         LinearLayout toolbar_image = toolbar.findViewById(R.id.toolbar_image);
 
         if (toolbarTitle.equals("")) {
@@ -91,7 +89,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
     }
 
-    public void updateDrawer() {
+    void updateDrawer() {
         userName.setText(SharedPrefs.getUserFullName());
         Glide.with(this).load(SharedPrefs.getUserPic()).into(userPic);
         userEmail.setText(SharedPrefs.getUserEmail());
@@ -107,7 +105,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         navigationView.getMenu().findItem(drawer_id).setChecked(true);
     }
 
-    public void listenExitBroadcast() {
+    private void listenExitBroadcast() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Helpers.BroadcastValue);
         receiver = new BroadcastReceiver() {

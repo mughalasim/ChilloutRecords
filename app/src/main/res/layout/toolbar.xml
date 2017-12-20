@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/very_dark_grey_transparent"
-    android:gravity="center"
-    android:textAlignment="center"
-    android:theme="@style/AppTheme"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
     app:titleTextColor="@color/white">
@@ -24,7 +21,7 @@
             style="@style/Header_Text"
             android:layout_centerInParent="true"
             android:text="@string/app_name"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/toolbar_image"

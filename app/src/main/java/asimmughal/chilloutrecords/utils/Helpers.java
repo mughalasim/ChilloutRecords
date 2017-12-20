@@ -36,7 +36,6 @@ import java.util.regex.Pattern;
 import asimmughal.chilloutrecords.BuildConfig;
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.main_pages.activities.AboutUsActivity;
-import asimmughal.chilloutrecords.main_pages.activities.ArtistActivity;
 import asimmughal.chilloutrecords.main_pages.activities.HomeActivity;
 import asimmughal.chilloutrecords.main_pages.activities.MyAccountActivity;
 import asimmughal.chilloutrecords.start_up.LoginActivity;
@@ -44,17 +43,6 @@ import asimmughal.chilloutrecords.start_up.SplashScreenActivity;
 
 public class Helpers {
     public String Mobile_Number_Error = "Invalid Mobile Number has been entered";
-
-    public static String SORT_NEARBY = "n";
-    public static String SORT_A_Z = "az";
-    public static String SORT_FEATURED = "pre";
-    public static String SORT_RATING = "p";
-
-    public static String ORDER_ASCENDING = "a";
-    public static String ORDER_DESCENDING = "d";
-
-    public static String ADAPTER_DEFAULT = "DEFAULT";
-    public static String ADAPTER_DISTANCE = "DISTANCE";
 
     public static String STR_LOGGED_OUT_EXTRA = "logged_out";
     public static String STR_LOGGED_OUT_TRUE = "true";
@@ -72,7 +60,7 @@ public class Helpers {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_loading);
         dialog.setCancelable(false);
-        ProgressDialogMessage = (TextView) dialog.findViewById(R.id.messageText);
+        ProgressDialogMessage = dialog.findViewById(R.id.messageText);
     }
 
     // DRAWER CLICKS ===============================================================================

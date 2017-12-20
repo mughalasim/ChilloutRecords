@@ -7,7 +7,6 @@
     <TextView
         style="@style/Header_Text"
         android:text="No DATA FOUND"
-        android:drawingCacheQuality="high"
         android:padding="@dimen/activity_padding"
         android:drawableTop="@drawable/ic_sad_face"/>
 

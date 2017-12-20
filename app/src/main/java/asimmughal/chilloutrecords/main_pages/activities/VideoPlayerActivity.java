@@ -10,11 +10,10 @@ import com.afollestad.easyvideoplayer.EasyVideoPlayer;
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.Helpers;
 
-
 public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoCallback {
 
-    private static final String
-            VIDEO_URL = "https://firebasestorage.googleapis.com/v0/b/eatout-restaurant-guide.appspot.com/o/Main%20Video%20R1%20(1min%20version).mp4?alt=media&token=6bb55612-5ab0-4767-8bb2-e5de32eabe6a";
+    private String
+            VIDEO_URL = "";
     private Helpers helpers;
     private EasyVideoPlayer player;
 
@@ -23,13 +22,24 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
-        helpers = new Helpers(VideoPlayerActivity.this);
+        handleExtraBundles();
 
+        helpers = new Helpers(VideoPlayerActivity.this);
         player = findViewById(R.id.player);
         player.setCallback(this);
         player.setSource(Uri.parse(VIDEO_URL));
-        // From here, the player view will show a progress indicator until the player is prepared.
-        // Once it's prepared, the progress indicator goes away and the controls become enabled for the user to begin playback.
+
+    }
+
+    private void handleExtraBundles() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            VIDEO_URL = extras.getString("VIDEO_URL");
+
+        } else {
+            finish();
+            helpers.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
+        }
     }
 
     @Override

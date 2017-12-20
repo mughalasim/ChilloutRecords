@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import asimmughal.chilloutrecords.R;
-import asimmughal.chilloutrecords.main_pages.activities.ArtistActivity;
 import asimmughal.chilloutrecords.main_pages.activities.HomeActivity;
 import asimmughal.chilloutrecords.utils.Helpers;
 import asimmughal.chilloutrecords.utils.SharedPrefs;

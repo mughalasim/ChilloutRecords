@@ -5,16 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
-
-import asimmughal.chilloutrecords.main_pages.models.ArtistModel;
 
 public class Database extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "EatOutDataBase.db";
@@ -286,9 +280,9 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-//    public ArtistModel setRestaurants(JSONObject json_data) {
+//    public GeneralModel setRestaurants(JSONObject json_data) {
 //
-//        ArtistModel artistModel = new ArtistModel();
+//        GeneralModel artistModel = new GeneralModel();
 //        try {
 //            artistModel.id = json_data.getString("id");
 //            artistModel.name = json_data.getString("name");
@@ -374,9 +368,9 @@ public class Database extends SQLiteOpenHelper {
 //        return artistModel;
 //    }
 
-//    public ArrayList<ArtistModel> getAllRestaurants(String RetrievalType, String COLLECTION_ID) {
+//    public ArrayList<GeneralModel> getAllRestaurants(String RetrievalType, String COLLECTION_ID) {
 //
-//        ArrayList<ArtistModel> list = new ArrayList<>();
+//        ArrayList<GeneralModel> list = new ArrayList<>();
 //        SQLiteDatabase db = this.getWritableDatabase();
 //
 //        String whereClause = "";
@@ -407,7 +401,7 @@ public class Database extends SQLiteOpenHelper {
 //        if (count > 0) {
 //            cursor.moveToFirst();
 //            do {
-//                ArtistModel artistModel = new ArtistModel();
+//                GeneralModel artistModel = new GeneralModel();
 //                artistModel.id = cursor.getString(cursor.getColumnIndex(RESTAURANT_ID));
 //                artistModel.name = cursor.getString(cursor.getColumnIndex(RESTAURANT_NAME));
 //                artistModel.average_rating = cursor.getString(cursor.getColumnIndex(RESTAURANT_AVERAGE_RATING));
