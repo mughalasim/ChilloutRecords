@@ -24,6 +24,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
 
         handleExtraBundles();
 
+        //TODO make this autorotate to Horizontakl orientation
+
         helpers = new Helpers(VideoPlayerActivity.this);
         player = findViewById(R.id.player);
         player.setCallback(this);

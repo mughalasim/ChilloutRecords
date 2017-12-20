@@ -55,6 +55,12 @@
 
     <!--LAYOUT AND IN APP STRINGS-->
     <string name="txt_version">Version:</string>
+    <string name="txt_old_version_title">Old Version</string>
+    <string name="txt_old_version_desc">Seems like you are using an old version of the app, Press yes to automatically download our new APK to get new features</string>
+    <string name="txt_update_now">UPDATE NOW</string>
+    <string name="txt_later">LATER</string>
+    <string name="txt_alert">Alert</string>
+    <string name="txt_share">SHARE</string>
 
 
 </resources>

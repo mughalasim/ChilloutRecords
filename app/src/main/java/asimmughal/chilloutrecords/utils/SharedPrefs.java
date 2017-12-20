@@ -128,14 +128,14 @@ public class SharedPrefs {
         editor.apply();
     }
 
-    public static String getCityCode() {
+    public static String getDownLoadURL() {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("CITYCODE", "1");
+        return mySharedPreferences.getString("DLURL", "");
     }
-    public static void setCityCode(String cityCode) {
+    public static void setDownLoadURL(String dl_url) {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("CITYCODE", cityCode);
+        editor.putString("DLURL", dl_url);
         editor.apply();
     }
 

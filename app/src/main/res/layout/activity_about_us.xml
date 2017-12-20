@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,68 +22,43 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="35dp"
                     android:orientation="vertical"
                     android:padding="10dp"
-                    android:layout_marginBottom="35dp"
                     android:weightSum="1">
 
                     <TextView
-                        style="@style/Header_Text"
-                        android:gravity="start"
-                        android:textColor="@color/colorPrimary"
-                        android:text="Welcome" />
-
-                    <TextView
+                        android:id="@+id/about_us"
                         style="@style/Text_Normal"
+                        android:layout_gravity="start"
                         android:gravity="start"
-                        android:text="This is the very first edition of the App, Designed and programmed by SG (Chillout Records CEO) with several contributions from all team members, we can finally bring to you an 'All under one roof' package \n\nWe are a group of 4 HipHop Artists so far and growing at an exponential rate. The more artists we work with, the larger our content library gets. So what are you waiting for, Post a comment on the wall about what you have to bring on the table and well feature it here" />
+                        android:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        style="@style/Header_Text"
-                        android:gravity="start"
-                        android:textColor="@color/colorPrimary"
-                        android:text="App Content" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_padding"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        style="@style/Text_Normal"
-                        android:gravity="start"
-                        android:text="All app content is original and copywrite to Chillout Records. We make sure to provide new content on a weeekly basis" />
+                        <TextView
+                            style="@style/Text_Normal"
+                            android:layout_gravity="start"
+                            android:gravity="start"
+                            android:text="@string/txt_version" />
 
-                    <TextView
-                        style="@style/Header_Text"
-                        android:gravity="start"
-                        android:textColor="@color/colorPrimary"
-                        android:text="New talent" />
+                        <TextView
+                            android:id="@+id/version_number"
+                            style="@style/Text_Normal"
+                            android:layout_gravity="start"
+                            android:gravity="start" />
 
-                    <TextView
-                        style="@style/Text_Normal"
-                        android:gravity="start"
-                        android:text="All new talent is welcome to be featured on our app, kindly email us on chilloutrecords2020@gmail.com or post your feedback on our wall feature" />
-
-                    <TextView
-                        style="@style/Header_Text"
-                        android:gravity="start"
-                        android:textColor="@color/colorPrimary"
-                        android:text="PlayStore" />
-
-                    <TextView
-                        style="@style/Text_Normal"
-                        android:gravity="start"
-                        android:text="We might not be able to put this app on the playstore, the music/video content is and will be explicit, and Fuck it, its better that way, we need to express ourselves, hehe" />
-
-
-
-                    <TextView
-                        android:id="@+id/version_number"
-                        style="@style/Text_Normal"
-                        android:gravity="start"
-                        android:layout_gravity="start"/>
-
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -90,8 +66,19 @@
 
         </LinearLayout>
 
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            app:fabSize="normal"
+            android:onClick="SHARE"
+            android:layout_gravity="end|bottom"
+            app:srcCompat="@drawable/ic_share"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp" />
+
     </android.support.design.widget.CoordinatorLayout>
 
-    <include layout="@layout/navigation_view"/>
+
+
+    <include layout="@layout/navigation_view" />
 
 </android.support.v4.widget.DrawerLayout>

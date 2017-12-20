@@ -1,11 +1,15 @@
 package asimmughal.chilloutrecords.main_pages.activities;
 
+import android.app.Dialog;
+import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,16 +19,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import org.json.JSONObject;
+
+import asimmughal.chilloutrecords.BuildConfig;
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.Database;
 import asimmughal.chilloutrecords.utils.Helpers;
 import asimmughal.chilloutrecords.utils.SharedPrefs;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,6 +69,8 @@ public class ParentActivity extends AppCompatActivity
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
+        setNewDatabaseRef();
 
         listenExitBroadcast();
 
@@ -145,4 +162,89 @@ public class ParentActivity extends AppCompatActivity
         updateDrawer();
         navigationView.getMenu().findItem(drawer_id).setChecked(true);
     }
+
+    // FIREBASE DATABASE VERSION CONTROL NOTIFICATION CHECKER ======================================
+
+    private void setNewDatabaseRef() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("AppVersion");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    Gson gson = new Gson();
+                    JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
+                    Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
+                    final int version_code = Integer.valueOf(jsonObject.getString("version_code"));
+                    final String download_url = jsonObject.getString("download_url");
+                    SharedPrefs.setDownLoadURL(download_url);
+
+                    if (BuildConfig.VERSION_CODE < version_code) {
+                        final Dialog dialog = new Dialog(ParentActivity.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.dialog_confirm);
+                        final TextView txtMessage = dialog.findViewById(R.id.txtMessage);
+                        final TextView txtOk = dialog.findViewById(R.id.txtOk);
+                        final TextView txtCancel = dialog.findViewById(R.id.txtCancel);
+                        final TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+                        txtCancel.setVisibility(View.VISIBLE);
+                        txtTitle.setText(R.string.txt_old_version_title);
+                        txtMessage.setText(R.string.txt_old_version_desc);
+
+                        txtOk.setText(R.string.txt_update_now);
+                        txtOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    if (Helpers.isDownloadManagerAvailable()) {
+                                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
+                                        request.setDescription("Downloading APK");
+                                        request.setTitle(getString(R.string.app_name));
+                                        // in order for this if to run, you must use the android 3.2 to compile your app
+                                        request.allowScanningByMediaScanner();
+                                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "apk");
+                                        // get download service and enqueue file
+                                        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                                        assert manager != null;
+                                        manager.enqueue(request);
+                                    }
+                                } catch (Exception e) {
+                                    helper.ToastMessage(ParentActivity.this, getString(R.string.error_500));
+                                }
+                                dialog.cancel();
+                            }
+                        });
+
+                        txtCancel.setText(R.string.txt_later);
+                        txtCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.cancel();
+                            }
+                        });
+                        dialog.show();
+
+                        ShortcutBadger.applyCount(ParentActivity.this, 1);
+
+                    } else {
+                        ShortcutBadger.applyCount(ParentActivity.this, 0);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Helpers.LogThis(e.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Helpers.LogThis("DATABASE:" + error.toString());
+            }
+        });
+
+    }
+
 }

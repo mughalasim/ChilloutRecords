@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
@@ -209,6 +210,13 @@ public class Helpers {
     public boolean validateEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
+    }
+
+    public static boolean isDownloadManagerAvailable() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return true;
+        }
+        return false;
     }
 
 //    public boolean validateIsLoggedIn() {

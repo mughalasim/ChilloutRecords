@@ -78,7 +78,7 @@ public class MessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, MessageTitle)
                 .setSmallIcon(getNotificationIcon())
                 .setContentTitle(MessageTitle)
                 .setContentText(messageBody)
@@ -91,7 +91,9 @@ public class MessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0, notificationBuilder.build());
+        if (notificationManager != null) {
+            notificationManager.notify(0, notificationBuilder.build());
+        }
 
         ShortcutBadger.applyCount(MessagingService.this, 1);
 
@@ -100,7 +102,7 @@ public class MessagingService extends FirebaseMessagingService {
     private int getNotificationIcon() {
         boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
         return useWhiteIcon ?
-                R.drawable.main_logo_white :
+                R.mipmap.ic_launcher :
                 R.mipmap.ic_launcher;
     }
 
