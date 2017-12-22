@@ -6,9 +6,9 @@
     android:layout_gravity="start"
     app:headerLayout="@layout/header_navigation"
     app:menu="@menu/drawer_menu"
-    android:background="@color/black"
-    app:itemIconTint="@color/white"
-    app:itemTextColor="@color/white"
+    android:background="@color/colorPrimaryDark"
+    app:itemIconTint="@color/colorPrimary"
+    app:itemTextColor="@color/colorPrimary"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

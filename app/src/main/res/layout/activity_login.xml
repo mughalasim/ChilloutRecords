@@ -1,8 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/home_freestyle_fridays"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name" />
 
     <ImageView
         android:id="@+id/mainLogo"
@@ -14,14 +21,24 @@
         android:src="@drawable/main_logo_white"
         android:contentDescription="@string/app_name" />
 
+    <TextView
+        style="@style/Text_Tiny"
+        android:layout_above="@+id/login_button"
+        android:layout_margin="@dimen/activity_padding"
+        android:layout_centerHorizontal="true"
+        android:text="We only got this option for now, so deal with it ;) "/>
+
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/activity_padding"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginBottom="85dp"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp" />
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
 
 </RelativeLayout>

@@ -4,10 +4,10 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/very_dark_grey_transparent"
+    android:background="@color/very_dark_grey"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
-    app:titleTextColor="@color/white">
+    app:titleTextColor="@color/colorPrimary">
 
     <RelativeLayout
         android:layout_width="match_parent"

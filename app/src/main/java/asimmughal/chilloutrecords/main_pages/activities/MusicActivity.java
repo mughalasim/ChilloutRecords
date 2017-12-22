@@ -121,10 +121,16 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
                     Gson gson = new Gson();
-                    JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
-                    Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
 
-                    addTracks(jsonArray, LL_tracks);
+                    if (dataSnapshot.getValue() instanceof JSONArray) {
+                        JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
+                        Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
+                        addTracksFromArray(jsonArray);
+                    } else {
+                        JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
+                        Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
+                        addTracksFromObject(jsonObject);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -145,10 +151,10 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     }
 
-    private void addTracks(final JSONArray jsonArray, final LinearLayout LL) throws JSONException {
+    private void addTracksFromArray (final JSONArray jsonArray) throws JSONException {
         LayoutInflater layoutInflater;
         layoutInflater = LayoutInflater.from(MusicActivity.this);
-        LL.removeAllViews();
+        LL_tracks.removeAllViews();
 
         int jsonArrayLength = jsonArray.length();
         if (jsonArrayLength > 0) {
@@ -190,11 +196,60 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                     }
                 });
 
-                LL.addView(child);
+                LL_tracks.addView(child);
             }
-            LL.setVisibility(View.VISIBLE);
+            LL_tracks.setVisibility(View.VISIBLE);
         } else {
-            LL.setVisibility(View.GONE);
+            LL_tracks.setVisibility(View.GONE);
+            noData();
+        }
+    }
+
+    private void addTracksFromObject (final JSONObject jsonObject) throws JSONException {
+        LayoutInflater layoutInflater;
+        layoutInflater = LayoutInflater.from(MusicActivity.this);
+        LL_tracks.removeAllViews();
+
+        if (jsonObject.length() > 0) {
+                // FIND ALL THE VIEWS ON THE CARD
+                @SuppressLint("InflateParams") final View child = layoutInflater.inflate(R.layout.list_item_track, null);
+                final TextView track_name = child.findViewById(R.id.track_name);
+                final TextView track_no = child.findViewById(R.id.track_no);
+                final TextView track_url = child.findViewById(R.id.track_url);
+                final GifImageView music_playing = child.findViewById(R.id.music_playing);
+                final ImageView lyrics = child.findViewById(R.id.lyrics);
+
+                final String str_track_name = jsonObject.getString("track_name");
+                final String str_track_no = jsonObject.getString("track_no");
+                final String str_track_lyrics = jsonObject.getString("track_lyrics");
+                STR_TRACK_URL = jsonObject.getString("track_url");
+
+                track_name.setText(str_track_name);
+                track_no.setText(str_track_no);
+                track_url.setText(STR_TRACK_URL);
+
+                child.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        updateAnimation(current_animation, false);
+                        current_animation = music_playing;
+                        helper.animate_flash(child, 10000, 5);
+                        player.setSource(Uri.parse(track_url.getText().toString()));
+                        LL_player.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                lyrics.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
+                    }
+                });
+
+            LL_tracks.addView(child);
+            LL_tracks.setVisibility(View.VISIBLE);
+        } else {
+            LL_tracks.setVisibility(View.GONE);
             noData();
         }
     }

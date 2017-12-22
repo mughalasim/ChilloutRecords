@@ -33,8 +33,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_button_height"
-                        android:layout_marginLeft="@dimen/activity_padding"
-                        android:layout_marginRight="@dimen/activity_padding"
                         android:layout_marginTop="@dimen/activity_padding"
                         android:onClick="ARTISTS">
 
@@ -56,7 +54,7 @@
 
                         <TextView
                             style="@style/Header_Text"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="ARTISTS" />
 
@@ -65,8 +63,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_button_height"
-                        android:layout_marginLeft="@dimen/activity_padding"
-                        android:layout_marginRight="@dimen/activity_padding"
                         android:layout_marginTop="@dimen/activity_padding"
                         android:onClick="VIDEOS">
 
@@ -87,7 +83,7 @@
 
                         <TextView
                             style="@style/Header_Text"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="VIDEOS" />
 
@@ -96,8 +92,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_button_height"
-                        android:layout_marginLeft="@dimen/activity_padding"
-                        android:layout_marginRight="@dimen/activity_padding"
                         android:layout_marginTop="@dimen/activity_padding"
                         android:onClick="FREESTYLES">
 
@@ -118,7 +112,7 @@
 
                         <TextView
                             style="@style/Header_Text"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="FREESTYLE FRIDAYS" />
 
@@ -127,8 +121,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_button_height"
-                        android:layout_marginLeft="@dimen/activity_padding"
-                        android:layout_marginRight="@dimen/activity_padding"
                         android:layout_marginTop="@dimen/activity_padding"
                         android:onClick="UPCOMING">
 
@@ -150,7 +142,7 @@
 
                         <TextView
                             style="@style/Header_Text"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="UPCOMING PROJECTS" />
 

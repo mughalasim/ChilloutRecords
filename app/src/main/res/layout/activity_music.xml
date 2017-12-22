@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/player"
-            android:background="@color/black"
+            android:background="@color/colorPrimaryDark"
             android:thumb="@null"
             android:clickable="false"
             android:progress="50" />

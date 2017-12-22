@@ -145,45 +145,47 @@ public class ArtistDetailsActivity extends ParentActivity {
         LayoutInflater layoutInflater;
         layoutInflater = LayoutInflater.from(ArtistDetailsActivity.this);
         LL_inner.removeAllViews();
-        JSONArray jsonArray = jsonObject.getJSONArray(flag_name);
-        int jsonArrayLength = jsonArray.length();
-        if (jsonArrayLength > 0) {
-            for (int i = 0; i < jsonArrayLength; i++) {
-                // FIND ALL THE VIEWS ON THE CARD
-                @SuppressLint("InflateParams")
-                View child = layoutInflater.inflate(R.layout.list_item_music, null);
+        if(jsonObject.has(flag_name)) {
+            JSONArray jsonArray = jsonObject.getJSONArray(flag_name);
+            int jsonArrayLength = jsonArray.length();
+            if (jsonArrayLength > 0) {
+                for (int i = 0; i < jsonArrayLength; i++) {
+                    // FIND ALL THE VIEWS ON THE CARD
+                    @SuppressLint("InflateParams")
+                    View child = layoutInflater.inflate(R.layout.list_item_music, null);
 //                child.setLayoutParams(childParams);
-                final RoundedImageView album_art = child.findViewById(R.id.album_art);
-                final TextView name = child.findViewById(R.id.name);
-                final TextView release_year = child.findViewById(R.id.release_year);
+                    final RoundedImageView album_art = child.findViewById(R.id.album_art);
+                    final TextView name = child.findViewById(R.id.name);
+                    final TextView release_year = child.findViewById(R.id.release_year);
 
-                JSONObject albumObject = jsonArray.getJSONObject(i);
-                final String str_album_name = albumObject.getString("name");
-                final String str_album_release_year = albumObject.getString("release_year");
-                final String str_album_art = albumObject.getString("album_art");
-                final String str_track_url = albumObject.getString("track_url");
+                    JSONObject albumObject = jsonArray.getJSONObject(i);
+                    final String str_album_name = albumObject.getString("name");
+                    final String str_album_release_year = albumObject.getString("release_year");
+                    final String str_album_art = albumObject.getString("album_art");
+                    final String str_track_url = albumObject.getString("track_url");
 
-                name.setText(str_album_name);
-                release_year.setText(str_album_release_year);
-                Glide.with(ArtistDetailsActivity.this).load(str_album_art).into(album_art);
+                    name.setText(str_album_name);
+                    release_year.setText(str_album_release_year);
+                    Glide.with(ArtistDetailsActivity.this).load(str_album_art).into(album_art);
 
-                child.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(ArtistDetailsActivity.this, MusicActivity.class)
-                                .putExtra("album_name", str_album_name)
-                                .putExtra("album_art", str_album_art)
-                                .putExtra("album_release_year", str_album_release_year)
-                                .putExtra("track_url", str_track_url)
-                        );
-                    }
-                });
+                    child.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(ArtistDetailsActivity.this, MusicActivity.class)
+                                    .putExtra("album_name", str_album_name)
+                                    .putExtra("album_art", str_album_art)
+                                    .putExtra("album_release_year", str_album_release_year)
+                                    .putExtra("track_url", str_track_url)
+                            );
+                        }
+                    });
 
-                LL_inner.addView(child);
+                    LL_inner.addView(child);
+                }
+                LL_outer.setVisibility(View.VISIBLE);
+            } else {
+                LL_outer.setVisibility(View.GONE);
             }
-            LL_outer.setVisibility(View.VISIBLE);
-        } else {
-            LL_outer.setVisibility(View.GONE);
         }
     }
 

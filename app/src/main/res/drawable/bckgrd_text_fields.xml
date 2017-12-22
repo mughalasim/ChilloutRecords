@@ -4,9 +4,9 @@
     <item android:state_focused="true" android:state_pressed="true">
         <shape>
             <gradient android:angle="270"
-                android:centerColor="@color/very_dark_grey_transparent"
-                android:endColor="@color/very_dark_grey_transparent"
-                android:startColor="@color/very_dark_grey_transparent" />
+                android:centerColor="@color/very_dark_grey"
+                android:endColor="@color/very_dark_grey"
+                android:startColor="@color/very_dark_grey" />
             <stroke
                 android:width="1dp"
                 android:color="@color/green" />
@@ -20,9 +20,9 @@
     <item android:state_focused="false" android:state_pressed="true">
         <shape>
             <gradient android:angle="270"
-                android:centerColor="@color/very_dark_grey_transparent"
-                android:endColor="@color/very_dark_grey_transparent"
-                android:startColor="@color/very_dark_grey_transparent" />
+                android:centerColor="@color/very_dark_grey"
+                android:endColor="@color/very_dark_grey"
+                android:startColor="@color/very_dark_grey" />
             <stroke
                 android:width="1dp"
                 android:color="@color/green" />
@@ -37,9 +37,9 @@
     <item android:state_focused="true" android:state_pressed="false">
         <shape>
             <gradient android:angle="270"
-                android:centerColor="@color/very_dark_grey_transparent"
-                android:endColor="@color/very_dark_grey_transparent"
-                android:startColor="@color/very_dark_grey_transparent" />
+                android:centerColor="@color/very_dark_grey"
+                android:endColor="@color/very_dark_grey"
+                android:startColor="@color/very_dark_grey" />
             <stroke
                 android:width="1dp"
                 android:color="@color/green" />
@@ -58,7 +58,7 @@
                 android:startColor="@color/colorPrimaryDark" />
             <stroke
                 android:width="1dp"
-                android:color="@color/white" />
+                android:color="@color/colorPrimary" />
             <corners
                 android:radius="0dp" />
         </shape>

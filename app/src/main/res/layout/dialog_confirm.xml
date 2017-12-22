@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/very_dark_grey_transparent"
+    android:background="@color/very_dark_grey"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,16 +14,11 @@
         android:padding="10dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:src="@drawable/main_logo_white" />
-
         <TextView
             android:id="@+id/txtTitle"
-            style="@style/Header_Text" />
+            android:textStyle="bold"
+            android:text="@string/app_name"
+            style="@style/Text_Normal" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -39,6 +34,7 @@
 
                 <TextView
                     android:id="@+id/txtMessage"
+                    android:text="@string/app_name"
                     style="@style/Text_Normal" />
 
                 <LinearLayout
