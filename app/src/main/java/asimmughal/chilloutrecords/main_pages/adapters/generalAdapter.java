@@ -21,11 +21,14 @@ import asimmughal.chilloutrecords.main_pages.activities.VideoPlayerActivity;
 import asimmughal.chilloutrecords.main_pages.models.GeneralModel;
 import asimmughal.chilloutrecords.utils.Helpers;
 
+import static asimmughal.chilloutrecords.main_pages.activities.HomeActivity.ARTISTS;
+import static asimmughal.chilloutrecords.main_pages.activities.HomeActivity.VIDEOS;
+
 public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHolder> {
     private Context context;
     private ArrayList<GeneralModel> mDataset;
     private Helpers helper;
-    private String adapter_type="";
+    private String adapter_type = "";
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -45,20 +48,20 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
 
         ViewHolder(View v) {
             super(v);
-            artist_name =  v.findViewById(R.id.artist_name);
-            artist_stage_name =  v.findViewById(R.id.artist_stage_name);
-            artist_year_since =  v.findViewById(R.id.artist_year_since);
-            artist_info =  v.findViewById(R.id.artist_info);
+            artist_name = v.findViewById(R.id.artist_name);
+            artist_stage_name = v.findViewById(R.id.artist_stage_name);
+            artist_year_since = v.findViewById(R.id.artist_year_since);
+            artist_info = v.findViewById(R.id.artist_info);
             artist_ppic = v.findViewById(R.id.artist_ppic);
 
-            video_name =  v.findViewById(R.id.video_name);
-            video_desc =  v.findViewById(R.id.video_desc);
-            video_url =  v.findViewById(R.id.video_url);
+            video_name = v.findViewById(R.id.video_name);
+            video_desc = v.findViewById(R.id.video_desc);
+            video_url = v.findViewById(R.id.video_url);
             video_ppic = v.findViewById(R.id.video_ppic);
 
-            no_list_item =  v.findViewById(R.id.no_list_items);
-            list_item_artists =  v.findViewById(R.id.list_item_artists);
-            list_item_videos =  v.findViewById(R.id.list_item_videos);
+            no_list_item = v.findViewById(R.id.no_list_items);
+            list_item_artists = v.findViewById(R.id.list_item_artists);
+            list_item_videos = v.findViewById(R.id.list_item_videos);
 
         }
 
@@ -88,13 +91,13 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
             holder.list_item_artists.setVisibility(View.GONE);
             holder.list_item_videos.setVisibility(View.GONE);
 
-        } else if(adapter_type.equals("Artists")){
+        } else if (adapter_type.equals(ARTISTS)) {
             holder.no_list_item.setVisibility(View.GONE);
             holder.list_item_artists.setVisibility(View.VISIBLE);
             holder.list_item_videos.setVisibility(View.GONE);
 
             holder.artist_name.setText(generalModel.artist_name);
-            holder.artist_stage_name.setText("Stage Name: "+ generalModel.artist_stage_name);
+            holder.artist_stage_name.setText(generalModel.artist_stage_name);
             holder.artist_info.setText(generalModel.artist_info);
             holder.artist_year_since.setText(generalModel.artist_year_since);
             Glide.with(context).load(generalModel.artist_ppic).into(holder.artist_ppic);
@@ -116,7 +119,7 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
                 }
             });
 
-        } else{
+        } else if (adapter_type.equals(VIDEOS)) {
             holder.no_list_item.setVisibility(View.GONE);
             holder.list_item_artists.setVisibility(View.GONE);
             holder.list_item_videos.setVisibility(View.VISIBLE);

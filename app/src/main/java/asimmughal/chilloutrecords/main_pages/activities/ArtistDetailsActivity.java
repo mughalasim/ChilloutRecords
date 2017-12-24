@@ -45,6 +45,10 @@ public class ArtistDetailsActivity extends ParentActivity {
             STR_NAME = "",
             STR_PPIC = "",
             DB_REFERENCE = "";
+    public static String
+            TRACK_TYPE_ALBUM = "Albums",
+            TRACK_TYPE_MIXTAPE = "Mixtapes",
+            TRACK_TYPE_SINGLE = "Singles";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,7 @@ public class ArtistDetailsActivity extends ParentActivity {
             STR_ID = extras.getString("id");
             STR_NAME = extras.getString("name");
             STR_PPIC = extras.getString("ppic");
-            DB_REFERENCE = "Music/" + STR_ID;
+            DB_REFERENCE = "Artists/" + STR_ID + "/Music";
             Glide.with(ArtistDetailsActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
@@ -109,11 +113,11 @@ public class ArtistDetailsActivity extends ParentActivity {
 
                     information.setText(jsonObject.getString("info"));
 
-                    addMusicLayout(jsonObject, "Albums", LL_album, scroll_albums);
+                    addMusicLayout(jsonObject, TRACK_TYPE_ALBUM, LL_album, scroll_albums);
 
-                    addMusicLayout(jsonObject, "Mixtape", LL_mixtapes, scroll_mixtapes);
+                    addMusicLayout(jsonObject, TRACK_TYPE_MIXTAPE, LL_mixtapes, scroll_mixtapes);
 
-                    addMusicLayout(jsonObject, "Singles", LL_singles, scroll_singles);
+                    addMusicLayout(jsonObject, TRACK_TYPE_SINGLE, LL_singles, scroll_singles);
 
 
                 } catch (Exception e) {
@@ -176,6 +180,7 @@ public class ArtistDetailsActivity extends ParentActivity {
                                     .putExtra("album_art", str_album_art)
                                     .putExtra("album_release_year", str_album_release_year)
                                     .putExtra("track_url", str_track_url)
+                                    .putExtra("track_type", flag_name)
                             );
                         }
                     });

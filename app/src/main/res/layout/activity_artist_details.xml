@@ -42,8 +42,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/activity_padding">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,14 +56,14 @@
                         style="@style/Text_Normal"
                         android:layout_gravity="start"
                         android:gravity="start"
-                        android:text="Bio Data"
-                        android:textColor="@color/colorPrimary" />
+                        android:text="@string/txt_bio_data" />
 
                     <TextView
                         android:id="@+id/information"
                         style="@style/Text_Normal"
                         android:gravity="start"
                         android:layout_gravity="start"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/progress_loading_initializing" />
 
                 </LinearLayout>
@@ -81,8 +80,7 @@
                     <TextView
                         style="@style/Text_Normal"
                         android:layout_gravity="start"
-                        android:text="Albums"
-                        android:textColor="@color/colorPrimary" />
+                        android:text="@string/txt_albums" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -113,8 +111,7 @@
                     <TextView
                         style="@style/Text_Normal"
                         android:layout_gravity="start"
-                        android:text="Mixtapes"
-                        android:textColor="@color/colorPrimary" />
+                        android:text="@string/txt_mixtapes" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -145,8 +142,7 @@
                     <TextView
                         style="@style/Text_Normal"
                         android:layout_gravity="start"
-                        android:text="Singles"
-                        android:textColor="@color/colorPrimary" />
+                        android:text="@string/txt_singles" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"

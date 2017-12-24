@@ -3,7 +3,6 @@ package asimmughal.chilloutrecords.main_pages.activities;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +32,7 @@ public class GeneralListActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artists);
+        setContentView(R.layout.activity_general_list);
 
         handleExtraBundles();
 
@@ -86,7 +85,7 @@ public class GeneralListActivity extends ParentActivity {
                     Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
 
                     int length = jsonArray.length();
-                    if (length > 1) {
+                    if (length > 0) {
                         arrayList.clear();
                         for (int i = 0; i < length; i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -138,7 +137,7 @@ public class GeneralListActivity extends ParentActivity {
                     Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
 
                     int length = jsonArray.length();
-                    if (length > 1) {
+                    if (length > 0) {
                         arrayList.clear();
                         for (int i = 0; i < length; i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -174,7 +173,7 @@ public class GeneralListActivity extends ParentActivity {
     public void noLists() {
         arrayList.clear();
         recyclerView.setAdapter(adapter);
-
+        adapter.notifyDataSetChanged();
     }
 
 }

@@ -39,7 +39,7 @@ ext {
     GooglePlaySDK = '11.6.2'
 
     // Debug the App
-    debugMode = true
+    debugMode = false
     proGuard = true
 
     // App Versioning

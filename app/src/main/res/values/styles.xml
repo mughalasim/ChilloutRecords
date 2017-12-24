@@ -72,7 +72,7 @@
         <item name="android:textSelectHandle">@drawable/edit_text_selection_background</item>
         <item name="android:selectable">false</item>
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textColorHint">@color/light_green</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:layout_margin">@dimen/text_size_normal_margin</item>
         <item name="android:textSize">@dimen/text_size_normal</item>
     </style>

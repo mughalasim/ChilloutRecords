@@ -54,13 +54,22 @@
     <string name="et_hint_amount">Enter Amount</string>
 
     <!--LAYOUT AND IN APP STRINGS-->
-    <string name="txt_version">Version:</string>
+    <string name="txt_version">Version:&#160;</string>
     <string name="txt_old_version_title">Old Version</string>
     <string name="txt_old_version_desc">Seems like you are using an old version of the app, Press yes to automatically download our new APK to get new features</string>
     <string name="txt_update_now">UPDATE NOW</string>
     <string name="txt_later">LATER</string>
     <string name="txt_alert">Alert</string>
     <string name="txt_share">SHARE</string>
+    <string name="txt_stage_name">Stage Name:</string>
+    <string name="txt_basic_information">Basic Information:</string>
+    <string name="txt_since">Since:</string>
+    <string name="txt_no_data_found">Oops!! No Data Found</string>
+    <string name="txt_released">Released:</string>
+    <string name="txt_bio_data">Bio Data</string>
+    <string name="txt_albums">Albums</string>
+    <string name="txt_mixtapes">Mixtapes</string>
+    <string name="txt_singles">Singles</string>
 
 
 </resources>

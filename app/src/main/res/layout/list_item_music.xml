@@ -47,7 +47,8 @@
             <TextView
                 style="@style/Text_Normal"
                 android:layout_gravity="start"
-                android:text="Released:"
+                android:text="@string/txt_released"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_tiny"
                 android:textStyle="bold" />
 
@@ -55,7 +56,7 @@
                 android:id="@+id/release_year"
                 style="@style/Text_Normal"
                 android:layout_gravity="start"
-                android:text="2004"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_tiny" />
 
         </LinearLayout>

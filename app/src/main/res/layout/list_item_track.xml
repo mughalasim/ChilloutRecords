@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/activity_padding"
     android:background="@drawable/bckgrd_activity_panels"
     android:orientation="horizontal">
@@ -13,8 +12,8 @@
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
-        android:visibility="gone"
-        android:src="@drawable/music_playing" />
+        android:src="@drawable/music_playing"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/track_no"
@@ -22,7 +21,7 @@
         android:layout_gravity="start"
         android:gravity="start"
         android:padding="@dimen/activity_padding"
-        android:text="01" />
+        android:textColor="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/track_name"
@@ -30,20 +29,19 @@
         android:layout_gravity="start"
         android:layout_toRightOf="@+id/track_no"
         android:padding="@dimen/activity_padding"
-        android:text="Track Name"
-        android:textStyle="bold" />
+        android:textColor="@color/colorPrimary" />
 
     <ImageView
         android:id="@+id/lyrics"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/ic_lyrics"
+        android:contentDescription="@string/app_name"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/activity_padding"
-        android:layout_marginRight="@dimen/activity_padding"/>
-
+        android:layout_marginRight="@dimen/activity_padding"
+        android:background="@drawable/ic_lyrics" />
 
     <TextView
         android:id="@+id/track_url"

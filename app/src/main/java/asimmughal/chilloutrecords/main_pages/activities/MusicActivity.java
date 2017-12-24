@@ -22,10 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.Helpers;
@@ -47,6 +51,7 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
             STR_NAME = "",
             STR_TRACK_URL = "",
             DB_REFERENCE = "",
+            STR_TRACK_TYPE = "",
             STR_PPIC = "";
 
     private SeekBar loading_progress;
@@ -103,7 +108,8 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
         if (extras != null) {
             STR_NAME = extras.getString("album_name");
             STR_PPIC = extras.getString("album_art");
-            DB_REFERENCE = "Tracks/" + extras.getString("track_url");
+            STR_TRACK_TYPE = extras.getString("track_type");
+            DB_REFERENCE = "Tracks/" + STR_TRACK_TYPE + "/" + extras.getString("track_url");
             Glide.with(MusicActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
@@ -122,13 +128,15 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 try {
                     Gson gson = new Gson();
 
-                    if (dataSnapshot.getValue() instanceof JSONArray) {
+//                    Helpers.LogThis("DATA VALUE: " + dataSnapshot.getValue());
+
+                    if (dataSnapshot.getValue().toString().startsWith("[")) {
                         JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
-                        Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
+//                        Helpers.LogThis("AFTER PARSING ARRAY: " + jsonArray.toString());
                         addTracksFromArray(jsonArray);
                     } else {
                         JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-                        Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
+//                        Helpers.LogThis("AFTER PARSING OBJECT: " + jsonObject.toString());
                         addTracksFromObject(jsonObject);
                     }
 
@@ -151,7 +159,7 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     }
 
-    private void addTracksFromArray (final JSONArray jsonArray) throws JSONException {
+    private void addTracksFromArray(final JSONArray jsonArray) throws JSONException {
         LayoutInflater layoutInflater;
         layoutInflater = LayoutInflater.from(MusicActivity.this);
         LL_tracks.removeAllViews();
@@ -205,46 +213,46 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
         }
     }
 
-    private void addTracksFromObject (final JSONObject jsonObject) throws JSONException {
+    private void addTracksFromObject(final JSONObject jsonObject) throws JSONException {
         LayoutInflater layoutInflater;
         layoutInflater = LayoutInflater.from(MusicActivity.this);
         LL_tracks.removeAllViews();
 
         if (jsonObject.length() > 0) {
-                // FIND ALL THE VIEWS ON THE CARD
-                @SuppressLint("InflateParams") final View child = layoutInflater.inflate(R.layout.list_item_track, null);
-                final TextView track_name = child.findViewById(R.id.track_name);
-                final TextView track_no = child.findViewById(R.id.track_no);
-                final TextView track_url = child.findViewById(R.id.track_url);
-                final GifImageView music_playing = child.findViewById(R.id.music_playing);
-                final ImageView lyrics = child.findViewById(R.id.lyrics);
+            // FIND ALL THE VIEWS ON THE CARD
+            @SuppressLint("InflateParams") final View child = layoutInflater.inflate(R.layout.list_item_track, null);
+            final TextView track_name = child.findViewById(R.id.track_name);
+            final TextView track_no = child.findViewById(R.id.track_no);
+            final TextView track_url = child.findViewById(R.id.track_url);
+            final GifImageView music_playing = child.findViewById(R.id.music_playing);
+            final ImageView lyrics = child.findViewById(R.id.lyrics);
 
-                final String str_track_name = jsonObject.getString("track_name");
-                final String str_track_no = jsonObject.getString("track_no");
-                final String str_track_lyrics = jsonObject.getString("track_lyrics");
-                STR_TRACK_URL = jsonObject.getString("track_url");
+            final String str_track_name = jsonObject.getString("track_name");
+            final String str_track_no = jsonObject.getString("track_no");
+            final String str_track_lyrics = jsonObject.getString("track_lyrics");
+            STR_TRACK_URL = jsonObject.getString("track_url");
 
-                track_name.setText(str_track_name);
-                track_no.setText(str_track_no);
-                track_url.setText(STR_TRACK_URL);
+            track_name.setText(str_track_name);
+            track_no.setText(str_track_no);
+            track_url.setText(STR_TRACK_URL);
 
-                child.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        updateAnimation(current_animation, false);
-                        current_animation = music_playing;
-                        helper.animate_flash(child, 10000, 5);
-                        player.setSource(Uri.parse(track_url.getText().toString()));
-                        LL_player.setVisibility(View.VISIBLE);
-                    }
-                });
+            child.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    updateAnimation(current_animation, false);
+                    current_animation = music_playing;
+                    helper.animate_flash(child, 10000, 5);
+                    player.setSource(Uri.parse(track_url.getText().toString()));
+                    LL_player.setVisibility(View.VISIBLE);
+                }
+            });
 
-                lyrics.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
-                    }
-                });
+            lyrics.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
+                }
+            });
 
             LL_tracks.addView(child);
             LL_tracks.setVisibility(View.VISIBLE);

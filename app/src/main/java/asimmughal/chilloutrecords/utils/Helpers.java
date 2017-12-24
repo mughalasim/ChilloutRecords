@@ -106,7 +106,7 @@ public class Helpers {
 
     public static void LogThis(String data) {
         if (BuildConfig.LOGGING) {
-            Log.e("EAT OUT KENYA: ", data);
+            Log.e("LOGGED: ", data);
         }
     }
 
@@ -210,13 +210,6 @@ public class Helpers {
     public boolean validateEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
-    }
-
-    public static boolean isDownloadManagerAvailable() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            return true;
-        }
-        return false;
     }
 
 //    public boolean validateIsLoggedIn() {

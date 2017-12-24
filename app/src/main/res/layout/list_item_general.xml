@@ -16,6 +16,7 @@
             android:id="@+id/imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:contentDescription="@string/app_name"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
             app:srcCompat="@drawable/ic_sad_face" />
@@ -29,10 +30,9 @@
 
             <TextView
                 style="@style/Header_Text"
-                android:text="Oops!! No Data Found" />
+                android:text="@string/txt_no_data_found" />
 
         </LinearLayout>
-
 
     </RelativeLayout>
 
@@ -40,15 +40,15 @@
         android:id="@+id/list_item_artists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"
+        android:layout_marginBottom="@dimen/activity_padding"
         android:background="@drawable/bckgrd_home_buttons"
-        android:layout_marginBottom="@dimen/activity_padding">
+        android:gravity="center"
+        android:visibility="gone">
 
         <!--IMAGE-->
         <ProgressBar
             android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic"/>
+            android:layout_height="@dimen/my_account_profile_pic" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/artist_ppic"
@@ -56,12 +56,14 @@
             android:layout_height="@dimen/my_account_profile_pic"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/activity_padding"
+            android:layout_marginLeft="@dimen/text_size_header_margin"
             android:layout_marginRight="@dimen/activity_padding"
+            android:layout_marginStart="@dimen/text_size_header_margin"
+            android:layout_marginTop="@dimen/text_size_header_margin"
             android:scaleType="centerCrop"
             app:riv_border_width="0dp"
             app:riv_corner_radius="8dp"
             app:riv_mutate_background="true" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,39 +75,50 @@
             <TextView
                 android:id="@+id/artist_name"
                 style="@style/Header_Text"
-                android:text="@string/app_name"
-                android:gravity="start"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
                 android:layout_margin="@dimen/text_size_small_margin"
+                android:gravity="start"
+                android:text="@string/app_name"
                 android:textSize="@dimen/text_size_header" />
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_padding"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/artist_stage_name"
-                    style="@style/Text_Normal"
-                    android:layout_gravity="start"
-                    android:gravity="start"
-                    android:text="@string/app_name"
-                    android:textSize="@dimen/text_size_tiny" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        style="@style/Text_Tiny"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:text="@string/txt_stage_name" />
+
+                    <TextView
+                        android:id="@+id/artist_stage_name"
+                        style="@style/Text_Tiny"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/app_name" />
+
+                </LinearLayout>
+
 
                 <TextView
-                    style="@style/Text_Normal"
-                    android:text="Basic Information:"
-                    android:textStyle="bold"
+                    style="@style/Text_Tiny"
                     android:layout_gravity="start"
-                    android:textSize="@dimen/text_size_tiny" />
+                    android:text="@string/txt_basic_information" />
 
                 <TextView
                     android:id="@+id/artist_info"
-                    style="@style/Text_Normal"
+                    style="@style/Text_Tiny"
                     android:layout_gravity="start"
+                    android:textColor="@color/colorPrimary"
                     android:gravity="start" />
 
                 <LinearLayout
@@ -116,17 +129,15 @@
 
                     <TextView
                         style="@style/Text_Normal"
-                        android:text="Since:"
-                        android:textStyle="bold"
                         android:layout_gravity="start"
+                        android:text="@string/txt_since"
                         android:textSize="@dimen/text_size_tiny" />
 
                     <TextView
                         android:id="@+id/artist_year_since"
-                        style="@style/Text_Normal"
-                        android:text="2004"
+                        style="@style/Text_Tiny"
                         android:layout_gravity="start"
-                        android:textSize="@dimen/text_size_tiny" />
+                        android:textColor="@color/colorPrimary" />
 
                 </LinearLayout>
 
@@ -134,21 +145,21 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/list_item_videos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginBottom="@dimen/activity_padding"
         android:background="@drawable/bckgrd_home_buttons"
-        android:layout_marginBottom="@dimen/activity_padding">
+        android:gravity="center"
+        android:visibility="visible">
 
         <!--IMAGE-->
         <ProgressBar
             android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic"/>
+            android:layout_height="@dimen/my_account_profile_pic" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/video_ppic"
@@ -156,7 +167,10 @@
             android:layout_height="@dimen/my_account_profile_pic"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/activity_padding"
+            android:layout_marginLeft="@dimen/text_size_header_margin"
             android:layout_marginRight="@dimen/activity_padding"
+            android:layout_marginStart="@dimen/text_size_header_margin"
+            android:layout_marginTop="@dimen/text_size_header_margin"
             android:scaleType="centerCrop"
             app:riv_border_width="0dp"
             app:riv_corner_radius="8dp"
@@ -173,12 +187,10 @@
             <TextView
                 android:id="@+id/video_name"
                 style="@style/Header_Text"
-                android:text="@string/app_name"
-                android:gravity="start"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
                 android:layout_margin="@dimen/text_size_small_margin"
-                android:textSize="@dimen/text_size_header" />
+                android:gravity="start"
+                android:text="@string/app_name" />
 
 
             <LinearLayout
@@ -189,11 +201,11 @@
 
                 <TextView
                     android:id="@+id/video_desc"
-                    style="@style/Text_Normal"
+                    style="@style/Text_Tiny"
                     android:layout_gravity="start"
                     android:gravity="start"
                     android:text="@string/app_name"
-                    android:textSize="@dimen/text_size_tiny" />
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/video_url"

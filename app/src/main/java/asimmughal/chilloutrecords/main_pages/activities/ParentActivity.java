@@ -48,11 +48,9 @@ public class ParentActivity extends AppCompatActivity
     Database db;
     Toolbar toolbar;
     DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
     NavigationView navigationView;
-    private View header;
     private BroadcastReceiver receiver;
-    TextView userName, userEmail, toolbar_text;
+    private TextView userName, userEmail, toolbar_text;
     private RoundedImageView userPic;
     private int drawer_id;
     String toolbarTitle;
@@ -92,13 +90,13 @@ public class ParentActivity extends AppCompatActivity
             toolbar_text.setText(toolbarTitle);
         }
 
-        toggle = new ActionBarDrawerToggle(
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-        header = navigationView.getHeaderView(0);
+        View header = navigationView.getHeaderView(0);
         userName = header.findViewById(R.id.username);
         userEmail = header.findViewById(R.id.userEmail);
         userPic = header.findViewById(R.id.userPic);
@@ -175,7 +173,7 @@ public class ParentActivity extends AppCompatActivity
                 try {
                     Gson gson = new Gson();
                     JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-                    Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
+//                    Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
                     final int version_code = Integer.valueOf(jsonObject.getString("version_code"));
                     final String download_url = jsonObject.getString("download_url");
                     SharedPrefs.setDownLoadURL(download_url);
@@ -197,7 +195,6 @@ public class ParentActivity extends AppCompatActivity
                             @Override
                             public void onClick(View v) {
                                 try {
-                                    if (Helpers.isDownloadManagerAvailable()) {
                                         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
                                         request.setDescription("Downloading APK");
                                         request.setTitle(getString(R.string.app_name));
@@ -209,7 +206,6 @@ public class ParentActivity extends AppCompatActivity
                                         DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                                         assert manager != null;
                                         manager.enqueue(request);
-                                    }
                                 } catch (Exception e) {
                                     helper.ToastMessage(ParentActivity.this, getString(R.string.error_500));
                                 }
