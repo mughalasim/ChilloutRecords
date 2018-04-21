@@ -8,27 +8,10 @@ import android.content.SharedPreferences;
 public class SharedPrefs {
     private static Context context;
     private static final String MYPREFS = "CHILLOUT_SHARED_PREFS";
-    private static final String NON_DELETABLE_PREFS = "CHILLOUT_SHARED_PREFS2";
-    private static final String LOGIN_PREFS = "FIRST_TIME_LOGIN";
 
     static {
-        SharedPrefs.context = MyApplication.getAppContext();
+        context = MyApplication.getAppContext();
     }
-
-// TOKEN INFORMATION ===============================================================================
-
-    public static String getToken() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("TOKEN", "");
-    }
-    public static void setToken(String token) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("TOKEN", token);
-        editor.apply();
-    }
-
-
 
 
 // USER ID INFORMATION =============================================================================
@@ -43,7 +26,6 @@ public class SharedPrefs {
         editor.putString("USERID", userID);
         editor.apply();
     }
-
 
 
 // USER INFORMATION ================================================================================
@@ -117,28 +99,6 @@ public class SharedPrefs {
         editor.apply();
     }
 
-    public static String getCountryCode() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("COUNTRYCODE", "");
-    }
-    public static void setCountryCode(String countryCode) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("COUNTRYCODE", countryCode);
-        editor.apply();
-    }
-
-    public static String getDownLoadURL() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("DLURL", "");
-    }
-    public static void setDownLoadURL(String dl_url) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("DLURL", dl_url);
-        editor.apply();
-    }
-
     public static String getUserEmail() {
         SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
         return mySharedPreferences.getString("EMAIL", "");
@@ -150,60 +110,23 @@ public class SharedPrefs {
         editor.apply();
     }
 
-    public static String getUserFacebookID() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("FACEBOOKID", "");
-    }
-    public static void setUserFacebookID(String fb_id) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("FACEBOOKID", fb_id);
-        editor.apply();
-    }
 
 // OTHER FUNCTIONS =================================================================================
+
+    public static String getDownLoadURL() {
+    SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
+    return mySharedPreferences.getString("DLURL", "");
+}
+    public static void setDownLoadURL(String dl_url) {
+        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString("DLURL", dl_url);
+        editor.apply();
+    }
 
     public static void deleteAllSharedPrefs(){
         SharedPreferences settings = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
         settings.edit().clear().apply();
     }
-
-    // NON_DELETABLE_PREFS =========================================================================
-    // DATABASE VERSION NUMBER =====================================================================
-
-    public static String getSupportNumber() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(NON_DELETABLE_PREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("SUPPORTNUMBER", "");
-    }
-    public static void setSupportNumber(String support_number) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(NON_DELETABLE_PREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("SUPPORTNUMBER", support_number);
-        editor.apply();
-    }
-
-    public static Integer getOldDataBaseVersion() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(NON_DELETABLE_PREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getInt("DATABASE_VERSION", 0);
-    }
-    public static void setNewDataBaseVersion(int db_version) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(NON_DELETABLE_PREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putInt("DATABASE_VERSION", db_version);
-        editor.apply();
-    }
-
-    public static String getTemporaryToken() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(NON_DELETABLE_PREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("TEMPTOKEN", "");
-    }
-    public static void setTemporaryToken(String token) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(NON_DELETABLE_PREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("TEMPTOKEN", token);
-        editor.apply();
-    }
-
-
 
 }

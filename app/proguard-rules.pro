@@ -23,10 +23,16 @@
 #For file mapping
 -printmapping proguard_mapping.txt
 
+-verbose
+
 #For retrofit issues
 -dontwarn okio.**
 -dontwarn retrofit2.Platform$Java8
 -keep class retrofit.** { *; }
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+-dontwarn javax.annotation.**
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
 #For the search Bar
 -keep class android.support.v7.widget.SearchView { *; }
@@ -43,11 +49,10 @@
   *;
 }
 
-#For Firebase and Google classes
--keepattributes Signature
--keepclassmembers class eatout.restaurantguide.models.** {
-  *;
-}
+# Google play ads
+-dontwarn com.google.android.gms.**
+
+-ignorewarnings
 
 
 #For the Animation Classes

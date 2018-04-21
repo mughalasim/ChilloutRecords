@@ -7,9 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:src="@drawable/home_freestyle_fridays"
+        android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/app_name" />
+        android:src="@drawable/home_freestyle_fridays" />
 
     <ImageView
         android:id="@+id/mainLogo"
@@ -17,28 +17,40 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/activity_padding"
+        android:contentDescription="@string/app_name"
         android:padding="5dp"
-        android:src="@drawable/main_logo_white"
-        android:contentDescription="@string/app_name" />
+        android:src="@drawable/main_logo_white" />
 
-    <TextView
-        style="@style/Text_Tiny"
-        android:layout_above="@+id/login_button"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sign_in_google"
         android:layout_margin="@dimen/activity_padding"
-        android:layout_centerHorizontal="true"
-        android:text="We only got this option for now, so deal with it ;) "/>
+        android:orientation="horizontal">
 
+        <TextView
+            style="@style/Button_No"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="signUp"
+            android:text="SIGN UP" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+        <TextView
+            style="@style/Button_Yes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="logIn"
+            android:text="LOGIN" />
+
+    </LinearLayout>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_google"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginBottom="85dp"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="@dimen/activity_padding"
+        android:layout_marginStart="@dimen/activity_padding" />
 
 </RelativeLayout>

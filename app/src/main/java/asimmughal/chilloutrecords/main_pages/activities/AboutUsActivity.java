@@ -11,8 +11,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -98,18 +96,6 @@ public class AboutUsActivity extends ParentActivity {
         final ImageView share_sms = dialog.findViewById(R.id.share_sms);
         final ImageView share_whatsapp = dialog.findViewById(R.id.share_whatsapp);
 
-        share_facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (helper.validateAppIsInstalled("com.facebook.katana")) {
-                    ShareLinkContent content = new ShareLinkContent.Builder()
-                            .setContentUrl(Uri.parse(STR_SHARELINK))
-                            .build();
-                    ShareDialog.show(AboutUsActivity.this, content);
-                    dialog.cancel();
-                }
-            }
-        });
 
         share_email.setOnClickListener(new View.OnClickListener() {
             @Override

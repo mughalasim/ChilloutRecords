@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.facebook.notifications.NotificationsManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -53,20 +52,11 @@ public class MessagingService extends FirebaseMessagingService {
                 data.putString(entry.getKey(), entry.getValue());
             }
 
-            if (NotificationsManager.canPresentCard(data)) {
-                Log.e(TAG, "IN-APP Notification");
-                NotificationsManager.presentNotification(
-                        this,
-                        data,
-                        new Intent(getApplicationContext(), SplashScreenActivity.class)
-                );
-
-            } else {
                 Log.e(TAG, "PUSH Notification");
                 String title = data.getString("title");
                 String body = data.getString("body");
                 sendNotification(title, body);
-            }
+
         }
     }
 

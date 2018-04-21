@@ -18,7 +18,6 @@ package asimmughal.chilloutrecords.services;
 
 import android.util.Log;
 
-import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -33,13 +32,6 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.e(TAG, "Refreshed token: " + refreshedToken);
-
-        sendRegistrationToServer(refreshedToken);
     }
 
-
-    private void sendRegistrationToServer(String token) {
-        AppEventsLogger.newLogger(MyApplication.getAppContext(), token);
-        AppEventsLogger.setPushNotificationsRegistrationId(token);
-    }
 }

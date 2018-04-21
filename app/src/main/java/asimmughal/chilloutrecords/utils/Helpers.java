@@ -1,5 +1,6 @@
 package asimmughal.chilloutrecords.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,8 +27,9 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.facebook.AccessToken;
-import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -75,8 +77,6 @@ public class Helpers {
             context.startActivity(new Intent(context, AboutUsActivity.class));
         } else if (id == R.id.log_out) {
             SharedPrefs.deleteAllSharedPrefs();
-            AccessToken.setCurrentAccessToken(null);
-            LoginManager.getInstance().logOut();
             context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             context.sendBroadcast(new Intent().setAction(BroadcastValue));
         }
@@ -88,7 +88,6 @@ public class Helpers {
     public static void sendLogoutBroadcast() {
         Context context = MyApplication.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
-        SharedPrefs.setTemporaryToken("");
         context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(STR_LOGGED_OUT_EXTRA, STR_LOGGED_OUT_TRUE));
         context.sendBroadcast(new Intent().setAction(BroadcastValue));
     }
@@ -96,7 +95,6 @@ public class Helpers {
     public static void sessionExpiryBroadcast() {
         Context context = MyApplication.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
-        SharedPrefs.setTemporaryToken("");
         context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(STR_LOGGED_OUT_EXTRA, STR_LOGGED_OUT_TRUE));
         context.sendBroadcast(new Intent().setAction(BroadcastValue));
     }
@@ -212,14 +210,17 @@ public class Helpers {
         return pattern.matcher(email).matches();
     }
 
-//    public boolean validateIsLoggedIn() {
-//        if (SharedPrefs.getWelcomeTitle().equals("")) {
-//            return true;
-//        } else {
-//            myDialog(context, "Alert", "Please login to use this feature");
-//            return false;
-//        }
-//    }
+    public boolean validateGooglePlayServices(Activity activity) {
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int status = googleApiAvailability.isGooglePlayServicesAvailable(activity);
+        if (status != ConnectionResult.SUCCESS) {
+            if (googleApiAvailability.isUserResolvableError(status)) {
+                googleApiAvailability.getErrorDialog(activity, status, 2404).show();
+            }
+            return false;
+        }
+        return true;
+    }
 
     public boolean validateAppIsInstalled(String uri) {
         PackageManager pm = context.getPackageManager();

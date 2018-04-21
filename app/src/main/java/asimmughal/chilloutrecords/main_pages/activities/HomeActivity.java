@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 
 import asimmughal.chilloutrecords.R;
 import asimmughal.chilloutrecords.utils.SharedPrefs;
@@ -55,11 +53,19 @@ public class HomeActivity extends ParentActivity {
     }
 
     public void FREESTYLES(View view) {
-
+        if (!helper.validateInternetNotPresent()) {
+            startActivity(new Intent(HomeActivity.this, GeneralListActivity.class).putExtra(KEY, FREESTYLE_FRIDAYS));
+        } else {
+            helper.myDialog(HomeActivity.this, getString(R.string.txt_alert), getString(R.string.error_connection));
+        }
     }
 
     public void UPCOMING(View view) {
-
+        if (!helper.validateInternetNotPresent()) {
+            startActivity(new Intent(HomeActivity.this, GeneralListActivity.class).putExtra(KEY, UPCOMING_PROJECTS));
+        } else {
+            helper.myDialog(HomeActivity.this, getString(R.string.txt_alert), getString(R.string.error_connection));
+        }
     }
 
     public void SHARE(View view) {
@@ -72,19 +78,6 @@ public class HomeActivity extends ParentActivity {
         final ImageView share_messenger = dialog.findViewById(R.id.share_messenger);
         final ImageView share_sms = dialog.findViewById(R.id.share_sms);
         final ImageView share_whatsapp = dialog.findViewById(R.id.share_whatsapp);
-
-        share_facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (helper.validateAppIsInstalled("com.facebook.katana")) {
-                    ShareLinkContent content = new ShareLinkContent.Builder()
-                            .setContentUrl(Uri.parse(STR_SHARELINK))
-                            .build();
-                    ShareDialog.show(HomeActivity.this, content);
-                    dialog.cancel();
-                }
-            }
-        });
 
         share_email.setOnClickListener(new View.OnClickListener() {
             @Override

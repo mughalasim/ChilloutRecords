@@ -48,13 +48,13 @@ dependencies {
     compile "com.android.support:support-vector-drawable:$rootProject.SupportLibrary"
 
     // RETROFIT ENDPOINT CALLING
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:retrofit:2.4.0'
 
     // JSON PARSING
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     // PICTURE LOADING
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:glide:4.5.0'
 
     // ROUNDED IMAGE VIEW
     compile 'com.makeramen:roundedimageview:2.3.0'
@@ -74,18 +74,12 @@ dependencies {
     // FIREBASE REALTIME DATABASE
     compile "com.google.firebase:firebase-database:$rootProject.GooglePlaySDK"
 
-    // FACEBOOK SDK
-    compile 'com.facebook.android:facebook-android-sdk:4.27.0'
-
-    // FACEBOOK NOTIFICATIONS
-    compile 'com.facebook.android:notifications:1.0.2'
-
-    // GOOGLE MAPS
-    compile "com.google.android.gms:play-services-maps:$rootProject.GooglePlaySDK"
+    // GOGLE AUTH
+    compile "com.google.android.gms:play-services-auth:$rootProject.GooglePlaySDK"
 
     // FABRIC CRASH TOOLS
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+        transitive = true;
     }
 
     // GOOGLE ANALYTICS
