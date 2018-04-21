@@ -20,42 +20,40 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#For file mapping
+# MAPPING
 -printmapping proguard_mapping.txt
 
 -verbose
 
-#For retrofit issues
+# RETROFIT
 -dontwarn okio.**
 -dontwarn retrofit2.Platform$Java8
 -keep class retrofit.** { *; }
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 
+# GLIDE CLASSES
 -dontwarn javax.annotation.**
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
-#For the search Bar
+# SEARCH WIDGET CLASSES
 -keep class android.support.v7.widget.SearchView { *; }
 
-#For Facebook
+# FACEBOOK CLASSES
 -keepattributes *Annotation*
--keep class com.facebook.** {
-   *;
-}
+-keep class com.facebook.** { *; }
 
-#For FireBase Database Models
+# FIREBASE MODELS
 -keepattributes Signature
--keepclassmembers class eatout.restaurantguide.models.** {
-  *;
-}
+-keepclassmembers class eatout.restaurantguide.models.** { *; }
 
-# Google play ads
+# GOOGLE PLAY ADS
 -dontwarn com.google.android.gms.**
 
+# USELESS WARNINGS
 -ignorewarnings
 
 
-#For the Animation Classes
+# YOYO ANIMATION CLASSES
 -keep class com.daimajia.* { *; }
 -keep interface com.daimajia.* { *; }
 -keep public class com.daimajia.* { *; }

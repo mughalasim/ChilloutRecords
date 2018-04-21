@@ -29,14 +29,14 @@ allprojects {
 
 ext {
     // SDK and tools
-    minSDK = 16
+    minSDK = 19
     targetSDK = 22
     compileSDK = 26
     buildTools = '27.0.3'
 
     // Dependencies versions
     SupportLibrary = '27.1.1'
-    GooglePlaySDK = '15.0.0'
+    GooglePlaySDK = '12.0.1'
 
     // Debug the App
     debugMode = false
