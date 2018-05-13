@@ -40,63 +40,51 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:cardview-v7:$rootProject.SupportLibrary"
-    compile "com.android.support:customtabs:$rootProject.SupportLibrary"
-    compile "com.android.support:design:$rootProject.SupportLibrary"
-    compile "com.android.support:recyclerview-v7:$rootProject.SupportLibrary"
-    compile "com.android.support:support-vector-drawable:$rootProject.SupportLibrary"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:cardview-v7:$rootProject.SupportLibrary"
+    implementation "com.android.support:customtabs:$rootProject.SupportLibrary"
+    implementation "com.android.support:design:$rootProject.SupportLibrary"
+    implementation "com.android.support:recyclerview-v7:$rootProject.SupportLibrary"
+    implementation "com.android.support:support-vector-drawable:$rootProject.SupportLibrary"
 
     // RETROFIT ENDPOINT CALLING
-    compile 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
 
     // JSON PARSING
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     // PICTURE LOADING
-    compile 'com.github.bumptech.glide:glide:4.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
 
     // ROUNDED IMAGE VIEW
-    compile 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    // FIREBASE AUTHENTICATION
-    compile "com.google.firebase:firebase-auth:$rootProject.GooglePlaySDK"
+    // FIREBASE DEPENDENCIES
+    implementation 'com.google.firebase:firebase-auth:15.1.0'
+    implementation 'com.google.firebase:firebase-messaging:15.0.2'
+    implementation 'com.google.firebase:firebase-invites:15.0.1'
+    implementation 'com.google.firebase:firebase-perf:15.2.0'
+    implementation 'com.google.firebase:firebase-database:15.0.1'
 
-    // FIREBASE PUSH NOTIFICATIONS
-    compile "com.google.firebase:firebase-messaging:$rootProject.GooglePlaySDK"
-
-    // FIREBASE DEEP LINKING
-    compile "com.google.firebase:firebase-invites:$rootProject.GooglePlaySDK"
-
-    // FIREBASE PERFORMANCE TESTING
-    compile "com.google.firebase:firebase-perf:$rootProject.GooglePlaySDK"
-
-    // FIREBASE REALTIME DATABASE
-    compile "com.google.firebase:firebase-database:$rootProject.GooglePlaySDK"
-
-    // GOGLE AUTH
-    compile "com.google.android.gms:play-services-auth:$rootProject.GooglePlaySDK"
-
-    // FABRIC CRASH TOOLS
-    compile('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
-        transitive = true;
-    }
-
-    // GOOGLE ANALYTICS
-    compile "com.google.android.gms:play-services-analytics:$rootProject.GooglePlaySDK"
+    // GOOGLE
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation('com.google.android.gms:play-services-analytics:15.0.0')
+            {
+                exclude module: 'play-services-ads'
+            }
 
     // YOYO ANIMATIONS
-    compile 'com.daimajia.easing:library:2.0@aar'
-    compile 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
     // NOTIFICATION BADGES
-    compile "me.leolin:ShortcutBadger:1.1.19@aar"
+    implementation "me.leolin:ShortcutBadger:1.1.19@aar"
 
     // GIF VIEWER
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
 
     // VIDEO PAYER
-    compile 'com.afollestad:easyvideoplayer:0.3.0'
+    implementation 'com.afollestad:easyvideoplayer:0.3.0'
 
 
 }
