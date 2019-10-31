@@ -2,37 +2,43 @@
 
 buildscript {
     repositories {
-        jcenter()
         google()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
         classpath 'com.google.gms:google-services:4.3.2'
+        classpath "com.gradle:build-scan-plugin:2.3"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+apply plugin: 'com.gradle.build-scan'
+apply plugin: 'java'
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
 allprojects {
     repositories {
+        google()
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com"}
         maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
-        google()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 }
 
 ext {
     // SDK and tools
     minSDK = 19
-    targetSDK = 29
+    targetSDK = 28
     compileSDK = 28
     buildTools = '28.0.3'
-
-    // Dependencies versions
-    SupportLibrary = '27.1.1'
 
     // App Versioning
     versionCode = 4
@@ -40,6 +46,6 @@ ext {
 
 }
 
-task clean(type: Delete) {
+task cleanApp(type: Delete) {
     delete rootProject.buildDir
 }

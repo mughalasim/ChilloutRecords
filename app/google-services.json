@@ -8,18 +8,55 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:339530129008:android:a8ab02586b4fd5da",
+        "mobilesdk_app_id": "1:339530129008:android:38d5c39748eb9f52351eb5",
         "android_client_info": {
-          "package_name": "com.chilloutrecords"
+          "package_name": "com.chilloutrecords.free"
         }
       },
       "oauth_client": [
         {
-          "client_id": "339530129008-k2ckksafg6dq0ucuinh28r9eomlq435u.apps.googleusercontent.com",
+          "client_id": "339530129008-udlhbm4tljatkkhim4p4vaergndcfr0h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.chilloutrecords",
-            "certificate_hash": "5eb62810349c5da0f44e6d6a6052f5f891beb264"
+            "package_name": "com.chilloutrecords.free",
+            "certificate_hash": "ade62586e54889c32a1b149488c69a865ccaf9cd"
+          }
+        },
+        {
+          "client_id": "339530129008-eequg3nlaj56aph2aiuerrggtd6ka8jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq_io43Sxc4sOaXpMXEEmLC-RzGtlpGL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339530129008-eequg3nlaj56aph2aiuerrggtd6ka8jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339530129008:android:5e9743c805fa36cd351eb5",
+        "android_client_info": {
+          "package_name": "com.chilloutrecrods.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339530129008-jv3mpohjk3qcp55eob785gh6c0virnhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chilloutrecrods.pro",
+            "certificate_hash": "ade62586e54889c32a1b149488c69a865ccaf9cd"
           }
         },
         {

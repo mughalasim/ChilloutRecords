@@ -1,45 +1,113 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        releaseSigning {
+            keyAlias 'chilloutrecords'
+            keyPassword 'chilloutrecords'
+            storeFile file('../chillout_records_key.jks')
+            storePassword 'chilloutrecords'
+        }
+    }
     compileSdkVersion rootProject.compileSDK
     buildToolsVersion rootProject.buildTools
-    flavorDimensions "versionCode"
+
     defaultConfig {
         applicationId "com.chilloutrecords"
         minSdkVersion rootProject.minSDK
         targetSdkVersion rootProject.targetSDK
         versionCode rootProject.versionCode
         versionName "$rootProject.versionName"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        resConfigs "en"
+
+        // RETROFIT TIMEOUT
+        buildConfigField 'Integer', 'CONNECTION_TIMEOUT', '20'
+
+        // DATABASE VERSION
+        buildConfigField 'Integer', 'DATABASE_VERSION', "$rootProject.versionCode"
+
+        // FIREBASE INIT
+        resValue "string", "FB_API_KEY", FB_API_KEY
+        buildConfigField 'String', 'FB_APP_ID', FB_APP_ID
+        buildConfigField 'String', 'FB_STORE', FB_STORE
+
+        // FIREBASE PATHS
+        buildConfigField 'String', 'FB_DB_URL', FB_DB_URL
     }
 
     buildTypes {
         release {
             debuggable false
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true
+            splits {
+                abi {
+                    enable true
+                    reset()
+                    include 'armeabi-v7a'
+                    universalApk false
+                }
+            }
+            signingConfig signingConfigs.releaseSigning
+            applicationVariants.all { variant -> renameAPKFile(variant) }
         }
+
         debug {
             debuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            splits {
+                abi {
+                    enable true
+                    reset()
+                    include 'armeabi-v7a', 'x86'
+                    universalApk false
+                }
+            }
+            signingConfig signingConfigs.releaseSigning
+            applicationVariants.all { variant -> renameAPKFile(variant) }
         }
     }
 
+    flavorDimensions "flavors"
     productFlavors {
         free {
-            buildConfigField 'Integer', 'connection_timeOut', '20'
-            buildConfigField 'Integer', 'DATABASE_VERSION', "$rootProject.versionCode"
-
-            // FIREBASE INIT
-            resValue "string", "FB_API_KEY", FB_API_KEY
-            buildConfigField 'String', 'FB_APP_ID', FB_APP_ID
-            buildConfigField 'String', 'FB_STORE', FB_STORE
-
-            // FIREBASE PATHS
-            buildConfigField 'String', 'FB_DB_URL', FB_DB_URL
+            // APP NAME AND ICON
+            applicationIdSuffix = ".free"
+            resValue "string", "app_name", "Chillout Records (Free)"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher"
+            ]
+            // APP IS FREE VERSION - WITH ADS
+//            buildConfigField 'Boolean', 'IS_PRO', false
         }
+
+        pro {
+            // APP NAME AND ICON
+            applicationIdSuffix = ".pro"
+            resValue "string", "app_name", "Chillout Records (pro)"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher"
+            ]
+            // APP IS PRO VERSION - AD FREE
+//            buildConfigField 'Boolean', 'IS_PRO', true
+        }
+    }
+}
+
+
+def renameAPKFile(variant) {
+    variant.outputs.all { output ->
+        outputFileName = new File(
+                "Chillout Records ("
+                        + variant.buildType.name
+                        + " - "
+                        + variant.versionName
+                        + " )"
+                        + ".apk"
+        )
     }
 }
 
