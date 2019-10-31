@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#9dff00</color>
+    <color name="colorPrimaryLight">#819FFF</color>
+    <color name="colorPrimary">#547BFB</color>
+    <color name="colorPrimaryDark">#3564FF</color>
 
-    <color name="light_green">#b9fc4e</color>
-    <color name="green">#9dff00</color>
-    <color name="dark_green">#86da00</color>
+    <color name="colorAccentLight">#ffa53d</color>
+    <color name="colorAccent">#fc941b</color>
+    <color name="colorAccentDark">#da8018</color>
 
-    <color name="very_dark_grey">#2b2b2b</color>
-    <color name="dark_grey">#5f5f5f</color>
-    <color name="grey">#bcbcbc</color>
-    <color name="light_grey">#d2d2d2</color>
-    <color name="light_grey_transparent">#9ed7d7d7</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent_black">#9A000000</color>
 
-    <color name="dim">#4c000000</color>
+    <color name="red">#e9343f</color>
+    <color name="green">#4CAF50</color>
+
+    <color name="black">#222222</color>
+    <color name="dark_grey">#6d6d6d</color>
+    <color name="grey">#919191</color>
+    <color name="light_grey">#f0f0f0</color>
+
     <color name="transparent">#00000000</color>
+    <color name="dim">#2F000000</color>
+    <color name="dimmer">#19000000</color>
 
 </resources>

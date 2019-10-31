@@ -1,26 +1,55 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- BORDER CORNERS =========================================================================-->
+    <dimen name="radius_corner">10sp</dimen>
 
-    <dimen name="activity_padding">8dp</dimen>
-    <dimen name="my_account_profile_pic">160dp</dimen>
-    <dimen name="nav_header_height">110dp</dimen>
-    <dimen name="nav_header_pic_height">90dp</dimen>
 
-    <dimen name="home_button_height">180dp</dimen>
+    <!-- LINE THICKNESS =========================================================================-->
+    <dimen name="line_thickness">1sp</dimen>
 
-    <dimen name="music_player_height">80dp</dimen>
 
-    <dimen name="share_icon_size">50dp</dimen>
+    <!--ANGLES ==================================================================================-->
+    <dimen name="angle_color">315</dimen>
 
-    <dimen name="text_size_header">20sp</dimen>
-    <dimen name="text_size_normal">18sp</dimen>
-    <dimen name="text_size_small">16sp</dimen>
-    <dimen name="text_size_tiny">14sp</dimen>
-    <dimen name="text_size_header_margin">4sp</dimen>
-    <dimen name="text_size_normal_margin">2sp</dimen>
-    <dimen name="text_size_small_margin">2sp</dimen>
-    <dimen name="text_size_tiny_margin">2sp</dimen>
 
-    <dimen name="edit_text_height">50sp</dimen>
+    <!--IMAGE DIMENS ============================================================================-->
+    <dimen name="img_size_x_large">148sp</dimen>
+    <dimen name="img_size_large">108sp</dimen>
+    <dimen name="img_size_medium_large">78sp</dimen>
+    <dimen name="img_size_medium">68sp</dimen>
+    <dimen name="img_size_normal">48sp</dimen>
+    <dimen name="img_size_small">28sp</dimen>
+
+
+    <!--PADDING =================================================================================-->
+    <dimen name="padding_large">28dp</dimen>
+    <dimen name="padding_medium">18dp</dimen>
+    <dimen name="padding_small">14dp</dimen>
+    <dimen name="padding_tiny">10dp</dimen>
+    <dimen name="padding_mini">6dp</dimen>
+
+
+    <!--TEXT SIZES ==============================================================================-->
+    <dimen name="text_size_xx_large">44sp</dimen>
+    <dimen name="text_size_x_large">24sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_normal">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+
+
+    <!--MARGINS AND SPACINGS ====================================================================-->
+    <dimen name="text_margin">2sp</dimen>
+    <dimen name="text_line_spacing">1sp</dimen>
+    <dimen name="text_line_multiplier">1.2</dimen>
+
+
+    <!--FIXED ITEM HEIGHTS ======================================================================-->
+    <dimen name="height_button">70sp</dimen>
+    <dimen name="height_edit_text">50dp</dimen>
+    <dimen name="height_panel">55sp</dimen>
+    <dimen name="height_nav_header">110sp</dimen>
+    <dimen name="height_collapsing_toolbar">250sp</dimen>
+    <dimen name="height_map">300sp</dimen>
+
 
 </resources>

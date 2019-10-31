@@ -98,17 +98,8 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
 
         <!--META DATA ===========================================================================-->
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="76a785997335084c719caa8f1efe8d81a87fc97e" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />

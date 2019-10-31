@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "339530129008-tp0fd3onoqtktgvhkueaj4g1h1kt2p91.apps.googleusercontent.com",
+          "client_id": "339530129008-k2ckksafg6dq0ucuinh28r9eomlq435u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "asimmughal.chilloutrecords",
-            "certificate_hash": "9d6ef4cbcfc8d5258c41a45d2dc4f85ef3c13305"
+            "certificate_hash": "5eb62810349c5da0f44e6d6a6052f5f891beb264"
           }
         },
         {
@@ -33,20 +33,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "339530129008-eequg3nlaj56aph2aiuerrggtd6ka8jo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

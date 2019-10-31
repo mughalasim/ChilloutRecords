@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ACTIVITY ANIMATION TIME ================================================================-->
+    <integer name="dash_anim_time">1000</integer>
+    <integer name="page_anim_time">100</integer>
+    <integer name="max_phone_number">13</integer>
+    <integer name="max_profile_info">2000</integer>
+    <integer name="max_conversation">500</integer>
+
+</resources>

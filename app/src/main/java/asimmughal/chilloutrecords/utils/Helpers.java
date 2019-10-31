@@ -103,7 +103,7 @@ public class Helpers {
     // LOGS ========================================================================================
 
     public static void LogThis(String data) {
-        if (BuildConfig.LOGGING) {
+        if (BuildConfig.DEBUG) {
             Log.e("LOGGED: ", data);
         }
     }
