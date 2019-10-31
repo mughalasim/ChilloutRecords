@@ -45,14 +45,14 @@
 
                     <TextView
                         android:id="@+id/txtCancel"
-                        style="@style/Button_No"
+                        style="@style/Material_Button_No"
                         android:layout_weight="1"
                         android:text="CANCEL"
                         android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/txtOk"
-                        style="@style/Button_Yes"
+                        style="@style/Material_Button_No"
                         android:layout_weight="1"
                         android:text="OK" />
 

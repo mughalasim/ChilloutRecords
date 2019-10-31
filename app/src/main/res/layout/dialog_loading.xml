@@ -6,14 +6,14 @@
     android:layout_gravity="center"
     android:background="@color/very_dark_grey"
     android:gravity="center_vertical"
-    android:padding="@dimen/activity_padding"
+    android:padding="@dimen/padding_medium"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="@dimen/my_account_profile_pic"
+        android:layout_width="@dimen/img_size_medium_large"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/activity_padding"
+        android:layout_marginBottom="@dimen/padding_medium"
         android:src="@drawable/main_logo_white" />
 
     <TextView
@@ -28,6 +28,6 @@
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:progressTint="@color/colorPrimary"
-        android:layout_marginTop="@dimen/activity_padding"/>
+        android:layout_marginTop="@dimen/padding_medium"/>
 
 </LinearLayout>

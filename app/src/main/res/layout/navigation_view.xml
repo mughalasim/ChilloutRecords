@@ -23,7 +23,7 @@
             style="@style/Text_Normal"
             android:layout_gravity="end"
             android:textSize="16sp"
-            android:layout_margin="@dimen/activity_padding" />
+            android:layout_margin="@dimen/padding_medium" />
 
     </LinearLayout>
 

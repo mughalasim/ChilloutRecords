@@ -7,13 +7,11 @@
     android:layout_height="match_parent"
     tools:openDrawer="end">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
@@ -23,7 +21,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/activity_padding">
+                android:paddingBottom="@dimen/padding_medium">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -32,8 +30,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/home_button_height"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/height_button"
+                        android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="ARTISTS">
 
                         <ImageView
@@ -53,7 +51,7 @@
 
 
                         <TextView
-                            style="@style/Header_Text"
+                            style="@style/Text_Header"
                             android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="ARTISTS" />
@@ -62,8 +60,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/home_button_height"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/height_button"
+                        android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="VIDEOS">
 
                         <ImageView
@@ -82,7 +80,7 @@
                             android:src="@drawable/bckgrd_home_buttons" />
 
                         <TextView
-                            style="@style/Header_Text"
+                            style="@style/Text_Header"
                             android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="VIDEOS" />
@@ -91,8 +89,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/home_button_height"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/height_button"
+                        android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="FREESTYLES">
 
                         <ImageView
@@ -111,7 +109,7 @@
                             android:src="@drawable/bckgrd_home_buttons" />
 
                         <TextView
-                            style="@style/Header_Text"
+                            style="@style/Text_Header"
                             android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="FREESTYLE FRIDAYS" />
@@ -120,8 +118,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/home_button_height"
-                        android:layout_marginTop="@dimen/activity_padding"
+                        android:layout_height="@dimen/height_button"
+                        android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="UPCOMING">
 
                         <ImageView
@@ -141,7 +139,7 @@
                             android:src="@drawable/bckgrd_home_buttons" />
 
                         <TextView
-                            style="@style/Header_Text"
+                            style="@style/Text_Header"
                             android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
                             android:text="UPCOMING PROJECTS" />

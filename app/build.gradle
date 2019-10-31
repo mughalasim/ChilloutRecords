@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.buildTools
     flavorDimensions "versionCode"
     defaultConfig {
-        applicationId "asimmughal.chilloutrecords"
+        applicationId "com.chilloutrecords"
         minSdkVersion rootProject.minSDK
         targetSdkVersion rootProject.targetSDK
         versionCode rootProject.versionCode

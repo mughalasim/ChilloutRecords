@@ -7,14 +7,11 @@
     android:layout_height="match_parent"
     tools:openDrawer="end">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
@@ -35,22 +32,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/activity_padding">
+                        android:layout_marginBottom="@dimen/padding_medium">
 
                         <!--IMAGE-->
-                       <ProgressBar
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerInParent="true"/>
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true" />
 
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/user_thumbnail"
-                            android:layout_width="@dimen/my_account_profile_pic"
-                            android:layout_height="@dimen/my_account_profile_pic"
+                            android:layout_width="@dimen/img_size_medium_large"
+                            android:layout_height="@dimen/img_size_medium_large"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/activity_padding"
-                            android:layout_marginRight="@dimen/activity_padding"
+                            android:layout_marginEnd="@dimen/padding_medium"
+                            android:layout_marginRight="@dimen/padding_medium"
                             android:scaleType="centerCrop"
                             app:riv_border_width="0dp"
                             app:riv_corner_radius="8dp"
@@ -58,41 +55,41 @@
 
 
                         <LinearLayout
-                            android:layout_width="@dimen/my_account_profile_pic"
+                            android:layout_width="@dimen/img_size_medium_large"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
                             android:layout_toEndOf="@+id/user_thumbnail"
                             android:layout_toRightOf="@+id/user_thumbnail"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/picture_add"
-                                style="@style/Button_Yes"
+                                style="@style/Material_Button_No"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/activity_padding"
-                                android:textSize="@dimen/text_size_tiny" />
+                                android:padding="@dimen/padding_medium"
+                                android:textSize="@dimen/text_size_small" />
 
                             <TextView
                                 android:id="@+id/picture_delete"
-                                style="@style/Button_No"
+                                style="@style/Material_Button_No"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/activity_padding"
-                                android:textSize="@dimen/text_size_tiny" />
+                                android:padding="@dimen/padding_medium"
+                                android:textSize="@dimen/text_size_small" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginBottom="@dimen/activity_padding"
+                                android:layout_marginBottom="@dimen/padding_medium"
                                 android:orientation="vertical">
 
                                 <TextView
                                     style="@style/Text_Normal"
-                                    android:textSize="@dimen/text_size_tiny" />
+                                    android:textSize="@dimen/text_size_small" />
 
                                 <TextView
                                     android:id="@+id/user_points"
-                                    style="@style/Header_Text"
+                                    style="@style/Text_Header"
                                     android:textColor="@color/colorPrimary"
                                     android:textStyle="bold" />
 
@@ -138,7 +135,7 @@
 
 
                     <TextView
-                        style="@style/Button_Yes"
+                        style="@style/Material_Button_No"
                         android:onClick="UpdateDetails"
                         android:text="UPDATE" />
 

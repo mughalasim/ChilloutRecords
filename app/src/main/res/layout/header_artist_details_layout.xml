@@ -28,12 +28,12 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ppic"
-            android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic"
+            android:layout_width="@dimen/img_size_medium_large"
+            android:layout_height="@dimen/img_size_medium_large"
             android:layout_centerInParent="true"
             app:riv_border_color="@color/colorAccent"
-            android:layout_marginEnd="@dimen/activity_padding"
-            android:layout_marginRight="@dimen/activity_padding"
+            android:layout_marginEnd="@dimen/padding_medium"
+            android:layout_marginRight="@dimen/padding_medium"
             android:scaleType="centerCrop"
             app:riv_border_width="2dp"
             app:riv_corner_radius="8dp"

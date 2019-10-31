@@ -26,9 +26,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_item"
-                    android:paddingLeft="@dimen/activity_padding"
-                    android:paddingRight="@dimen/activity_padding"
-                    android:paddingTop="@dimen/activity_padding"
+                    android:paddingLeft="@dimen/padding_medium"
+                    android:paddingRight="@dimen/padding_medium"
+                    android:paddingTop="@dimen/padding_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

@@ -12,9 +12,12 @@
     <color name="transparent_black">#9A000000</color>
 
     <color name="red">#e9343f</color>
+    <color name="light_green">#2EDA35</color>
     <color name="green">#4CAF50</color>
+    <color name="dark_green">#337936</color>
 
     <color name="black">#222222</color>
+    <color name="very_dark_grey">#474646</color>
     <color name="dark_grey">#6d6d6d</color>
     <color name="grey">#919191</color>
     <color name="light_grey">#f0f0f0</color>

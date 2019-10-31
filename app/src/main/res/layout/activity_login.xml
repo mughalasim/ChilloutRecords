@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/activity_padding"
+        android:layout_margin="@dimen/padding_medium"
         android:contentDescription="@string/app_name"
         android:padding="5dp"
         android:src="@drawable/main_logo_white" />
@@ -25,18 +25,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/sign_in_google"
-        android:layout_margin="@dimen/activity_padding"
+        android:layout_margin="@dimen/padding_medium"
         android:orientation="horizontal">
 
         <TextView
-            style="@style/Button_No"
+            style="@style/Material_Button_No"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:onClick="signUp"
             android:text="SIGN UP" />
 
         <TextView
-            style="@style/Button_Yes"
+            style="@style/Material_Button_Yes"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:onClick="logIn"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
-        android:layout_marginEnd="@dimen/activity_padding"
-        android:layout_marginStart="@dimen/activity_padding" />
+        android:layout_marginEnd="@dimen/padding_medium"
+        android:layout_marginStart="@dimen/padding_medium" />
 
 </RelativeLayout>

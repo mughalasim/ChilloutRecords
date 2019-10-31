@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/txtTitle"
-        style="@style/Header_Text"
+        style="@style/Text_Header"
         android:text="@string/txt_share" />
 
     <HorizontalScrollView
@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/share_facebook"
-                android:layout_width="@dimen/share_icon_size"
-                android:layout_height="@dimen/share_icon_size"
+                android:layout_width="@dimen/img_size_normal"
+                android:layout_height="@dimen/img_size_normal"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/app_name"
@@ -37,8 +37,8 @@
 
             <ImageView
                 android:id="@+id/share_whatsapp"
-                android:layout_width="@dimen/share_icon_size"
-                android:layout_height="@dimen/share_icon_size"
+                android:layout_width="@dimen/img_size_normal"
+                android:layout_height="@dimen/img_size_normal"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/app_name"
@@ -46,8 +46,8 @@
 
             <ImageView
                 android:id="@+id/share_messenger"
-                android:layout_width="@dimen/share_icon_size"
-                android:layout_height="@dimen/share_icon_size"
+                android:layout_width="@dimen/img_size_normal"
+                android:layout_height="@dimen/img_size_normal"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/app_name"
@@ -56,8 +56,8 @@
 
             <ImageView
                 android:id="@+id/share_email"
-                android:layout_width="@dimen/share_icon_size"
-                android:layout_height="@dimen/share_icon_size"
+                android:layout_width="@dimen/img_size_normal"
+                android:layout_height="@dimen/img_size_normal"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/app_name"
@@ -65,8 +65,8 @@
 
             <ImageView
                 android:id="@+id/share_sms"
-                android:layout_width="@dimen/share_icon_size"
-                android:layout_height="@dimen/share_icon_size"
+                android:layout_width="@dimen/img_size_normal"
+                android:layout_height="@dimen/img_size_normal"
                 android:contentDescription="@string/app_name"
                 android:padding="5dp"
                 android:src="@drawable/share_sms" />

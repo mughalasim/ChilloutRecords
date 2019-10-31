@@ -19,7 +19,7 @@
         android:layout_centerInParent="true"
         android:contentDescription="@string/app_name"
         android:scaleType="centerInside"
-        android:padding="@dimen/activity_padding"
+        android:padding="@dimen/padding_medium"
         android:src="@drawable/main_logo_white" />
 
     <LinearLayout
@@ -27,8 +27,8 @@
         android:layout_width="match_parent"
         android:background="@drawable/bckgrd_activity_panels"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_padding"
-        android:layout_margin="@dimen/activity_padding"
+        android:padding="@dimen/padding_medium"
+        android:layout_margin="@dimen/padding_medium"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 

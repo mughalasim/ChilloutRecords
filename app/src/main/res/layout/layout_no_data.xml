@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <TextView
-        style="@style/Header_Text"
+        style="@style/Text_Header"
         android:text="@string/txt_no_data_found"
-        android:padding="@dimen/activity_padding"
+        android:padding="@dimen/padding_medium"
         android:drawableTop="@drawable/ic_sad_face"/>
 
 </LinearLayout>

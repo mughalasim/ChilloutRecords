@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:339530129008:android:a8ab02586b4fd5da",
         "android_client_info": {
-          "package_name": "asimmughal.chilloutrecords"
+          "package_name": "com.chilloutrecords"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "339530129008-k2ckksafg6dq0ucuinh28r9eomlq435u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "asimmughal.chilloutrecords",
+            "package_name": "com.chilloutrecords",
             "certificate_hash": "5eb62810349c5da0f44e6d6a6052f5f891beb264"
           }
         },

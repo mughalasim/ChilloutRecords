@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/Header_Text"
+                style="@style/Text_Header"
                 android:text="@string/txt_no_data_found" />
 
         </LinearLayout>
@@ -40,26 +40,26 @@
         android:id="@+id/list_item_artists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_padding"
+        android:layout_marginBottom="@dimen/padding_medium"
         android:background="@drawable/bckgrd_home_buttons"
         android:gravity="center"
         android:visibility="gone">
 
         <!--IMAGE-->
         <ProgressBar
-            android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic" />
+            android:layout_width="@dimen/img_size_medium_large"
+            android:layout_height="@dimen/img_size_medium_large" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/artist_ppic"
-            android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic"
+            android:layout_width="@dimen/img_size_medium_large"
+            android:layout_height="@dimen/img_size_medium_large"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/activity_padding"
-            android:layout_marginLeft="@dimen/text_size_header_margin"
-            android:layout_marginRight="@dimen/activity_padding"
-            android:layout_marginStart="@dimen/text_size_header_margin"
-            android:layout_marginTop="@dimen/text_size_header_margin"
+            android:layout_marginEnd="@dimen/padding_medium"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/padding_medium"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin"
             android:scaleType="centerCrop"
             app:riv_border_width="0dp"
             app:riv_corner_radius="8dp"
@@ -74,18 +74,18 @@
 
             <TextView
                 android:id="@+id/artist_name"
-                style="@style/Header_Text"
+                style="@style/Text_Header"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_size_small_margin"
+                android:layout_margin="@dimen/text_margin"
                 android:gravity="start"
                 android:text="@string/app_name"
-                android:textSize="@dimen/text_size_header" />
+                android:textSize="@dimen/text_size_large" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_padding"
+                android:layout_marginBottom="@dimen/padding_medium"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -93,14 +93,14 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                     <TextView
-                        style="@style/Text_Tiny"
+                        style="@style/Text_Small"
                         android:layout_gravity="start"
                         android:gravity="start"
                         android:text="@string/txt_stage_name" />
 
                     <TextView
                         android:id="@+id/artist_stage_name"
-                        style="@style/Text_Tiny"
+                        style="@style/Text_Small"
                         android:layout_gravity="start"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
@@ -110,13 +110,13 @@
 
 
                 <TextView
-                    style="@style/Text_Tiny"
+                    style="@style/Text_Small"
                     android:layout_gravity="start"
                     android:text="@string/txt_basic_information" />
 
                 <TextView
                     android:id="@+id/artist_info"
-                    style="@style/Text_Tiny"
+                    style="@style/Text_Small"
                     android:layout_gravity="start"
                     android:textColor="@color/colorPrimary"
                     android:gravity="start" />
@@ -124,18 +124,18 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_padding"
+                    android:layout_marginBottom="@dimen/padding_medium"
                     android:orientation="horizontal">
 
                     <TextView
                         style="@style/Text_Normal"
                         android:layout_gravity="start"
                         android:text="@string/txt_since"
-                        android:textSize="@dimen/text_size_tiny" />
+                        android:textSize="@dimen/text_size_small" />
 
                     <TextView
                         android:id="@+id/artist_year_since"
-                        style="@style/Text_Tiny"
+                        style="@style/Text_Small"
                         android:layout_gravity="start"
                         android:textColor="@color/colorPrimary" />
 
@@ -151,26 +151,26 @@
         android:id="@+id/list_item_videos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_padding"
+        android:layout_marginBottom="@dimen/padding_medium"
         android:background="@drawable/bckgrd_home_buttons"
         android:gravity="center"
         android:visibility="visible">
 
         <!--IMAGE-->
         <ProgressBar
-            android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic" />
+            android:layout_width="@dimen/img_size_medium_large"
+            android:layout_height="@dimen/img_size_medium_large" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/video_ppic"
-            android:layout_width="@dimen/my_account_profile_pic"
-            android:layout_height="@dimen/my_account_profile_pic"
+            android:layout_width="@dimen/img_size_medium_large"
+            android:layout_height="@dimen/img_size_medium_large"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/activity_padding"
-            android:layout_marginLeft="@dimen/text_size_header_margin"
-            android:layout_marginRight="@dimen/activity_padding"
-            android:layout_marginStart="@dimen/text_size_header_margin"
-            android:layout_marginTop="@dimen/text_size_header_margin"
+            android:layout_marginEnd="@dimen/padding_medium"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/padding_medium"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin"
             android:scaleType="centerCrop"
             app:riv_border_width="0dp"
             app:riv_corner_radius="8dp"
@@ -186,9 +186,9 @@
 
             <TextView
                 android:id="@+id/video_name"
-                style="@style/Header_Text"
+                style="@style/Text_Header"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_size_small_margin"
+                android:layout_margin="@dimen/text_margin"
                 android:gravity="start"
                 android:text="@string/app_name" />
 
@@ -196,12 +196,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_padding"
+                android:layout_marginBottom="@dimen/padding_medium"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/video_desc"
-                    style="@style/Text_Tiny"
+                    style="@style/Text_Small"
                     android:layout_gravity="start"
                     android:gravity="start"
                     android:text="@string/app_name"
