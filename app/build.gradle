@@ -78,7 +78,7 @@ android {
             applicationIdSuffix = ".free"
             resValue "string", "app_name", "Chillout Records (Free)"
             manifestPlaceholders = [
-                    appIcon: "@mipmap/ic_launcher"
+                    appIcon: "@mipmap/ic_launcher_free"
             ]
             // APP IS FREE VERSION - WITH ADS
 //            buildConfigField 'Boolean', 'IS_PRO', false
@@ -89,7 +89,7 @@ android {
             applicationIdSuffix = ".pro"
             resValue "string", "app_name", "Chillout Records (pro)"
             manifestPlaceholders = [
-                    appIcon: "@mipmap/ic_launcher"
+                    appIcon: "@mipmap/ic_launcher_pro"
             ]
             // APP IS PRO VERSION - AD FREE
 //            buildConfigField 'Boolean', 'IS_PRO', true
