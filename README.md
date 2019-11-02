@@ -10,3 +10,7 @@ If you wish to see how the project is coming along, feel free to view its wirefr
 
 Get the Latest Android App from [here](https://firebasestorage.googleapis.com/v0/b/chillout-records.appspot.com/o/APK's%2FChillout_Records%20v0.4.apk?alt=media&token=4394cf71-ad96-46a6-ac39-5591951ddc45)
 
+**Social Media**
+
+1. [Instagram](https://www.instagram.com/chillout.records/)
+2. [Youtube](https://www.youtube.com/channel/UC1zuwkWAJ4mDCMxMjGyVEkQ)
