@@ -26,18 +26,18 @@
     <!-- DRAWER ARROW STYLE =====================================================================-->
     <style name="drawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="color">@color/colorAccent</item>
+        <item name="color">@color/colorPrimary</item>
     </style>
 
 
     <!-- DRAWER ARROW STYLE =====================================================================-->
     <style name="actionOverflowMenu" parent="Widget.AppCompat.ListPopupWindow">
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:background">@drawable/edit_text_selection_background</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@color/colorAccent</item>
         <item name="actionOverflowButtonStyle">@style/overflowButtonStyle</item>
     </style>
     <style name="overflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:tint">@color/colorPrimary</item>
     </style>
 
 
@@ -48,7 +48,7 @@
     </style>
 
     <!-- TAB TEXT STYLE =========================================================================-->
-    <style name="Tab_Text_Layout" parent="AppTheme">
+    <style name="TabTextLayout" parent="AppTheme">
         <item name="android:layout_height">@dimen/height_panel</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingStart">@dimen/padding_small</item>
@@ -65,7 +65,7 @@
 
 
     <!-- CARD STYLE =============================================================================-->
-    <style name="Card_Layout" parent="AppTheme">
+    <style name="CardLayout" parent="AppTheme">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginEnd">@dimen/padding_tiny</item>
@@ -80,12 +80,11 @@
 
 
     <!-- EDIT TEXT STYLES =======================================================================-->
-    <style name="Edit_Text" parent="AppTheme">
+    <style name="EditText" parent="AppTheme">
         <item name="android:layout_height">@dimen/height_edit_text</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center_vertical|start</item>
-        <item name="android:background">@drawable/edit_text_selection_background</item>
         <item name="android:paddingLeft">@dimen/padding_tiny</item>
         <item name="android:paddingRight">@dimen/padding_tiny</item>
         <item name="android:maxLines">1</item>

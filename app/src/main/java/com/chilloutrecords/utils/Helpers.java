@@ -34,7 +34,7 @@ import com.chilloutrecords.R;
 import com.chilloutrecords.activities.AboutUsActivity;
 import com.chilloutrecords.activities.HomeActivity;
 import com.chilloutrecords.activities.MyAccountActivity;
-import com.chilloutrecords.activities.LoginActivity;
+import com.chilloutrecords.activities.StartUpActivity;
 import com.chilloutrecords.activities.SplashScreenActivity;
 
 import static com.chilloutrecords.utils.StaticVariables.ANIMATION_TIME;
@@ -72,7 +72,7 @@ public class Helpers {
             context.startActivity(new Intent(context, AboutUsActivity.class));
         } else if (id == R.id.log_out) {
             SharedPrefs.deleteAllSharedPrefs();
-            context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            context.startActivity(new Intent(context, StartUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             context.sendBroadcast(new Intent().setAction(BroadcastValue));
         }
     }

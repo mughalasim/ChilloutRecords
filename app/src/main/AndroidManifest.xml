@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.StartUpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
