@@ -48,19 +48,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/padding_medium"
-                    android:background="@drawable/bckgrd_activity_panels"
+                    android:background="@drawable/bckgrd_card"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_medium">
 
                     <TextView
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:layout_gravity="start"
                         android:gravity="start"
                         android:text="@string/txt_bio_data" />
 
                     <TextView
                         android:id="@+id/information"
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:gravity="start"
                         android:layout_gravity="start"
                         android:textColor="@color/colorPrimary"
@@ -73,12 +73,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/padding_medium"
-                    android:background="@drawable/bckgrd_activity_panels"
+                    android:background="@drawable/bckgrd_card"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_medium">
 
                     <TextView
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:layout_gravity="start"
                         android:text="@string/txt_albums" />
 
@@ -104,12 +104,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/padding_medium"
-                    android:background="@drawable/bckgrd_activity_panels"
+                    android:background="@drawable/bckgrd_card"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_medium">
 
                     <TextView
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:layout_gravity="start"
                         android:text="@string/txt_mixtapes" />
 
@@ -135,12 +135,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/padding_medium"
-                    android:background="@drawable/bckgrd_activity_panels"
+                    android:background="@drawable/bckgrd_card"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_medium">
 
                     <TextView
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:layout_gravity="start"
                         android:text="@string/txt_singles" />
 

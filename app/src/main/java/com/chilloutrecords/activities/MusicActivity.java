@@ -1,4 +1,4 @@
-package com.chilloutrecords.main_pages.activities;
+package com.chilloutrecords.activities;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -22,14 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 
 import com.chilloutrecords.R;
 import com.chilloutrecords.utils.Helpers;

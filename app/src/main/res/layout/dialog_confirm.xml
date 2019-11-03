@@ -18,7 +18,7 @@
             android:id="@+id/txtTitle"
             android:textStyle="bold"
             android:text="@string/app_name"
-            style="@style/Text_Normal" />
+            style="@style/TextBody" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 <TextView
                     android:id="@+id/txtMessage"
                     android:text="@string/app_name"
-                    style="@style/Text_Normal" />
+                    style="@style/TextBody" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -45,14 +45,14 @@
 
                     <TextView
                         android:id="@+id/txtCancel"
-                        style="@style/Material_Button_No"
+                        style="@style/ButtonNo"
                         android:layout_weight="1"
                         android:text="CANCEL"
                         android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/txtOk"
-                        style="@style/Material_Button_No"
+                        style="@style/ButtonNo"
                         android:layout_weight="1"
                         android:text="OK" />
 

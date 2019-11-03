@@ -1,4 +1,4 @@
-package com.chilloutrecords.main_pages.activities;
+package com.chilloutrecords.activities;
 
 import android.net.Uri;
 import android.os.Bundle;

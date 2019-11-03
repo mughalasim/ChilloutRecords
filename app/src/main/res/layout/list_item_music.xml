@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/name"
-            style="@style/Text_Normal"
+            style="@style/TextBody"
             android:text="@string/app_name" />
 
         <LinearLayout
@@ -45,7 +45,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/Text_Normal"
+                style="@style/TextBody"
                 android:layout_gravity="start"
                 android:text="@string/txt_released"
                 android:textColor="@color/colorPrimary"
@@ -54,7 +54,7 @@
 
             <TextView
                 android:id="@+id/release_year"
-                style="@style/Text_Normal"
+                style="@style/TextBody"
                 android:layout_gravity="start"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_small" />

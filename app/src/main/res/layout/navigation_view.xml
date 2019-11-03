@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/app_version"
-            style="@style/Text_Normal"
+            style="@style/TextBody"
             android:layout_gravity="end"
             android:textSize="16sp"
             android:layout_margin="@dimen/padding_medium" />

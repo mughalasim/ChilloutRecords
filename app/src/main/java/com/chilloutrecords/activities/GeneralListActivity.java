@@ -1,4 +1,4 @@
-package com.chilloutrecords.main_pages.activities;
+package com.chilloutrecords.activities;
 
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,11 +17,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.main_pages.adapters.generalAdapter;
-import com.chilloutrecords.main_pages.models.GeneralModel;
+import com.chilloutrecords.adapters.generalAdapter;
+import com.chilloutrecords.models.GeneralModel;
 import com.chilloutrecords.utils.Helpers;
 
-import static com.chilloutrecords.main_pages.activities.HomeActivity.ARTISTS;
+import static com.chilloutrecords.activities.HomeActivity.ARTISTS;
 
 public class GeneralListActivity extends ParentActivity {
     public ArrayList<GeneralModel> arrayList = new ArrayList<>();

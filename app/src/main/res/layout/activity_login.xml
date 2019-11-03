@@ -1,56 +1,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium"
     android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        android:src="@drawable/home_freestyle_fridays" />
 
     <ImageView
         android:id="@+id/mainLogo"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/img_size_x_large"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/padding_medium"
         android:contentDescription="@string/app_name"
-        android:padding="5dp"
         android:src="@drawable/main_logo_white" />
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/sign_in_google"
-        android:layout_margin="@dimen/padding_medium"
-        android:orientation="horizontal">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <TextView
-            style="@style/Material_Button_No"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="signUp"
-            android:text="SIGN UP" />
+            android:text="@string/app_name"
+            style="@style/TextTitle"/>
+
 
         <TextView
-            style="@style/Material_Button_Yes"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:text="@string/app_name"
+            style="@style/TextBody"/>
+
+
+        <TextView
+            android:text="@string/app_name"
+            style="@style/TextSmall"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/ButtonYes"
             android:onClick="logIn"
             android:text="LOGIN" />
 
+        <com.google.android.material.button.MaterialButton
+            style="@style/ButtonNo"
+            android:onClick="signUp"
+            android:text="SIGN UP" />
+
     </LinearLayout>
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_google"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="@dimen/padding_medium"
-        android:layout_marginStart="@dimen/padding_medium" />
 
 </RelativeLayout>

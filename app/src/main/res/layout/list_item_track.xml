@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/padding_medium"
-    android:background="@drawable/bckgrd_activity_panels"
+    android:background="@drawable/bckgrd_card"
     android:orientation="horizontal">
 
     <pl.droidsonroids.gif.GifImageView
@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/track_no"
-        style="@style/Text_Normal"
+        style="@style/TextBody"
         android:layout_gravity="start"
         android:gravity="start"
         android:padding="@dimen/padding_medium"
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/track_name"
-        style="@style/Text_Normal"
+        style="@style/TextBody"
         android:layout_gravity="start"
         android:layout_toRightOf="@+id/track_no"
         android:padding="@dimen/padding_medium"
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/track_url"
-        style="@style/Text_Normal"
+        style="@style/TextBody"
         android:layout_gravity="start"
         android:gravity="start"
         android:visibility="gone" />

@@ -7,14 +7,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_nav_header"
-        android:background="@drawable/bckgrd_activity_panels"
+        android:background="@drawable/bckgrd_card"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="@dimen/padding_medium">
 
         <TextView
             android:id="@+id/username"
-            style="@style/Text_Normal"
+            style="@style/TextBody"
             android:layout_margin="0dp"
             android:gravity="start"
             android:layout_gravity="start"
@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/userEmail"
-            style="@style/Text_Small"
+            style="@style/TextSmall"
             android:gravity="start"
             android:layout_gravity="start"
             android:text="asimkenya@gmail.com"

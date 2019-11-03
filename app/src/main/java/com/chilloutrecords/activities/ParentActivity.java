@@ -1,4 +1,4 @@
-package com.chilloutrecords.main_pages.activities;
+package com.chilloutrecords.activities;
 
 import android.app.Dialog;
 import android.app.DownloadManager;

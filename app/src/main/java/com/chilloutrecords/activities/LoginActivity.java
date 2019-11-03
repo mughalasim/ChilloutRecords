@@ -1,4 +1,4 @@
-package com.chilloutrecords.start_up;
+package com.chilloutrecords.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.main_pages.activities.HomeActivity;
 import com.chilloutrecords.utils.Helpers;
 import com.chilloutrecords.utils.SharedPrefs;
 

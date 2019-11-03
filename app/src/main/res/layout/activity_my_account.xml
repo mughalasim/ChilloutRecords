@@ -64,14 +64,14 @@
 
                             <TextView
                                 android:id="@+id/picture_add"
-                                style="@style/Material_Button_No"
+                                style="@style/ButtonNo"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/padding_medium"
                                 android:textSize="@dimen/text_size_small" />
 
                             <TextView
                                 android:id="@+id/picture_delete"
-                                style="@style/Material_Button_No"
+                                style="@style/ButtonNo"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/padding_medium"
                                 android:textSize="@dimen/text_size_small" />
@@ -84,7 +84,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    style="@style/Text_Normal"
+                                    style="@style/TextBody"
                                     android:textSize="@dimen/text_size_small" />
 
                                 <TextView
@@ -101,7 +101,7 @@
                     </RelativeLayout>
 
                     <TextView
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:text="Your Account details" />
 
                     <EditText
@@ -135,7 +135,7 @@
 
 
                     <TextView
-                        style="@style/Material_Button_No"
+                        style="@style/ButtonNo"
                         android:onClick="UpdateDetails"
                         android:text="UPDATE" />
 

@@ -1,4 +1,4 @@
-package com.chilloutrecords.main_pages.adapters;
+package com.chilloutrecords.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +16,13 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.main_pages.activities.ArtistDetailsActivity;
-import com.chilloutrecords.main_pages.activities.VideoPlayerActivity;
-import com.chilloutrecords.main_pages.models.GeneralModel;
+import com.chilloutrecords.activities.ArtistDetailsActivity;
+import com.chilloutrecords.activities.VideoPlayerActivity;
+import com.chilloutrecords.models.GeneralModel;
 import com.chilloutrecords.utils.Helpers;
 
-import static com.chilloutrecords.main_pages.activities.HomeActivity.ARTISTS;
-import static com.chilloutrecords.main_pages.activities.HomeActivity.VIDEOS;
+import static com.chilloutrecords.activities.HomeActivity.ARTISTS;
+import static com.chilloutrecords.activities.HomeActivity.VIDEOS;
 
 public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHolder> {
     private Context context;

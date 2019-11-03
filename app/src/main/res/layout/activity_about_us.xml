@@ -30,12 +30,12 @@
                     android:orientation="vertical"
                     android:layout_margin="@dimen/padding_medium"
                     android:padding="@dimen/padding_medium"
-                    android:background="@drawable/bckgrd_activity_panels"
+                    android:background="@drawable/bckgrd_card"
                     android:weightSum="1">
 
                     <TextView
                         android:id="@+id/about_us"
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:layout_gravity="start"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary" />
@@ -47,14 +47,14 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            style="@style/Text_Normal"
+                            style="@style/TextBody"
                             android:layout_gravity="start"
                             android:gravity="start"
                             android:text="@string/txt_version" />
 
                         <TextView
                             android:id="@+id/version_number"
-                            style="@style/Text_Normal"
+                            style="@style/TextBody"
                             android:layout_gravity="start"
                             android:gravity="start" />
 

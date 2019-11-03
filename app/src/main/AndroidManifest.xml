@@ -28,7 +28,7 @@
         <!--START UP PAGES ======================================================================-->
 
         <activity
-            android:name=".start_up.SplashScreenActivity"
+            android:name=".activities.SplashScreenActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -39,53 +39,53 @@
         </activity>
 
         <activity
-            android:name=".start_up.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
 
         <!-- MAIN PAGES =========================================================================-->
 
-        <activity android:name=".main_pages.activities.ParentActivity" />
+        <activity android:name=".activities.ParentActivity" />
 
         <activity
-            android:name=".main_pages.activities.HomeActivity"
+            android:name=".activities.HomeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.GeneralListActivity"
+            android:name=".activities.GeneralListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.ArtistDetailsActivity"
+            android:name=".activities.ArtistDetailsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.AboutUsActivity"
+            android:name=".activities.AboutUsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.MyAccountActivity"
+            android:name=".activities.MyAccountActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.MusicActivity"
+            android:name=".activities.MusicActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".main_pages.activities.VideoPlayerActivity"
+            android:name=".activities.VideoPlayerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />

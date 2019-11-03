@@ -1,4 +1,4 @@
-package com.chilloutrecords.main_pages.activities;
+package com.chilloutrecords.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -24,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.main_pages.models.TrackModel;
 import com.chilloutrecords.utils.Helpers;
 
 public class ArtistDetailsActivity extends ParentActivity {

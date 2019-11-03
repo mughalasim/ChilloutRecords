@@ -1,42 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/splash_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:alpha="0.6"
-        android:src="@drawable/music_playing"/>
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/mainLogo"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="@dimen/img_size_x_large"
         android:layout_centerInParent="true"
         android:contentDescription="@string/app_name"
+        android:padding="@dimen/padding_medium"
         android:scaleType="centerInside"
-        android:padding="@dimen/padding_medium"
         android:src="@drawable/main_logo_white" />
-
-    <LinearLayout
-        android:id="@+id/progress_text_panel"
-        android:layout_width="match_parent"
-        android:background="@drawable/bckgrd_activity_panels"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_medium"
-        android:layout_margin="@dimen/padding_medium"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/progress_text"
-            style="@style/Text_Normal"
-            android:text="@string/progress_loading_initializing" />
-
-    </LinearLayout>
 
 </RelativeLayout>

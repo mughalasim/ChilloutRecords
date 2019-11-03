@@ -93,14 +93,14 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
                     <TextView
-                        style="@style/Text_Small"
+                        style="@style/TextSmall"
                         android:layout_gravity="start"
                         android:gravity="start"
                         android:text="@string/txt_stage_name" />
 
                     <TextView
                         android:id="@+id/artist_stage_name"
-                        style="@style/Text_Small"
+                        style="@style/TextSmall"
                         android:layout_gravity="start"
                         android:gravity="start"
                         android:textColor="@color/colorPrimary"
@@ -110,13 +110,13 @@
 
 
                 <TextView
-                    style="@style/Text_Small"
+                    style="@style/TextSmall"
                     android:layout_gravity="start"
                     android:text="@string/txt_basic_information" />
 
                 <TextView
                     android:id="@+id/artist_info"
-                    style="@style/Text_Small"
+                    style="@style/TextSmall"
                     android:layout_gravity="start"
                     android:textColor="@color/colorPrimary"
                     android:gravity="start" />
@@ -128,14 +128,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Text_Normal"
+                        style="@style/TextBody"
                         android:layout_gravity="start"
                         android:text="@string/txt_since"
                         android:textSize="@dimen/text_size_small" />
 
                     <TextView
                         android:id="@+id/artist_year_since"
-                        style="@style/Text_Small"
+                        style="@style/TextSmall"
                         android:layout_gravity="start"
                         android:textColor="@color/colorPrimary" />
 
@@ -201,7 +201,7 @@
 
                 <TextView
                     android:id="@+id/video_desc"
-                    style="@style/Text_Small"
+                    style="@style/TextSmall"
                     android:layout_gravity="start"
                     android:gravity="start"
                     android:text="@string/app_name"
@@ -209,7 +209,7 @@
 
                 <TextView
                     android:id="@+id/video_url"
-                    style="@style/Text_Normal"
+                    style="@style/TextBody"
                     android:visibility="gone" />
 
             </LinearLayout>

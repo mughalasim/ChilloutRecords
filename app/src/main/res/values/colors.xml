@@ -1,29 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLight">#819FFF</color>
-    <color name="colorPrimary">#547BFB</color>
-    <color name="colorPrimaryDark">#3564FF</color>
-
-    <color name="colorAccentLight">#ffa53d</color>
-    <color name="colorAccent">#fc941b</color>
-    <color name="colorAccentDark">#da8018</color>
-
-    <color name="white">#ffffff</color>
-    <color name="transparent_black">#9A000000</color>
-
-    <color name="red">#e9343f</color>
-    <color name="light_green">#2EDA35</color>
-    <color name="green">#4CAF50</color>
-    <color name="dark_green">#337936</color>
-
-    <color name="black">#222222</color>
-    <color name="very_dark_grey">#474646</color>
-    <color name="dark_grey">#6d6d6d</color>
-    <color name="grey">#919191</color>
-    <color name="light_grey">#f0f0f0</color>
-
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FFFFFF</color>
     <color name="transparent">#00000000</color>
-    <color name="dim">#2F000000</color>
-    <color name="dimmer">#19000000</color>
 
 </resources>

@@ -4,13 +4,9 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
-import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.ActionMode;
@@ -27,22 +23,21 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.regex.Pattern;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.main_pages.activities.AboutUsActivity;
-import com.chilloutrecords.main_pages.activities.HomeActivity;
-import com.chilloutrecords.main_pages.activities.MyAccountActivity;
-import com.chilloutrecords.start_up.LoginActivity;
-import com.chilloutrecords.start_up.SplashScreenActivity;
+import com.chilloutrecords.activities.AboutUsActivity;
+import com.chilloutrecords.activities.HomeActivity;
+import com.chilloutrecords.activities.MyAccountActivity;
+import com.chilloutrecords.activities.LoginActivity;
+import com.chilloutrecords.activities.SplashScreenActivity;
+
+import static com.chilloutrecords.utils.StaticVariables.ANIMATION_TIME;
 
 public class Helpers {
     public String Mobile_Number_Error = "Invalid Mobile Number has been entered";
@@ -279,10 +274,9 @@ public class Helpers {
 
 
     // ANIMATIONS ==================================================================================
-
-    public void animate_flash(View v, int time, int animation_delay) {
+    public static void animate_flash(View v, int animation_delay) {
         YoYo.with(Techniques.Flash)
-                .duration(time).delay(animation_delay)
+                .duration(ANIMATION_TIME).delay(animation_delay)
                 .playOn(v);
     }
 
@@ -291,13 +285,13 @@ public class Helpers {
                 0.0f, 1.0f, 0.0f, 1.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);
-        anim.setDuration(400);
+        anim.setDuration(ANIMATION_TIME);
         view.startAnimation(anim);
     }
 
-    public void animate_slide_in(View v, int time, int animation_delay) {
+    public static void animate_slide_in(View v, int time, int animation_delay) {
         YoYo.with(Techniques.SlideInLeft)
-                .duration(time).delay(animation_delay)
+                .duration(ANIMATION_TIME).delay(animation_delay)
                 .playOn(v);
     }
 

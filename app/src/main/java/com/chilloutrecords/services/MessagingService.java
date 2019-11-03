@@ -31,7 +31,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.start_up.SplashScreenActivity;
+import com.chilloutrecords.activities.SplashScreenActivity;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MessagingService extends FirebaseMessagingService {
