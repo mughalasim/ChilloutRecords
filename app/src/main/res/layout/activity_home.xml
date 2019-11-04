@@ -42,19 +42,19 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/home_artists" />
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/bckgrd_home_buttons" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:contentDescription="@string/app_name"-->
+<!--                            android:scaleType="centerCrop"-->
+<!--                            android:src="@drawable/bckgrd_home_buttons" />-->
 
 
-                        <TextView
-                            style="@style/Text_Header"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_centerInParent="true"
-                            android:text="ARTISTS" />
+<!--                        <TextView-->
+<!--                            style="@style/Text_Header"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="ARTISTS" />-->
 
                     </RelativeLayout>
 
@@ -72,18 +72,18 @@
                             android:padding="2dp"
                             android:src="@drawable/home_music_videos" />
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/bckgrd_home_buttons" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:contentDescription="@string/app_name"-->
+<!--                            android:scaleType="centerCrop"-->
+<!--                            android:src="@drawable/bckgrd_home_buttons" />-->
 
-                        <TextView
-                            style="@style/Text_Header"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_centerInParent="true"
-                            android:text="VIDEOS" />
+<!--                        <TextView-->
+<!--                            style="@style/Text_Header"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="VIDEOS" />-->
 
                     </RelativeLayout>
 
@@ -101,18 +101,18 @@
                             android:padding="2dp"
                             android:src="@drawable/home_freestyle_fridays" />
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/bckgrd_home_buttons" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:contentDescription="@string/app_name"-->
+<!--                            android:scaleType="centerCrop"-->
+<!--                            android:src="@drawable/bckgrd_home_buttons" />-->
 
-                        <TextView
-                            style="@style/Text_Header"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_centerInParent="true"
-                            android:text="FREESTYLE FRIDAYS" />
+<!--                        <TextView-->
+<!--                            style="@style/Text_Header"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="FREESTYLE FRIDAYS" />-->
 
                     </RelativeLayout>
 
@@ -131,18 +131,18 @@
                             android:alpha="0.5"
                             android:src="@drawable/home_upcoming" />
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/app_name"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/bckgrd_home_buttons" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:contentDescription="@string/app_name"-->
+<!--                            android:scaleType="centerCrop"-->
+<!--                            android:src="@drawable/bckgrd_home_buttons" />-->
 
-                        <TextView
-                            style="@style/Text_Header"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_centerInParent="true"
-                            android:text="UPCOMING PROJECTS" />
+<!--                        <TextView-->
+<!--                            style="@style/Text_Header"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="UPCOMING PROJECTS" />-->
 
                     </RelativeLayout>
 

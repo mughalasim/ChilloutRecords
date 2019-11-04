@@ -11,20 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop"
-            android:background="@color/colorPrimaryDark"
-            android:src="@drawable/main_logo_white" />
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:background="@color/colorPrimaryDark"-->
+<!--            android:src="@drawable/main_logo_white" />-->
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bckgrd_home_buttons" />
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/bckgrd_home_buttons" />-->
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ppic"

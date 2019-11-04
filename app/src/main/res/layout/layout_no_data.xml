@@ -4,10 +4,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        style="@style/Text_Header"
-        android:text="@string/txt_no_data_found"
-        android:padding="@dimen/padding_medium"
-        android:drawableTop="@drawable/ic_sad_face"/>
+<!--    <TextView-->
+<!--        style="@style/Text_Header"-->
+<!--        android:text="@string/txt_no_data_found"-->
+<!--        android:padding="@dimen/padding_medium"-->
+<!--        android:drawableTop="@drawable/ic_sad_face"/>-->
 
 </LinearLayout>

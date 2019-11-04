@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helpers;
+import com.chilloutrecords.utils.Helper;
 
 public class ArtistDetailsActivity extends ParentActivity {
 
@@ -93,13 +93,13 @@ public class ArtistDetailsActivity extends ParentActivity {
             Glide.with(ArtistDetailsActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
-            helper.ToastMessage(ArtistDetailsActivity.this, getString(R.string.error_500));
+//            helper.ToastMessage(ArtistDetailsActivity.this, getString(R.string.error_500));
         }
     }
 
     public void fetchData(String dbRef) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        Helpers.LogThis("DATABASE REF: " + dbRef);
+//        Helper.LogThis("DATABASE REF: " + dbRef);
         DatabaseReference myRef = database.getReference(dbRef);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -108,7 +108,7 @@ public class ArtistDetailsActivity extends ParentActivity {
                 try {
                     Gson gson = new Gson();
                     JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-                    Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
+//                    Helper.LogThis("AFTER PARSING: " + jsonObject.toString());
 
                     information.setText(jsonObject.getString("info"));
 
@@ -122,14 +122,14 @@ public class ArtistDetailsActivity extends ParentActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     noData();
-                    Helpers.LogThis(e.toString());
+//                    Helper.LogThis(e.toString());
                 }
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
                 noData();
                 Log.w("HOMEPAGE: ", "Failed to read value.", error.toException());
             }

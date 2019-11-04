@@ -69,7 +69,7 @@ public class MessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, MessageTitle)
-                .setSmallIcon(getNotificationIcon())
+//                .setSmallIcon(getNotificationIcon())
                 .setContentTitle(MessageTitle)
                 .setContentText(messageBody)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
@@ -89,11 +89,11 @@ public class MessagingService extends FirebaseMessagingService {
 
     }
 
-    private int getNotificationIcon() {
-        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ?
-                R.mipmap.ic_launcher :
-                R.mipmap.ic_launcher;
-    }
+//    private int getNotificationIcon() {
+//        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
+//        return useWhiteIcon ?
+//                R.mipmap.ic_launcher :
+//                R.mipmap.ic_launcher;
+//    }
 
 }

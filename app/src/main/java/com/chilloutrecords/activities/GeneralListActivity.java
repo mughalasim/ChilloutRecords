@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chilloutrecords.utils.Helper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,13 +19,12 @@ import java.util.ArrayList;
 
 import com.chilloutrecords.R;
 import com.chilloutrecords.adapters.generalAdapter;
-import com.chilloutrecords.models.GeneralModel;
-import com.chilloutrecords.utils.Helpers;
+//import com.chilloutrecords.models.GeneralModel;
 
 import static com.chilloutrecords.activities.HomeActivity.ARTISTS;
 
 public class GeneralListActivity extends ParentActivity {
-    public ArrayList<GeneralModel> arrayList = new ArrayList<>();
+//    public ArrayList<GeneralModel> arrayList = new ArrayList<>();
     public RecyclerView recyclerView;
     public generalAdapter adapter;
     private String DB_REFERENCE = "";
@@ -54,13 +54,13 @@ public class GeneralListActivity extends ParentActivity {
             DB_REFERENCE = extras.getString("DB_REFERENCE");
         } else {
             finish();
-            helper.ToastMessage(GeneralListActivity.this, getString(R.string.error_500));
+//            helper.ToastMessage(GeneralListActivity.this, getString(R.string.error_500));
         }
     }
 
     private void findAllViews() {
         recyclerView = findViewById(R.id.list_item);
-        adapter = new generalAdapter(GeneralListActivity.this, arrayList, DB_REFERENCE);
+//        adapter = new generalAdapter(GeneralListActivity.this, arrayList, DB_REFERENCE);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -69,34 +69,34 @@ public class GeneralListActivity extends ParentActivity {
     }
 
     public void fetchArtists() {
-        helper.setProgressDialogMessage("Loading " + DB_REFERENCE + ".. Please wait");
-        helper.progressDialog(true);
+//        helper.setTxt_progress_message("Loading " + DB_REFERENCE + ".. Please wait");
+//        helper.progressDialog(true);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(DB_REFERENCE);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
                 try {
 
                     Gson gson = new Gson();
                     JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
-                    Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
+//                    Helper.LogThis("AFTER PARSING: " + jsonArray.toString());
 
                     int length = jsonArray.length();
                     if (length > 0) {
-                        arrayList.clear();
+//                        arrayList.clear();
                         for (int i = 0; i < length; i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
-                            GeneralModel generalModel = new GeneralModel();
-                            generalModel.artist_id = object.getString("id");
-                            generalModel.artist_info = object.getString("info");
-                            generalModel.artist_name = object.getString("name");
-                            generalModel.artist_ppic = object.getString("ppic");
-                            generalModel.artist_stage_name = object.getString("stage_name");
-                            generalModel.artist_year_since = object.getString("year_since");
-                            arrayList.add(generalModel);
+//                            GeneralModel generalModel = new GeneralModel();
+//                            generalModel.artist_id = object.getString("id");
+//                            generalModel.artist_info = object.getString("info");
+//                            generalModel.artist_name = object.getString("name");
+//                            generalModel.artist_ppic = object.getString("ppic");
+//                            generalModel.artist_stage_name = object.getString("stage_name");
+//                            generalModel.artist_year_since = object.getString("year_since");
+//                            arrayList.add(generalModel);
                         }
                         adapter.notifyDataSetChanged();
                     } else {
@@ -106,47 +106,47 @@ public class GeneralListActivity extends ParentActivity {
                 } catch (Exception e) {
                     noLists();
                     e.printStackTrace();
-                    Helpers.LogThis(e.toString());
+//                    Helper.LogThis(e.toString());
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
                 noLists();
-                Helpers.LogThis(error.toString());
+//                Helper.LogThis(error.toString());
             }
         });
 
     }
 
     public void fetchVideos() {
-        helper.setProgressDialogMessage("Loading " + DB_REFERENCE + ".. Please wait");
-        helper.progressDialog(true);
+//        helper.setTxt_progress_message("Loading " + DB_REFERENCE + ".. Please wait");
+//        helper.progressDialog(true);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(DB_REFERENCE);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
                 try {
 
                     Gson gson = new Gson();
                     JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
-                    Helpers.LogThis("AFTER PARSING: " + jsonArray.toString());
+//                    Helper.LogThis("AFTER PARSING: " + jsonArray.toString());
 
                     int length = jsonArray.length();
                     if (length > 0) {
-                        arrayList.clear();
+//                        arrayList.clear();
                         for (int i = 0; i < length; i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
-                            GeneralModel generalModel = new GeneralModel();
-                            generalModel.video_desc = object.getString("info");
-                            generalModel.video_name = object.getString("name");
-                            generalModel.video_ppic = object.getString("ppic");
-                            generalModel.video_url = object.getString("video_url");
-                            arrayList.add(generalModel);
+//                            GeneralModel generalModel = new GeneralModel();
+//                            generalModel.video_desc = object.getString("info");
+//                            generalModel.video_name = object.getString("name");
+//                            generalModel.video_ppic = object.getString("ppic");
+//                            generalModel.video_url = object.getString("video_url");
+//                            arrayList.add(generalModel);
                         }
                         adapter.notifyDataSetChanged();
                     } else {
@@ -156,22 +156,22 @@ public class GeneralListActivity extends ParentActivity {
                 } catch (Exception e) {
                     noLists();
                     e.printStackTrace();
-                    Helpers.LogThis(e.toString());
+//                    Helper.LogThis(e.toString());
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
                 noLists();
-                Helpers.LogThis(error.toString());
+//                Helper.LogThis(error.toString());
             }
         });
 
     }
 
     public void noLists() {
-        arrayList.clear();
+//        arrayList.clear();
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

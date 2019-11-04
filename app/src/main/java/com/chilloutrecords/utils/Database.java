@@ -362,7 +362,7 @@ public class Database extends SQLiteOpenHelper {
 //
 //
 //        } catch (JSONException e) {
-//            Helpers.LogThis("DATABASE: "+e.toString());
+//            Helper.LogThis("DATABASE: "+e.toString());
 //            return artistModel;
 //        }
 //        return artistModel;

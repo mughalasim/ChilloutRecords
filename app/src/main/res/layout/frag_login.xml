@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/MaterialEditTextLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user_email"
+            style="@style/MaterialEditText"
+            android:hint="@string/et_hint_email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/MaterialEditTextLayout"
+        app:passwordToggleDrawable="@drawable/ic_lock"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user_password"
+            style="@style/MaterialEditText"
+            android:hint="@string/et_hint_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm"
+        style="@style/ButtonYes"
+        android:text="@string/nav_login" />
+
+    <TextView
+        style="@style/TextBody"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:onClick="forgotPassword"
+        android:text="@string/txt_back" />
+
+    <TextView
+        style="@style/TextSmall"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:onClick="openTermsAndConditions"
+        android:text="@string/txt_terms" />
+
+</LinearLayout>

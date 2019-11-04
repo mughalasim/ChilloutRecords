@@ -8,11 +8,11 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helpers;
+import com.chilloutrecords.utils.Helper;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-import static com.chilloutrecords.utils.StaticVariables.ANIMATION_TIME;
+import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -24,14 +24,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         ShortcutBadger.applyCount(SplashScreenActivity.this, 0);
 
         ImageView main_logo = findViewById(R.id.mainLogo);
-        Helpers.animate_flash(main_logo, 0);
+//        Helper.animate_flash(main_logo, 0);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashScreenActivity.this, StartUpActivity.class));
                 finish();
             }
-        }, ANIMATION_TIME * 2);
+        }, INT_ANIMATION_TIME * 2);
     }
 
 }

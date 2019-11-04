@@ -19,14 +19,14 @@
 
     <application
         android:name="com.chilloutrecords.utils.MyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="stateHidden"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:node="merge">
+        tools:ignore="MissingApplicationIcon">
 
         <!--START UP PAGES ======================================================================-->
-
         <activity
             android:name=".activities.SplashScreenActivity"
             android:screenOrientation="portrait">
@@ -36,53 +36,49 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="chilloutrecords.com"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
 
         <activity
-            android:name=".activities.StartUpActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".activities.StartUpActivity" />
 
 
         <!-- MAIN PAGES =========================================================================-->
-
         <activity android:name=".activities.ParentActivity" />
 
         <activity
             android:name=".activities.HomeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.GeneralListActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.ArtistDetailsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.AboutUsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.MyAccountActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.MusicActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.VideoPlayerActivity"
@@ -90,46 +86,12 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />
 
-
-        <!-- FACEBOOK PAGES =====================================================================-->
-
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-
-        <!--META DATA ===========================================================================-->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/ic_launcher" />
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
-
         <!--CLOUD MESSAGING SERVICES ============================================================-->
         <service android:name=".services.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <!--GOOGLE PLAYSTORE CAMPAIGN MANAGEMENT-->
-
-        <receiver
-            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.google.android.gms.analytics.CampaignTrackingService"
-            android:enabled="true"
-            android:exported="false" />
-
 
     </application>
 

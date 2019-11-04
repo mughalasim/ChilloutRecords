@@ -56,7 +56,7 @@
                         style="@style/TextBody"
                         android:layout_gravity="start"
                         android:gravity="start"
-                        android:text="@string/txt_bio_data" />
+                        android:text="@string/txt_later" />
 
                     <TextView
                         android:id="@+id/information"
@@ -64,7 +64,7 @@
                         android:gravity="start"
                         android:layout_gravity="start"
                         android:textColor="@color/colorPrimary"
-                        android:text="@string/progress_loading_initializing" />
+                        android:text="@string/progress_loading" />
 
                 </LinearLayout>
 
@@ -80,7 +80,7 @@
                     <TextView
                         style="@style/TextBody"
                         android:layout_gravity="start"
-                        android:text="@string/txt_albums" />
+                        android:text="@string/txt_later" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                     <TextView
                         style="@style/TextBody"
                         android:layout_gravity="start"
-                        android:text="@string/txt_mixtapes" />
+                        android:text="@string/txt_later" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                     <TextView
                         style="@style/TextBody"
                         android:layout_gravity="start"
-                        android:text="@string/txt_singles" />
+                        android:text="@string/txt_later" />
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"

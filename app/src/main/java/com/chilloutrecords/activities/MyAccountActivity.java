@@ -65,26 +65,26 @@ public class MyAccountActivity extends ParentActivity {
         }
 
     public void UpdateDetails(View view) {
-        if (register_first_name.getText().toString().length() < 1) {
-            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: First Name");
-        } else if (register_last_name.getText().toString().length() < 1) {
-            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Last Name");
-        } else if (register_email.getText().toString().length() < 1) {
-            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Email");
-        } else if (!helper.validateEmail(register_email.getText().toString())) {
-            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Invalid Email");
-        } else if (helper.validateMobileNumber(register_phone.getText().toString().trim())) {
-            helper.myDialog(MyAccountActivity.this, "Update Failure", helper.Mobile_Number_Error);
-        } else if (register_dob.getText().toString().length() < 1) {
-            helper.myDialog(MyAccountActivity.this, "Update Failure", "Set your Date of Birth");
-        } else {
-            SharedPrefs.setUserFirstName(register_first_name.getText().toString());
-            SharedPrefs.setUserLastName(register_last_name.getText().toString());
-            SharedPrefs.setUserEmail(register_email.getText().toString());
-            SharedPrefs.setUserPhone(register_phone.getText().toString());
-            SharedPrefs.setUserDOB(register_dob.getText().toString());
-            helper.ToastMessage(MyAccountActivity.this, "Successfully Updated");
-        }
+//        if (register_first_name.getText().toString().length() < 1) {
+////            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: First Name");
+//        } else if (register_last_name.getText().toString().length() < 1) {
+////            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Last Name");
+//        } else if (register_email.getText().toString().length() < 1) {
+////            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Email");
+//        } else if (!helper.validateEmail(register_email.getText().toString())) {
+//            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Invalid Email");
+//        } else if (helper.validateMobileNumber(register_phone.getText().toString().trim())) {
+//            helper.myDialog(MyAccountActivity.this, "Update Failure", helper.Mobile_Number_Error);
+//        } else if (register_dob.getText().toString().length() < 1) {
+//            helper.myDialog(MyAccountActivity.this, "Update Failure", "Set your Date of Birth");
+//        } else {
+//            SharedPrefs.setUserFirstName(register_first_name.getText().toString());
+//            SharedPrefs.setUserLastName(register_last_name.getText().toString());
+//            SharedPrefs.setUserEmail(register_email.getText().toString());
+//            SharedPrefs.setUserPhone(register_phone.getText().toString());
+//            SharedPrefs.setUserDOB(register_dob.getText().toString());
+//            helper.ToastMessage(MyAccountActivity.this, "Successfully Updated");
+//        }
     }
 
     private void setDates() {
@@ -129,20 +129,20 @@ public class MyAccountActivity extends ParentActivity {
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
-        register_first_name = findViewById(R.id.register_first_name);
-        register_last_name = findViewById(R.id.register_last_name);
-        register_email = findViewById(R.id.register_email);
-        register_phone = findViewById(R.id.register_phone);
-        register_dob = findViewById(R.id.register_dob);
+//        register_first_name = findViewById(R.id.register_first_name);
+//        register_last_name = findViewById(R.id.register_last_name);
+//        register_email = findViewById(R.id.register_email);
+//        register_phone = findViewById(R.id.register_phone);
+//        register_dob = findViewById(R.id.register_dob);
+//
+//        user_thumbnail = findViewById(R.id.user_thumbnail);
+//        picture_add = findViewById(R.id.picture_add);
+//        picture_delete = findViewById(R.id.picture_delete);
 
-        user_thumbnail = findViewById(R.id.user_thumbnail);
-        picture_add = findViewById(R.id.picture_add);
-        picture_delete = findViewById(R.id.picture_delete);
-
-        helper.setDefaultEditTextSelectionMode(register_first_name);
-        helper.setDefaultEditTextSelectionMode(register_last_name);
-        helper.setDefaultEditTextSelectionMode(register_email);
-        helper.setDefaultEditTextSelectionMode(register_phone);
+//        helper.setDefaultEditTextSelectionMode(register_first_name);
+//        helper.setDefaultEditTextSelectionMode(register_last_name);
+//        helper.setDefaultEditTextSelectionMode(register_email);
+//        helper.setDefaultEditTextSelectionMode(register_phone);
 
     }
 

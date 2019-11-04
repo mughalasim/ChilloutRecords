@@ -49,18 +49,18 @@
 
     <!-- TAB TEXT STYLE =========================================================================-->
     <style name="TabTextLayout" parent="AppTheme">
-        <item name="android:layout_height">@dimen/height_panel</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingStart">@dimen/padding_small</item>
         <item name="android:paddingEnd">@dimen/padding_small</item>
-        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="scrimBackground">@color/colorPrimary</item>
         <item name="tabTextColor">@color/colorPrimary</item>
         <item name="android:background">@color/colorAccent</item>
-        <item name="tabIndicatorColor">@color/colorPrimary</item>
         <item name="tabTextAppearance">@style/TextTitle</item>
-        <item name="tabMode">scrollable</item>
-        <item name="tabGravity">center</item>
-        <item name="tabIndicatorHeight">@dimen/text_margin</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorHeight">0dp</item>
     </style>
 
 
@@ -95,30 +95,25 @@
         <item name="android:textSize">@dimen/text_size_normal</item>
     </style>
 
-    <style name="Material_Edit_Text_Layout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="MaterialEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="boxBackgroundColor">@color/colorAccent</item>
-        <item name="android:layout_marginTop">@dimen/padding_small</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="boxStrokeColor">@color/colorAccent</item>
+        <item name="android:background">@drawable/bckgrd_text_fields</item>
+        <item name="boxBackgroundColor">@color/colorAccent</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/radius_corner</item>
         <item name="boxCornerRadiusTopStart">@dimen/radius_corner</item>
         <item name="boxCornerRadiusBottomStart">@dimen/radius_corner</item>
         <item name="boxCornerRadiusTopEnd">@dimen/radius_corner</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="errorEnabled">true</item>
     </style>
 
-    <style name="Material_Edit_Text" parent="AppTheme">
+    <style name="MaterialEditText" parent="AppTheme">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingLeft">@dimen/padding_tiny</item>
         <item name="android:paddingRight">@dimen/padding_tiny</item>
-        <item name="android:layout_marginBottom">-12sp</item>
         <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorPrimary</item>

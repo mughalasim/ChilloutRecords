@@ -1,16 +1,6 @@
 <resources>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-
-
-    <!--META DATA ===============================================================================-->
-    <string name="facebook_app_id">568892320169038</string>
-    <string name="fb_login_protocol_scheme">fb568892320169038</string>
 
     <!--ERROR MESSAGES ==========================================================================-->
-    <string name="error_invalid_username">This username is invalid</string>
     <string name="error_password_short">This password is too short</string>
     <string name="error_password_match">new password and confirm password do not match</string>
     <string name="error_field_required">This field is required</string>
@@ -19,55 +9,53 @@
     <string name="error_session_expiry">Session Expired, Please Login again</string>
 
     <!--LOADING DIALOGS =========================================================================-->
-    <string name="progress_loading_fb_login">Logging in with Facebook…please wait…</string>
-    <string name="progress_loading_login">Logging in. Please wait…</string>
-    <string name="progress_loading_register">Registration in progress… Please wait…</string>
-    <string name="progress_loading_nice">Nice!&#160;</string>
-    <string name="progress_loading_account_setup">, we are setting up your account, it should be done in a bit…</string>
-    <string name="progress_loading_details_fetch">Fetching your details… Please wait…</string>
-    <string name="progress_loading_password_reset">Sending a reset link to your email… Please wait…</string>
-    <string name="progress_loading_countries">Fetching all countries from the server</string>
-    <string name="progress_loading_initializing">Initializing....</string>
-    <string name="progress_loading_areas">Updating areas to the selected location..</string>
-    <string name="progress_loading_restaurant_info">Loading Restaurant Information.. Please wait</string>
-    <string name="progress_loading_review">Posting your review, please wait…</string>
-    <string name="progress_loading_claim_offer">Redeeming your offer, please wait…</string>
-    <string name="progress_loading_account_update">Updating your account. Please wait…</string>
-    <string name="progress_loading_location">Updating your preferred Location</string>
-    <string name="progress_loading_area_update">Updating areas to the selected location..</string>
+    <string name="progress_login">Logging in. Please wait…</string>
+    <string name="progress_register">Registration in progress… Please wait…</string>
+    <string name="progress_password_reset">Sending a reset link to your email… Please wait…</string>
+    <string name="progress_initializing">Initializing....</string>
+    <string name="progress_loading">Loading, please wait....</string>
+    <string name="progress_profile_update">Updating your profile. Please wait…</string>
+
+    <!--NAVIGATION ==============================================================================-->
+    <string name="nav_login">Login</string>
+    <string name="nav_register">Register</string>
+
+    <!-- DRAWER NAV =============================================================================-->
+    <string name="nav_home">Home</string>
+    <string name="nav_about_us">About us</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_profile">My Profile</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- HOME NAVIGATION ========================================================================-->
+    <string name="nav_drawer_open">Open drawer</string>
+    <string name="nav_drawer_close">Close drawer</string>
+    <string name="nav_artists">Artists</string>
+    <string name="nav_videos">Videos</string>
 
     <!--EDIT TEXT HINTS =========================================================================-->
-    <string name="et_hint_first_name">First Name</string>
-    <string name="et_hint_last_name">Last Name</string>
+    <string name="et_hint_name">Name</string>
+    <string name="et_hint_stage_name">Stage Name / Nickname</string>
     <string name="et_hint_email">Email</string>
+    <string name="et_hint_info">About you</string>
     <string name="et_hint_password">Password</string>
     <string name="et_hint_confirm_password">Confirm Password</string>
-    <string name="et_hint_your_thoughts">Your thoughts :) ....</string>
-    <string name="et_hint_search_here">search here…</string>
-    <string name="et_hint_country_code">Country: </string>
-    <string name="et_hint_phone">Phone Number eg. (0712 345 678)</string>
-    <string name="et_hint_dob">Date Of Birth (YYYY-MM-DD)</string>
-    <string name="et_hint_new_password">Set new password</string>
-    <string name="et_hint_confirm_new_password">Confirm new password</string>
-    <string name="et_hint_amount">Enter Amount</string>
 
-    <!--LAYOUT AND IN APP STRINGS-->
-    <string name="txt_version">Version:&#160;</string>
-    <string name="txt_old_version_title">Old Version</string>
-    <string name="txt_old_version_desc">Seems like you are using an old version of the app, Press yes to automatically download our new APK to get new features</string>
-    <string name="txt_update_now">UPDATE NOW</string>
-    <string name="txt_later">LATER</string>
+    <!--APP VERSIONING ==========================================================================-->
+    <string name="txt_version">App version:&#160;</string>
+    <string name="txt_old_version_title">Old version</string>
+    <string name="txt_old_version_desc">Seems like you are using an old version of the app, tap YES to automatically download our new APK to get new features</string>
+    <string name="txt_update_now">Update now</string>
+    <string name="txt_later">Later</string>
     <string name="txt_alert">Alert</string>
-    <string name="txt_share">SHARE</string>
-    <string name="txt_stage_name">Stage Name:</string>
-    <string name="txt_basic_information">Basic Information:</string>
-    <string name="txt_since">Since:</string>
-    <string name="txt_no_data_found">Oops!! No Data Found</string>
-    <string name="txt_released">Released:</string>
-    <string name="txt_bio_data">Bio Data</string>
-    <string name="txt_albums">Albums</string>
-    <string name="txt_mixtapes">Mixtapes</string>
-    <string name="txt_singles">Singles</string>
 
+    <!-- BASIC TEXTS  ===========================================================================-->
+    <string name="txt_confirm">OK</string>
+    <string name="txt_close">Close</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_back">Back</string>
+    <string name="txt_forgot_pass">Forgot password</string>
+    <string name="txt_terms">By logging in or Registering you agree to the terms and Conditions of the Chillout Records App</string>
 
 </resources>

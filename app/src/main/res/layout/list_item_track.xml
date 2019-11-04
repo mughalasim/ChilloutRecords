@@ -6,14 +6,14 @@
     android:background="@drawable/bckgrd_card"
     android:orientation="horizontal">
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/music_playing"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/music_playing"
-        android:visibility="gone" />
+<!--    <pl.droidsonroids.gif.GifImageView-->
+<!--        android:id="@+id/music_playing"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/music_playing"-->
+<!--        android:visibility="gone" />-->
 
     <TextView
         android:id="@+id/track_no"
@@ -31,17 +31,17 @@
         android:padding="@dimen/padding_medium"
         android:textColor="@color/colorPrimary" />
 
-    <ImageView
-        android:id="@+id/lyrics"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/app_name"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/padding_medium"
-        android:layout_marginRight="@dimen/padding_medium"
-        android:background="@drawable/ic_lyrics" />
+<!--    <ImageView-->
+<!--        android:id="@+id/lyrics"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:contentDescription="@string/app_name"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginEnd="@dimen/padding_medium"-->
+<!--        android:layout_marginRight="@dimen/padding_medium"-->
+<!--        android:background="@drawable/ic_lyrics" />-->
 
     <TextView
         android:id="@+id/track_url"

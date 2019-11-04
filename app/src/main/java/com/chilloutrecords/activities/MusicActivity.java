@@ -28,7 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helpers;
+import com.chilloutrecords.utils.Helper;
 import pl.droidsonroids.gif.GifImageView;
 
 public class MusicActivity extends ParentActivity implements EasyVideoCallback {
@@ -90,12 +90,12 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
         loading_progress.setProgress(0);
         loading_progress.setMax(100);
         loading_progress.setClickable(false);
-        loading_progress.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
+//        loading_progress.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
 
     }
 
@@ -109,13 +109,13 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
             Glide.with(MusicActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
-            helper.ToastMessage(MusicActivity.this, getString(R.string.error_500));
+//            helper.ToastMessage(MusicActivity.this, getString(R.string.error_500));
         }
     }
 
     public void fetchData(String dbRef) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        Helpers.LogThis("DATABASE REF: " + dbRef);
+//        Helper.LogThis("DATABASE REF: " + dbRef);
         DatabaseReference myRef = database.getReference(dbRef);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -124,30 +124,30 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 try {
                     Gson gson = new Gson();
 
-//                    Helpers.LogThis("DATA VALUE: " + dataSnapshot.getValue());
+//                    Helper.LogThis("DATA VALUE: " + dataSnapshot.getValue());
 
                     if (dataSnapshot.getValue().toString().startsWith("[")) {
                         JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
-//                        Helpers.LogThis("AFTER PARSING ARRAY: " + jsonArray.toString());
+//                        Helper.LogThis("AFTER PARSING ARRAY: " + jsonArray.toString());
                         addTracksFromArray(jsonArray);
                     } else {
                         JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-//                        Helpers.LogThis("AFTER PARSING OBJECT: " + jsonObject.toString());
+//                        Helper.LogThis("AFTER PARSING OBJECT: " + jsonObject.toString());
                         addTracksFromObject(jsonObject);
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     noData();
-                    Helpers.LogThis(e.toString());
+//                    Helper.LogThis(e.toString());
                 }
 
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                helper.progressDialog(false);
+//                helper.progressDialog(false);
                 noData();
                 Log.e("HOMEPAGE: ", "Failed to read value.", error.toException());
             }
@@ -169,8 +169,8 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 final TextView track_name = child.findViewById(R.id.track_name);
                 final TextView track_no = child.findViewById(R.id.track_no);
                 final TextView track_url = child.findViewById(R.id.track_url);
-                final GifImageView music_playing = child.findViewById(R.id.music_playing);
-                final ImageView lyrics = child.findViewById(R.id.lyrics);
+//                final GifImageView music_playing = child.findViewById(R.id.music_playing);
+//                final ImageView lyrics = child.findViewById(R.id.lyrics);
 
                 JSONObject albumObject = jsonArray.getJSONObject(i);
                 final String str_track_name = albumObject.getString("track_name");
@@ -186,19 +186,19 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                     @Override
                     public void onClick(View view) {
                         updateAnimation(current_animation, false);
-                        current_animation = music_playing;
-                        helper.animate_flash(child, 10000, 5);
+//                        current_animation = music_playing;
+//                        helper.animate_flash(child, 10000, 5);
                         player.setSource(Uri.parse(track_url.getText().toString()));
                         LL_player.setVisibility(View.VISIBLE);
                     }
                 });
 
-                lyrics.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
-                    }
-                });
+//                lyrics.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+////                        helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
+//                    }
+//                });
 
                 LL_tracks.addView(child);
             }
@@ -220,8 +220,8 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
             final TextView track_name = child.findViewById(R.id.track_name);
             final TextView track_no = child.findViewById(R.id.track_no);
             final TextView track_url = child.findViewById(R.id.track_url);
-            final GifImageView music_playing = child.findViewById(R.id.music_playing);
-            final ImageView lyrics = child.findViewById(R.id.lyrics);
+//            final GifImageView music_playing = child.findViewById(R.id.music_playing);
+//            final ImageView lyrics = child.findViewById(R.id.lyrics);
 
             final String str_track_name = jsonObject.getString("track_name");
             final String str_track_no = jsonObject.getString("track_no");
@@ -236,19 +236,19 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 @Override
                 public void onClick(View view) {
                     updateAnimation(current_animation, false);
-                    current_animation = music_playing;
-                    helper.animate_flash(child, 10000, 5);
+//                    current_animation = music_playing;
+//                    helper.animate_flash(child, 10000, 5);
                     player.setSource(Uri.parse(track_url.getText().toString()));
                     LL_player.setVisibility(View.VISIBLE);
                 }
             });
 
-            lyrics.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
-                }
-            });
+//            lyrics.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+////                    helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
+//                }
+//            });
 
             LL_tracks.addView(child);
             LL_tracks.setVisibility(View.VISIBLE);

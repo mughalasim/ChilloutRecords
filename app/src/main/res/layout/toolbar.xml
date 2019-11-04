@@ -4,7 +4,6 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/very_dark_grey"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
     app:titleTextColor="@color/colorPrimary">
@@ -16,12 +15,12 @@
         android:layout_marginEnd="?attr/actionBarSize"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/toolbar_text"
-            style="@style/Text_Header"
-            android:layout_centerInParent="true"
-            android:text="@string/app_name"
-            android:visibility="gone" />
+<!--        <TextView-->
+<!--            android:id="@+id/toolbar_text"-->
+<!--            style="@style/Text_Header"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:text="@string/app_name"-->
+<!--            android:visibility="gone" />-->
 
         <LinearLayout
             android:id="@+id/toolbar_image"
@@ -32,13 +31,13 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/app_name"
-                android:padding="10dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/main_logo_white" />
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:contentDescription="@string/app_name"-->
+<!--                android:padding="10dp"-->
+<!--                android:scaleType="centerInside"-->
+<!--                android:src="@drawable/main_logo_white" />-->
 
         </LinearLayout>
     </RelativeLayout>

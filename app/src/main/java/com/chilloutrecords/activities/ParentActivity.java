@@ -11,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
 import androidx.annotation.NonNull;
+
+import com.chilloutrecords.utils.Helper;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,14 +39,13 @@ import org.json.JSONObject;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.utils.Database;
-import com.chilloutrecords.utils.Helpers;
 import com.chilloutrecords.utils.SharedPrefs;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Helpers helper;
+    Helper helper;
     Database db;
     Toolbar toolbar;
     DrawerLayout drawer;
@@ -56,14 +57,14 @@ public class ParentActivity extends AppCompatActivity
     String toolbarTitle;
 
     void initialize(int drawer_id, String toolbarTitle) {
-        helper = new Helpers(ParentActivity.this);
+        helper = new Helper(ParentActivity.this);
         db = new Database();
 
         this.drawer_id = drawer_id;
         this.toolbarTitle = toolbarTitle;
 
-        toolbar = findViewById(R.id.toolbar);
-        toolbar_text = toolbar.findViewById(R.id.toolbar_text);
+//        toolbar = findViewById(R.id.toolbar);
+//        toolbar_text = toolbar.findViewById(R.id.toolbar_text);
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -90,10 +91,10 @@ public class ParentActivity extends AppCompatActivity
             toolbar_text.setText(toolbarTitle);
         }
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
@@ -122,7 +123,7 @@ public class ParentActivity extends AppCompatActivity
 
     private void listenExitBroadcast() {
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Helpers.BroadcastValue);
+//        filter.addAction(Helper.BroadcastValue);
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -170,74 +171,74 @@ public class ParentActivity extends AppCompatActivity
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                try {
-                    Gson gson = new Gson();
-                    JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-//                    Helpers.LogThis("AFTER PARSING: " + jsonObject.toString());
-                    final int version_code = Integer.valueOf(jsonObject.getString("version_code"));
-                    final String download_url = jsonObject.getString("download_url");
-                    SharedPrefs.setDownLoadURL(download_url);
+//                try {
+//                    Gson gson = new Gson();
+//                    JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
+//                    Helper.LogThis("AFTER PARSING: " + jsonObject.toString());
+//                    final int version_code = Integer.valueOf(jsonObject.getString("version_code"));
+//                    final String download_url = jsonObject.getString("download_url");
+//                    SharedPrefs.setDownLoadURL(download_url);
 
-                    if (BuildConfig.VERSION_CODE < version_code) {
-                        final Dialog dialog = new Dialog(ParentActivity.this);
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setContentView(R.layout.dialog_confirm);
-                        final TextView txtMessage = dialog.findViewById(R.id.txtMessage);
-                        final TextView txtOk = dialog.findViewById(R.id.txtOk);
-                        final TextView txtCancel = dialog.findViewById(R.id.txtCancel);
-                        final TextView txtTitle = dialog.findViewById(R.id.txtTitle);
-                        txtCancel.setVisibility(View.VISIBLE);
-                        txtTitle.setText(R.string.txt_old_version_title);
-                        txtMessage.setText(R.string.txt_old_version_desc);
+//                    if (BuildConfig.VERSION_CODE < version_code) {
+//                        final Dialog dialog = new Dialog(ParentActivity.this);
+//                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                        dialog.setContentView(R.layout.dialog_confirm);
+//                        final TextView txtMessage = dialog.findViewById(R.id.txtMessage);
+//                        final TextView txtOk = dialog.findViewById(R.id.txtOk);
+//                        final TextView txtCancel = dialog.findViewById(R.id.txtCancel);
+//                        final TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+//                        txtCancel.setVisibility(View.VISIBLE);
+//                        txtTitle.setText(R.string.txt_old_version_title);
+//                        txtMessage.setText(R.string.txt_old_version_desc);
 
-                        txtOk.setText(R.string.txt_update_now);
-                        txtOk.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                try {
-                                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
-                                        request.setDescription("Downloading APK");
-                                        request.setTitle(getString(R.string.app_name));
-                                        // in order for this if to run, you must use the android 3.2 to compile your app
-                                        request.allowScanningByMediaScanner();
-                                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "apk");
-                                        // get download service and enqueue file
-                                        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                                        assert manager != null;
-                                        manager.enqueue(request);
-                                } catch (Exception e) {
-                                    helper.ToastMessage(ParentActivity.this, getString(R.string.error_500));
-                                }
-                                dialog.cancel();
-                            }
-                        });
+//                        txtOk.setText(R.string.txt_update_now);
+//                        txtOk.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                try {
+//                                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
+//                                        request.setDescription("Downloading APK");
+//                                        request.setTitle(getString(R.string.app_name));
+//                                        // in order for this if to run, you must use the android 3.2 to compile your app
+//                                        request.allowScanningByMediaScanner();
+//                                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//                                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "apk");
+//                                        // get download service and enqueue file
+//                                        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+//                                        assert manager != null;
+//                                        manager.enqueue(request);
+//                                } catch (Exception e) {
+//                                    helper.ToastMessage(ParentActivity.this, getString(R.string.error_500));
+//                                }
+//                                dialog.cancel();
+//                            }
+//                        });
 
-                        txtCancel.setText(R.string.txt_later);
-                        txtCancel.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.cancel();
-                            }
-                        });
-                        dialog.show();
+//                        txtCancel.setText(R.string.txt_later);
+//                        txtCancel.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//                        dialog.show();
 
-                        ShortcutBadger.applyCount(ParentActivity.this, 1);
+//                        ShortcutBadger.applyCount(ParentActivity.this, 1);
 
-                    } else {
-                        ShortcutBadger.applyCount(ParentActivity.this, 0);
-                    }
+//                    } else {
+//                        ShortcutBadger.applyCount(ParentActivity.this, 0);
+//                    }
 
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Helpers.LogThis(e.toString());
-                }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    Helper.LogThis(e.toString());
+//                }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                Helpers.LogThis("DATABASE:" + error.toString());
+//                Helper.LogThis("DATABASE:" + error.toString());
             }
         });
 

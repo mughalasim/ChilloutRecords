@@ -87,11 +87,11 @@
                                     style="@style/TextBody"
                                     android:textSize="@dimen/text_size_small" />
 
-                                <TextView
-                                    android:id="@+id/user_points"
-                                    style="@style/Text_Header"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textStyle="bold" />
+<!--                                <TextView-->
+<!--                                    android:id="@+id/user_points"-->
+<!--                                    style="@style/Text_Header"-->
+<!--                                    android:textColor="@color/colorPrimary"-->
+<!--                                    android:textStyle="bold" />-->
 
                             </LinearLayout>
 
@@ -104,17 +104,17 @@
                         style="@style/TextBody"
                         android:text="Your Account details" />
 
-                    <EditText
-                        android:id="@+id/register_first_name"
-                        style="@style/EditText"
-                        android:hint="@string/et_hint_first_name"
-                        android:inputType="textPersonName" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/register_first_name"-->
+<!--                        style="@style/EditText"-->
+<!--                        android:hint="@string/et_hint_first_name"-->
+<!--                        android:inputType="textPersonName" />-->
 
-                    <EditText
-                        android:id="@+id/register_last_name"
-                        style="@style/EditText"
-                        android:hint="@string/et_hint_last_name"
-                        android:inputType="textPersonName" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/register_last_name"-->
+<!--                        style="@style/EditText"-->
+<!--                        android:hint="@string/et_hint_last_name"-->
+<!--                        android:inputType="textPersonName" />-->
 
                     <EditText
                         android:id="@+id/register_email"
@@ -122,16 +122,16 @@
                         android:hint="@string/et_hint_email"
                         android:inputType="textEmailAddress" />
 
-                    <EditText
-                        android:id="@+id/register_phone"
-                        style="@style/EditText"
-                        android:hint="@string/et_hint_phone"
-                        android:inputType="phone" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/register_phone"-->
+<!--                        style="@style/EditText"-->
+<!--                        android:hint="@string/et_hint_phone"-->
+<!--                        android:inputType="phone" />-->
 
-                    <TextView
-                        android:id="@+id/register_dob"
-                        style="@style/EditText"
-                        android:hint="@string/et_hint_dob" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/register_dob"-->
+<!--                        style="@style/EditText"-->
+<!--                        android:hint="@string/et_hint_dob" />-->
 
 
                     <TextView
