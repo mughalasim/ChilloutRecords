@@ -44,7 +44,7 @@
 
 # FIREBASE MODELS
 -keepattributes Signature
--keepclassmembers class eatout.restaurantguide.models.** { *; }
+-keepattributes *Annotation*
 
 # GOOGLE PLAY ADS
 -dontwarn com.google.android.gms.**

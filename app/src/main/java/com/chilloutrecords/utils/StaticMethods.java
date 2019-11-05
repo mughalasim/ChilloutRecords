@@ -19,11 +19,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.HomeActivity;
 import com.chilloutrecords.activities.SplashScreenActivity;
+import com.chilloutrecords.activities.StartUpActivity;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
@@ -31,24 +34,41 @@ import static com.chilloutrecords.utils.StaticVariables.BROADCAST_LOG_OUT;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_FALSE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRUE;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
 
 public class StaticMethods {
 
     public interface SuccessListener {
         void success();
+
         void failed();
     }
 
     public interface DialogListener {
         void yes();
+
         void no();
     }
 
+    // GET USER ID AND LOGIN TO APP
+    public static void getUserIdAndLogin(Activity context) {
+        FIREBASE_USER = FIREBASE_AUTH.getCurrentUser();
+        if (FIREBASE_USER != null) {
+            logg("FETCH USER", FIREBASE_USER.getUid());
+            context.finish();
+//            context.startActivity(new Intent(context, HomeActivity.class));
+        } else {
+            context.finish();
+            context.startActivity(new Intent(context, StartUpActivity.class));
+        }
+    }
+
     // LOGS ========================================================================================
-    public static void LogThis(String data) {
+    public static void logg(String page_title, String data) {
         if (BuildConfig.DEBUG) {
-            Log.e("LOGGED: ", data);
+            Log.e(page_title + ": ", data);
         }
     }
 
@@ -87,6 +107,7 @@ public class StaticMethods {
     public static void broadcastLogout() {
         Context context = MyApplication.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
+        FIREBASE_AUTH.signOut();
         context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, EXTRA_TRUE));
         context.sendBroadcast(new Intent().setAction(BROADCAST_LOG_OUT));
     }
@@ -94,6 +115,7 @@ public class StaticMethods {
     public static void broadcastSessionExpiry() {
         Context context = MyApplication.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
+        FIREBASE_AUTH.signOut();
         context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, EXTRA_FALSE));
         context.sendBroadcast(new Intent().setAction(BROADCAST_LOG_OUT));
     }
@@ -142,12 +164,22 @@ public class StaticMethods {
         }
     }
 
-    public static boolean validateEmptyEditText(EditText editText, String error_message) {
-        if (editText.getText().toString().length() < 1) {
-            editText.setError(error_message);
+    public static boolean validateEmptyEditText(EditText edit_text, String error_message) {
+        if (edit_text.getText().toString().length() < 1) {
+            edit_text.setError(error_message);
             return false;
         } else {
-            editText.setError(null);
+            edit_text.setError(null);
+            return true;
+        }
+    }
+
+    public static boolean validateMatch(EditText edit_text_1, EditText edit_text_2) {
+        if (edit_text_1.getText().toString().trim().length() != edit_text_2.getText().toString().trim().length()) {
+            edit_text_1.setError("Passwords do not match");
+            return false;
+        } else {
+            edit_text_1.setError(null);
             return true;
         }
     }

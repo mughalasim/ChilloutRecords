@@ -7,6 +7,8 @@
     <string name="error_500">Server Error, Please try again later</string>
     <string name="error_connection">Offline Mode, Please check your internet connection</string>
     <string name="error_session_expiry">Session Expired, Please Login again</string>
+    <string name="error_login_failed">Failed to Login to the Chillout records App. Please check your credentials or try again later</string>
+    <string name="error_register_failed">Failed to Register your account into the Chillout records App. Please try again later</string>
 
     <!--LOADING DIALOGS =========================================================================-->
     <string name="progress_login">Logging in. Please wait…</string>

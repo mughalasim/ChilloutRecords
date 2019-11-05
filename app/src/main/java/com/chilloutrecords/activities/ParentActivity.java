@@ -69,7 +69,7 @@ public class ParentActivity extends AppCompatActivity
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
-        setNewDatabaseRef();
+//        setNewDatabaseRef();
 
         listenExitBroadcast();
 

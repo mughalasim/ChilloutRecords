@@ -6,8 +6,9 @@
 
     <ImageView
         android:id="@+id/main_logo"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/img_size_x_large"
+        android:layout_width="@dimen/screen_min_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:contentDescription="@string/app_name"
         android:padding="@dimen/padding_large"
         android:src="@drawable/ic_logo_black" />

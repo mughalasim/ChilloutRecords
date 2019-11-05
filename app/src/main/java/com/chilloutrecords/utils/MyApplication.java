@@ -10,19 +10,27 @@ import java.util.List;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class MyApplication extends Application{
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 
-        private static Context context;
+public class MyApplication extends Application {
 
-        public void onCreate() {
-            super.onCreate();
-            MyApplication.context = getApplicationContext();
-        }
+    private static Context context;
 
-        public static Context getAppContext() {
-            return MyApplication.context;
-        }
+    public void onCreate() {
+        super.onCreate();
+        MyApplication.context = getApplicationContext();
+
+        initFireBase();
+
+    }
+
+    public static Context getAppContext() {
+        return MyApplication.context;
+    }
 
     public static void initFireBase() {
         FirebaseOptions builder = new FirebaseOptions.Builder()
@@ -37,6 +45,12 @@ public class MyApplication extends Application{
         if (fire_base_app_list.size() < 1) {
             FirebaseApp.initializeApp(getAppContext(), builder);
         }
+
+        // Initialize Firebase Auth
+        FIREBASE_AUTH = FirebaseAuth.getInstance();
+
+        // Initialize Firebase DB
+        FIREBASE_DB = FirebaseDatabase.getInstance();
 
     }
 

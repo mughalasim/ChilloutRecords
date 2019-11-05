@@ -11,14 +11,22 @@ import com.chilloutrecords.R;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.fragments.LoginFragment;
 import com.chilloutrecords.fragments.RegisterFragment;
+import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
 public class StartUpActivity extends AppCompatActivity {
 
     private TabLayout tab_layout;
     private ViewPager view_pager;
+    private final String TAG_LOG = "STARTUP";
+
+
 
     private int[] fragment_title_list = {
             R.string.nav_login,

@@ -36,6 +36,7 @@
             android:inputType="textCapSentences" />
 
         <Spinner
+            android:id="@+id/spinner_gender"
             style="@style/EditText"
             android:layout_marginTop="@dimen/padding_medium"
             android:entries="@array/select_gender" />
@@ -65,7 +66,7 @@
             android:inputType="textPassword" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btn_register"
             style="@style/ButtonYes"
             android:layout_marginTop="@dimen/padding_medium"
             android:text="@string/nav_register" />
