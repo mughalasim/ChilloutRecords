@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_nav_header">
+    android:layout_height="?attr/actionBarSize">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_nav_header"
+        android:layout_height="?attr/actionBarSize"
         android:background="@drawable/bckgrd_card"
         android:orientation="vertical"
         android:gravity="center"

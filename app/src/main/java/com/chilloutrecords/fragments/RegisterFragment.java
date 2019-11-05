@@ -31,7 +31,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
             try {
-                root_view = inflater.inflate(R.layout.frag_login, container, false);
+                root_view = inflater.inflate(R.layout.frag_register, container, false);
 
                 AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 

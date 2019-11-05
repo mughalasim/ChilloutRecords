@@ -13,7 +13,7 @@
         style="@style/TextTitle"
         android:text="@string/app_name"
         android:layout_marginTop="@dimen/padding_mini"
-        android:textSize="@dimen/text_size_x_large" />
+         />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:text="@string/error_500"
-                android:textSize="@dimen/text_size_medium" />
+                 />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_confirm"

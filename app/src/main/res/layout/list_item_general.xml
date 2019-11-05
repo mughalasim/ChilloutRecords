@@ -78,7 +78,7 @@
 <!--                android:layout_margin="@dimen/text_margin"-->
 <!--                android:gravity="start"-->
 <!--                android:text="@string/app_name"-->
-<!--                android:textSize="@dimen/text_size_large" />-->
+<!--                 />-->
 
 
             <LinearLayout
@@ -130,7 +130,7 @@
 <!--                        style="@style/TextBody"-->
 <!--                        android:layout_gravity="start"-->
 <!--                        android:text="@string/txt_since"-->
-<!--                        android:textSize="@dimen/text_size_small" />-->
+<!--                         />-->
 
                     <TextView
                         android:id="@+id/artist_year_since"

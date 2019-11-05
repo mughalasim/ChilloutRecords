@@ -30,7 +30,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_button"
+                        android:layout_height="?attr/actionBarSize"
                         android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="ARTISTS">
 
@@ -60,7 +60,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_button"
+                        android:layout_height="?attr/actionBarSize"
                         android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="VIDEOS">
 
@@ -89,7 +89,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_button"
+                        android:layout_height="?attr/actionBarSize"
                         android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="FREESTYLES">
 
@@ -118,7 +118,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_button"
+                        android:layout_height="?attr/actionBarSize"
                         android:layout_marginTop="@dimen/padding_medium"
                         android:onClick="UPCOMING">
 

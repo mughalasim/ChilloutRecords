@@ -1,15 +1,15 @@
 <resources>
     <!-- BORDER CORNERS =========================================================================-->
-    <dimen name="radius_corner">10sp</dimen>
-
+    <dimen name="radius_corner">5sp</dimen>
 
     <!-- LINE THICKNESS =========================================================================-->
     <dimen name="line_thickness">1sp</dimen>
 
-
     <!--ANGLES ==================================================================================-->
     <dimen name="angle_color">315</dimen>
 
+    <!-- SCREEN MAX WIDTH =======================================================================-->
+    <dimen name="screen_min_width">300dp</dimen>
 
     <!--IMAGE DIMENS ============================================================================-->
     <dimen name="img_size_x_large">148sp</dimen>
@@ -19,7 +19,6 @@
     <dimen name="img_size_normal">48sp</dimen>
     <dimen name="img_size_small">28sp</dimen>
 
-
     <!--PADDING =================================================================================-->
     <dimen name="padding_large">28dp</dimen>
     <dimen name="padding_medium">18dp</dimen>
@@ -27,29 +26,9 @@
     <dimen name="padding_tiny">10dp</dimen>
     <dimen name="padding_mini">6dp</dimen>
 
-
-    <!--TEXT SIZES ==============================================================================-->
-    <dimen name="text_size_xx_large">44sp</dimen>
-    <dimen name="text_size_x_large">24sp</dimen>
-    <dimen name="text_size_large">16sp</dimen>
-    <dimen name="text_size_medium">14sp</dimen>
-    <dimen name="text_size_normal">12sp</dimen>
-    <dimen name="text_size_small">10sp</dimen>
-
-
-    <!--MARGINS AND SPACINGS ====================================================================-->
+    <!--TEXT MARGINS AND SPACINGS ===============================================================-->
     <dimen name="text_margin">2sp</dimen>
     <dimen name="text_line_spacing">1sp</dimen>
     <dimen name="text_line_multiplier">1.2</dimen>
-
-
-    <!--FIXED ITEM HEIGHTS ======================================================================-->
-    <dimen name="height_button">70sp</dimen>
-    <dimen name="height_edit_text">50dp</dimen>
-    <dimen name="height_panel">55sp</dimen>
-    <dimen name="height_nav_header">110sp</dimen>
-    <dimen name="height_collapsing_toolbar">250sp</dimen>
-    <dimen name="height_map">300sp</dimen>
-
 
 </resources>

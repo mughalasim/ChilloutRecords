@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            android:paddingBottom="@dimen/height_panel"
+            android:paddingBottom="?attr/actionBarSize"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -90,7 +90,7 @@
             android:id="@+id/player"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_height="@dimen/height_panel"
+            android:layout_height="?attr/actionBarSize"
             app:evp_disableControls="false"
             app:evp_hideControlsOnPlay="false" />
 

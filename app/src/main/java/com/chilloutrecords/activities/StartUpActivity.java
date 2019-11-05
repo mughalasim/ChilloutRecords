@@ -1,6 +1,8 @@
 package com.chilloutrecords.activities;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -61,6 +63,14 @@ public class StartUpActivity extends AppCompatActivity {
         view_pager.setAdapter(adapter);
 
         tab_layout.setupWithViewPager(view_pager, true);
+
+    }
+
+    public void forgotPassword(View view) {
+
+    }
+
+    public void openTermsAndConditions(View view) {
 
     }
 

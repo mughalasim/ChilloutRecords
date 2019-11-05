@@ -49,7 +49,7 @@
 <!--                android:layout_gravity="start"-->
 <!--                android:text="@string/txt_released"-->
 <!--                android:textColor="@color/colorPrimary"-->
-<!--                android:textSize="@dimen/text_size_small"-->
+<!--                -->
 <!--                android:textStyle="bold" />-->
 
             <TextView
@@ -57,7 +57,7 @@
                 style="@style/TextBody"
                 android:layout_gravity="start"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_small" />
+                 />
 
         </LinearLayout>
 

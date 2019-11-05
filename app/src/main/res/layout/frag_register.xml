@@ -2,8 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarThumbVertical="@null"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:scrollbarThumbVertical="@null">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,16 +13,37 @@
 
         <TextView
             style="@style/TextBody"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_large"
-            android:text="@string/txt_login" />
+            android:gravity="center"
+            android:text="@string/txt_register" />
+
+        <EditText
+            android:id="@+id/et_name"
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/padding_large"
+            android:hint="@string/et_hint_name"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences" />
+
+        <EditText
+            android:id="@+id/et_stage_name"
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:hint="@string/et_hint_stage_name"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences" />
+
+        <Spinner
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:entries="@array/select_gender" />
 
         <EditText
             android:id="@+id/et_email"
             style="@style/EditText"
-            android:layout_marginTop="@dimen/padding_large"
+            android:layout_marginTop="@dimen/padding_medium"
             android:hint="@string/et_hint_email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
@@ -35,25 +56,28 @@
             android:importantForAutofill="no"
             android:inputType="textPassword" />
 
+        <EditText
+            android:id="@+id/et_password_confirm"
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:hint="@string/et_hint_confirm_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirm"
             style="@style/ButtonYes"
             android:layout_marginTop="@dimen/padding_medium"
-            android:text="@string/nav_login" />
-
-        <TextView
-            style="@style/TextBody"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/padding_large"
-            android:onClick="forgotPassword"
-            android:text="@string/txt_forgot_pass" />
+            android:text="@string/nav_register" />
 
         <TextView
             style="@style/TextSmall"
+            android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/padding_large"
             android:gravity="center"
             android:onClick="openTermsAndConditions"
             android:text="@string/txt_terms" />
 
     </LinearLayout>
+
 </ScrollView>

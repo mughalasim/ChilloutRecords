@@ -28,6 +28,6 @@
         android:gravity="center"
         android:text="@string/progress_loading"
         android:textAllCaps="false"
-        android:textSize="@dimen/text_size_medium" />
+         />
 
 </RelativeLayout>

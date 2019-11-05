@@ -20,6 +20,13 @@
     <string name="nav_login">Login</string>
     <string name="nav_register">Register</string>
 
+    <!--ARRAY GENDER ============================================================================-->
+    <string-array name="select_gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
     <!-- DRAWER NAV =============================================================================-->
     <string name="nav_home">Home</string>
     <string name="nav_about_us">About us</string>
@@ -56,6 +63,8 @@
     <string name="txt_cancel">Cancel</string>
     <string name="txt_back">Back</string>
     <string name="txt_forgot_pass">Forgot password</string>
-    <string name="txt_terms">By logging in or Registering you agree to the terms and Conditions of the Chillout Records App</string>
+    <string name="txt_login">Kindly enter your email and password to login</string>
+    <string name="txt_register">Kindly give us some details so we may create your account on the chillout records platform</string>
+    <string name="txt_terms">By tapping LOGIN or REGISTER you agree to the terms and Conditions of the Chillout Records App</string>
 
 </resources>
