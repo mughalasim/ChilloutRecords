@@ -36,7 +36,7 @@
             android:inputType="textPassword" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btn_login"
             style="@style/ButtonYes"
             android:layout_marginTop="@dimen/padding_medium"
             android:text="@string/nav_login" />

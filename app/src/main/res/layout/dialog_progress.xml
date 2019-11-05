@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bckgrd_card"
+    android:gravity="center_vertical"
+    android:minWidth="@dimen/screen_min_width"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium">
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txt_loading_message"
+        style="@style/TextBody"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/padding_large"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:gravity="center"
+        android:text="@string/progress_loading"
+        android:textAllCaps="false" />
+
+</LinearLayout>

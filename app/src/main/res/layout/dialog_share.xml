@@ -1,78 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bckgrd_edit_text"
-    android:orientation="vertical">
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:background="@drawable/bckgrd_card"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_large">
 
     <TextView
-        android:id="@+id/txtTitle"
+        android:id="@+id/txt_title"
         style="@style/TextTitle"
-        android:text="@string/txt_later" />
+        android:text="@string/nav_share" />
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dp"
-        android:padding="3dp"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+        android:scrollbarThumbVertical="@null">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/share_facebook"-->
-<!--                android:layout_width="@dimen/img_size_normal"-->
-<!--                android:layout_height="@dimen/img_size_normal"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:contentDescription="@string/app_name"-->
-<!--                android:src="@drawable/share_facebook" />-->
+            <TextView
+                android:id="@+id/txt_message"
+                style="@style/TextBody"
+                android:layout_marginTop="@dimen/padding_large"
+                android:layout_marginBottom="@dimen/padding_large"
+                android:gravity="center"
+                android:text="@string/txt_share" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/share_whatsapp"-->
-<!--                android:layout_width="@dimen/img_size_normal"-->
-<!--                android:layout_height="@dimen/img_size_normal"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:contentDescription="@string/app_name"-->
-<!--                android:src="@drawable/share_whatsapp" />-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/share_messenger"-->
-<!--                android:layout_width="@dimen/img_size_normal"-->
-<!--                android:layout_height="@dimen/img_size_normal"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:contentDescription="@string/app_name"-->
-<!--                android:padding="3dp"-->
-<!--                android:src="@drawable/share_messenger" />-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/share_facebook"
+                    android:layout_width="@dimen/img_size_normal"
+                    android:layout_height="@dimen/img_size_normal"
+                    android:layout_marginEnd="@dimen/padding_large"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_share_facebook" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/share_email"-->
-<!--                android:layout_width="@dimen/img_size_normal"-->
-<!--                android:layout_height="@dimen/img_size_normal"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:contentDescription="@string/app_name"-->
-<!--                android:src="@drawable/share_email" />-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/share_whatsapp"
+                    android:layout_width="@dimen/img_size_normal"
+                    android:layout_height="@dimen/img_size_normal"
+                    android:layout_marginEnd="@dimen/padding_large"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_share_whatsapp" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/share_sms"-->
-<!--                android:layout_width="@dimen/img_size_normal"-->
-<!--                android:layout_height="@dimen/img_size_normal"-->
-<!--                android:contentDescription="@string/app_name"-->
-<!--                android:padding="5dp"-->
-<!--                android:src="@drawable/share_sms" />-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/share_email"
+                    android:layout_width="@dimen/img_size_normal"
+                    android:layout_height="@dimen/img_size_normal"
+                    android:layout_marginEnd="@dimen/padding_large"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_share_email" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/share_sms"
+                    android:layout_width="@dimen/img_size_normal"
+                    android:layout_height="@dimen/img_size_normal"
+                    android:contentDescription="@string/app_name"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_share_sms" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </ScrollView>
 
 </LinearLayout>
+
+
+

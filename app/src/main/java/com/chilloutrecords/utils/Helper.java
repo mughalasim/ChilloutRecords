@@ -30,7 +30,8 @@ public class Helper {
 
         dialog_progress = new Dialog(context);
         dialog_progress.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog_progress.setContentView(R.layout.dialog_loading);
+        Objects.requireNonNull(dialog_progress.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog_progress.setContentView(R.layout.dialog_progress);
         dialog_progress.setCancelable(false);
 
         txt_loading_message = dialog_progress.findViewById(R.id.txt_loading_message);
@@ -52,14 +53,14 @@ public class Helper {
 
     // DIALOGS =====================================================================================
     public void setProgressDialog(String message) {
-        if (!dialog_progress.isShowing()) {
-            dialog_progress.show();
-            txt_loading_message.setText(message);
-        } else {
+        if (dialog_progress.isShowing()) {
             dialog_progress.cancel();
-            dialog_progress.show();
-            txt_loading_message.setText(message);
         }
+        if(message.equals("")){
+            message = context.getString(R.string.progress_loading);
+        }
+        txt_loading_message.setText(message);
+        dialog_progress.show();
     }
 
     public void dismissProgressDialog() {

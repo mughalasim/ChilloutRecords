@@ -173,8 +173,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_back" />
-                            <entry key="sourceFile" value="C:\Users\Asim" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_share_whatsapp" />
+                            <entry key="sourceFile" value="E:\Downloads\whatsapp-brands.svg" />
                           </map>
                         </option>
                       </PersistentState>

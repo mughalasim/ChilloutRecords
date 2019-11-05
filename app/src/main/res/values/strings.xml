@@ -64,6 +64,7 @@
     <string name="txt_back">Back</string>
     <string name="txt_forgot_pass">Forgot password</string>
     <string name="txt_login">Kindly enter your email and password to login</string>
+    <string name="txt_share">Select what platform you wish to share the app on</string>
     <string name="txt_register">Kindly give us some details so we may create your account on the chillout records platform</string>
     <string name="txt_terms">By tapping LOGIN or REGISTER you agree to the terms and Conditions of the Chillout Records App</string>
 
