@@ -38,7 +38,7 @@ public class MyAccountActivity extends ParentActivity {
 
         setContentView(R.layout.activity_my_account);
 
-        initialize(R.id.my_account, "MY ACCOUNT");
+//        initialize(R.id.my_account, "MY ACCOUNT");
 
         findAllViews();
 
@@ -66,24 +66,24 @@ public class MyAccountActivity extends ParentActivity {
 
     public void UpdateDetails(View view) {
 //        if (register_first_name.getText().toString().length() < 1) {
-////            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: First Name");
+////            dialogs.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: First Name");
 //        } else if (register_last_name.getText().toString().length() < 1) {
-////            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Last Name");
+////            dialogs.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Last Name");
 //        } else if (register_email.getText().toString().length() < 1) {
-////            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Email");
-//        } else if (!helper.validateEmail(register_email.getText().toString())) {
-//            helper.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Invalid Email");
-//        } else if (helper.validateMobileNumber(register_phone.getText().toString().trim())) {
-//            helper.myDialog(MyAccountActivity.this, "Update Failure", helper.Mobile_Number_Error);
+////            dialogs.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Email");
+//        } else if (!dialogs.validateEmail(register_email.getText().toString())) {
+//            dialogs.myDialog(MyAccountActivity.this, "Update Failure", "Field Required: Invalid Email");
+//        } else if (dialogs.validateMobileNumber(register_phone.getText().toString().trim())) {
+//            dialogs.myDialog(MyAccountActivity.this, "Update Failure", dialogs.Mobile_Number_Error);
 //        } else if (register_dob.getText().toString().length() < 1) {
-//            helper.myDialog(MyAccountActivity.this, "Update Failure", "Set your Date of Birth");
+//            dialogs.myDialog(MyAccountActivity.this, "Update Failure", "Set your Date of Birth");
 //        } else {
 //            SharedPrefs.setUserFirstName(register_first_name.getText().toString());
 //            SharedPrefs.setUserLastName(register_last_name.getText().toString());
 //            SharedPrefs.setUserEmail(register_email.getText().toString());
 //            SharedPrefs.setUserPhone(register_phone.getText().toString());
 //            SharedPrefs.setUserDOB(register_dob.getText().toString());
-//            helper.ToastMessage(MyAccountActivity.this, "Successfully Updated");
+//            dialogs.ToastMessage(MyAccountActivity.this, "Successfully Updated");
 //        }
     }
 
@@ -120,14 +120,14 @@ public class MyAccountActivity extends ParentActivity {
     @Override
     public void onResume() {
         super.onResume();
-        updateDrawer();
+//        updateDrawer();
         updateFields();
     }
 
     private void findAllViews() {
         toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        navigation_view = findViewById(R.id.nav_view);
 
 //        register_first_name = findViewById(R.id.register_first_name);
 //        register_last_name = findViewById(R.id.register_last_name);
@@ -139,10 +139,10 @@ public class MyAccountActivity extends ParentActivity {
 //        picture_add = findViewById(R.id.picture_add);
 //        picture_delete = findViewById(R.id.picture_delete);
 
-//        helper.setDefaultEditTextSelectionMode(register_first_name);
-//        helper.setDefaultEditTextSelectionMode(register_last_name);
-//        helper.setDefaultEditTextSelectionMode(register_email);
-//        helper.setDefaultEditTextSelectionMode(register_phone);
+//        dialogs.setDefaultEditTextSelectionMode(register_first_name);
+//        dialogs.setDefaultEditTextSelectionMode(register_last_name);
+//        dialogs.setDefaultEditTextSelectionMode(register_email);
+//        dialogs.setDefaultEditTextSelectionMode(register_phone);
 
     }
 
@@ -150,7 +150,7 @@ public class MyAccountActivity extends ParentActivity {
         picture_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                helper.myDialog(MyAccountActivity.this, getString(R.string.txt_alert), getString(R.string.txt_coming_soon));
+//                dialogs.myDialog(MyAccountActivity.this, getString(R.string.txt_alert), getString(R.string.txt_coming_soon));
             }
         });
 

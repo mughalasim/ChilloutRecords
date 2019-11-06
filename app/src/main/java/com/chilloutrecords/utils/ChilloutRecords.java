@@ -16,20 +16,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 
-public class MyApplication extends Application {
+public class ChilloutRecords extends Application {
 
     private static Context context;
 
     public void onCreate() {
         super.onCreate();
-        MyApplication.context = getApplicationContext();
+        ChilloutRecords.context = getApplicationContext();
 
         initFireBase();
 
     }
 
     public static Context getAppContext() {
-        return MyApplication.context;
+        return ChilloutRecords.context;
     }
 
     public static void initFireBase() {
@@ -40,7 +40,7 @@ public class MyApplication extends Application {
                 .setStorageBucket(BuildConfig.FB_STORE)
                 .build();
 
-        List<FirebaseApp> fire_base_app_list = FirebaseApp.getApps(MyApplication.getAppContext());
+        List<FirebaseApp> fire_base_app_list = FirebaseApp.getApps(ChilloutRecords.getAppContext());
 
         if (fire_base_app_list.size() < 1) {
             FirebaseApp.initializeApp(getAppContext(), builder);

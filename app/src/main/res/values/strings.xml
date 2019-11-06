@@ -52,7 +52,6 @@
     <string name="et_hint_confirm_password">Confirm Password</string>
 
     <!--APP VERSIONING ==========================================================================-->
-    <string name="txt_version">App version:&#160;</string>
     <string name="txt_old_version_title">Old version</string>
     <string name="txt_old_version_desc">Seems like you are using an old version of the app, tap YES to automatically download our new APK to get new features</string>
     <string name="txt_update_now">Update now</string>

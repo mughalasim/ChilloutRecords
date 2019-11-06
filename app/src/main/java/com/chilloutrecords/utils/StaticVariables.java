@@ -9,6 +9,7 @@ public class StaticVariables {
     public static FirebaseAuth FIREBASE_AUTH;
     public static FirebaseUser FIREBASE_USER;
     public static FirebaseDatabase FIREBASE_DB;
+    public static FirebaseAuth.AuthStateListener FIREBASE_AUTH_STATE_LISTENER;
 
     // ANIMATION TIME ==============================================================================
     public static int INT_ANIMATION_TIME = 1000;

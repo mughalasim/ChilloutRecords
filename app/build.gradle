@@ -22,15 +22,19 @@ android {
         multiDexEnabled true
         resConfigs "en"
 
-        // RETROFIT TIMEOUT
-        buildConfigField 'Integer', 'CONNECTION_TIMEOUT', '20'
+        // FIREBASE DATABASE URLS
+        buildConfigField 'String', 'DB_REF_ABOUT_US', DB_REF_ABOUT_US
+        buildConfigField 'String', 'DB_REF_APP_VERSION', DB_REF_APP_VERSION
+        buildConfigField 'String', 'DB_REF_POLICY', DB_REF_POLICY
+        buildConfigField 'String', 'DB_REF_TRACKS', DB_REF_TRACKS
+        buildConfigField 'String', 'DB_REF_USERS', DB_REF_USERS
+        buildConfigField 'String', 'DB_REF_VIDEOS', DB_REF_VIDEOS
 
-        // DATABASE VERSION
-        buildConfigField 'Integer', 'DATABASE_VERSION', "$rootProject.versionCode"
+        // APP VERSION
+        resValue "string", 'app_version', "Version: $rootProject.versionName"
 
         // FIREBASE INIT
         resValue "string", "FB_API_KEY", FB_API_KEY
-        buildConfigField 'String', 'FB_APP_ID', FB_APP_ID
         buildConfigField 'String', 'FB_STORE', FB_STORE
 
         // FIREBASE PATHS
@@ -80,6 +84,8 @@ android {
             manifestPlaceholders = [
                     appIcon: "@mipmap/ic_launcher_free"
             ]
+            // FIREBASE APP ID
+            buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_FREE
             // APP IS FREE VERSION - WITH ADS
 //            buildConfigField 'Boolean', 'IS_PRO', false
         }
@@ -91,6 +97,8 @@ android {
             manifestPlaceholders = [
                     appIcon: "@mipmap/ic_launcher_pro"
             ]
+            // FIREBASE APP ID
+            buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_PRO
             // APP IS PRO VERSION - AD FREE
 //            buildConfigField 'Boolean', 'IS_PRO', true
         }
@@ -119,9 +127,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
 
-    // RETROFIT
-    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-
     // JSON PARSING
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
@@ -148,9 +153,6 @@ dependencies {
 
     // NOTIFICATION BADGES
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"
-
-    // GIF VIEWER
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
 
     // VIDEO PAYER
     implementation 'com.afollestad:easyvideoplayer:0.3.0'

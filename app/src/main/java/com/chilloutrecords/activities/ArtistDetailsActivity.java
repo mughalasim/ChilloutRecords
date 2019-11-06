@@ -24,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helper;
 
 public class ArtistDetailsActivity extends ParentActivity {
 
@@ -59,7 +58,7 @@ public class ArtistDetailsActivity extends ParentActivity {
 
         handleExtraBundles();
 
-        initialize(R.id.home, STR_NAME);
+//        initialize(R.id.home, STR_NAME);
 
         fetchData(DB_REFERENCE);
 
@@ -93,13 +92,13 @@ public class ArtistDetailsActivity extends ParentActivity {
             Glide.with(ArtistDetailsActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
-//            helper.ToastMessage(ArtistDetailsActivity.this, getString(R.string.error_500));
+//            dialogs.ToastMessage(ArtistDetailsActivity.this, getString(R.string.error_500));
         }
     }
 
     public void fetchData(String dbRef) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        Helper.LogThis("DATABASE REF: " + dbRef);
+//        DialogMethods.LogThis("DATABASE REF: " + dbRef);
         DatabaseReference myRef = database.getReference(dbRef);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -108,7 +107,7 @@ public class ArtistDetailsActivity extends ParentActivity {
                 try {
                     Gson gson = new Gson();
                     JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-//                    Helper.LogThis("AFTER PARSING: " + jsonObject.toString());
+//                    DialogMethods.LogThis("AFTER PARSING: " + jsonObject.toString());
 
                     information.setText(jsonObject.getString("info"));
 
@@ -122,14 +121,14 @@ public class ArtistDetailsActivity extends ParentActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     noData();
-//                    Helper.LogThis(e.toString());
+//                    DialogMethods.LogThis(e.toString());
                 }
-//                helper.progressDialog(false);
+//                dialogs.progressDialog(false);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-//                helper.progressDialog(false);
+//                dialogs.progressDialog(false);
                 noData();
                 Log.w("HOMEPAGE: ", "Failed to read value.", error.toException());
             }

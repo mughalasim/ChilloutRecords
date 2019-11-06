@@ -11,28 +11,17 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:orientation="vertical">
 
             <include layout="@layout/toolbar" />
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/ll_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/padding_medium">
-
-                <TextView
-                    android:id="@+id/txt_info"
-                    style="@style/TextBody"
-                    android:layout_gravity="center"
-                    android:text="@string/progress_loading"
-                    android:layout_margin="@dimen/padding_medium"
-                    android:padding="@dimen/padding_medium"
-                    android:background="@drawable/bckgrd_card"
-                    android:textColor="@color/colorPrimary" />
-
-            </ScrollView>
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
 
         </LinearLayout>
 

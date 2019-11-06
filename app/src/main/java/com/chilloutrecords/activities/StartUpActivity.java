@@ -1,5 +1,6 @@
 package com.chilloutrecords.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.fragments.LoginFragment;
@@ -22,22 +24,18 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
 public class StartUpActivity extends AppCompatActivity {
 
-    private TabLayout tab_layout;
-    private ViewPager view_pager;
-    private final String TAG_LOG = "STARTUP";
-
-
-
+    private TabLayout
+            tab_layout;
+    private ViewPager
+            view_pager;
     private int[] fragment_title_list = {
             R.string.nav_login,
             R.string.nav_register
     };
-
     private final String[] fragment_extras = {
             "",
             ""
     };
-
     private Fragment[] fragment_list = {
             new LoginFragment(),
             new RegisterFragment()
@@ -79,7 +77,7 @@ public class StartUpActivity extends AppCompatActivity {
     }
 
     public void openTermsAndConditions(View view) {
-
+        startActivity(new Intent(this, TextActivity.class).putExtra(EXTRA_STRING, BuildConfig.DB_REF_POLICY));
     }
 
 }

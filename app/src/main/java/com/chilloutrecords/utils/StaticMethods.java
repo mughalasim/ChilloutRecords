@@ -8,25 +8,29 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.HomeActivity;
 import com.chilloutrecords.activities.SplashScreenActivity;
 import com.chilloutrecords.activities.StartUpActivity;
+import com.chilloutrecords.interfaces.GeneralInterface;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
@@ -35,41 +39,28 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_FALSE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRUE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH_STATE_LISTENER;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
 
 public class StaticMethods {
 
-    public interface SuccessListener {
-        void success();
-
-        void failed();
-    }
-
-    public interface DialogListener {
-        void yes();
-
-        void no();
-    }
-
-    // GET USER ID AND LOGIN TO APP
-    public static void getUserIdAndLogin(Activity context) {
-        FIREBASE_USER = FIREBASE_AUTH.getCurrentUser();
-        if (FIREBASE_USER != null) {
-            logg("FETCH USER", FIREBASE_USER.getUid());
-            context.finish();
-//            context.startActivity(new Intent(context, HomeActivity.class));
-        } else {
-            context.finish();
-            context.startActivity(new Intent(context, StartUpActivity.class));
-        }
-    }
+    private static Toast toast;
 
     // LOGS ========================================================================================
     public static void logg(String page_title, String data) {
         if (BuildConfig.DEBUG) {
             Log.e(page_title + ": ", data);
         }
+    }
+
+    public static void showToast(String message) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(ChilloutRecords.getAppContext(), message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     // ANIMATIONS ==================================================================================
@@ -104,37 +95,33 @@ public class StaticMethods {
     }
 
     // BROADCASTS ==================================================================================
-    public static void broadcastLogout() {
-        Context context = MyApplication.getAppContext();
+    public static void broadcastLogout(Boolean is_session_expired) {
+        Context context = ChilloutRecords.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
+        FIREBASE_AUTH.removeAuthStateListener(FIREBASE_AUTH_STATE_LISTENER);
         FIREBASE_AUTH.signOut();
+        if (is_session_expired) {
+            showToast("Your session has expired. Kindly login to continue");
+        }
         context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, EXTRA_TRUE));
-        context.sendBroadcast(new Intent().setAction(BROADCAST_LOG_OUT));
-    }
-
-    public static void broadcastSessionExpiry() {
-        Context context = MyApplication.getAppContext();
-        SharedPrefs.deleteAllSharedPrefs();
-        FIREBASE_AUTH.signOut();
-        context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, EXTRA_FALSE));
         context.sendBroadcast(new Intent().setAction(BROADCAST_LOG_OUT));
     }
 
     // VALIDATIONS =================================================================================
     public static boolean validateInternetConnection() {
-        ConnectivityManager cm = (ConnectivityManager) MyApplication.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) ChilloutRecords.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnected();
 
     }
 
-    public static void validateAppIsInstalled(String uri, SuccessListener listener) {
-        PackageManager pm = MyApplication.getAppContext().getPackageManager();
+    public static boolean validateAppIsInstalled(String uri) {
+        PackageManager pm = ChilloutRecords.getAppContext().getPackageManager();
         try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-            listener.success();
+            return true;
         } catch (PackageManager.NameNotFoundException e) {
-            listener.failed();
+            return false;
         }
     }
 
@@ -184,11 +171,11 @@ public class StaticMethods {
         }
     }
 
-    public boolean validateSpinner(Spinner spinner) {
+    public static boolean validateSpinner(Spinner spinner) {
         return spinner.getSelectedItemPosition() != 0;
     }
 
-    public boolean validateEmptyTextView(TextView textView, String errorMessage) {
+    public static boolean validateEmptyTextView(TextView textView, String errorMessage) {
         return textView.getText().toString().trim().length() >= 1;
 
     }

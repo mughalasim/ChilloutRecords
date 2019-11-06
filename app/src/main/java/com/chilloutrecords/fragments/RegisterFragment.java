@@ -1,6 +1,5 @@
 package com.chilloutrecords.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -15,10 +14,10 @@ import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.HomeActivity;
+import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
-import com.chilloutrecords.utils.Helper;
+import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,15 +27,16 @@ import com.google.firebase.auth.AuthResult;
 import java.util.Calendar;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
 public class RegisterFragment extends Fragment {
     private View root_view;
-    private Helper helper;
+    private DialogMethods dialogs;
     private final String TAG_LOG = "REGISTER";
 
     private EditText et_email, et_name, et_stage_name, et_password, et_password_confirm;
     private Spinner spinner_gender;
-    MaterialButton btn_register;
+    private MaterialButton btn_register;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -55,7 +55,7 @@ public class RegisterFragment extends Fragment {
 
                 AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
-                helper = new Helper(getActivity());
+                dialogs = new DialogMethods(getActivity());
 
                 et_name = root_view.findViewById(R.id.et_name);
                 et_stage_name = root_view.findViewById(R.id.et_stage_name);
@@ -86,12 +86,13 @@ public class RegisterFragment extends Fragment {
                                         StaticMethods.validateEmptyEditText(et_password_confirm, getString(R.string.error_field_required)) &&
                                         StaticMethods.validateMatch(et_password, et_password_confirm)
                         ) {
-                            helper.setProgressDialog(getString(R.string.progress_register));
+
+                            dialogs.setProgressDialog(getString(R.string.progress_register));
                             FIREBASE_AUTH.createUserWithEmailAndPassword(et_email.getText().toString().trim(), et_password.getText().toString().trim())
                                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
-                                            helper.dismissProgressDialog();
+                                            dialogs.dismissProgressDialog();
                                             if (task.isSuccessful()) {
                                                 UserModel user = new UserModel();
                                                 user.name = et_name.getText().toString().trim();
@@ -101,18 +102,28 @@ public class RegisterFragment extends Fragment {
                                                 user.gender = spinner_gender.getSelectedItemPosition();
                                                 user.is_artist = false;
                                                 user.id = FIREBASE_AUTH.getCurrentUser().getUid();
-                                                Database.updateUser(user);
+                                                Database.setUser(user, new GeneralInterface() {
+                                                    @Override
+                                                    public void success() {
+                                                        Database.getUserIdAndLogin(getActivity());
+                                                    }
 
-                                                helper.showToast("success");
+                                                    @Override
+                                                    public void failed() {
+                                                        FIREBASE_USER.delete();
+                                                        FIREBASE_AUTH.signOut();
+                                                        dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
+                                                    }
+                                                });
 
                                             } else {
                                                 StaticMethods.logg(TAG_LOG, "Registration Failed " + task.getException());
 
                                                 if (task.getException() != null && !task.getException().toString().equals("") && task.getException().toString().contains(":")) {
                                                     String[] messages = task.getException().toString().split(":");
-                                                    helper.setDialogCancel(getString(R.string.txt_alert), messages[1]);
+                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), messages[1]);
                                                 } else {
-                                                    helper.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
+                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
                                                 }
 
                                             }

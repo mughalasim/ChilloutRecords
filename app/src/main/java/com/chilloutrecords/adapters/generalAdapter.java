@@ -1,33 +1,24 @@
 package com.chilloutrecords.adapters;
 
 import android.content.Context;
-import android.content.Intent;
+
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.chilloutrecords.utils.Helper;
+import com.chilloutrecords.utils.DialogMethods;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import java.util.ArrayList;
-
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.ArtistDetailsActivity;
-import com.chilloutrecords.activities.VideoPlayerActivity;
 //import com.chilloutrecords.models.GeneralModel;
-
-import static com.chilloutrecords.activities.HomeActivity.ARTISTS;
-import static com.chilloutrecords.activities.HomeActivity.VIDEOS;
 
 public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHolder> {
     private Context context;
 //    private ArrayList<GeneralModel> mDataset;
-    private Helper helper;
+    private DialogMethods dialogs;
     private String adapter_type = "";
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,7 +61,7 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
 
 //    public generalAdapter(Context context, ArrayList<GeneralModel> myDataset, String adapter_type) {
 //        this.context = context;
-//        helper = new Helper(context);
+//        dialogs = new DialogMethods(context);
 //        this.mDataset = myDataset;
 //        this.adapter_type = adapter_type;
 //
@@ -105,7 +96,7 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
 //            holder.itemView.setOnClickListener(new OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    if (helper.validateInternetConnection() && generalModel.artist_id.length() > 0) {
+//                    if (dialogs.validateInternetConnection() && generalModel.artist_id.length() > 0) {
 //                        holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),
 //                                ArtistDetailsActivity.class)
 //                                .putExtra("id", generalModel.artist_id)
@@ -114,7 +105,7 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
 //                        );
 //
 //                    } else {
-//                        helper.myDialog(context, "Alert", context.getString(R.string.error_connection));
+//                        dialogs.myDialog(context, "Alert", context.getString(R.string.error_connection));
 //                    }
 //                }
 //            });
@@ -132,20 +123,20 @@ public class generalAdapter extends RecyclerView.Adapter<generalAdapter.ViewHold
 //            holder.itemView.setOnClickListener(new OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    if (helper.validateInternetConnection() && generalModel.video_url.length() > 0) {
+//                    if (dialogs.validateInternetConnection() && generalModel.video_url.length() > 0) {
 //                        holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),
 //                                VideoPlayerActivity.class)
 //                                .putExtra("VIDEO_URL", generalModel.video_url)
 //                        );
 //
 //                    } else {
-//                        helper.myDialog(context, "Alert", context.getString(R.string.error_connection));
+//                        dialogs.myDialog(context, "Alert", context.getString(R.string.error_connection));
 //                    }
 //                }
 //            });
 //        }
 //
-//        Helper.animate_recyclerview(holder.itemView);
+//        DialogMethods.animate_recyclerview(holder.itemView);
 
     }
 

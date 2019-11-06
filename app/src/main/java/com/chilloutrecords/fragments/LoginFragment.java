@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helper;
+import com.chilloutrecords.utils.Database;
+import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +27,7 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 
 public class LoginFragment extends Fragment {
     private View root_view;
-    private Helper helper;
+    private DialogMethods dialogs;
     private final String TAG_LOG = "LOGIN";
 
     private EditText
@@ -51,7 +52,7 @@ public class LoginFragment extends Fragment {
 
                 AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
-                helper = new Helper(getActivity());
+                dialogs = new DialogMethods(getActivity());
 
                 et_email = root_view.findViewById(R.id.et_email);
                 et_password = root_view.findViewById(R.id.et_password);
@@ -67,7 +68,7 @@ public class LoginFragment extends Fragment {
                     public void onClick(View view) {
                         if (StaticMethods.validateEmail(et_email) && StaticMethods.validateEmptyEditText(et_password, getString(R.string.error_field_required))) {
 
-                            helper.setProgressDialog(getString(R.string.progress_login));
+                            dialogs.setProgressDialog(getString(R.string.progress_login));
 
                             FIREBASE_AUTH
                                     .signInWithEmailAndPassword(et_email.getText().toString().trim(), et_password.getText().toString().trim())
@@ -75,17 +76,17 @@ public class LoginFragment extends Fragment {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                            helper.dismissProgressDialog();
+                                            dialogs.dismissProgressDialog();
 
                                             if (task.isSuccessful()) {
                                                 StaticMethods.logg(TAG_LOG, "Sign in success");
-                                                StaticMethods.getUserIdAndLogin(getActivity());
+                                                Database.getUserIdAndLogin(getActivity());
                                             } else {
                                                 if (task.getException() != null && !task.getException().toString().equals("") && task.getException().toString().contains(":")) {
                                                     String[] messages = task.getException().toString().split(":");
-                                                    helper.setDialogCancel(getString(R.string.txt_alert), messages[1]);
+                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), messages[1]);
                                                 } else {
-                                                    helper.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_login_failed));
+                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_login_failed));
                                                 }
                                             }
 

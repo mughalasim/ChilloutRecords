@@ -5,7 +5,7 @@
     android:background="@color/colorAccent">
 
     <ImageView
-        android:id="@+id/mainLogo"
+        android:id="@+id/main_logo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/img_size_x_large"
         android:layout_centerInParent="true"

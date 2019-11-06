@@ -2,30 +2,24 @@ package com.chilloutrecords.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.AboutUsActivity;
-import com.chilloutrecords.activities.HomeActivity;
-import com.chilloutrecords.activities.MyAccountActivity;
+import com.chilloutrecords.interfaces.GeneralInterface;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Objects;
 
-public class Helper {
+public class DialogMethods {
     private Context context;
-    private static Toast toast;
     private TextView txt_loading_message;
     private final Dialog dialog_progress;
 
-    public Helper(Context context) {
+    public DialogMethods(Context context) {
         this.context = context;
 
         dialog_progress = new Dialog(context);
@@ -36,20 +30,6 @@ public class Helper {
 
         txt_loading_message = dialog_progress.findViewById(R.id.txt_loading_message);
     }
-
-    // DRAWER NAVIGATION ===========================================================================
-    public void Drawer_Item_Clicked(Context context, int id) {
-        if (id == R.id.home) {
-            context.startActivity(new Intent(context, HomeActivity.class));
-        } else if (id == R.id.my_account) {
-            context.startActivity(new Intent(context, MyAccountActivity.class));
-        } else if (id == R.id.about_us) {
-            context.startActivity(new Intent(context, AboutUsActivity.class));
-        } else if (id == R.id.log_out) {
-            StaticMethods.broadcastLogout();
-        }
-    }
-
 
     // DIALOGS =====================================================================================
     public void setProgressDialog(String message) {
@@ -73,7 +53,7 @@ public class Helper {
             String str_title,
             String str_message,
             String str_confirm,
-            final StaticMethods.DialogListener response) {
+            final GeneralInterface response) {
 
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_confirm);
@@ -89,14 +69,14 @@ public class Helper {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                response.yes();
+                response.success();
                 dialog.cancel();
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                response.no();
+                response.failed();
                 dialog.cancel();
             }
         });
@@ -122,15 +102,6 @@ public class Helper {
             }
         });
         dialog.show();
-    }
-
-    public void showToast(String message) {
-        if (toast != null) {
-            toast.cancel();
-        }
-        toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 
 

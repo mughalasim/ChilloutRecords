@@ -10,7 +10,7 @@ public class SharedPrefs {
     private static final String MYPREFS = "CHILLOUT_SHARED_PREFS";
 
     static {
-        context = MyApplication.getAppContext();
+        context = ChilloutRecords.getAppContext();
     }
 
 

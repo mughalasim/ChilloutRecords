@@ -8,13 +8,13 @@ import com.afollestad.easyvideoplayer.EasyVideoCallback;
 import com.afollestad.easyvideoplayer.EasyVideoPlayer;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helper;
+import com.chilloutrecords.utils.DialogMethods;
 
 public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoCallback {
 
     private String
             VIDEO_URL = "";
-    private Helper helper;
+    private DialogMethods dialogs;
     private EasyVideoPlayer player;
 
     @Override
@@ -26,7 +26,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
 
         //TODO make this autorotate to Horizontakl orientation
 
-        helper = new Helper(VideoPlayerActivity.this);
+        dialogs = new DialogMethods(VideoPlayerActivity.this);
         player = findViewById(R.id.player);
         player.setCallback(this);
         player.setSource(Uri.parse(VIDEO_URL));
@@ -40,7 +40,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
 
         } else {
             finish();
-//            helper.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
+//            dialogs.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
         }
     }
 
@@ -70,7 +70,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
 
     @Override
     public void onError(EasyVideoPlayer player, Exception e) {
-//        helper.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
+//        dialogs.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
         finish();
     }
 

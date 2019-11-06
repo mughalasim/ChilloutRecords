@@ -28,8 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.utils.Helper;
-import pl.droidsonroids.gif.GifImageView;
 
 public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
@@ -54,8 +52,6 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     private EasyVideoPlayer player;
 
-    private GifImageView current_animation;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +63,7 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
         handleExtraBundles();
 
-        initialize(R.id.home, STR_NAME);
+//        initialize(R.id.home, STR_NAME);
 
         fetchData(DB_REFERENCE);
 
@@ -109,13 +105,13 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
             Glide.with(MusicActivity.this).load(STR_PPIC).into(ppic);
         } else {
             finish();
-//            helper.ToastMessage(MusicActivity.this, getString(R.string.error_500));
+//            dialogs.ToastMessage(MusicActivity.this, getString(R.string.error_500));
         }
     }
 
     public void fetchData(String dbRef) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        Helper.LogThis("DATABASE REF: " + dbRef);
+//        DialogMethods.LogThis("DATABASE REF: " + dbRef);
         DatabaseReference myRef = database.getReference(dbRef);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -124,30 +120,30 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 try {
                     Gson gson = new Gson();
 
-//                    Helper.LogThis("DATA VALUE: " + dataSnapshot.getValue());
+//                    DialogMethods.LogThis("DATA VALUE: " + dataSnapshot.getValue());
 
                     if (dataSnapshot.getValue().toString().startsWith("[")) {
                         JSONArray jsonArray = new JSONArray(gson.toJson(dataSnapshot.getValue()));
-//                        Helper.LogThis("AFTER PARSING ARRAY: " + jsonArray.toString());
+//                        DialogMethods.LogThis("AFTER PARSING ARRAY: " + jsonArray.toString());
                         addTracksFromArray(jsonArray);
                     } else {
                         JSONObject jsonObject = new JSONObject(gson.toJson(dataSnapshot.getValue()));
-//                        Helper.LogThis("AFTER PARSING OBJECT: " + jsonObject.toString());
+//                        DialogMethods.LogThis("AFTER PARSING OBJECT: " + jsonObject.toString());
                         addTracksFromObject(jsonObject);
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     noData();
-//                    Helper.LogThis(e.toString());
+//                    DialogMethods.LogThis(e.toString());
                 }
 
-//                helper.progressDialog(false);
+//                dialogs.progressDialog(false);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-//                helper.progressDialog(false);
+//                dialogs.progressDialog(false);
                 noData();
                 Log.e("HOMEPAGE: ", "Failed to read value.", error.toException());
             }
@@ -185,9 +181,8 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
                 child.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        updateAnimation(current_animation, false);
 //                        current_animation = music_playing;
-//                        helper.animate_flash(child, 10000, 5);
+//                        dialogs.animate_flash(child, 10000, 5);
                         player.setSource(Uri.parse(track_url.getText().toString()));
                         LL_player.setVisibility(View.VISIBLE);
                     }
@@ -196,7 +191,7 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 //                lyrics.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
-////                        helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
+////                        dialogs.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
 //                    }
 //                });
 
@@ -235,9 +230,8 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
             child.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    updateAnimation(current_animation, false);
 //                    current_animation = music_playing;
-//                    helper.animate_flash(child, 10000, 5);
+//                    dialogs.animate_flash(child, 10000, 5);
                     player.setSource(Uri.parse(track_url.getText().toString()));
                     LL_player.setVisibility(View.VISIBLE);
                 }
@@ -246,7 +240,7 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 //            lyrics.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
-////                    helper.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
+////                    dialogs.myDialog(MusicActivity.this, "Lyrics", str_track_lyrics);
 //                }
 //            });
 
@@ -261,16 +255,6 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
     public void noData() {
         no_list_items.setVisibility(View.VISIBLE);
         LL_player.setVisibility(View.GONE);
-    }
-
-    public void updateAnimation(GifImageView view, Boolean show) {
-        if (current_animation != null) {
-            if (show) {
-                view.setVisibility(View.VISIBLE);
-            } else {
-                view.setVisibility(View.GONE);
-            }
-        }
     }
 
     // Methods for the implemented EasyVideoCallback ===============================================
@@ -294,13 +278,13 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     @Override
     public void onError(EasyVideoPlayer player, Exception e) {
-//        helper.ToastMessage(MusicActivity.this, e.toString());
+//        dialogs.ToastMessage(MusicActivity.this, e.toString());
         finish();
     }
 
     @Override
     public void onCompletion(EasyVideoPlayer player) {
-        updateAnimation(current_animation, false);
+
     }
 
     @Override
@@ -315,13 +299,11 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
 
     @Override
     public void onStarted(EasyVideoPlayer player) {
-        updateAnimation(current_animation, true);
     }
 
     @Override
     public void onPaused(EasyVideoPlayer player) {
         // TODO handle if needed
-        updateAnimation(current_animation, false);
     }
 
 }
