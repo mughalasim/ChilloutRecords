@@ -57,7 +57,7 @@
         <activity android:name=".activities.ParentActivity" />
 
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".activities.ParentToolBarActivity"
             android:launchMode="singleTask" />
 
         <activity

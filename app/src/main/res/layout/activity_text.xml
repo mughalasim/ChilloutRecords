@@ -26,6 +26,7 @@
                     android:id="@+id/txt_info"
                     style="@style/TextBody"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="@string/progress_loading"
                     android:layout_margin="@dimen/padding_medium"
                     android:padding="@dimen/padding_medium"

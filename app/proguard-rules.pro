@@ -22,36 +22,24 @@
 
 # MAPPING
 -printmapping proguard_mapping.txt
-
 -verbose
-
-# RETROFIT
--dontwarn okio.**
--dontwarn retrofit2.Platform$Java8
--keep class retrofit.** { *; }
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 
 # GLIDE CLASSES
 -dontwarn javax.annotation.**
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
-# SEARCH WIDGET CLASSES
--keep class android.support.v7.widget.SearchView { *; }
-
-# FACEBOOK CLASSES
--keepattributes *Annotation*
--keep class com.facebook.** { *; }
-
 # FIREBASE MODELS
 -keepattributes Signature
 -keepattributes *Annotation*
+-keepclassmembers class com.chilloutrecords.models.** {
+  *;
+}
 
 # GOOGLE PLAY ADS
 -dontwarn com.google.android.gms.**
 
 # USELESS WARNINGS
 -ignorewarnings
-
 
 # YOYO ANIMATION CLASSES
 -keep class com.daimajia.* { *; }

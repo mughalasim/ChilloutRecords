@@ -17,30 +17,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.SplashScreenActivity;
-import com.chilloutrecords.activities.StartUpActivity;
-import com.chilloutrecords.interfaces.GeneralInterface;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
 import static com.chilloutrecords.utils.StaticVariables.BROADCAST_LOG_OUT;
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_FALSE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRUE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH_STATE_LISTENER;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
 
 public class StaticMethods {
@@ -98,7 +90,6 @@ public class StaticMethods {
     public static void broadcastLogout(Boolean is_session_expired) {
         Context context = ChilloutRecords.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
-        FIREBASE_AUTH.removeAuthStateListener(FIREBASE_AUTH_STATE_LISTENER);
         FIREBASE_AUTH.signOut();
         if (is_session_expired) {
             showToast("Your session has expired. Kindly login to continue");

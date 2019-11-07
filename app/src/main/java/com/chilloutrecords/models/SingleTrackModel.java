@@ -1,8 +1,8 @@
 package com.chilloutrecords.models;
 
-import java.io.Serializable;
+import androidx.annotation.Keep;
 
-public class SingleTrackModel implements Serializable {
+public class SingleTrackModel {
 
     public String art = "";
     public String lyrics = "";
@@ -12,5 +12,10 @@ public class SingleTrackModel implements Serializable {
     public int play_count;
 
     public long release_date;
+
+    @Keep
+    public SingleTrackModel(){
+        // Default constructor required for calls to DataSnapshot.getValue(SingleTrackModel.class)
+    }
 
 }

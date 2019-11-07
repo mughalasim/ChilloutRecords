@@ -20,8 +20,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         ShortcutBadger.applyCount(SplashScreenActivity.this, 0);
 
-        ImageView main_logo = findViewById(R.id.main_logo);
-        StaticMethods.animate_flash(main_logo, 0);
+//        ImageView main_logo = findViewById(R.id.main_logo);
+//        StaticMethods.animate_flash(main_logo, 0);
 
         // CHECK IF THE USER IS LOGGED IN
         Database.getUserIdAndLogin(SplashScreenActivity.this);

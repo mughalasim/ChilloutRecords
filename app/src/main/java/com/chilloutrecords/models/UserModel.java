@@ -1,6 +1,6 @@
 package com.chilloutrecords.models;
 
-import java.io.Serializable;
+import androidx.annotation.Keep;
 
 public class UserModel {
     public int profile_visits;
@@ -16,5 +16,12 @@ public class UserModel {
     public Boolean is_artist;
 
     public long member_since_date;
+
+    public MusicModel music;
+
+    @Keep
+    public UserModel(){
+        // Default constructor required for calls to DataSnapshot.getValue(UserModel.class)
+    }
 
 }
