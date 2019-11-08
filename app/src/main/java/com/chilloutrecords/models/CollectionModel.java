@@ -4,17 +4,18 @@ import androidx.annotation.Keep;
 
 import java.util.ArrayList;
 
-public class CollectionTrackModel {
+public class CollectionModel {
+    public String id = "";
     public String name = "";
     public long release_date;
     public String art = "";
     public String type = "";
 
-    public ArrayList<TrackModel> track_models;
+    public ArrayList<TrackModel> tracks;
 
     @Keep
-    public CollectionTrackModel(){
-        // Default constructor required for calls to DataSnapshot.getValue(CollectionTrackModel.class)
+    public CollectionModel(){
+        // Default constructor required for calls to DataSnapshot.getValue(CollectionModel.class)
     }
 
 }

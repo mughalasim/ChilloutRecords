@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
@@ -24,7 +23,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
@@ -34,7 +36,12 @@ public class RegisterFragment extends Fragment {
     private DialogMethods dialogs;
     private final String TAG_LOG = "REGISTER";
 
-    private EditText et_email, et_name, et_stage_name, et_password, et_password_confirm;
+    private EditText
+            et_email,
+            et_name,
+            et_stage_name,
+            et_password,
+            et_password_confirm;
     private Spinner spinner_gender;
     private MaterialButton btn_register;
 
@@ -52,8 +59,6 @@ public class RegisterFragment extends Fragment {
         if (root_view == null && getActivity() != null) {
             try {
                 root_view = inflater.inflate(R.layout.frag_register, container, false);
-
-                AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
                 dialogs = new DialogMethods(getActivity());
 
@@ -89,33 +94,12 @@ public class RegisterFragment extends Fragment {
 
                             dialogs.setProgressDialog(getString(R.string.progress_register));
                             FIREBASE_AUTH.createUserWithEmailAndPassword(et_email.getText().toString().trim(), et_password.getText().toString().trim())
-                                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                    .addOnCompleteListener(Objects.requireNonNull(getActivity()), new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             dialogs.dismissProgressDialog();
                                             if (task.isSuccessful()) {
-                                                UserModel user = new UserModel();
-                                                user.name = et_name.getText().toString().trim();
-                                                user.stage_name = et_stage_name.getText().toString().trim();
-                                                user.member_since_date = Calendar.getInstance().getTimeInMillis();
-                                                user.email = et_email.getText().toString().trim();
-                                                user.gender = spinner_gender.getSelectedItemPosition();
-                                                user.is_artist = false;
-                                                user.id = FIREBASE_AUTH.getCurrentUser().getUid();
-                                                Database.setUser(user, new GeneralInterface() {
-                                                    @Override
-                                                    public void success() {
-                                                        Database.getUserIdAndLogin(getActivity());
-                                                    }
-
-                                                    @Override
-                                                    public void failed() {
-                                                        FIREBASE_USER.delete();
-                                                        FIREBASE_AUTH.signOut();
-                                                        dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
-                                                    }
-                                                });
-
+                                                createUser();
                                             } else {
                                                 StaticMethods.logg(TAG_LOG, "Registration Failed " + task.getException());
 
@@ -143,5 +127,37 @@ public class RegisterFragment extends Fragment {
             ((ViewGroup) container.getParent()).removeView(root_view);
         }
         return root_view;
+    }
+
+    private void createUser(){
+        // CREATE THE NEW USER
+        UserModel user = new UserModel();
+
+        user.id = Objects.requireNonNull(FIREBASE_AUTH.getCurrentUser()).getUid();
+        user.name = et_name.getText().toString().trim();
+        user.stage_name = et_stage_name.getText().toString().trim();
+        user.member_since_date = Calendar.getInstance().getTimeInMillis();
+        user.email = et_email.getText().toString().trim();
+        user.gender = spinner_gender.getSelectedItemPosition();
+        user.is_artist = false;
+//        user.music.collections.add("0");
+//        user.music.collections.add("1");
+//        user.music.singles.add("0");
+
+        // SET THE USER IN THE DATABASE
+        Database.setUser(user, new GeneralInterface() {
+            @Override
+            public void success() {
+                Database.getUserIdAndLogin(getActivity());
+            }
+
+            @Override
+            public void failed() {
+                // IF THE USER FAILED TO GET INSERTED, WE DELETE THE USER FORM THE AUTH LIST AND SIGN OUT
+                FIREBASE_USER.delete();
+                FIREBASE_AUTH.signOut();
+                dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
+            }
+        });
     }
 }

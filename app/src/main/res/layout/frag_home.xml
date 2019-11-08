@@ -1,71 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/CardLayout"
-        android:layout_marginTop="@dimen/padding_medium"
-        android:onClick="openArtists"
-        android:padding="@dimen/padding_large">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardLayout"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:onClick="openArtists"
+            android:padding="@dimen/padding_large">
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/img_size_x_large"
-                android:scaleType="centerCrop"
-                android:src="@drawable/home_artists"
-                app:riv_corner_radius="@dimen/radius_corner" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/padding_large"
-                android:elevation="@dimen/text_margin"
-                android:text="@string/nav_artists"
-                android:textColor="@color/colorAccent" />
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_size_x_large"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_artists"
+                    app:riv_corner_radius="@dimen/radius_corner" />
 
-        </RelativeLayout>
+                <TextView
+                    style="@style/TextTitle"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/padding_large"
+                    android:elevation="@dimen/text_margin"
+                    android:text="@string/nav_artists"
+                    android:textColor="@color/colorAccent" />
 
-    </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/CardLayout"
-        android:layout_marginTop="@dimen/padding_medium"
-        android:onClick="openVideos"
-        android:padding="@dimen/padding_large">
+        </com.google.android.material.card.MaterialCardView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardLayout"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:onClick="openVideos"
+            android:padding="@dimen/padding_large">
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/img_size_x_large"
-                android:scaleType="centerCrop"
-                android:src="@drawable/home_music_videos"
-                app:riv_corner_radius="@dimen/radius_corner" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/padding_large"
-                android:elevation="@dimen/text_margin"
-                android:text="@string/nav_videos"
-                android:textColor="@color/colorAccent" />
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_size_x_large"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_music_videos"
+                    app:riv_corner_radius="@dimen/radius_corner" />
 
-        </RelativeLayout>
+                <TextView
+                    style="@style/TextTitle"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/padding_large"
+                    android:elevation="@dimen/text_margin"
+                    android:text="@string/nav_videos"
+                    android:textColor="@color/colorAccent" />
 
-    </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
 
+        </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

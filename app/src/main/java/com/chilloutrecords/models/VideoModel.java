@@ -2,9 +2,11 @@ package com.chilloutrecords.models;
 
 import androidx.annotation.Keep;
 
-public class SingleTrackModel {
+public class VideoModel {
 
+    public String id = "";
     public String art = "";
+    public String info = "";
     public String lyrics = "";
     public String name = "";
     public String url = "";
@@ -14,8 +16,8 @@ public class SingleTrackModel {
     public long release_date;
 
     @Keep
-    public SingleTrackModel(){
-        // Default constructor required for calls to DataSnapshot.getValue(SingleTrackModel.class)
+    public VideoModel(){
+        // Default constructor required for calls to DataSnapshot.getValue(VideoModel.class)
     }
 
 }

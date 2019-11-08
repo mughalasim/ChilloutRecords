@@ -24,7 +24,8 @@
         android:windowSoftInputMode="stateHidden"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        tools:ignore="MissingApplicationIcon">
+        android:icon="${icon}"
+        android:roundIcon="${icon_round}">
 
         <!--START UP PAGES ======================================================================-->
         <activity

@@ -73,7 +73,7 @@ public class StartUpActivity extends AppCompatActivity {
     }
 
     public void forgotPassword(View view) {
-
+    // TODO - create forgot password activity
     }
 
     public void openTermsAndConditions(View view) {

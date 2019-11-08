@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 
+import com.chilloutrecords.BuildConfig;
+import com.chilloutrecords.fragments.HomeFragment;
 import com.chilloutrecords.fragments.LoginFragment;
 import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.utils.ChilloutRecords;
@@ -23,6 +25,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -42,6 +46,8 @@ import com.chilloutrecords.R;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.SharedPrefs;
 
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DialogMethods
@@ -55,8 +61,6 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
             receiver;
     private TextView
             txt_page_title;
-    private LinearLayout
-            ll_fragment;
 
 
     // OVERRIDE METHODS ============================================================================
@@ -70,19 +74,19 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
         toolbar = findViewById(R.id.toolbar);
         txt_page_title = findViewById(R.id.txt_page_title);
-        ll_fragment = findViewById(R.id.ll_fragment);
 
         drawer = findViewById(R.id.drawer_layout);
         navigation_view = findViewById(R.id.nav_view);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigation_view.setNavigationItemSelectedListener(this);
 
         listenExitBroadcast();
+
+        loadFragment(new HomeFragment(), getString(R.string.nav_home), R.id.nav_home);
 
     }
 
@@ -91,19 +95,20 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_home:
-                loadFragment(new LoginFragment(), getString(R.string.nav_home), id);
+                loadFragment(new HomeFragment(), getString(R.string.nav_home), id);
                 break;
 
             case R.id.nav_my_profile:
-                loadFragment(new LoginFragment(), getString(R.string.nav_profile), id);
+                loadFragment(new HomeFragment(), getString(R.string.nav_profile), id);
                 break;
 
             case R.id.nav_share:
-                loadFragment(new LoginFragment(), getString(R.string.nav_share), id);
+//                TODO - Make share dialog
+//                dialogs.share();
                 break;
 
             case R.id.nav_about_us:
-                loadFragment(new LoginFragment(), getString(R.string.nav_about_us), id);
+                startActivity(new Intent(this, TextActivity.class).putExtra(EXTRA_STRING, BuildConfig.DB_REF_ABOUT_US));
                 break;
 
             case R.id.nav_log_out:
@@ -117,17 +122,21 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onBackPressed() {
-       dialogs.setDialogConfirm("Exit", "Are you sre you wish to exit the App", "Exit", new GeneralInterface() {
-           @Override
-           public void success() {
-               finish();
-           }
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (this.isTaskRoot()) {
+            dialogs.setDialogConfirm("Exit", "Are you sre you wish to exit the App", "Exit", new GeneralInterface() {
+                @Override
+                public void success() {
+                    finish();
+                }
 
-           @Override
-           public void failed() {
+                @Override
+                public void failed() {
 
-           }
-       });
+                }
+            });
+        }
     }
 
     @Override
@@ -142,6 +151,11 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
     public void loadFragment(Fragment fragment, String page_title, int drawer_id) {
         txt_page_title.setText(page_title);
         navigation_view.getMenu().findItem(drawer_id).setChecked(true);
+        FragmentManager manager = this.getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.ll_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
     }
 
@@ -157,7 +171,13 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         registerReceiver(receiver, filter);
     }
 
+    public void openVideos(View view){
 
+    }
+
+    public void openArtists(View view){
+
+    }
 
 
 }

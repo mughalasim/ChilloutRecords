@@ -1,5 +1,6 @@
 package com.chilloutrecords.utils;
 
+import com.chilloutrecords.models.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -9,6 +10,9 @@ public class StaticVariables {
     public static FirebaseAuth FIREBASE_AUTH;
     public static FirebaseUser FIREBASE_USER;
     public static FirebaseDatabase FIREBASE_DB;
+
+    // USER MODEL ==================================================================================
+    public static UserModel USER;
 
     // ANIMATION TIME ==============================================================================
     public static int INT_ANIMATION_TIME = 1000;

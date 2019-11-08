@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
@@ -49,8 +48,6 @@ public class LoginFragment extends Fragment {
         if (root_view == null && getActivity() != null) {
             try {
                 root_view = inflater.inflate(R.layout.frag_login, container, false);
-
-                AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
                 dialogs = new DialogMethods(getActivity());
 

@@ -3,6 +3,8 @@ package com.chilloutrecords.utils;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 
@@ -23,6 +25,8 @@ public class ChilloutRecords extends Application {
     public void onCreate() {
         super.onCreate();
         ChilloutRecords.context = getApplicationContext();
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         initFireBase();
 
