@@ -6,7 +6,8 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="@color/grey_dark"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@drawable/bckgrd_tab_white"
     app:itemIconTint="@color/colorPrimary"
     app:itemTextColor="@color/colorPrimary"
     app:menu="@menu/drawer_menu">

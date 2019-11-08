@@ -29,9 +29,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.regex.Pattern;
 
-import static com.chilloutrecords.utils.StaticVariables.BROADCAST_LOG_OUT;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRUE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
 
@@ -87,15 +85,14 @@ public class StaticMethods {
     }
 
     // BROADCASTS ==================================================================================
-    public static void broadcastLogout(Boolean is_session_expired) {
+    public static void logOutUser(Boolean is_session_expired) {
         Context context = ChilloutRecords.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
         FIREBASE_AUTH.signOut();
         if (is_session_expired) {
             showToast("Your session has expired. Kindly login to continue");
         }
-        context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, EXTRA_TRUE));
-        context.sendBroadcast(new Intent().setAction(BROADCAST_LOG_OUT));
+        context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, is_session_expired));
     }
 
     // VALIDATIONS =================================================================================

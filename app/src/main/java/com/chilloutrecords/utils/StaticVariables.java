@@ -23,11 +23,6 @@ public class StaticVariables {
 
     // BUNDLE EXTRA VARIABLES ======================================================================
     public static final String EXTRA_STRING = "EXTRA_STRING";
-    public static final String EXTRA_TRUE = "TRUE";
-    public static final String EXTRA_FALSE = "FALSE";
-
-    // BROADCAST VARIABLES =========================================================================
-    public static final String BROADCAST_LOG_OUT = "BROADCAST_LOG_OUT";
 
     // GLOBAL STATIC VARIABLES======================================================================
     public static final String CHANNEL_ID = "CHANNEL_ID";
