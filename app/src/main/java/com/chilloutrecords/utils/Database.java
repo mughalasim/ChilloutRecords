@@ -21,6 +21,7 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.USER;
+import static com.chilloutrecords.utils.StaticVariables.USER_LISTENER;
 
 public class Database {
 
@@ -42,17 +43,22 @@ public class Database {
     // GET USER MODEL FROM FIREBASE ================================================================
     private static void getUser() {
         DatabaseReference reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
-        reference.child(FIREBASE_USER.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                USER = dataSnapshot.getValue(UserModel.class);
-            }
+        if (USER_LISTENER != null) {
+            USER_LISTENER = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    USER = new UserModel();
+                    USER = dataSnapshot.getValue(UserModel.class);
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            };
+
+            reference.child(FIREBASE_USER.getUid()).addValueEventListener(USER_LISTENER);
+        }
     }
 
     // CHECK IF USER IS AUTHENTICATED ==============================================================

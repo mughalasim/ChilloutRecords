@@ -23,12 +23,14 @@ android {
         resConfigs "en"
 
         // FIREBASE DATABASE URLS
-        buildConfigField 'String', 'DB_REF_ABOUT_US', DB_REF_ABOUT_US
         buildConfigField 'String', 'DB_REF_APP_VERSION', DB_REF_APP_VERSION
+        buildConfigField 'String', 'DB_REF_ABOUT_US', DB_REF_ABOUT_US
         buildConfigField 'String', 'DB_REF_POLICY', DB_REF_POLICY
-        buildConfigField 'String', 'DB_REF_TRACKS', DB_REF_TRACKS
         buildConfigField 'String', 'DB_REF_USERS', DB_REF_USERS
         buildConfigField 'String', 'DB_REF_VIDEOS', DB_REF_VIDEOS
+        buildConfigField 'String', 'DB_REF_TRACKS', DB_REF_TRACKS
+        buildConfigField 'String', 'DB_REF_COLLECTIONS', DB_REF_COLLECTIONS
+        buildConfigField 'String', 'DB_REF_SINGLES', DB_REF_SINGLES
 
         // SONG TYPES
         buildConfigField 'String', 'SONG_TYPE_SINGLE',  SONG_TYPE_SINGLE

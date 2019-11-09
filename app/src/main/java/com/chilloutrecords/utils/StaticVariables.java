@@ -4,6 +4,7 @@ import com.chilloutrecords.models.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class StaticVariables {
     // FIREBASE VARIABLES ==========================================================================
@@ -11,8 +12,11 @@ public class StaticVariables {
     public static FirebaseUser FIREBASE_USER;
     public static FirebaseDatabase FIREBASE_DB;
 
+    // FIREBASE VALUE EVENT LISTENERS ==============================================================
+    public static ValueEventListener USER_LISTENER;
+
     // USER MODEL ==================================================================================
-    public static UserModel USER;
+    public static UserModel USER = new UserModel();
 
     // ANIMATION TIME ==============================================================================
     public static int INT_ANIMATION_TIME = 1000;

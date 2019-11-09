@@ -133,16 +133,25 @@ public class RegisterFragment extends Fragment {
         // CREATE THE NEW USER
         UserModel user = new UserModel();
 
+        // STANDARD DATA
         user.id = Objects.requireNonNull(FIREBASE_AUTH.getCurrentUser()).getUid();
         user.name = et_name.getText().toString().trim();
         user.stage_name = et_stage_name.getText().toString().trim();
-        user.member_since_date = Calendar.getInstance().getTimeInMillis();
         user.email = et_email.getText().toString().trim();
+        user.info = "Standard user";
         user.gender = spinner_gender.getSelectedItemPosition();
+        user.p_pic = "random url to the profile picture";
+
+        // MUSIC INFO
+        user.music.collections.add("0");
+        user.music.collections.add("1");
+        user.music.singles.add("0");
+
+        // META DATA
+        user.member_since_date = Calendar.getInstance().getTimeInMillis();
         user.is_artist = false;
-//        user.music.collections.add("0");
-//        user.music.collections.add("1");
-//        user.music.singles.add("0");
+        user.play_count = 0;
+        user.profile_visits = 0;
 
         // SET THE USER IN THE DATABASE
         Database.setUser(user, new GeneralInterface() {

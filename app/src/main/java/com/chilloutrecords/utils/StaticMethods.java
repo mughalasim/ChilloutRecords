@@ -31,7 +31,9 @@ import java.util.regex.Pattern;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
+import static com.chilloutrecords.utils.StaticVariables.USER_LISTENER;
 
 public class StaticMethods {
 
@@ -88,6 +90,10 @@ public class StaticMethods {
     public static void logOutUser(Boolean is_session_expired) {
         Context context = ChilloutRecords.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
+        // ALL VALUE EVENT LISTENERS MUST BE REMOVED HERE ON LOGOUT
+        if (USER_LISTENER != null)
+            FIREBASE_DB.getReference().removeEventListener(USER_LISTENER);
+
         FIREBASE_AUTH.signOut();
         if (is_session_expired) {
             showToast("Your session has expired. Kindly login to continue");

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chilloutrecords.adapters.ListingAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,14 +16,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.adapters.generalAdapter;
 //import com.chilloutrecords.models.GeneralModel;
 
 
 public class GeneralListActivity extends ParentActivity {
 //    public ArrayList<GeneralModel> arrayList = new ArrayList<>();
     public RecyclerView recyclerView;
-    public generalAdapter adapter;
+    public ListingAdapter adapter;
     private String DB_REFERENCE = "";
 
     @Override
@@ -51,7 +51,7 @@ public class GeneralListActivity extends ParentActivity {
 
     private void findAllViews() {
         recyclerView = findViewById(R.id.list_item);
-//        adapter = new generalAdapter(GeneralListActivity.this, arrayList, DB_REFERENCE);
+//        adapter = new ListingAdapter(GeneralListActivity.this, arrayList, DB_REFERENCE);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
