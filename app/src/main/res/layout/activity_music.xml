@@ -61,7 +61,7 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/layout_no_data" />
+                <include layout="@layout/list_item_none" />
 
             </LinearLayout>
 

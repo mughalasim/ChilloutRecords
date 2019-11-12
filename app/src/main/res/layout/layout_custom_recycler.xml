@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.chilloutrecords.utils.CustomRecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/txt_no_results"
+        style="@style/TextTitle"
+        android:layout_width="match_parent"
+        android:drawableTop="@drawable/ic_no_wifi"
+        android:gravity="center"
+        android:padding="@dimen/padding_large"
+        android:text="@string/txt_update_now" />
+
+</RelativeLayout>

@@ -79,7 +79,6 @@ public class MusicActivity extends ParentActivity implements EasyVideoCallback {
         ppic = findViewById(R.id.ppic);
         LL_tracks = findViewById(R.id.LL_tracks);
         LL_player = findViewById(R.id.LL_player);
-        no_list_items = findViewById(R.id.no_list_items);
         no_list_items.setVisibility(View.GONE);
 
         loading_progress = findViewById(R.id.loading_progress);
