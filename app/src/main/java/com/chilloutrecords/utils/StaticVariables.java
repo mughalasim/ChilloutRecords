@@ -5,12 +5,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class StaticVariables {
     // FIREBASE VARIABLES ==========================================================================
     public static FirebaseAuth FIREBASE_AUTH;
     public static FirebaseUser FIREBASE_USER;
     public static FirebaseDatabase FIREBASE_DB;
+    public static FirebaseStorage FIREBASE_STORAGE;
 
     // FIREBASE VALUE EVENT LISTENERS ==============================================================
     public static ValueEventListener USER_LISTENER;

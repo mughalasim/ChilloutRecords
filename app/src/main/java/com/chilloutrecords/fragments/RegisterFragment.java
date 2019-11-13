@@ -138,13 +138,12 @@ public class RegisterFragment extends Fragment {
         user.name = et_name.getText().toString().trim();
         user.stage_name = et_stage_name.getText().toString().trim();
         user.email = et_email.getText().toString().trim();
-        user.info = "Standard user";
+        user.info = "..tell us something about you..";
         user.gender = spinner_gender.getSelectedItemPosition();
-        user.p_pic = "random url to the profile picture";
+        user.p_pic = "default_pic.jpg";
 
         // MUSIC INFO
         user.music.collections.add("0");
-        user.music.collections.add("1");
         user.music.singles.add("0");
 
         // META DATA

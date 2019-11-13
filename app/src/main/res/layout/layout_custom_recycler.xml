@@ -10,11 +10,11 @@
 
     <TextView
         android:id="@+id/txt_no_results"
-        style="@style/TextTitle"
+        style="@style/TextSmall"
         android:layout_width="match_parent"
-        android:drawableTop="@drawable/ic_no_wifi"
+        android:drawableTop="@drawable/ic_info"
         android:gravity="center"
         android:padding="@dimen/padding_large"
-        android:text="@string/txt_update_now" />
+        android:text="@string/error_connection" />
 
 </RelativeLayout>

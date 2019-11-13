@@ -10,7 +10,7 @@ import com.afollestad.easyvideoplayer.EasyVideoPlayer;
 import com.chilloutrecords.R;
 import com.chilloutrecords.utils.DialogMethods;
 
-public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoCallback {
+public class PlayerActivity extends AppCompatActivity implements EasyVideoCallback {
 
     private String
             VIDEO_URL = "";
@@ -20,13 +20,13 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_player);
+        setContentView(R.layout.activity_player);
 
         handleExtraBundles();
 
-        //TODO make this autorotate to Horizontakl orientation
+        //TODO make this autorotate to Horizontal orientation
 
-        dialogs = new DialogMethods(VideoPlayerActivity.this);
+        dialogs = new DialogMethods(PlayerActivity.this);
         player = findViewById(R.id.player);
         player.setCallback(this);
         player.setSource(Uri.parse(VIDEO_URL));
@@ -40,7 +40,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
 
         } else {
             finish();
-//            dialogs.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
+//            dialogs.ToastMessage(PlayerActivity.this, getString(R.string.error_500));
         }
     }
 
@@ -70,7 +70,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements EasyVideoC
 
     @Override
     public void onError(EasyVideoPlayer player, Exception e) {
-//        dialogs.ToastMessage(VideoPlayerActivity.this, getString(R.string.error_500));
+//        dialogs.ToastMessage(PlayerActivity.this, getString(R.string.error_500));
         finish();
     }
 

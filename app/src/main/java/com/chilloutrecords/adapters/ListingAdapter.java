@@ -10,8 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
+import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -21,6 +24,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
     private Context
             context;
+    private UrlInterface listener;
     private ArrayList<ListingModel>
             models;
 
@@ -37,9 +41,10 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         }
     }
 
-    public ListingAdapter(Context context, ArrayList<ListingModel> models) {
+    public ListingAdapter(Context context, ArrayList<ListingModel> models, UrlInterface listener) {
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -56,10 +61,28 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
         final ListingModel model = models.get(position);
 
-        Glide.with(context).load(model.img).into(holder.img);
+        Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.img, new UrlInterface() {
+            @Override
+            public void success(String url) {
+                Glide.with(context).load(url).into(holder.img);
+            }
+
+            @Override
+            public void failed() {
+
+            }
+        });
+
         holder.txt.setText(model.txt);
 
         StaticMethods.animate_recycler_view(holder.itemView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.success(model.url);
+            }
+        });
 
     }
 

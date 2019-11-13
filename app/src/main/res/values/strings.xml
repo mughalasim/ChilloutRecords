@@ -37,6 +37,7 @@
     <string name="nav_profile">My Profile</string>
     <string name="nav_logout">Logout</string>
     <string name="nav_settings">Settings</string>
+    <string name="nav_policy">Privacy policy</string>
 
     <!-- HOME NAVIGATION ========================================================================-->
     <string name="nav_drawer_open">Open drawer</string>

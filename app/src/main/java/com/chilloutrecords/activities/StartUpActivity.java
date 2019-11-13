@@ -76,9 +76,5 @@ public class StartUpActivity extends AppCompatActivity {
     // TODO - create forgot password activity
     }
 
-    public void openTermsAndConditions(View view) {
-        startActivity(new Intent(this, TextActivity.class).putExtra(EXTRA_STRING, BuildConfig.DB_REF_POLICY));
-    }
-
 }
 

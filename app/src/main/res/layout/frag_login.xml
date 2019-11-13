@@ -52,7 +52,6 @@
             style="@style/TextSmall"
             android:layout_marginTop="@dimen/padding_large"
             android:gravity="center"
-            android:onClick="openTermsAndConditions"
             android:text="@string/txt_terms" />
 
     </LinearLayout>

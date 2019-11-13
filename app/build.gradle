@@ -32,6 +32,12 @@ android {
         buildConfigField 'String', 'DB_REF_COLLECTIONS', DB_REF_COLLECTIONS
         buildConfigField 'String', 'DB_REF_SINGLES', DB_REF_SINGLES
 
+        // FIREBASE STORAGE URLS
+        buildConfigField 'String', 'STORAGE_IMAGES', STORAGE_IMAGES
+        buildConfigField 'String', 'STORAGE_VIDEOS', STORAGE_VIDEOS
+        buildConfigField 'String', 'STORAGE_MUSIC',  STORAGE_MUSIC
+        buildConfigField 'String', 'STORAGE_APK',  STORAGE_APK
+
         // SONG TYPES
         buildConfigField 'String', 'SONG_TYPE_SINGLE',  SONG_TYPE_SINGLE
         buildConfigField 'String', 'SONG_TYPE_MIXTAPE', SONG_TYPE_MIXTAPE
@@ -148,9 +154,8 @@ dependencies {
     // FIREBASE DEPENDENCIES
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
-    implementation 'com.google.firebase:firebase-invites:17.0.0'
-    implementation 'com.google.firebase:firebase-perf:19.0.1'
     implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
 
     // GOOGLE
     implementation 'com.google.android.gms:play-services-auth:17.0.0'

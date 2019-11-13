@@ -2,6 +2,7 @@ package com.chilloutrecords.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
@@ -9,16 +10,21 @@ import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.activities.StartUpActivity;
 import com.chilloutrecords.interfaces.GeneralInterface;
+import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.USER;
 import static com.chilloutrecords.utils.StaticVariables.USER_LISTENER;
@@ -74,4 +80,28 @@ public class Database {
         }
         context.finish();
     }
+
+    // STORAGE FILE URL ============================================================================
+    public static void getFileUrl(String path, String file_name, final UrlInterface listener) {
+        StorageReference file_reference = FIREBASE_STORAGE.getReference().child(path).child(file_name);
+        try {
+            file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    listener.success(uri.toString());
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    listener.failed();
+                }
+            });
+        } catch (Exception e) {
+            StaticMethods.logg("STATIC METHOD", "File not found");
+            listener.failed();
+        }
+
+
+    }
+
 }

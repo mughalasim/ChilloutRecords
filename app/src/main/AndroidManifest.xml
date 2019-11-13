@@ -82,7 +82,7 @@
             android:launchMode="singleTask" />
 
         <activity
-            android:name=".activities.VideoPlayerActivity"
+            android:name=".activities.PlayerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />

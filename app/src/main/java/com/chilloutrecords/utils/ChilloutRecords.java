@@ -14,9 +14,11 @@ import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 
 public class ChilloutRecords extends Application {
 
@@ -55,6 +57,9 @@ public class ChilloutRecords extends Application {
 
         // Initialize Firebase DB
         FIREBASE_DB = FirebaseDatabase.getInstance();
+
+        // Initialize Firebase Storage
+        FIREBASE_STORAGE = FirebaseStorage.getInstance();
 
     }
 
