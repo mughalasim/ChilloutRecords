@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
+import com.chilloutrecords.fragments.ForgotPasswordFragment;
 import com.chilloutrecords.fragments.LoginFragment;
 import com.chilloutrecords.fragments.RegisterFragment;
 import com.chilloutrecords.utils.StaticMethods;
@@ -30,15 +31,18 @@ public class StartUpActivity extends AppCompatActivity {
             view_pager;
     private int[] fragment_title_list = {
             R.string.nav_login,
-            R.string.nav_register
+            R.string.nav_register,
+            R.string.nav_forgot_password
     };
     private final String[] fragment_extras = {
+            "",
             "",
             ""
     };
     private Fragment[] fragment_list = {
             new LoginFragment(),
-            new RegisterFragment()
+            new RegisterFragment(),
+            new ForgotPasswordFragment()
     };
 
     @Override
@@ -73,8 +77,11 @@ public class StartUpActivity extends AppCompatActivity {
     }
 
     public void forgotPassword(View view) {
-    // TODO - create forgot password activity
+        view_pager.setCurrentItem(2);
     }
 
+    public void backToLogin(){
+        view_pager.setCurrentItem(0);
+    }
 }
 

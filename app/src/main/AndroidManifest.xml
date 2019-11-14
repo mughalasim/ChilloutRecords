@@ -1,21 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
 
     package="com.chilloutrecords">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-    <permission
-        android:name="com.chilloutrecords.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="com.chilloutrecords.permission.C2D_MESSAGE" />
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
 
     <application
         android:name="com.chilloutrecords.utils.ChilloutRecords"
@@ -27,7 +15,6 @@
         android:icon="${icon}"
         android:roundIcon="${icon_round}">
 
-        <!--START UP PAGES ======================================================================-->
         <activity
             android:name=".activities.SplashScreenActivity"
             android:screenOrientation="portrait">
@@ -46,53 +33,22 @@
                 <data
                     android:host="chilloutrecords.com"
                     android:scheme="https" />
+
             </intent-filter>
 
         </activity>
 
-        <activity
-            android:name=".activities.StartUpActivity" />
+        <activity android:name=".activities.StartUpActivity" />
 
-
-        <!-- MAIN PAGES =========================================================================-->
         <activity android:name=".activities.ParentActivity" />
 
-        <activity
-            android:name=".activities.ParentToolBarActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name=".activities.GeneralListActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name=".activities.ArtistDetailsActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name=".activities.TextActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name=".activities.MyAccountActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name=".activities.MusicActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".activities.ProfileActivity" />
 
         <activity
             android:name=".activities.PlayerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />
-
-        <!--CLOUD MESSAGING SERVICES ============================================================-->
-        <service android:name=".services.MessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
     </application>
 

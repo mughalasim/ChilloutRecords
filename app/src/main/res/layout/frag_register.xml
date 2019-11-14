@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:scrollbarThumbVertical="@null">
 
@@ -19,51 +20,80 @@
             android:gravity="center"
             android:text="@string/txt_register" />
 
-        <EditText
-            android:id="@+id/et_name"
-            style="@style/EditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_name"
+            style="@style/EditTextLayout"
             android:layout_marginTop="@dimen/padding_large"
-            android:hint="@string/et_hint_name"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences" />
+            android:hint="@string/et_hint_name">
 
-        <EditText
-            android:id="@+id/et_stage_name"
-            style="@style/EditText"
-            android:layout_marginTop="@dimen/padding_medium"
-            android:hint="@string/et_hint_stage_name"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name"
+                style="@style/EditTextInput"
+                android:inputType="textPersonName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_stage_name"
+            style="@style/EditTextLayout"
+            android:layout_marginTop="@dimen/padding_small"
+            android:hint="@string/et_hint_stage_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_stage_name"
+                style="@style/EditTextInput"
+                android:inputType="textPersonName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
             android:id="@+id/spinner_gender"
             style="@style/EditText"
-            android:layout_marginTop="@dimen/padding_medium"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:layout_marginTop="@dimen/padding_large"
             android:entries="@array/select_gender" />
 
-        <EditText
-            android:id="@+id/et_email"
-            style="@style/EditText"
-            android:layout_marginTop="@dimen/padding_medium"
-            android:hint="@string/et_hint_email"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_email"
+            style="@style/EditTextLayout"
+            android:layout_marginTop="@dimen/padding_large"
+            android:hint="@string/et_hint_email">
 
-        <EditText
-            android:id="@+id/et_password"
-            style="@style/EditText"
-            android:layout_marginTop="@dimen/padding_medium"
-            android:hint="@string/et_hint_password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email"
+                style="@style/EditTextInput"
+                android:inputType="textEmailAddress"/>
 
-        <EditText
-            android:id="@+id/et_password_confirm"
-            style="@style/EditText"
-            android:layout_marginTop="@dimen/padding_medium"
-            android:hint="@string/et_hint_confirm_password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_password"
+            style="@style/EditTextLayout"
+            android:layout_marginTop="@dimen/padding_small"
+            app:passwordToggleEnabled="true"
+            android:hint="@string/et_hint_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                style="@style/EditTextInput"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_password_confirm"
+            style="@style/EditTextLayout"
+            android:layout_marginTop="@dimen/padding_small"
+            app:passwordToggleEnabled="true"
+            android:hint="@string/et_hint_confirm_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password_confirm"
+                style="@style/EditTextInput"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_register"

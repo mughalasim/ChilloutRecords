@@ -21,6 +21,8 @@ import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 
 import java.util.ArrayList;
@@ -36,12 +38,19 @@ public class RegisterFragment extends Fragment {
     private DialogMethods dialogs;
     private final String TAG_LOG = "REGISTER";
 
-    private EditText
+    private TextInputEditText
             et_email,
             et_name,
             et_stage_name,
             et_password,
             et_password_confirm;
+    private TextInputLayout
+            etl_email,
+            etl_name,
+            etl_stage_name,
+            etl_password,
+            etl_password_confirm;
+
     private Spinner spinner_gender;
     private MaterialButton btn_register;
 
@@ -62,13 +71,19 @@ public class RegisterFragment extends Fragment {
 
                 dialogs = new DialogMethods(getActivity());
 
-                et_name = root_view.findViewById(R.id.et_name);
-                et_stage_name = root_view.findViewById(R.id.et_stage_name);
                 spinner_gender = root_view.findViewById(R.id.spinner_gender);
 
+                et_name = root_view.findViewById(R.id.et_name);
+                et_stage_name = root_view.findViewById(R.id.et_stage_name);
                 et_email = root_view.findViewById(R.id.et_email);
                 et_password = root_view.findViewById(R.id.et_password);
                 et_password_confirm = root_view.findViewById(R.id.et_password_confirm);
+
+                etl_name = root_view.findViewById(R.id.etl_name);
+                etl_stage_name = root_view.findViewById(R.id.etl_stage_name);
+                etl_email = root_view.findViewById(R.id.etl_email);
+                etl_password = root_view.findViewById(R.id.etl_password);
+                etl_password_confirm = root_view.findViewById(R.id.etl_password_confirm);
 
                 btn_register = root_view.findViewById(R.id.btn_register);
 
@@ -84,16 +99,16 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         if (
-                                StaticMethods.validateEmptyEditText(et_name, getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateEmptyEditText(et_stage_name, getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateEmail(et_email) &&
-                                        StaticMethods.validateEmptyEditText(et_password, getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateEmptyEditText(et_password_confirm, getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateMatch(et_password, et_password_confirm)
+                                StaticMethods.validateEmptyEditText(et_name, etl_name, getString(R.string.error_field_required)) &&
+                                        StaticMethods.validateEmptyEditText(et_stage_name, etl_stage_name,getString(R.string.error_field_required)) &&
+                                        StaticMethods.validateEmail(et_email, etl_email) &&
+                                        StaticMethods.validateEmptyEditText(et_password, etl_password,getString(R.string.error_field_required)) &&
+                                        StaticMethods.validateEmptyEditText(et_password_confirm, etl_password_confirm,getString(R.string.error_field_required)) &&
+                                        StaticMethods.validateMatch(et_password, etl_password, et_password_confirm, etl_password_confirm)
                         ) {
 
                             dialogs.setProgressDialog(getString(R.string.progress_register));
-                            FIREBASE_AUTH.createUserWithEmailAndPassword(et_email.getText().toString().trim(), et_password.getText().toString().trim())
+                            FIREBASE_AUTH.createUserWithEmailAndPassword(Objects.requireNonNull(et_email.getText()).toString().trim(), Objects.requireNonNull(et_password.getText()).toString().trim())
                                     .addOnCompleteListener(Objects.requireNonNull(getActivity()), new OnCompleteListener<AuthResult>() {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -135,9 +150,9 @@ public class RegisterFragment extends Fragment {
 
         // STANDARD DATA
         user.id = Objects.requireNonNull(FIREBASE_AUTH.getCurrentUser()).getUid();
-        user.name = et_name.getText().toString().trim();
-        user.stage_name = et_stage_name.getText().toString().trim();
-        user.email = et_email.getText().toString().trim();
+        user.name = Objects.requireNonNull(et_name.getText()).toString().trim();
+        user.stage_name = Objects.requireNonNull(et_stage_name.getText()).toString().trim();
+        user.email = Objects.requireNonNull(et_email.getText()).toString().trim();
         user.info = "..tell us something about you..";
         user.gender = spinner_gender.getSelectedItemPosition();
         user.p_pic = "default_pic.jpg";

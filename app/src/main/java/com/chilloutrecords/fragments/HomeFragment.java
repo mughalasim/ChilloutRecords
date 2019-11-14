@@ -1,5 +1,6 @@
 package com.chilloutrecords.fragments;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.InflateException;
@@ -17,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
+import com.chilloutrecords.activities.ProfileActivity;
 import com.chilloutrecords.adapters.ListingAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
+import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -104,9 +107,10 @@ public class HomeFragment extends Fragment {
                         if (btn_back.getVisibility() == View.GONE) {
                             ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), 0, url);
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_USERS)) {
-                            // TODO - open profile
+                            // TODO - open profile Activity with bundle extra with the USER ID
+                            getActivity().startActivity(new Intent(getActivity(), ProfileActivity.class));
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_VIDEOS)) {
-                            // TODO - open Video
+                            // TODO - open Video with bundle extra with the the VIDEO ID
                         }
                     }
 
@@ -158,8 +162,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                StaticMethods.logg(PATH_URL, databaseError.toString());
-                recycler_view.setTextView(txt_no_results, "No information to display at this time");
+                Database.handleDatabaseError(databaseError);
             }
         });
     }
@@ -189,7 +192,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                StaticMethods.logg(PATH_URL, databaseError.toString());
+                Database.handleDatabaseError(databaseError);
             }
         });
     }

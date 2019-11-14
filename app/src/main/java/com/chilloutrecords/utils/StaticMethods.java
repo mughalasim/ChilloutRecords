@@ -26,6 +26,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
 
@@ -131,37 +133,44 @@ public class StaticMethods {
         return true;
     }
 
-    public static boolean validateEmail(EditText edit_text) {
+    public static boolean validateEmail(TextInputEditText edit_text, TextInputLayout layout) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
-        if (edit_text.getText().toString().length() < 1) {
-            edit_text.setError("This field cannot be blank");
+        if (edit_text.getText() != null && edit_text.getText().toString().length() < 1) {
+            layout.setError("This field cannot be blank");
             return false;
-        } else if (!pattern.matcher(edit_text.getText().toString()).matches()) {
-            edit_text.setError("Invalid email address");
+        } else if (edit_text.getText() != null && !pattern.matcher(edit_text.getText().toString()).matches()) {
+            layout.setError("Invalid email address");
             return false;
         } else {
-            edit_text.setError(null);
+            layout.setError(null);
             return true;
         }
     }
 
-    public static boolean validateEmptyEditText(EditText edit_text, String error_message) {
-        if (edit_text.getText().toString().length() < 1) {
-            edit_text.setError(error_message);
+    public static boolean validateEmptyEditText(TextInputEditText edit_text, TextInputLayout layout, String error_message) {
+        if (edit_text.getText() != null && edit_text.getText().toString().length() < 1) {
+            layout.setError(error_message);
             return false;
         } else {
-            edit_text.setError(null);
+            layout.setError(null);
             return true;
         }
     }
 
-    public static boolean validateMatch(EditText edit_text_1, EditText edit_text_2) {
-        if (edit_text_1.getText().toString().trim().length() != edit_text_2.getText().toString().trim().length()) {
-            edit_text_1.setError("Passwords do not match");
-            return false;
+    public static boolean validateMatch(TextInputEditText edit_text_1, TextInputLayout layout_1,
+                                        TextInputEditText edit_text_2, TextInputLayout layout_2) {
+        if (edit_text_1.getText() != null && edit_text_2.getText() != null) {
+            if (edit_text_1.getText().toString().trim().length() != edit_text_2.getText().toString().trim().length()) {
+                layout_1.setError("Passwords do not match");
+                return false;
+            } else {
+                layout_1.setError(null);
+                return true;
+            }
         } else {
-            edit_text_1.setError(null);
-            return true;
+            layout_1.setError("Cannot be empty");
+            layout_2.setError("Cannot be empty");
+            return false;
         }
     }
 

@@ -59,7 +59,7 @@ public class Database {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    Database.handleDatabaseError(databaseError);
                 }
             };
 
@@ -74,11 +74,21 @@ public class Database {
             StaticMethods.logg("FETCH USER", FIREBASE_USER.getUid());
             getUser();
             context.startActivity(new Intent(context, ParentActivity.class));
-//            context.startActivity(new Intent(context, StartUpActivity.class));
         } else {
             context.startActivity(new Intent(context, StartUpActivity.class));
         }
         context.finish();
+    }
+
+    // HANDLE ERROR ================================================================================
+    public static void handleDatabaseError(DatabaseError error) {
+        int code = error.getCode();
+        if (code == DatabaseError.DISCONNECTED || code == DatabaseError.NETWORK_ERROR || code == DatabaseError.UNAVAILABLE ) {
+            // TODO - Start network error activity
+            StaticMethods.showToast("Network error");
+        } else if (code == DatabaseError.PERMISSION_DENIED || code == DatabaseError.EXPIRED_TOKEN || code == DatabaseError.INVALID_TOKEN  ) {
+            StaticMethods.logOutUser(true);
+        }
     }
 
     // STORAGE FILE URL ============================================================================

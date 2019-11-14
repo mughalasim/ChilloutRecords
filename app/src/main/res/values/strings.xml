@@ -1,14 +1,21 @@
 <resources>
+    <!--ARRAY GENDER ============================================================================-->
+    <string-array name="select_gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 
     <!--ERROR MESSAGES ==========================================================================-->
     <string name="error">Error</string>
     <string name="error_password_short">This password is too short</string>
-    <string name="error_password_match">new password and confirm password do not match</string>
+    <string name="error_password_match">New password and confirm password do not match</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_500">Server Error, Please try again later</string>
     <string name="error_connection">Offline Mode, Please check your internet connection</string>
     <string name="error_session_expiry">Session Expired, Please Login again</string>
     <string name="error_login_failed">Failed to Login to the Chillout records App. Please check your credentials or try again later</string>
+    <string name="error_reset_failed">Failed to sent a rest link to the provided email address. Please check your credentials or try again later</string>
     <string name="error_register_failed">Failed to Register your account into the Chillout records App. Please try again later</string>
 
     <!--LOADING DIALOGS =========================================================================-->
@@ -19,16 +26,10 @@
     <string name="progress_loading">Loading, please wait....</string>
     <string name="progress_profile_update">Updating your profile. Please wait…</string>
 
-    <!--NAVIGATION ==============================================================================-->
+    <!-- STARTUP NAVIGATION =====================================================================-->
     <string name="nav_login">Login</string>
     <string name="nav_register">Register</string>
-
-    <!--ARRAY GENDER ============================================================================-->
-    <string-array name="select_gender">
-        <item>Select Gender</item>
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
+    <string name="nav_forgot_password">Reset</string>
 
     <!-- DRAWER NAV =============================================================================-->
     <string name="nav_home">Home</string>
@@ -60,16 +61,22 @@
     <string name="txt_later">Later</string>
     <string name="txt_alert">Alert</string>
 
+    <!-- TOASTS =================================================================================-->
+    <string name="toast_reset_success">Successfully sent reset link to you inbox</string>
+
     <!-- BASIC TEXTS  ===========================================================================-->
     <string name="txt_confirm">OK</string>
     <string name="txt_close">Close</string>
+    <string name="txt_reset">Reset</string>
     <string name="txt_cancel">Cancel</string>
     <string name="txt_back">Back</string>
-    <string name="txt_forgot_pass">Forgot password</string>
     <string name="txt_login">Kindly enter your email and password to login</string>
     <string name="txt_logout">Are you sure you wis to logout</string>
+    <string name="txt_forgot_pass">Forgot password</string>
+    <string name="txt_forgot">Kindly enter your registered email address and well send you a password reset link</string>
     <string name="txt_share">Select what platform you wish to share the app on</string>
     <string name="txt_register">Kindly give us some details so we may create your account on the chillout records platform</string>
     <string name="txt_terms">By tapping LOGIN or REGISTER you agree to the terms and Conditions of the Chillout Records App</string>
+    <string name="txt_stats">Stats</string>
 
 </resources>

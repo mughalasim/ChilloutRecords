@@ -1,9 +1,7 @@
 package com.chilloutrecords.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,14 +24,10 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    DialogMethods
-            dialogs;
+    DialogMethods dialogs;
     Toolbar toolbar;
-    DrawerLayout
-            drawer;
-    NavigationView
-            navigation_view;
-
+    DrawerLayout drawer;
+    NavigationView navigation_view;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -139,6 +133,5 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
                     }
                 });
     }
-
 
 }

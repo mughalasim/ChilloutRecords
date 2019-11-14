@@ -1,6 +1,7 @@
 package com.chilloutrecords.fragments;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.chilloutrecords.adapters.ListingAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
 import com.chilloutrecords.models.TextModel;
+import com.chilloutrecords.utils.Database;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -68,14 +70,15 @@ public class TextFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 TextModel object = dataSnapshot.getValue(TextModel.class);
                 assert object != null;
-                txt_info.setText(object.info);
                 txt_page_title.setText(object.title);
+                txt_info.setText(Html.fromHtml(object.info).toString());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 txt_info.setText(getString(R.string.error_500));
                 txt_page_title.setText(getString(R.string.error));
+                Database.handleDatabaseError(databaseError);
             }
         });
 

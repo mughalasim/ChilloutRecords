@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorPrimary">#4E0303</color>
+    <color name="colorPrimaryDark">#2C0101</color>
+    <color name="colorAccent">#EEEEEE</color>
 
     <color name="transparent">#00000000</color>
-    <color name="tint">#A6020000</color>
 
     <color name="grey">#F5F4F4</color>
     <color name="grey_dark">#ACACAC</color>

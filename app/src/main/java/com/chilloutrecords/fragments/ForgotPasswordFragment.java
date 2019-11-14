@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.StartUpActivity;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
@@ -26,67 +27,59 @@ import java.util.Objects;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 
-public class LoginFragment extends Fragment {
+public class ForgotPasswordFragment extends Fragment {
     private View root_view;
     private DialogMethods dialogs;
-    private final String TAG_LOG = "LOGIN";
+    private final String TAG_LOG = "PASSWORD RESET";
 
     private TextInputEditText
-            et_email,
-            et_password;
+            et_email;
     private TextInputLayout
-            etl_email,
-            etl_password;
-    private MaterialButton btn_login;
+            etl_email;
+    private MaterialButton btn_reset;
 
     // OVERRIDE METHODS ============================================================================
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
             try {
-                root_view = inflater.inflate(R.layout.frag_login, container, false);
+                root_view = inflater.inflate(R.layout.frag_forgot_password, container, false);
 
                 dialogs = new DialogMethods(getActivity());
 
                 et_email = root_view.findViewById(R.id.et_email);
-                et_password = root_view.findViewById(R.id.et_password);
-
                 etl_email = root_view.findViewById(R.id.etl_email);
-                etl_password = root_view.findViewById(R.id.etl_password);
-
-                btn_login = root_view.findViewById(R.id.btn_login);
+                btn_reset = root_view.findViewById(R.id.btn_reset);
 
                 if(BuildConfig.DEBUG){
                     et_email.setText("user@test.com");
-                    et_password.setText("password");
                 }
 
-                btn_login.setOnClickListener(new View.OnClickListener() {
+                btn_reset.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (StaticMethods.validateEmail(et_email, etl_email) && StaticMethods.validateEmptyEditText(et_password, etl_password, getString(R.string.error_field_required))) {
+                        if (StaticMethods.validateEmail(et_email, etl_email)) {
 
-                            dialogs.setProgressDialog(getString(R.string.progress_login));
+                            dialogs.setProgressDialog(getString(R.string.progress_password_reset));
 
                             FIREBASE_AUTH
-                                    .signInWithEmailAndPassword(
-                                            Objects.requireNonNull(et_email.getText()).toString().trim(),
-                                            Objects.requireNonNull(et_password.getText()).toString().trim())
-                                    .addOnCompleteListener(Objects.requireNonNull(getActivity()), new OnCompleteListener<AuthResult>() {
+                                    .sendPasswordResetEmail(Objects.requireNonNull(et_email.getText()).toString().trim())
+                                    .addOnCompleteListener(Objects.requireNonNull(getActivity()), new OnCompleteListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                        public void onComplete(@NonNull Task<Void> task) {
 
                                             dialogs.dismissProgressDialog();
 
                                             if (task.isSuccessful()) {
-                                                StaticMethods.logg(TAG_LOG, "Sign in success");
-                                                Database.getUserIdAndLogin(getActivity());
+                                                StaticMethods.logg(TAG_LOG, "Reset link sent successfully");
+                                                StaticMethods.showToast(getString(R.string.toast_reset_success));
+                                                ((StartUpActivity) getActivity()).backToLogin();
                                             } else {
                                                 if (task.getException() != null && !task.getException().toString().equals("") && task.getException().toString().contains(":")) {
                                                     String[] messages = task.getException().toString().split(":");
                                                     dialogs.setDialogCancel(getString(R.string.txt_alert), messages[1]);
                                                 } else {
-                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_login_failed));
+                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_reset_failed));
                                                 }
                                             }
 
