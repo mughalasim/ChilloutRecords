@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_tool_bar"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/rl_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
@@ -31,9 +32,8 @@
         style="@style/TextTitle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_below="@+id/rl_tool_bar"
         android:background="@drawable/bckgrd_tab_black"
         android:gravity="center"
         android:textColor="@color/colorAccent" />
 
-</RelativeLayout>
+</LinearLayout>

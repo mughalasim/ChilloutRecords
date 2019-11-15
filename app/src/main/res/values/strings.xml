@@ -78,5 +78,9 @@
     <string name="txt_register">Kindly give us some details so we may create your account on the chillout records platform</string>
     <string name="txt_terms">By tapping LOGIN or REGISTER you agree to the terms and Conditions of the Chillout Records App</string>
     <string name="txt_stats">Stats</string>
+    <string name="txt_email">Email:&#160;</string>
+    <string name="txt_member_since">Member since:&#160;</string>
+    <string name="txt_profile_visits">Profile visits:&#160;</string>
+    <string name="txt_stage_name">Stage name: &#160;</string>
 
 </resources>

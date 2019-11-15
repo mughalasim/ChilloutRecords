@@ -1,5 +1,6 @@
 package com.chilloutrecords.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,6 +22,7 @@ import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -62,8 +64,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_profile:
-//                TODO - Make profile fragment
-//                loadFragment(new ProfileFragment(), id, "");
+                startActivity(new Intent(this, ProfileActivity.class).putExtra(EXTRA_STRING, FIREBASE_USER.getUid()));
                 break;
 
             case R.id.nav_share:

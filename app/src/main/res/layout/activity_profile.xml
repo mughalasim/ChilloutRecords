@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <include layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_below="@+id/ll_tool_bar"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -52,7 +52,6 @@
                     android:layout_centerInParent="true"
                     android:background="@color/grey_dark"
                     android:padding="@dimen/line_thickness"
-                    android:src="@drawable/ic_person"
                     app:riv_border_color="@color/colorPrimary"
                     app:riv_border_width="@dimen/line_thickness"
                     app:riv_corner_radius="@dimen/img_size_x_large"
@@ -72,7 +71,6 @@
                     android:src="@drawable/ic_camera" />
 
             </RelativeLayout>
-
 
             <com.google.android.material.card.MaterialCardView
                 style="@style/CardLayout"
@@ -144,9 +142,22 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <LinearLayout
+                android:id="@+id/ll_music"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/padding_medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_fragment"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

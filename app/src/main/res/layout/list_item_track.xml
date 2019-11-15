@@ -1,53 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/padding_medium"
-    android:background="@drawable/bckgrd_card"
-    android:orientation="horizontal">
-
-<!--    <pl.droidsonroids.gif.GifImageView-->
-<!--        android:id="@+id/music_playing"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        android:src="@drawable/music_playing"-->
-<!--        android:visibility="gone" />-->
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    android:padding="@dimen/padding_mini"
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/track_no"
-        style="@style/TextBody"
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:padding="@dimen/padding_medium"
-        android:textColor="@color/colorPrimary" />
+        android:id="@+id/txt_track_number"
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:text="10"
+        style="@style/TextSmall"/>
 
     <TextView
-        android:id="@+id/track_name"
-        style="@style/TextBody"
-        android:layout_gravity="start"
-        android:layout_toRightOf="@+id/track_no"
-        android:padding="@dimen/padding_medium"
-        android:textColor="@color/colorPrimary" />
-
-<!--    <ImageView-->
-<!--        android:id="@+id/lyrics"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:contentDescription="@string/app_name"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:layout_marginEnd="@dimen/padding_medium"-->
-<!--        android:layout_marginRight="@dimen/padding_medium"-->
-<!--        android:background="@drawable/ic_lyrics" />-->
+        android:id="@+id/txt_track_titler"
+        android:layout_width="0dp"
+        android:layout_weight="0.8"
+        android:text="Track name to be displayed here"
+        style="@style/TextSmall"/>
 
     <TextView
-        android:id="@+id/track_url"
-        style="@style/TextBody"
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:visibility="gone" />
+        android:id="@+id/txt_track_length"
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:text="20:20"
+        style="@style/TextSmall"/>
 
-</RelativeLayout>
+</LinearLayout>

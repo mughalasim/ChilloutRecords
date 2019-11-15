@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    style="@style/CardLayout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_track_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/screen_min_width"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_small"
+            android:weightSum="2">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_art"
+                android:layout_width="0dp"
+                app:riv_corner_radius="@dimen/radius_corner"
+                app:riv_mutate_background="true"
+                android:layout_height="@dimen/img_size_large"
+                android:layout_weight="0.9"
+                android:src="@color/colorPrimaryDark" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/padding_small"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_title"
+                    android:text="Dissimilitude"
+                    style="@style/TextBody" />
+
+                <TextView
+                    android:id="@+id/txt_release_year"
+                    android:text="2019"
+                    style="@style/TextBody" />
+
+                <TextView
+                    android:id="@+id/txt_track_count"
+                    android:text="11 Tracks"
+                    style="@style/TextBody" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,5 +1,6 @@
 package com.chilloutrecords.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,13 +30,13 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
-import static com.chilloutrecords.utils.StaticVariables.USER_LISTENER;
 
 public class StaticMethods {
 
@@ -88,13 +89,10 @@ public class StaticMethods {
                 .playOn(v);
     }
 
-    // BROADCASTS ==================================================================================
+    // LOGOUT ======================================================================================
     public static void logOutUser(Boolean is_session_expired) {
         Context context = ChilloutRecords.getAppContext();
         SharedPrefs.deleteAllSharedPrefs();
-        // ALL VALUE EVENT LISTENERS MUST BE REMOVED HERE ON LOGOUT
-        if (USER_LISTENER != null)
-            FIREBASE_DB.getReference().removeEventListener(USER_LISTENER);
 
         FIREBASE_AUTH.signOut();
         if (is_session_expired) {
@@ -147,7 +145,8 @@ public class StaticMethods {
         }
     }
 
-    public static boolean validateEmptyEditText(TextInputEditText edit_text, TextInputLayout layout, String error_message) {
+    public static boolean validateEmptyEditText(TextInputEditText edit_text,
+                                                TextInputLayout layout, String error_message) {
         if (edit_text.getText() != null && edit_text.getText().toString().length() < 1) {
             layout.setError(error_message);
             return false;
@@ -195,6 +194,31 @@ public class StaticMethods {
             }
         } else {
             return "";
+        }
+    }
+
+
+    // FORMAT ======================================================================================
+    public static String getDate(long time_in_millis) {
+        // Create a DateFormatter object for displaying date in specified format.
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd - MM - yyyy");
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time_in_millis);
+        return formatter.format(calendar.getTime());
+    }
+
+    public static String getGender(int gender_number) {
+        switch (gender_number) {
+            case 0:
+                return "Gender: Unspecified";
+            case 1:
+                return "Gender: Male";
+            case 2:
+                return "Gender: Female";
+            default:
+                return "Gender: Unknown";
         }
     }
 

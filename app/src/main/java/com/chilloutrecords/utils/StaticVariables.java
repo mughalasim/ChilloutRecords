@@ -14,12 +14,6 @@ public class StaticVariables {
     public static FirebaseDatabase FIREBASE_DB;
     public static FirebaseStorage FIREBASE_STORAGE;
 
-    // FIREBASE VALUE EVENT LISTENERS ==============================================================
-    public static ValueEventListener USER_LISTENER;
-
-    // USER MODEL ==================================================================================
-    public static UserModel USER = new UserModel();
-
     // ANIMATION TIME ==============================================================================
     public static int INT_ANIMATION_TIME = 1000;
 
