@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CardLayout"
+    android:layout_marginTop="@dimen/padding_medium"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="@dimen/screen_min_width"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_tiny"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_track_cover"
+            android:layout_width="match_parent"
+            android:minWidth="@dimen/screen_min_width"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_art"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/img_size_large"
+                android:layout_weight="1"
+                android:src="@color/colorPrimaryDark"
+                app:riv_corner_radius="@dimen/radius_corner"
+                app:riv_mutate_background="true" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_small"
+                android:layout_weight="1.5"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_small">
+
+                <TextView
+                    android:id="@+id/txt_collection_name"
+                    style="@style/TextBody"
+                    android:text="Dissimilitude" />
+
+                <TextView
+                    android:id="@+id/txt_collection_release_year"
+                    style="@style/TextBody"
+                    android:text="12 - 12 - 2019" />
+
+                <TextView
+                    android:id="@+id/txt_collection_type"
+                    style="@style/TextBody"
+                    android:text="Album" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_expand"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="@dimen/img_size_small"
+                android:layout_gravity="bottom"
+                android:src="@drawable/ic_arrow_down" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tracks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -28,7 +28,6 @@ android {
         buildConfigField 'String', 'DB_REF_POLICY', DB_REF_POLICY
         buildConfigField 'String', 'DB_REF_USERS', DB_REF_USERS
         buildConfigField 'String', 'DB_REF_VIDEOS', DB_REF_VIDEOS
-        buildConfigField 'String', 'DB_REF_TRACKS', DB_REF_TRACKS
         buildConfigField 'String', 'DB_REF_COLLECTIONS', DB_REF_COLLECTIONS
         buildConfigField 'String', 'DB_REF_SINGLES', DB_REF_SINGLES
 

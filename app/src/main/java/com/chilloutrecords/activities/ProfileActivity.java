@@ -7,19 +7,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.adapters.ViewPagerAdapter;
+import com.chilloutrecords.fragments.TrackFragment;
+import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.ArrayList;
+
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
@@ -51,6 +61,24 @@ public class ProfileActivity extends AppCompatActivity {
     private ValueEventListener
             listener;
 
+    private TabLayout
+            tab_layout;
+    private ViewPager
+            view_pager;
+    private int[] fragment_title_list = {
+            R.string.nav_singles,
+            R.string.nav_collections
+    };
+    private final String[] fragment_extras = {
+            BuildConfig.DB_REF_SINGLES,
+            BuildConfig.DB_REF_COLLECTIONS,
+    };
+    private Fragment[] fragment_list = {
+            new TrackFragment(),
+            new TrackFragment()
+    };
+    private ArrayList<ArrayList<String>> extra_array_list = new ArrayList<>();
+
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -72,9 +100,9 @@ public class ProfileActivity extends AppCompatActivity {
         txt_profile_visits = findViewById(R.id.txt_profile_visits);
         txt_member_since = findViewById(R.id.txt_member_since);
 
+        img_profile = findViewById(R.id.img_profile);
         btn_edit_picture = findViewById(R.id.btn_edit_picture);
         btn_edit_profile = findViewById(R.id.btn_edit_profile);
-        img_profile = findViewById(R.id.img_profile);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -97,6 +125,9 @@ public class ProfileActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        view_pager = findViewById(R.id.view_pager);
+        tab_layout = findViewById(R.id.tabs);
 
         btn_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,8 +189,18 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadProfile(UserModel model) {
         if (model != null) {
+            // Image
+            Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.p_pic, new UrlInterface() {
+                @Override
+                public void success(String url) {
+                    Glide.with(ProfileActivity.this).load(url).into(img_profile);
+                }
 
+                @Override
+                public void failed() {
 
+                }
+            });
             // General info
             txt_name.setText(model.name);
             txt_stage_name.setText(getString(R.string.txt_stage_name).concat(model.stage_name));
@@ -168,12 +209,44 @@ public class ProfileActivity extends AppCompatActivity {
             // stats
             txt_profile_visits.setText(getString(R.string.txt_profile_visits).concat(String.valueOf(model.profile_visits)));
             txt_member_since.setText(getString(R.string.txt_member_since).concat(StaticMethods.getDate(model.member_since_date)));
+            // Music content
+            if (model.is_artist && model.music != null) {
+                tab_layout.setVisibility(View.VISIBLE);
+                view_pager.setVisibility(View.VISIBLE);
+                extra_array_list.add(model.music.singles);
+                extra_array_list.add(model.music.collections);
+                setupViewPager(fragment_list, fragment_title_list, fragment_extras, extra_array_list);
+            } else {
+                tab_layout.setVisibility(View.GONE);
+                view_pager.setVisibility(View.GONE);
+            }
         }
     }
 
     public void ShareProfile(View view) {
         StaticMethods.showToast("Coming soon");
     }
+
+    public void setupViewPager(Fragment[] fragment_list, int[] fragment_title_list, String[] extra_string, ArrayList<ArrayList<String>> extra_array_list) {
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        for (int i = 0; i < fragment_title_list.length; i++) {
+            Bundle bundle = new Bundle();
+            bundle.putString(EXTRA_STRING, extra_string[i]);
+            bundle.putStringArrayList(EXTRA_DATA, extra_array_list.get(i));
+
+            Fragment fragment = fragment_list[i];
+            fragment.setArguments(bundle);
+            adapter.addFragment(fragment, getString(fragment_title_list[i]));
+        }
+
+        view_pager.setAdapter(adapter);
+
+        tab_layout.setupWithViewPager(view_pager, true);
+
+    }
+
 
 }
 

@@ -22,7 +22,6 @@ import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
 public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -64,7 +63,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_profile:
-                startActivity(new Intent(this, ProfileActivity.class).putExtra(EXTRA_STRING, FIREBASE_USER.getUid()));
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
 
             case R.id.nav_share:

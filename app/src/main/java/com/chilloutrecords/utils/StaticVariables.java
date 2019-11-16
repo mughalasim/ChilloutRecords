@@ -23,6 +23,7 @@ public class StaticVariables {
 
     // BUNDLE EXTRA VARIABLES ======================================================================
     public static final String EXTRA_STRING = "EXTRA_STRING";
+    public static final String EXTRA_DATA = "EXTRA_DATA";
 
     // GLOBAL STATIC VARIABLES======================================================================
     public static final String CHANNEL_ID = "CHANNEL_ID";

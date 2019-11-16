@@ -45,7 +45,7 @@
         <activity android:name=".activities.ProfileActivity" />
 
         <activity
-            android:name=".activities.PlayerActivity"
+            android:name=".activities.VideoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />

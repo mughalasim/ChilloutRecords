@@ -31,6 +31,10 @@
     <string name="nav_register">Register</string>
     <string name="nav_forgot_password">Reset</string>
 
+    <!-- PROFILE NAVIGATION =====================================================================-->
+    <string name="nav_singles">Singles</string>
+    <string name="nav_collections">Collections</string>
+
     <!-- DRAWER NAV =============================================================================-->
     <string name="nav_home">Home</string>
     <string name="nav_about_us">About us</string>

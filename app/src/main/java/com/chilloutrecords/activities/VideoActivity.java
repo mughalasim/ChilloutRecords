@@ -9,10 +9,14 @@ import com.afollestad.easyvideoplayer.EasyVideoPlayer;
 
 import com.chilloutrecords.R;
 import com.chilloutrecords.utils.DialogMethods;
+import com.chilloutrecords.utils.StaticMethods;
 
-public class PlayerActivity extends AppCompatActivity implements EasyVideoCallback {
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+
+public class VideoActivity extends AppCompatActivity implements EasyVideoCallback {
 
     private String
+            VIDEO_ID = "",
             VIDEO_URL = "";
     private DialogMethods dialogs;
     private EasyVideoPlayer player;
@@ -20,27 +24,29 @@ public class PlayerActivity extends AppCompatActivity implements EasyVideoCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player);
 
         handleExtraBundles();
 
-        //TODO make this autorotate to Horizontal orientation
+        setContentView(R.layout.activity_video);
 
-        dialogs = new DialogMethods(PlayerActivity.this);
-        player = findViewById(R.id.player);
-        player.setCallback(this);
-        player.setSource(Uri.parse(VIDEO_URL));
+        //TODO make this autorotate to Horizontal orientation
+//        dialogs = new DialogMethods(VideoActivity.this);
+//        player = findViewById(R.id.player);
+//        player.setCallback(this);
+//        player.setSource(Uri.parse(VIDEO_URL));
 
     }
 
     private void handleExtraBundles() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            VIDEO_URL = extras.getString("VIDEO_URL");
+            VIDEO_ID = extras.getString(EXTRA_STRING);
+            // TODO - from video ID get the video object and redesign the entire video activity
+
 
         } else {
+            StaticMethods.showToast(getString(R.string.error_500));
             finish();
-//            dialogs.ToastMessage(PlayerActivity.this, getString(R.string.error_500));
         }
     }
 
@@ -70,7 +76,7 @@ public class PlayerActivity extends AppCompatActivity implements EasyVideoCallba
 
     @Override
     public void onError(EasyVideoPlayer player, Exception e) {
-//        dialogs.ToastMessage(PlayerActivity.this, getString(R.string.error_500));
+//        dialogs.ToastMessage(VideoActivity.this, getString(R.string.error_500));
         finish();
     }
 

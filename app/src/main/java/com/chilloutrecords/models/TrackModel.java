@@ -9,9 +9,10 @@ public class TrackModel {
     public String lyrics = "";
     public String name = "";
     public String url = "";
+    public String length;
 
     public int play_count;
-    public int track_no;
+    public int number;
 
     public long release_date;
 

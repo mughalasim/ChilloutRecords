@@ -1,7 +1,6 @@
 package com.chilloutrecords.fragments;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
+import com.chilloutrecords.activities.VideoActivity;
 import com.chilloutrecords.activities.ProfileActivity;
 import com.chilloutrecords.adapters.ListingAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
@@ -107,10 +107,9 @@ public class HomeFragment extends Fragment {
                         if (btn_back.getVisibility() == View.GONE) {
                             ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), 0, url);
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_USERS)) {
-                            // TODO - open profile Activity with bundle extra with the USER ID
-                            getActivity().startActivity(new Intent(getActivity(), ProfileActivity.class));
+                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), ProfileActivity.class).putExtra(EXTRA_STRING, url));
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_VIDEOS)) {
-                            // TODO - open Video with bundle extra with the the VIDEO ID
+//                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), VideoActivity.class).putExtra(EXTRA_STRING, url));
                         }
                     }
 
@@ -179,7 +178,7 @@ public class HomeFragment extends Fragment {
                     model = new ListingModel();
                     model.txt = video.name;
                     model.img = video.art;
-                    model.url = video.url;
+                    model.url = video.id;
 
                     models.add(model);
 
