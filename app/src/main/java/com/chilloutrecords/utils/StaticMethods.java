@@ -201,7 +201,7 @@ public class StaticMethods {
     // FORMAT ======================================================================================
     public static String getDate(long time_in_millis) {
         // Create a DateFormatter object for displaying date in specified format.
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd - MM - yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("MMM yyyy");
 
         // Create a calendar object that will convert the date and time value in milliseconds to date.
         Calendar calendar = Calendar.getInstance();

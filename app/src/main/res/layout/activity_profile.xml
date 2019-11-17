@@ -19,62 +19,64 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/screen_min_width"
                 android:layout_height="wrap_content">
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/padding_large"
-                    android:backgroundTint="@color/grey_dark"
-                    android:elevation="@dimen/text_margin"
-                    android:onClick="ShareProfile"
-                    android:src="@drawable/ic_share"
-                    app:elevation="@dimen/text_margin" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btn_edit_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/padding_large"
-                    android:backgroundTint="@color/grey_dark"
-                    android:elevation="@dimen/text_margin"
-                    android:src="@drawable/ic_edit"
-                    app:elevation="@dimen/text_margin"
-                    tools:ignore="RelativeOverlap" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/img_profile"
                     android:layout_width="@dimen/img_size_x_large"
                     android:layout_height="@dimen/img_size_x_large"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/padding_large"
+                    android:layout_margin="@dimen/padding_small"
                     android:padding="@dimen/line_thickness"
-                    android:src="@color/grey_dark"
+                    android:src="@color/highlight"
                     android:scaleType="centerCrop"
                     app:riv_border_color="@color/colorPrimary"
                     app:riv_border_width="@dimen/line_thickness"
                     app:riv_corner_radius="@dimen/img_size_x_large" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/highlight"
+                    android:layout_marginTop="@dimen/padding_small"
+                    android:layout_marginStart="4dp"
+                    android:elevation="@dimen/elevation"
+                    android:onClick="ShareProfile"
+                    android:src="@drawable/ic_share"
+                    app:elevation="@dimen/elevation" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_edit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/padding_small"
+                    android:backgroundTint="@color/highlight"
+                    android:elevation="@dimen/elevation"
+                    android:src="@drawable/ic_edit"
+                    app:elevation="@dimen/elevation"
+                    tools:ignore="RelativeOverlap" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btn_edit_picture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_profile"
-                    android:layout_marginStart="-40dp"
-                    android:layout_marginTop="-40dp"
-                    android:layout_toEndOf="@id/img_profile"
-                    android:backgroundTint="@color/grey_dark"
-                    android:elevation="@dimen/text_margin"
+                    android:layout_marginEnd="4dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/padding_small"
+                    android:layout_below="@+id/btn_edit_profile"
+                    android:backgroundTint="@color/highlight"
+                    android:elevation="@dimen/elevation"
                     android:src="@drawable/ic_camera"
-                    app:elevation="@dimen/text_margin" />
+                    app:elevation="@dimen/elevation" />
 
             </RelativeLayout>
 
             <com.google.android.material.card.MaterialCardView
-                style="@style/CardLayout"
-                android:layout_marginTop="@dimen/padding_large">
+                style="@style/CardLayout">
 
                 <LinearLayout
                     android:layout_width="@dimen/screen_min_width"
@@ -118,6 +120,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_marginTop="@dimen/padding_small"
+                android:elevation="@dimen/elevation"
                 android:layout_width="@dimen/screen_min_width"
                 style="@style/TabTextLayout" />
 

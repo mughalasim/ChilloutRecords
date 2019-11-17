@@ -17,6 +17,7 @@ import com.chilloutrecords.adapters.TrackAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
+import com.chilloutrecords.utils.StaticMethods;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class TrackFragment extends Fragment {private View root_view;
                 adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new UrlInterface() {
                     @Override
                     public void success(String url) {
-
+                        StaticMethods.showToast(url);
                     }
 
                     @Override

@@ -86,5 +86,7 @@
     <string name="txt_member_since">Member since:&#160;</string>
     <string name="txt_profile_visits">Profile visits:&#160;</string>
     <string name="txt_stage_name">Stage name: &#160;</string>
+    <string name="txt_released_on">Release: &#160;</string>
+    <string name="txt_length">Length: &#160;</string>
 
 </resources>
