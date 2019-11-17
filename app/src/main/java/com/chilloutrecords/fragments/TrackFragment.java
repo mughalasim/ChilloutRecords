@@ -13,13 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.ProfileActivity;
 import com.chilloutrecords.adapters.TrackAdapter;
+import com.chilloutrecords.interfaces.TrackInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
+import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
 import com.chilloutrecords.utils.StaticMethods;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
@@ -54,15 +58,11 @@ public class TrackFragment extends Fragment {private View root_view;
                 TextView txt_no_results = root_view.findViewById(R.id.txt_no_results);
                 recycler_view.setTextView(txt_no_results, "No content to display");
 
-                adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new UrlInterface() {
+                adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackInterface() {
                     @Override
-                    public void success(String url) {
-                        StaticMethods.showToast(url);
-                    }
-
-                    @Override
-                    public void failed() {
-
+                    public void success(TrackModel model) {
+                        ((ProfileActivity) Objects.requireNonNull(getActivity())).showPlayer(model);
+//                        StaticMethods.showToast(url);
                     }
                 });
 

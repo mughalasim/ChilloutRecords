@@ -2,6 +2,7 @@ package com.chilloutrecords.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,11 @@ import com.chilloutrecords.R;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.fragments.TrackFragment;
 import com.chilloutrecords.interfaces.UrlInterface;
+import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -79,6 +82,9 @@ public class ProfileActivity extends AppCompatActivity {
     };
     private ArrayList<ArrayList<String>> extra_array_list = new ArrayList<>();
 
+    private LinearLayout ll_bottom_sheet;
+    private BottomSheetBehavior bs_behaviour; // lol BS behavior
+
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -92,6 +98,9 @@ public class ProfileActivity extends AppCompatActivity {
         // FIND ALL VIEWS
         toolbar = findViewById(R.id.toolbar);
         txt_page_title = findViewById(R.id.txt_page_title);
+        ll_bottom_sheet = findViewById(R.id.ll_bottom_sheet);
+        bs_behaviour = BottomSheetBehavior.from(ll_bottom_sheet);
+        bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         txt_name = findViewById(R.id.txt_name);
         txt_stage_name = findViewById(R.id.txt_stage_name);
@@ -195,11 +204,6 @@ public class ProfileActivity extends AppCompatActivity {
                 public void success(String url) {
                     Glide.with(ProfileActivity.this).load(url).into(img_profile);
                 }
-
-                @Override
-                public void failed() {
-
-                }
             });
             // General info
             txt_name.setText(model.name);
@@ -247,6 +251,10 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    public void showPlayer(TrackModel model) {
+        bs_behaviour.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+
+    }
 
 }
 

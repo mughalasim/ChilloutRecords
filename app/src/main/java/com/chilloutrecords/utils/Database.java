@@ -79,12 +79,12 @@ public class Database {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    listener.failed();
+//                    listener.failed();
                 }
             });
         } catch (Exception e) {
             StaticMethods.logg("STATIC METHOD", "File not found");
-            listener.failed();
+//            listener.failed();
         }
 
 

@@ -66,11 +66,6 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
             public void success(String url) {
                 Glide.with(context).load(url).into(holder.img);
             }
-
-            @Override
-            public void failed() {
-
-            }
         });
 
         holder.txt.setText(model.txt);

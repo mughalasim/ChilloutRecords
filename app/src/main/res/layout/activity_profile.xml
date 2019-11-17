@@ -1,144 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar" />
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_tool_bar">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include layout="@layout/toolbar" />
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll_tool_bar">
 
-            <RelativeLayout
-                android:layout_width="@dimen/screen_min_width"
-                android:layout_height="wrap_content">
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/img_profile"
-                    android:layout_width="@dimen/img_size_x_large"
-                    android:layout_height="@dimen/img_size_x_large"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="@dimen/padding_small"
-                    android:padding="@dimen/line_thickness"
-                    android:src="@color/highlight"
-                    android:scaleType="centerCrop"
-                    app:riv_border_color="@color/colorPrimary"
-                    app:riv_border_width="@dimen/line_thickness"
-                    app:riv_corner_radius="@dimen/img_size_x_large" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/highlight"
-                    android:layout_marginTop="@dimen/padding_small"
-                    android:layout_marginStart="4dp"
-                    android:elevation="@dimen/elevation"
-                    android:onClick="ShareProfile"
-                    android:src="@drawable/ic_share"
-                    app:elevation="@dimen/elevation" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btn_edit_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="@dimen/padding_small"
-                    android:backgroundTint="@color/highlight"
-                    android:elevation="@dimen/elevation"
-                    android:src="@drawable/ic_edit"
-                    app:elevation="@dimen/elevation"
-                    tools:ignore="RelativeOverlap" />
-
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btn_edit_picture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="@dimen/padding_small"
-                    android:layout_below="@+id/btn_edit_profile"
-                    android:backgroundTint="@color/highlight"
-                    android:elevation="@dimen/elevation"
-                    android:src="@drawable/ic_camera"
-                    app:elevation="@dimen/elevation" />
-
-            </RelativeLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/CardLayout">
-
-                <LinearLayout
-                    android:layout_width="@dimen/screen_min_width"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_small">
-
-                    <TextView
-                        android:id="@+id/txt_name"
-                        style="@style/TextTitle" />
-
-                    <TextView
-                        android:id="@+id/txt_stage_name"
-                        style="@style/TextBody"
-                        android:layout_marginTop="@dimen/text_margin" />
-
-                    <TextView
-                        android:id="@+id/txt_email"
-                        style="@style/TextBody"
-                        android:layout_marginTop="@dimen/text_margin" />
-
-                    <TextView
-                        android:id="@+id/txt_gender"
-                        style="@style/TextBody"
-                        android:layout_marginTop="@dimen/text_margin" />
-
-                    <TextView
-                        android:id="@+id/txt_member_since"
-                        style="@style/TextBody"
-                        android:layout_marginTop="@dimen/text_margin" />
-
-                    <TextView
-                        android:id="@+id/txt_profile_visits"
-                        style="@style/TextBody"
-                        android:layout_marginTop="@dimen/text_margin" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_marginTop="@dimen/padding_small"
-                android:elevation="@dimen/elevation"
-                android:layout_width="@dimen/screen_min_width"
-                style="@style/TabTextLayout" />
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="600dp" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/screen_min_width"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="@dimen/img_size_x_large"
+                        android:layout_height="@dimen/img_size_x_large"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="@dimen/padding_small"
+                        android:padding="@dimen/line_thickness"
+                        android:scaleType="centerCrop"
+                        android:src="@color/highlight"
+                        app:riv_border_color="@color/colorPrimary"
+                        app:riv_border_width="@dimen/line_thickness"
+                        app:riv_corner_radius="@dimen/img_size_x_large" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="@dimen/padding_small"
+                        android:backgroundTint="@color/highlight"
+                        android:elevation="@dimen/elevation"
+                        android:onClick="ShareProfile"
+                        android:src="@drawable/ic_share"
+                        app:elevation="@dimen/elevation" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_edit_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/padding_small"
+                        android:layout_marginEnd="4dp"
+                        android:backgroundTint="@color/highlight"
+                        android:elevation="@dimen/elevation"
+                        android:src="@drawable/ic_edit"
+                        app:elevation="@dimen/elevation"
+                        tools:ignore="RelativeOverlap" />
 
 
-        </LinearLayout>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_edit_picture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btn_edit_profile"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/padding_small"
+                        android:layout_marginEnd="4dp"
+                        android:backgroundTint="@color/highlight"
+                        android:elevation="@dimen/elevation"
+                        android:src="@drawable/ic_camera"
+                        app:elevation="@dimen/elevation" />
 
-    </androidx.core.widget.NestedScrollView>
+                </RelativeLayout>
+
+                <com.google.android.material.card.MaterialCardView style="@style/CardLayout">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/screen_min_width"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_small">
+
+                        <TextView
+                            android:id="@+id/txt_name"
+                            style="@style/TextTitle" />
+
+                        <TextView
+                            android:id="@+id/txt_stage_name"
+                            style="@style/TextBody"
+                            android:layout_marginTop="@dimen/text_margin" />
+
+                        <TextView
+                            android:id="@+id/txt_email"
+                            style="@style/TextBody"
+                            android:layout_marginTop="@dimen/text_margin" />
+
+                        <TextView
+                            android:id="@+id/txt_gender"
+                            style="@style/TextBody"
+                            android:layout_marginTop="@dimen/text_margin" />
+
+                        <TextView
+                            android:id="@+id/txt_member_since"
+                            style="@style/TextBody"
+                            android:layout_marginTop="@dimen/text_margin" />
+
+                        <TextView
+                            android:id="@+id/txt_profile_visits"
+                            style="@style/TextBody"
+                            android:layout_marginTop="@dimen/text_margin" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    style="@style/TabTextLayout"
+                    android:layout_width="@dimen/screen_min_width"
+                    android:layout_marginTop="@dimen/padding_small"
+                    android:elevation="@dimen/elevation" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp" />
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_fragment"
+        android:id="@+id/ll_bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="340dp"
+        android:background="@color/colorAccent"
         android:orientation="vertical"
-        android:visibility="gone" />
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="?attr/actionBarSize"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/progress_password_reset"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

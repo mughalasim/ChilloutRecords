@@ -112,11 +112,6 @@ public class HomeFragment extends Fragment {
 //                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), VideoActivity.class).putExtra(EXTRA_STRING, url));
                         }
                     }
-
-                    @Override
-                    public void failed() {
-
-                    }
                 });
 
                 recycler_view.setAdapter(adapter);
