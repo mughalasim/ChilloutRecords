@@ -149,15 +149,19 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                     View child = inflater.inflate(R.layout.list_item_track, null);
                     TextView txt_track_number = child.findViewById(R.id.txt_track_number);
                     TextView txt_track_title = child.findViewById(R.id.txt_track_title);
-                    TextView txt_track_length = child.findViewById(R.id.txt_track_length);
+                    TextView txt_track_play_count = child.findViewById(R.id.txt_track_play_count);
                     txt_track_title.setText(track.name);
                     txt_track_number.setText(String.valueOf(track.number));
-                    txt_track_length.setText(String.valueOf(track.length));
+                    txt_track_play_count.setText(String.valueOf(track.play_count));
                     holder.ll_tracks.addView(child);
                     child.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            listener.success(track);
+                            listener.success(
+                                    track,
+                                    BuildConfig.DB_REF_COLLECTIONS+"/"+model.id+"/tracks/"+track.id,
+                                    BuildConfig.DB_REF_COLLECTIONS+"/"+model.id
+                            );
                         }
                     });
 
@@ -172,7 +176,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
             if (model != null) {
                 holder.txt_collection_name.setText(model.name);
                 holder.txt_collection_release_year.setText(context.getString(R.string.txt_released_on).concat(StaticMethods.getDate(model.release_date)));
-                holder.txt_collection_type.setText(context.getString(R.string.txt_length).concat(model.length));
+                holder.txt_collection_type.setText(String.valueOf(model.play_count));
                 Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, new UrlInterface() {
                     @Override
                     public void success(String url) {
@@ -183,7 +187,10 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        listener.success(model);
+                        listener.success(model,
+                                BuildConfig.DB_REF_SINGLES+"/"+model.id,
+                                BuildConfig.DB_REF_SINGLES+"/"+model.id
+                        );
                     }
                 });
             } else {

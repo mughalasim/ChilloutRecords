@@ -60,9 +60,8 @@ public class TrackFragment extends Fragment {private View root_view;
 
                 adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackInterface() {
                     @Override
-                    public void success(TrackModel model) {
-                        ((ProfileActivity) Objects.requireNonNull(getActivity())).showPlayer(model);
-//                        StaticMethods.showToast(url);
+                    public void success(TrackModel model, String db_path, String storage_path) {
+                        ((ProfileActivity) Objects.requireNonNull(getActivity())).showPlayer(model, db_path, storage_path);
                     }
                 });
 

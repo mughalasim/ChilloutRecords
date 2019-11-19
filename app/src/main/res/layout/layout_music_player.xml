@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    app:behavior_peekHeight="?attr/actionBarSize"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_thickness"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/media_controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/img_size_small">
+
+        <ImageButton
+            android:id="@+id/btn_track_play"
+            style="@android:style/MediaButton.Play"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/txt_track_current_time"
+            style="@style/TextSmall"
+            android:padding="@dimen/padding_mini"
+            android:text="00:00"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/seek_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/padding_large"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txt_track_end_time"
+            style="@style/TextSmall"
+            android:padding="@dimen/padding_mini"
+            android:text="00:00"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_thickness"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/padding_tiny"
+        android:paddingBottom="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large"
+        android:paddingStart="@dimen/padding_large">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_track_title"
+                style="@style/TextBody"
+                android:layout_toStartOf="@+id/btn_track_download"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_track_download"
+                android:layout_width="@dimen/img_size_small"
+                android:layout_height="@dimen/img_size_small"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/padding_mini"
+                android:src="@drawable/ic_download" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/padding_tiny"
+            android:layout_height="@dimen/line_thickness"
+            android:background="@color/highlight" />
+
+        <TextView
+            style="@style/TextBody"
+            android:layout_marginTop="@dimen/padding_tiny"
+            android:text="@string/txt_lyrics" />
+
+        <TextView
+            android:id="@+id/txt_track_lyrics"
+            style="@style/TextBody"
+            android:layout_marginTop="@dimen/padding_small"
+            android:text="@string/progress_loading" />
+
+    </LinearLayout>
+
+</LinearLayout>

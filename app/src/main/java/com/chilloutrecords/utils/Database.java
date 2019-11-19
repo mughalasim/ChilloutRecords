@@ -79,15 +79,31 @@ public class Database {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-//                    listener.failed();
+                    listener.success("");
                 }
             });
         } catch (Exception e) {
             StaticMethods.logg("STATIC METHOD", "File not found");
-//            listener.failed();
+            listener.success("");
         }
 
 
+    }
+
+    // UPDATE TRACK PLAY COUNT =====================================================================
+    public static void updateTrackPlayCount(String path, int current_play_count){
+        current_play_count++;
+        DatabaseReference reference = FIREBASE_DB.getReference();
+        reference.child(path).child("play_count").setValue(current_play_count).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    StaticMethods.logg("Database", "Updated play count");
+                } else {
+                    StaticMethods.logg("Database", "Failed to update play count");
+                }
+            }
+        });
     }
 
 }
