@@ -16,10 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
@@ -56,13 +55,26 @@ public class Database {
         context.finish();
     }
 
+    public static void validateUserToken() {
+        FIREBASE_USER = FIREBASE_AUTH.getCurrentUser();
+        try {
+            FIREBASE_USER.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                @Override
+                public void onComplete(@NonNull Task<GetTokenResult> task) {
+
+                }
+            });
+        } catch (Exception e) {
+            StaticMethods.logOutUser(true);
+        }
+    }
+
     // HANDLE ERROR ================================================================================
     public static void handleDatabaseError(DatabaseError error) {
         int code = error.getCode();
-        if (code == DatabaseError.DISCONNECTED || code == DatabaseError.NETWORK_ERROR || code == DatabaseError.UNAVAILABLE ) {
-            // TODO - Start network error activity
+        if (code == DatabaseError.DISCONNECTED || code == DatabaseError.NETWORK_ERROR || code == DatabaseError.UNAVAILABLE) {
             StaticMethods.showToast("Network error");
-        } else if (code == DatabaseError.PERMISSION_DENIED || code == DatabaseError.EXPIRED_TOKEN || code == DatabaseError.INVALID_TOKEN  ) {
+        } else if (code == DatabaseError.PERMISSION_DENIED || code == DatabaseError.EXPIRED_TOKEN || code == DatabaseError.INVALID_TOKEN) {
             StaticMethods.logOutUser(true);
         }
     }
@@ -74,7 +86,7 @@ public class Database {
             file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    listener.completed (true, uri.toString());
+                    listener.completed(true, uri.toString());
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -91,7 +103,7 @@ public class Database {
     }
 
     // UPDATE TRACK PLAY COUNT =====================================================================
-    public static void updateTrackPlayCount(String path, int current_play_count){
+    public static void updateTrackPlayCount(String path, int current_play_count) {
         current_play_count++;
         DatabaseReference reference = FIREBASE_DB.getReference();
         reference.child(path).child("play_count").setValue(current_play_count).addOnCompleteListener(new OnCompleteListener<Void>() {
