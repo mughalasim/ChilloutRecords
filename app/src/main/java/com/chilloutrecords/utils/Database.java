@@ -74,17 +74,17 @@ public class Database {
             file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    listener.success(uri.toString());
+                    listener.completed (true, uri.toString());
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    listener.success("");
+                    listener.completed(false, "");
                 }
             });
         } catch (Exception e) {
             StaticMethods.logg("STATIC METHOD", "File not found");
-            listener.success("");
+            listener.completed(false, "");
         }
 
 

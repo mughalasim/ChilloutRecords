@@ -25,6 +25,7 @@ import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
+import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -63,13 +64,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     private String STR_ID = "";
     private final String TAG_LOG = "PROFILE";
+    private DialogMethods dialogs;
 
+    private String IMG_PROFILE_URL = "";
     private TextView
             txt_page_title,
             txt_name,
             txt_stage_name,
-            txt_email,
-            txt_gender,
+            txt_info,
             txt_profile_visits,
             txt_member_since;
 
@@ -176,6 +178,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
+        dialogs = new DialogMethods(ProfileActivity.this);
 
         // FIND ALL VIEWS
         toolbar = findViewById(R.id.toolbar);
@@ -199,8 +202,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         txt_name = findViewById(R.id.txt_name);
         txt_stage_name = findViewById(R.id.txt_stage_name);
-        txt_email = findViewById(R.id.txt_email);
-        txt_gender = findViewById(R.id.txt_gender);
+        txt_info = findViewById(R.id.txt_info);
         txt_profile_visits = findViewById(R.id.txt_profile_visits);
         txt_member_since = findViewById(R.id.txt_member_since);
 
@@ -236,7 +238,7 @@ public class ProfileActivity extends AppCompatActivity {
         btn_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                dialogs.setDialogProfileUpdate();
             }
         });
 
@@ -250,7 +252,7 @@ public class ProfileActivity extends AppCompatActivity {
         img_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                dialogs.setDialogImagePreview(IMG_PROFILE_URL);
             }
         });
 
@@ -270,6 +272,15 @@ public class ProfileActivity extends AppCompatActivity {
         }
         super.onPause();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (bs_behaviour.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+            bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -301,20 +312,29 @@ public class ProfileActivity extends AppCompatActivity {
         reference.child(STR_ID).addValueEventListener(listener);
     }
 
+    private UserModel user_model = new UserModel();
+
+    public UserModel getUserModel() {
+        return user_model;
+    }
+
     private void loadProfile(UserModel model) {
         if (model != null) {
+            user_model = model;
             // Image
             Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.p_pic, new UrlInterface() {
                 @Override
-                public void success(String url) {
-                    Glide.with(ProfileActivity.this).load(url).into(img_profile);
+                public void completed(Boolean success, String url) {
+                    if (success) {
+                        Glide.with(ProfileActivity.this).load(url).into(img_profile);
+                        IMG_PROFILE_URL = url;
+                    }
                 }
             });
             // General info
             txt_name.setText(model.name);
             txt_stage_name.setText(getString(R.string.txt_stage_name).concat(model.stage_name));
-            txt_email.setText(getString(R.string.txt_email).concat(model.email));
-            txt_gender.setText(StaticMethods.getGender(model.gender));
+            txt_info.setText(model.info);
             // stats
             txt_profile_visits.setText(getString(R.string.txt_profile_visits).concat(String.valueOf(model.profile_visits)));
             txt_member_since.setText(getString(R.string.txt_member_since).concat(StaticMethods.getDate(model.member_since_date)));
@@ -418,9 +438,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         Database.getFileUrl(storage_path, model.url, new UrlInterface() {
             @Override
-            public void success(String url) {
+            public void completed(Boolean success, String url) {
                 try {
-                    if (url != null && !url.equals("")) {
+                    if (success) {
                         StaticMethods.logg("PROFILE", url);
                         Uri uri = Uri.parse(url);
                         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(ProfileActivity.this, Util.getUserAgent(ProfileActivity.this, getString(R.string.app_name)), null);
@@ -476,7 +496,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setProgress() {
-        seek_bar.setProgress(0);
+//        seek_bar.setProgress(0);
         seek_bar.setMax((int) player.getDuration() / 1000);
         txt_track_current_time.setText(stringForTime((int) player.getCurrentPosition()));
         txt_track_end_time.setText(stringForTime((int) player.getDuration()));

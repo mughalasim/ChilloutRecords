@@ -35,7 +35,7 @@
                         android:layout_margin="@dimen/padding_small"
                         android:padding="@dimen/line_thickness"
                         android:scaleType="centerCrop"
-                        android:src="@color/highlight"
+                        android:src="@color/colorAccent"
                         app:riv_border_color="@color/colorPrimary"
                         app:riv_border_width="@dimen/line_thickness"
                         app:riv_corner_radius="@dimen/img_size_x_large" />
@@ -44,8 +44,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        app:rippleColor="@color/highlight"
                         android:layout_marginTop="@dimen/padding_small"
-                        android:backgroundTint="@color/highlight"
+                        android:backgroundTint="@color/colorPrimary"
                         android:elevation="@dimen/elevation"
                         android:onClick="ShareProfile"
                         android:src="@drawable/ic_share"
@@ -58,7 +59,8 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/padding_small"
                         android:layout_marginEnd="4dp"
-                        android:backgroundTint="@color/highlight"
+                        app:rippleColor="@color/highlight"
+                        android:backgroundTint="@color/colorPrimary"
                         android:elevation="@dimen/elevation"
                         android:src="@drawable/ic_edit"
                         app:elevation="@dimen/elevation"
@@ -72,8 +74,9 @@
                         android:layout_below="@+id/btn_edit_profile"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/padding_small"
+                        app:rippleColor="@color/highlight"
                         android:layout_marginEnd="4dp"
-                        android:backgroundTint="@color/highlight"
+                        android:backgroundTint="@color/colorPrimary"
                         android:elevation="@dimen/elevation"
                         android:src="@drawable/ic_camera"
                         app:elevation="@dimen/elevation" />
@@ -98,16 +101,6 @@
                             android:layout_marginTop="@dimen/text_margin" />
 
                         <TextView
-                            android:id="@+id/txt_email"
-                            style="@style/TextBody"
-                            android:layout_marginTop="@dimen/text_margin" />
-
-                        <TextView
-                            android:id="@+id/txt_gender"
-                            style="@style/TextBody"
-                            android:layout_marginTop="@dimen/text_margin" />
-
-                        <TextView
                             android:id="@+id/txt_member_since"
                             style="@style/TextBody"
                             android:layout_marginTop="@dimen/text_margin" />
@@ -115,6 +108,27 @@
                         <TextView
                             android:id="@+id/txt_profile_visits"
                             style="@style/TextBody"
+                            android:layout_marginTop="@dimen/text_margin" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_marginTop="@dimen/padding_tiny"
+                    style="@style/CardLayout">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/screen_min_width"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_small">
+
+                        <TextView
+                            android:id="@+id/txt_info"
+                            style="@style/TextBody"
+                            android:maxLength="@integer/max_profile_info"
                             android:layout_marginTop="@dimen/text_margin" />
 
                     </LinearLayout>

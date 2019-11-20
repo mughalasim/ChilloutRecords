@@ -5,14 +5,15 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.ProfileActivity;
 import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
@@ -25,11 +26,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Objects;
 
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
@@ -42,24 +43,29 @@ public class RegisterFragment extends Fragment {
             et_email,
             et_name,
             et_stage_name,
+            et_info,
             et_password,
             et_password_confirm;
     private TextInputLayout
             etl_email,
             etl_name,
             etl_stage_name,
+            etl_info,
             etl_password,
             etl_password_confirm;
-
+    private TextView txt_title;
+    private boolean isRegistration = true;
     private Spinner spinner_gender;
-    private MaterialButton btn_register;
+    private MaterialButton btn_confirm;
+    private UserModel extra_user = new UserModel();
 
     // OVERRIDE METHODS ============================================================================
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
+        if (getActivity() instanceof  ProfileActivity) {
+            isRegistration = false;
+            extra_user = ((ProfileActivity) getActivity()).getUserModel();
         }
     }
 
@@ -73,66 +79,95 @@ public class RegisterFragment extends Fragment {
 
                 spinner_gender = root_view.findViewById(R.id.spinner_gender);
 
+                txt_title = root_view.findViewById(R.id.txt_title);
+
                 et_name = root_view.findViewById(R.id.et_name);
                 et_stage_name = root_view.findViewById(R.id.et_stage_name);
+                et_info = root_view.findViewById(R.id.et_info);
                 et_email = root_view.findViewById(R.id.et_email);
                 et_password = root_view.findViewById(R.id.et_password);
                 et_password_confirm = root_view.findViewById(R.id.et_password_confirm);
 
                 etl_name = root_view.findViewById(R.id.etl_name);
                 etl_stage_name = root_view.findViewById(R.id.etl_stage_name);
+                etl_info = root_view.findViewById(R.id.etl_info);
                 etl_email = root_view.findViewById(R.id.etl_email);
                 etl_password = root_view.findViewById(R.id.etl_password);
                 etl_password_confirm = root_view.findViewById(R.id.etl_password_confirm);
 
-                btn_register = root_view.findViewById(R.id.btn_register);
+                btn_confirm = root_view.findViewById(R.id.btn_confirm);
 
-                if (BuildConfig.DEBUG) {
-                    et_name.setText("Asim");
-                    et_stage_name.setText("Speedy");
-                    et_email.setText("user@test.com");
-                    et_password.setText("password");
-                    et_password_confirm.setText("password");
+                if (isRegistration) {
+                    txt_title.setText(getString(R.string.txt_register));
+                    btn_confirm.setText(getString(R.string.nav_register));
+                    etl_info.setVisibility(View.GONE);
+                    etl_email.setVisibility(View.VISIBLE);
+                    etl_password.setVisibility(View.VISIBLE);
+                    etl_password_confirm.setVisibility(View.VISIBLE);
+                    btn_confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (
+                                    StaticMethods.validateEmptyEditText(et_name, etl_name, getString(R.string.error_field_required)) &&
+                                            StaticMethods.validateEmptyEditText(et_stage_name, etl_stage_name, getString(R.string.error_field_required)) &&
+                                            StaticMethods.validateEmail(et_email, etl_email) &&
+                                            StaticMethods.validateEmptyEditText(et_password, etl_password, getString(R.string.error_field_required)) &&
+                                            StaticMethods.validateEmptyEditText(et_password_confirm, etl_password_confirm, getString(R.string.error_field_required)) &&
+                                            StaticMethods.validateMatch(et_password, etl_password, et_password_confirm, etl_password_confirm)
+                            ) {
+                                dialogs.setProgressDialog(getString(R.string.progress_register));
+                                FIREBASE_AUTH.createUserWithEmailAndPassword(Objects.requireNonNull(et_email.getText()).toString().trim(), Objects.requireNonNull(et_password.getText()).toString().trim())
+                                        .addOnCompleteListener(Objects.requireNonNull(getActivity()), new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                dialogs.dismissProgressDialog();
+                                                if (task.isSuccessful()) {
+                                                    createUser();
+                                                } else {
+                                                    StaticMethods.logg(TAG_LOG, "Registration Failed " + task.getException());
+
+                                                    if (task.getException() != null && !task.getException().toString().equals("") && task.getException().toString().contains(":")) {
+                                                        String[] messages = task.getException().toString().split(":");
+                                                        dialogs.setDialogCancel(getString(R.string.txt_alert), messages[1]);
+                                                    } else {
+                                                        dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
+                                                    }
+
+                                                }
+                                            }
+                                        });
+                            }
+                        }
+                    });
+                } else {
+                    txt_title.setText(getString(R.string.txt_update_profile));
+                    btn_confirm.setText(getString(R.string.txt_update));
+                    etl_info.setVisibility(View.VISIBLE);
+                    etl_email.setVisibility(View.GONE);
+                    etl_password.setVisibility(View.GONE);
+                    etl_password_confirm.setVisibility(View.GONE);
+                    populateFromModel();
+                    btn_confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (
+                                    StaticMethods.validateEmptyEditText(et_name, etl_name, getString(R.string.error_field_required)) &&
+                                            StaticMethods.validateEmptyEditText(et_stage_name, etl_stage_name, getString(R.string.error_field_required)) &&
+                                            StaticMethods.validateEmptyEditText(et_info, etl_info, getString(R.string.error_field_required))
+                            ) {
+                                updateUser();
+                            }
+                        }
+                    });
                 }
 
-                btn_register.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (
-                                StaticMethods.validateEmptyEditText(et_name, etl_name, getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateEmptyEditText(et_stage_name, etl_stage_name,getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateEmail(et_email, etl_email) &&
-                                        StaticMethods.validateEmptyEditText(et_password, etl_password,getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateEmptyEditText(et_password_confirm, etl_password_confirm,getString(R.string.error_field_required)) &&
-                                        StaticMethods.validateMatch(et_password, etl_password, et_password_confirm, etl_password_confirm)
-                        ) {
-
-                            dialogs.setProgressDialog(getString(R.string.progress_register));
-                            FIREBASE_AUTH.createUserWithEmailAndPassword(Objects.requireNonNull(et_email.getText()).toString().trim(), Objects.requireNonNull(et_password.getText()).toString().trim())
-                                    .addOnCompleteListener(Objects.requireNonNull(getActivity()), new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            dialogs.dismissProgressDialog();
-                                            if (task.isSuccessful()) {
-                                                createUser();
-                                            } else {
-                                                StaticMethods.logg(TAG_LOG, "Registration Failed " + task.getException());
-
-                                                if (task.getException() != null && !task.getException().toString().equals("") && task.getException().toString().contains(":")) {
-                                                    String[] messages = task.getException().toString().split(":");
-                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), messages[1]);
-                                                } else {
-                                                    dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
-                                                }
-
-                                            }
-
-                                        }
-                                    });
-
-                        }
-                    }
-                });
+//                if (BuildConfig.DEBUG) {
+//                        et_name.setText("Asim");
+//                        et_stage_name.setText("Speedy");
+//                        et_email.setText("user@test.com");
+//                        et_password.setText("password");
+//                        et_password_confirm.setText("password");
+//                }
 
 
             } catch (InflateException e) {
@@ -144,7 +179,14 @@ public class RegisterFragment extends Fragment {
         return root_view;
     }
 
-    private void createUser(){
+    private void populateFromModel() {
+        et_name.setText(extra_user.name);
+        et_stage_name.setText(extra_user.stage_name);
+        spinner_gender.setSelection(extra_user.gender);
+        et_info.setText(extra_user.info);
+    }
+
+    private void createUser() {
         // CREATE THE NEW USER
         UserModel user = new UserModel();
 
@@ -180,6 +222,27 @@ public class RegisterFragment extends Fragment {
                 FIREBASE_USER.delete();
                 FIREBASE_AUTH.signOut();
                 dialogs.setDialogCancel(getString(R.string.txt_alert), getString(R.string.error_register_failed));
+            }
+        });
+    }
+
+    private void updateUser() {
+        // UPDATE USER
+        extra_user.name = Objects.requireNonNull(et_name.getText()).toString().trim();
+        extra_user.stage_name = Objects.requireNonNull(et_stage_name.getText()).toString().trim();
+        extra_user.info = Objects.requireNonNull(et_info.getText()).toString().trim();
+        extra_user.gender = spinner_gender.getSelectedItemPosition();
+
+        // UPDATE THE USER IN THE DATABASE
+        Database.setUser(extra_user, new GeneralInterface() {
+            @Override
+            public void success() {
+                StaticMethods.showToast(getString(R.string.toast_update_success));
+            }
+
+            @Override
+            public void failed() {
+                StaticMethods.showToast(getString(R.string.error_update_failed));
             }
         });
     }

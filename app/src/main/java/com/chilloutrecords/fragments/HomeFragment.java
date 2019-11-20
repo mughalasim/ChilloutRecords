@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
 
                 adapter = new ListingAdapter(getActivity(), models, new UrlInterface() {
                     @Override
-                    public void success(String url) {
+                    public void completed (Boolean success, String url) {
                         if (btn_back.getVisibility() == View.GONE) {
                             ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), 0, url);
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_USERS)) {

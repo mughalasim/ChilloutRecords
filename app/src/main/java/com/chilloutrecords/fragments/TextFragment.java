@@ -10,21 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.ParentActivity;
-import com.chilloutrecords.adapters.ListingAdapter;
-import com.chilloutrecords.interfaces.UrlInterface;
-import com.chilloutrecords.models.ListingModel;
 import com.chilloutrecords.models.TextModel;
 import com.chilloutrecords.utils.Database;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Objects;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;

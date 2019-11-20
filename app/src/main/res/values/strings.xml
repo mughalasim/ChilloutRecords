@@ -18,10 +18,12 @@
     <string name="error_login_failed">Failed to Login to the Chillout records App. Please check your credentials or try again later</string>
     <string name="error_reset_failed">Failed to sent a rest link to the provided email address. Please check your credentials or try again later</string>
     <string name="error_register_failed">Failed to Register your account into the Chillout records App. Please try again later</string>
+    <string name="error_update_failed">Failed to update your account information. Please try again later</string>
 
     <!--LOADING DIALOGS =========================================================================-->
     <string name="progress_login">Logging in. Please wait…</string>
     <string name="progress_register">Registration in progress… Please wait…</string>
+    <string name="progress_update">Profile update in progress… Please wait…</string>
     <string name="progress_password_reset">Sending a reset link to your email… Please wait…</string>
     <string name="progress_initializing">Initializing....</string>
     <string name="progress_loading">Loading, please wait....</string>
@@ -62,12 +64,13 @@
     <!--APP VERSIONING ==========================================================================-->
     <string name="txt_old_version_title">Old version</string>
     <string name="txt_old_version_desc">Seems like you are using an old version of the app, tap YES to automatically download our new APK to get new features</string>
-    <string name="txt_update_now">Update now</string>
+    <string name="txt_update">Update</string>
     <string name="txt_later">Later</string>
     <string name="txt_alert">Alert</string>
 
     <!-- TOASTS =================================================================================-->
     <string name="toast_reset_success">Successfully sent reset link to you inbox</string>
+    <string name="toast_update_success">Successfully updated</string>
 
     <!-- BASIC TEXTS  ===========================================================================-->
     <string name="txt_confirm">OK</string>
@@ -89,5 +92,6 @@
     <string name="txt_stage_name">Stage name: &#160;</string>
     <string name="txt_released_on">Release: &#160;</string>
     <string name="txt_lyrics">Lyrics</string>
+    <string name="txt_update_profile">Update your profile</string>
 
 </resources>

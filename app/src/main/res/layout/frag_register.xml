@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_title"
             style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
@@ -37,7 +38,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_stage_name"
             style="@style/EditTextLayout"
-            android:layout_marginTop="@dimen/padding_small"
             android:hint="@string/et_hint_stage_name">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -47,17 +47,31 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_info"
+            style="@style/EditTextLayout"
+            app:counterEnabled="true"
+            android:hint="@string/et_hint_info">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_info"
+                style="@style/EditTextInput"
+                android:maxLength="@integer/max_profile_info"
+                android:maxLines="15"
+                android:inputType="textLongMessage|textMultiLine"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Spinner
             android:id="@+id/spinner_gender"
             style="@style/EditText"
-            android:layout_marginBottom="@dimen/padding_small"
-            android:layout_marginTop="@dimen/padding_large"
             android:entries="@array/select_gender" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_email"
             style="@style/EditTextLayout"
-            android:layout_marginTop="@dimen/padding_large"
+            android:layout_marginTop="@dimen/padding_small"
             android:hint="@string/et_hint_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -70,7 +84,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_password"
             style="@style/EditTextLayout"
-            android:layout_marginTop="@dimen/padding_small"
             app:passwordToggleEnabled="true"
             android:hint="@string/et_hint_password">
 
@@ -84,7 +97,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_password_confirm"
             style="@style/EditTextLayout"
-            android:layout_marginTop="@dimen/padding_small"
             app:passwordToggleEnabled="true"
             android:hint="@string/et_hint_confirm_password">
 
@@ -96,17 +108,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_confirm"
             style="@style/ButtonYes"
-            android:layout_marginTop="@dimen/padding_medium"
-            android:text="@string/nav_register" />
-
-        <TextView
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/padding_large"
             android:layout_marginTop="@dimen/padding_large"
-            android:gravity="center"
-            android:text="@string/txt_terms" />
+            android:text="@string/nav_register" />
 
     </LinearLayout>
 

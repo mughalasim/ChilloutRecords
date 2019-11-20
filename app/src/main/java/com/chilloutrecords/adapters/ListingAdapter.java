@@ -63,8 +63,9 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
         Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.img, new UrlInterface() {
             @Override
-            public void success(String url) {
-                Glide.with(context).load(url).into(holder.img);
+            public void completed (Boolean success, String url) {
+                if (context != null && success)
+                    Glide.with(context).load(url).into(holder.img);
             }
         });
 
@@ -75,7 +76,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.success(model.url);
+                listener.completed (true, model.url);
             }
         });
 

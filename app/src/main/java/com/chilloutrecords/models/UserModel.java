@@ -1,6 +1,8 @@
 package com.chilloutrecords.models;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
     public int profile_visits;
     public int play_count;
     public int gender;

@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment {
 
                 btn_login = root_view.findViewById(R.id.btn_login);
 
-                if(BuildConfig.DEBUG){
+                if (BuildConfig.DEBUG) {
                     et_email.setText("user@test.com");
                     et_password.setText("password");
                 }

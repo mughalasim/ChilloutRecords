@@ -129,9 +129,9 @@ def renameAPKFile(variant) {
         outputFileName = new File(
                 "Chillout Records ("
                         + variant.buildType.name
-                        + " - "
+                        + "-"
                         + variant.versionName
-                        + " )"
+                        + ")"
                         + ".apk"
         )
     }
@@ -173,9 +173,10 @@ dependencies {
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"
 
     // VIDEO PAYER
-    implementation 'com.afollestad:easyvideoplayer:0.3.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.10.7'
 
+    // IMAGE VIEWER
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
