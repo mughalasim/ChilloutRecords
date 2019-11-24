@@ -14,6 +14,7 @@ public class VideoModel {
     public int play_count;
 
     public long release_date;
+    public boolean is_live;
 
     @Keep
     public VideoModel(){

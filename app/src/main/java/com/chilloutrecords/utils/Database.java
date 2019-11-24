@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
@@ -53,20 +52,6 @@ public class Database {
             context.startActivity(new Intent(context, StartUpActivity.class));
         }
         context.finish();
-    }
-
-    public static void validateUserToken() {
-        FIREBASE_USER = FIREBASE_AUTH.getCurrentUser();
-        try {
-            FIREBASE_USER.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                @Override
-                public void onComplete(@NonNull Task<GetTokenResult> task) {
-
-                }
-            });
-        } catch (Exception e) {
-            StaticMethods.logOutUser(true);
-        }
     }
 
     // HANDLE ERROR ================================================================================

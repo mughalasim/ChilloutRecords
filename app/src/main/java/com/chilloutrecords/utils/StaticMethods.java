@@ -2,6 +2,7 @@ package com.chilloutrecords.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,6 +37,7 @@ import java.util.regex.Pattern;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
 
 public class StaticMethods {
@@ -95,6 +97,8 @@ public class StaticMethods {
         SharedPrefs.deleteAllSharedPrefs();
 
         FIREBASE_AUTH.signOut();
+        FIREBASE_USER = null;
+
         if (is_session_expired) {
             showToast("Your session has expired. Kindly login to continue");
         }
@@ -180,6 +184,20 @@ public class StaticMethods {
     public static boolean validateEmptyTextView(TextView textView, String errorMessage) {
         return textView.getText().toString().trim().length() >= 1;
 
+    }
+
+    public static void startServiceIfNotRunning (Context context, Class<?> service_class) {
+        boolean isNotRunning = true;
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        assert manager != null;
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (service_class.getName().equals(service.service.getClassName())) {
+                isNotRunning = false;
+            }
+        }
+        if (isNotRunning) {
+            context.startService(new Intent(context, service_class));
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package com.chilloutrecords.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -29,8 +30,6 @@ import com.google.firebase.auth.AuthResult;
 import java.util.Calendar;
 import java.util.Objects;
 
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
@@ -69,6 +68,7 @@ public class RegisterFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
@@ -104,6 +104,16 @@ public class RegisterFragment extends Fragment {
                     etl_email.setVisibility(View.VISIBLE);
                     etl_password.setVisibility(View.VISIBLE);
                     etl_password_confirm.setVisibility(View.VISIBLE);
+
+                if (BuildConfig.DEBUG) {
+                        et_name.setText("Asim");
+                        et_stage_name.setText("Speedy");
+                        et_email.setText("user@test.com");
+                        et_password.setText("password");
+                        et_password_confirm.setText("password");
+                        spinner_gender.setSelection(1);
+                }
+
                     btn_confirm.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -160,15 +170,6 @@ public class RegisterFragment extends Fragment {
                         }
                     });
                 }
-
-//                if (BuildConfig.DEBUG) {
-//                        et_name.setText("Asim");
-//                        et_stage_name.setText("Speedy");
-//                        et_email.setText("user@test.com");
-//                        et_password.setText("password");
-//                        et_password_confirm.setText("password");
-//                }
-
 
             } catch (InflateException e) {
                 e.printStackTrace();

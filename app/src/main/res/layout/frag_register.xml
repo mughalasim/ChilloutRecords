@@ -111,7 +111,6 @@
             android:id="@+id/btn_confirm"
             style="@style/ButtonYes"
             android:layout_marginBottom="@dimen/padding_large"
-            android:layout_marginTop="@dimen/padding_large"
             android:text="@string/nav_register" />
 
     </LinearLayout>

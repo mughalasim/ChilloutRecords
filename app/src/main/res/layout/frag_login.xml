@@ -36,7 +36,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_password"
             style="@style/EditTextLayout"
-            android:layout_marginTop="@dimen/padding_small"
             app:passwordToggleEnabled="true"
             android:hint="@string/et_hint_password">
 
@@ -50,7 +49,6 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
             style="@style/ButtonYes"
-            android:layout_marginTop="@dimen/padding_medium"
             android:text="@string/nav_login" />
 
         <TextView

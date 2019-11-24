@@ -16,6 +16,6 @@
         android:drawableTop="@drawable/ic_info"
         android:gravity="center"
         android:padding="@dimen/padding_large"
-        android:text="@string/error_connection" />
+        android:text="@string/progress_loading" />
 
 </RelativeLayout>

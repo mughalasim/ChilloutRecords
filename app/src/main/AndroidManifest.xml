@@ -17,6 +17,7 @@
         android:icon="${icon}"
         android:roundIcon="${icon_round}">
 
+        <!-- ACTIVITIES =========================================================================-->
         <activity
             android:name=".activities.SplashScreenActivity"
             android:screenOrientation="portrait">
@@ -28,14 +29,9 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="chilloutrecords.com"
-                    android:scheme="https" />
-
+                <data android:host="chilloutrecords.com" android:scheme="https" />
             </intent-filter>
 
         </activity>
@@ -46,11 +42,13 @@
 
         <activity android:name=".activities.ProfileActivity" />
 
-        <activity
-            android:name=".activities.VideoActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activities.VideoActivity"/>
+
+
+        <!-- SERVICES ===========================================================================-->
+        <service
+            android:name=".services.LoginStateService"
+            android:stopWithTask="false"/>
 
     </application>
 

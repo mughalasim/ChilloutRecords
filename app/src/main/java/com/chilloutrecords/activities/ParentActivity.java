@@ -17,6 +17,7 @@ import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
 import com.chilloutrecords.fragments.TextFragment;
 import com.chilloutrecords.interfaces.GeneralInterface;
+import com.chilloutrecords.services.LoginStateService;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.navigation.NavigationView;
@@ -36,6 +37,8 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_parent);
+
+        StaticMethods.startServiceIfNotRunning(this, LoginStateService.class);
 
         dialogs = new DialogMethods(ParentActivity.this);
 

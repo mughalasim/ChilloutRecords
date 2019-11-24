@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
-import com.chilloutrecords.activities.VideoActivity;
 import com.chilloutrecords.activities.ProfileActivity;
+import com.chilloutrecords.activities.VideoActivity;
 import com.chilloutrecords.adapters.ListingAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
@@ -41,13 +41,10 @@ public class HomeFragment extends Fragment {
     private View root_view;
     private CustomRecyclerView recycler_view;
     private ListingAdapter adapter;
-    private RecyclerView.LayoutManager layout_manager;
     private ListingModel model;
     private ArrayList<ListingModel> models = new ArrayList<>();
     private String PATH_URL = "";
-    private TextView
-            txt_page_title,
-            txt_no_results;
+    private TextView txt_no_results;
     private AppCompatImageView
             btn_back;
 
@@ -58,7 +55,7 @@ public class HomeFragment extends Fragment {
             try {
 
                 root_view = inflater.inflate(R.layout.frag_home, container, false);
-                txt_page_title = root_view.findViewById(R.id.txt_page_title);
+                TextView txt_page_title = root_view.findViewById(R.id.txt_page_title);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
                 btn_back = root_view.findViewById(R.id.btn_back);
 
@@ -95,21 +92,21 @@ public class HomeFragment extends Fragment {
 
                 recycler_view.setHasFixedSize(true);
 
-                layout_manager = new LinearLayoutManager(getContext());
+                RecyclerView.LayoutManager layout_manager = new LinearLayoutManager(getContext());
                 recycler_view.setLayoutManager(layout_manager);
 
                 txt_no_results = root_view.findViewById(R.id.txt_no_results);
-                recycler_view.setTextView(txt_no_results, "No information to display at this time");
+                recycler_view.setTextView(txt_no_results, getString(R.string.progress_loading));
 
                 adapter = new ListingAdapter(getActivity(), models, new UrlInterface() {
                     @Override
-                    public void completed (Boolean success, String url) {
+                    public void completed(Boolean success, String url) {
                         if (btn_back.getVisibility() == View.GONE) {
                             ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), 0, url);
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_USERS)) {
                             Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), ProfileActivity.class).putExtra(EXTRA_STRING, url));
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_VIDEOS)) {
-//                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), VideoActivity.class).putExtra(EXTRA_STRING, url));
+                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), VideoActivity.class).putExtra(EXTRA_STRING, url));
                         }
                     }
                 });
@@ -132,6 +129,7 @@ public class HomeFragment extends Fragment {
         return root_view;
     }
 
+    // CLASS METHODS ===============================================================================
     private void fetchArtists() {
         FIREBASE_DB.getReference().child(BuildConfig.DB_REF_USERS).orderByChild("is_artist").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -141,6 +139,7 @@ public class HomeFragment extends Fragment {
                     UserModel artist = child.getValue(UserModel.class);
 
                     model = new ListingModel();
+                    assert artist != null;
                     model.txt = artist.stage_name;
                     model.img = artist.p_pic;
                     model.url = artist.id;
@@ -149,34 +148,8 @@ public class HomeFragment extends Fragment {
 
                 }
 
-                adapter.notifyDataSetChanged();
-
-                StaticMethods.logg(PATH_URL, dataSnapshot.toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Database.handleDatabaseError(databaseError);
-            }
-        });
-    }
-
-
-    private void fetchVideos() {
-        FIREBASE_DB.getReference().child(BuildConfig.DB_REF_VIDEOS).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    VideoModel video = child.getValue(VideoModel.class);
-
-                    model = new ListingModel();
-                    model.txt = video.name;
-                    model.img = video.art;
-                    model.url = video.id;
-
-                    models.add(model);
-
+                if (models.size() < 1) {
+                    recycler_view.setTextView(txt_no_results, getString(R.string.error_no_data));
                 }
 
                 adapter.notifyDataSetChanged();
@@ -187,6 +160,42 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Database.handleDatabaseError(databaseError);
+                recycler_view.setTextView(txt_no_results, getString(R.string.error_500));
+            }
+        });
+    }
+
+    private void fetchVideos() {
+        FIREBASE_DB.getReference().child(BuildConfig.DB_REF_VIDEOS).orderByChild("is_live").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    VideoModel video = child.getValue(VideoModel.class);
+
+                    model = new ListingModel();
+                    assert video != null;
+                    model.txt = video.name;
+                    model.img = video.art;
+                    model.url = video.id;
+
+                    models.add(model);
+
+                }
+
+                if (models.size() < 1) {
+                    recycler_view.setTextView(txt_no_results, getString(R.string.error_no_data));
+                }
+
+                adapter.notifyDataSetChanged();
+
+                StaticMethods.logg(PATH_URL, dataSnapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Database.handleDatabaseError(databaseError);
+                recycler_view.setTextView(txt_no_results, getString(R.string.error_500));
             }
         });
     }
