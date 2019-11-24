@@ -15,7 +15,7 @@
     <dimen name="elevation">3dp</dimen>
 
     <!--IMAGE DIMENS ============================================================================-->
-    <dimen name="img_size_xx_large">448sp</dimen>
+    <dimen name="img_size_xx_large">320sp</dimen>
     <dimen name="img_size_x_large">148sp</dimen>
     <dimen name="img_size_large">108sp</dimen>
     <dimen name="img_size_medium_large">78sp</dimen>

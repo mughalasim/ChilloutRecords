@@ -441,7 +441,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void completed(Boolean success, String url) {
                 try {
                     if (success) {
-                        StaticMethods.logg("PROFILE", url);
+                        StaticMethods.logg(TAG_LOG, url);
                         Uri uri = Uri.parse(url);
                         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(ProfileActivity.this, Util.getUserAgent(ProfileActivity.this, getString(R.string.app_name)), null);
                         ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
@@ -452,12 +452,12 @@ public class ProfileActivity extends AppCompatActivity {
                     } else {
                         bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
                         StaticMethods.showToast(getString(R.string.error_track));
-                        StaticMethods.logg("PROFILE", "EMPTY URL");
+                        StaticMethods.logg(TAG_LOG, "EMPTY URL");
                     }
                 } catch (Exception e) {
                     bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
                     StaticMethods.showToast(getString(R.string.error_track));
-                    StaticMethods.logg("PROFILE", e.toString());
+                    StaticMethods.logg(TAG_LOG, e.toString());
                 }
             }
         });
