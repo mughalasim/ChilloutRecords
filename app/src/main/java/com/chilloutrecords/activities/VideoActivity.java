@@ -22,16 +22,12 @@ import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.extractor.ExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
@@ -50,6 +46,7 @@ public class VideoActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private final String TAG_LOG = "VIDEO";
     private TextView
+            txt_info,
             txt_track_title,
             txt_track_lyrics,
             txt_track_current_time,
@@ -126,6 +123,15 @@ public class VideoActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        if (player != null) {
+            player.release();
+            player = null;
+        }
+        super.onPause();
+    }
+
     private void findAllViews() {
         toolbar = findViewById(R.id.toolbar);
         // SETUP TOOLBAR
@@ -138,6 +144,7 @@ public class VideoActivity extends AppCompatActivity {
         });
 
         txt_track_title = findViewById(R.id.txt_track_title);
+        txt_info = findViewById(R.id.txt_info);
         txt_track_lyrics = findViewById(R.id.txt_track_lyrics);
         txt_track_current_time = findViewById(R.id.txt_track_current_time);
         txt_track_end_time = findViewById(R.id.txt_track_end_time);
@@ -177,11 +184,11 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
         seek_bar.setMax(0);
-        TrackSelector trackSelector = new DefaultTrackSelector();
-        LoadControl loadControl = new DefaultLoadControl();
-        player = ExoPlayerFactory.newSimpleInstance(VideoActivity.this, trackSelector, loadControl);
+        player = ExoPlayerFactory.newSimpleInstance(VideoActivity.this,
+                new DefaultTrackSelector(), new DefaultLoadControl());
         player.addListener(player_listener);
         player_view.setPlayer(player);
+        player_view.setUseController(false);
     }
 
     private void fetchVideo() {
@@ -205,7 +212,12 @@ public class VideoActivity extends AppCompatActivity {
         STR_TRACK_PATH = full_path;
         INT_PLAY_COUNT = model.play_count;
         txt_track_title.setText(model.name);
-        txt_track_lyrics.setText(model.lyrics);
+        txt_info.setText(model.info);
+        if(model.lyrics.equals("")){
+            txt_track_lyrics.setText(getString(R.string.txt_coming_soon));
+        }else{
+            txt_track_lyrics.setText(model.lyrics);
+        }
 
         Database.getFileUrl(storage_path, model.url, new UrlInterface() {
             @Override
@@ -215,9 +227,9 @@ public class VideoActivity extends AppCompatActivity {
                         StaticMethods.logg(TAG_LOG, url);
                         Uri uri = Uri.parse(url);
                         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(VideoActivity.this, Util.getUserAgent(VideoActivity.this, getString(R.string.app_name)), null);
-                        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-                        MediaSource audioSource = new ExtractorMediaSource(uri, dataSourceFactory, extractorsFactory, null, null);
-                        player.prepare(audioSource);
+//                        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+                        MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
+                        player.prepare(videoSource);
                         setPlayPause(true);
 
                     } else {
