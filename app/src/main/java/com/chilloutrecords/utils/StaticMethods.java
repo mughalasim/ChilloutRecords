@@ -1,5 +1,7 @@
 package com.chilloutrecords.utils;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -19,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chilloutrecords.BuildConfig;
@@ -33,6 +36,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Formatter;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
@@ -85,10 +90,17 @@ public class StaticMethods {
         view.startAnimation(anim);
     }
 
-    public static void animate_slide_in(View v, int time, int animation_delay) {
-        YoYo.with(Techniques.SlideInLeft)
+    public static void animate_slide_out(final View to_hide, final int animation_delay, final View to_show) {
+        YoYo.with(Techniques.FadeOutUp).duration(1).playOn(to_show);
+        YoYo.with(Techniques.FadeOutUp)
                 .duration(INT_ANIMATION_TIME).delay(animation_delay)
-                .playOn(v);
+                .withListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        YoYo.with(Techniques.FadeInUp).duration(INT_ANIMATION_TIME).playOn(to_show);
+                        super.onAnimationEnd(animation);
+                    }
+                }).playOn(to_hide);
     }
 
     // LOGOUT ======================================================================================
@@ -186,7 +198,7 @@ public class StaticMethods {
 
     }
 
-    public static void startServiceIfNotRunning (Context context, Class<?> service_class) {
+    public static void startServiceIfNotRunning(Context context, Class<?> service_class) {
         boolean isNotRunning = true;
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         assert manager != null;
@@ -237,6 +249,26 @@ public class StaticMethods {
                 return "Gender: Female";
             default:
                 return "Gender: Unknown";
+        }
+    }
+
+    @NonNull
+    public static String getTimeFromMillis(int time_in_millis) {
+        StringBuilder builder;
+        Formatter formatter;
+        builder = new StringBuilder();
+        formatter = new Formatter(builder, Locale.getDefault());
+        int total_seconds = time_in_millis / 1000;
+
+        int seconds = total_seconds % 60;
+        int minutes = (total_seconds / 60) % 60;
+        int hours = total_seconds / 3600;
+
+        builder.setLength(0);
+        if (hours > 0) {
+            return formatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
+        } else {
+            return formatter.format("%02d:%02d", minutes, seconds).toString();
         }
     }
 

@@ -10,12 +10,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar" />
+        <TextView
+            android:id="@+id/txt_page_title"
+            style="@style/TextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bckgrd_tab_black"
+            android:gravity="center"
+            android:textColor="@color/colorAccent" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/ll_tool_bar">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +54,6 @@
                         android:layout_marginTop="@dimen/padding_small"
                         android:backgroundTint="@color/colorPrimary"
                         android:elevation="@dimen/elevation"
-                        android:onClick="ShareProfile"
                         android:src="@drawable/ic_share"
                         app:elevation="@dimen/elevation" />
 

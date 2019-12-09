@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
-import com.chilloutrecords.activities.ProfileActivity;
 import com.chilloutrecords.activities.VideoActivity;
 import com.chilloutrecords.adapters.ListingAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
@@ -102,9 +101,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void completed(Boolean success, String url) {
                         if (btn_back.getVisibility() == View.GONE) {
-                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), 0, url);
+                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), R.id.nav_home, url);
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_USERS)) {
-                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), ProfileActivity.class).putExtra(EXTRA_STRING, url));
+                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new ProfileFragment(), R.id.nav_home, url);
                         } else if (PATH_URL.equals(BuildConfig.DB_REF_VIDEOS)) {
                             Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), VideoActivity.class).putExtra(EXTRA_STRING, url));
                         }

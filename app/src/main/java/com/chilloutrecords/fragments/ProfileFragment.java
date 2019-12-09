@@ -1,26 +1,27 @@
-package com.chilloutrecords.activities;
+package com.chilloutrecords.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
-import com.chilloutrecords.fragments.TrackFragment;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
@@ -32,10 +33,8 @@ import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.extractor.ExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
@@ -52,15 +51,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Locale;
+import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.user_model;
+import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileFragment extends Fragment {
+    private View root_view;
 
     private String STR_ID = "";
     private final String TAG_LOG = "PROFILE";
@@ -74,8 +75,6 @@ public class ProfileActivity extends AppCompatActivity {
             txt_info,
             txt_profile_visits,
             txt_member_since;
-
-    private Toolbar toolbar;
 
     private FloatingActionButton
             btn_edit_picture,
@@ -148,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
                     player.seekTo(0);
                     break;
                 case ExoPlayer.STATE_READY:
-                    StaticMethods.logg(TAG_LOG, "ExoPlayer ready! pos: " + player.getCurrentPosition() + " max: " + stringForTime((int) player.getDuration()));
+                    StaticMethods.logg(TAG_LOG, "ExoPlayer ready! pos: " + player.getCurrentPosition() + " max: " + getTimeFromMillis((int) player.getDuration()));
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -170,102 +169,102 @@ public class ProfileActivity extends AppCompatActivity {
         }
     };
 
+
     // OVERRIDE METHODS ============================================================================
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (root_view == null && getActivity() != null) {
+            try {
 
-        setContentView(R.layout.activity_profile);
+                root_view = inflater.inflate(R.layout.frag_profile, container, false);
 
-        reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
-        dialogs = new DialogMethods(ProfileActivity.this);
+                reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
+                dialogs = new DialogMethods(getActivity());
 
-        // FIND ALL VIEWS
-        toolbar = findViewById(R.id.toolbar);
-        txt_page_title = findViewById(R.id.txt_page_title);
-        ll_bottom_sheet = findViewById(R.id.ll_bottom_sheet);
-        bs_behaviour = BottomSheetBehavior.from(ll_bottom_sheet);
-        bs_behaviour.setHideable(true);
-        bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bs_behaviour.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View view, int i) {
-                if (i == BottomSheetBehavior.STATE_HIDDEN) {
-                    setPlayPause(false);
+                // FIND ALL VIEWS
+                txt_page_title = root_view.findViewById(R.id.txt_page_title);
+                ll_bottom_sheet = root_view.findViewById(R.id.ll_bottom_sheet);
+                bs_behaviour = BottomSheetBehavior.from(ll_bottom_sheet);
+                bs_behaviour.setHideable(true);
+                bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bs_behaviour.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull View view, int i) {
+                        if (i == BottomSheetBehavior.STATE_HIDDEN) {
+                            setPlayPause(false);
+                        }
+                    }
+
+                    @Override
+                    public void onSlide(@NonNull View view, float v) {
+
+                    }
+                });
+                txt_name = root_view.findViewById(R.id.txt_name);
+                txt_stage_name = root_view.findViewById(R.id.txt_stage_name);
+                txt_info = root_view.findViewById(R.id.txt_info);
+                txt_profile_visits = root_view.findViewById(R.id.txt_profile_visits);
+                txt_member_since = root_view.findViewById(R.id.txt_member_since);
+
+                img_profile = root_view.findViewById(R.id.img_profile);
+                btn_edit_picture = root_view.findViewById(R.id.btn_edit_picture);
+                btn_edit_profile = root_view.findViewById(R.id.btn_edit_profile);
+
+                Bundle bundle = this.getArguments();
+                if (bundle != null) {
+                    STR_ID = bundle.getString(EXTRA_STRING);
+                    txt_page_title.setText("PROFILE VIEW");
+                    btn_edit_picture.hide();
+                    btn_edit_profile.hide();
+                } else {
+                    STR_ID = FIREBASE_USER.getUid();
+                    txt_page_title.setText("MY PROFILE");
+                    btn_edit_picture.show();
+                    btn_edit_profile.show();
                 }
+
+                view_pager = root_view.findViewById(R.id.view_pager);
+                tab_layout = root_view.findViewById(R.id.tabs);
+
+                btn_edit_profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new RegisterFragment(), R.id.nav_profile, "");
+                    }
+                });
+
+                btn_edit_picture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+                img_profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogs.setDialogImagePreview(IMG_PROFILE_URL);
+                    }
+                });
+
+
+            } catch (InflateException e) {
+                e.printStackTrace();
             }
-
-            @Override
-            public void onSlide(@NonNull View view, float v) {
-
-            }
-        });
-        txt_name = findViewById(R.id.txt_name);
-        txt_stage_name = findViewById(R.id.txt_stage_name);
-        txt_info = findViewById(R.id.txt_info);
-        txt_profile_visits = findViewById(R.id.txt_profile_visits);
-        txt_member_since = findViewById(R.id.txt_member_since);
-
-        img_profile = findViewById(R.id.img_profile);
-        btn_edit_picture = findViewById(R.id.btn_edit_picture);
-        btn_edit_profile = findViewById(R.id.btn_edit_profile);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            STR_ID = bundle.getString(EXTRA_STRING);
-            txt_page_title.setText("PROFILE");
-            btn_edit_picture.hide();
-            btn_edit_profile.hide();
         } else {
-            STR_ID = FIREBASE_USER.getUid();
-            txt_page_title.setText("MY PROFILE");
-            btn_edit_picture.show();
-            btn_edit_profile.show();
+            ((ViewGroup) container.getParent()).removeView(root_view);
         }
-
-        // SETUP TOOLBAR
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        view_pager = findViewById(R.id.view_pager);
-        tab_layout = findViewById(R.id.tabs);
-
-        btn_edit_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogs.setDialogProfileUpdate();
-            }
-        });
-
-        btn_edit_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        img_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogs.setDialogImagePreview(IMG_PROFILE_URL);
-            }
-        });
-
+        return root_view;
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         setDataListener();
         super.onStart();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         if (player != null) {
             player.release();
             player = null;
@@ -275,18 +274,10 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (bs_behaviour.getState() != BottomSheetBehavior.STATE_HIDDEN) {
-            bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         if (listener != null) {
             reference.child(STR_ID).removeEventListener(listener);
+            user_model = null;
         }
         super.onDestroy();
     }
@@ -308,14 +299,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Database.handleDatabaseError(databaseError);
             }
         };
-
         reference.child(STR_ID).addValueEventListener(listener);
-    }
-
-    private UserModel user_model = new UserModel();
-
-    public UserModel getUserModel() {
-        return user_model;
     }
 
     private void loadProfile(UserModel model) {
@@ -326,7 +310,7 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void completed(Boolean success, String url) {
                     if (success) {
-                        Glide.with(ProfileActivity.this).load(url).into(img_profile);
+                        Glide.with(getActivity()).load(url).into(img_profile);
                         IMG_PROFILE_URL = url;
                     }
                 }
@@ -358,13 +342,9 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void ShareProfile(View view) {
-        StaticMethods.showToast("Coming soon");
-    }
+    private void setupViewPager(Fragment[] fragment_list, int[] fragment_title_list, String[] extra_string, ArrayList<ArrayList<String>> extra_array_list) {
 
-    public void setupViewPager(Fragment[] fragment_list, int[] fragment_title_list, String[] extra_string, ArrayList<ArrayList<String>> extra_array_list) {
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
 
         for (int i = 0; i < fragment_title_list.length; i++) {
             Bundle bundle = new Bundle();
@@ -384,13 +364,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     // MUSIC PLAYER CONTROLS =======================================================================
     private void initMediaControls() {
-        txt_track_title = findViewById(R.id.txt_track_title);
-        txt_track_lyrics = findViewById(R.id.txt_track_lyrics);
-        txt_track_current_time = findViewById(R.id.txt_track_current_time);
-        txt_track_end_time = findViewById(R.id.txt_track_end_time);
-        btn_track_download = findViewById(R.id.btn_track_download);
+        txt_track_title = root_view.findViewById(R.id.txt_track_title);
+        txt_track_lyrics = root_view.findViewById(R.id.txt_track_lyrics);
+        txt_track_current_time = root_view.findViewById(R.id.txt_track_current_time);
+        txt_track_end_time = root_view.findViewById(R.id.txt_track_end_time);
+        btn_track_download = root_view.findViewById(R.id.btn_track_download);
         btn_track_download.setVisibility(View.GONE);
-        btn_track_play = findViewById(R.id.btn_track_play);
+        btn_track_play = root_view.findViewById(R.id.btn_track_play);
         btn_track_play.requestFocus();
         btn_track_play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -398,7 +378,7 @@ public class ProfileActivity extends AppCompatActivity {
                 setPlayPause(!isPlaying);
             }
         });
-        seek_bar = findViewById(R.id.seek_bar);
+        seek_bar = root_view.findViewById(R.id.seek_bar);
         seek_bar.requestFocus();
         seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -425,7 +405,7 @@ public class ProfileActivity extends AppCompatActivity {
         seek_bar.setMax(0);
         TrackSelector trackSelector = new DefaultTrackSelector();
         LoadControl loadControl = new DefaultLoadControl();
-        player = ExoPlayerFactory.newSimpleInstance(ProfileActivity.this, trackSelector, loadControl);
+        player = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
         player.addListener(player_listener);
     }
 
@@ -443,9 +423,8 @@ public class ProfileActivity extends AppCompatActivity {
                     if (success) {
                         StaticMethods.logg(TAG_LOG, url);
                         Uri uri = Uri.parse(url);
-                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(ProfileActivity.this, Util.getUserAgent(ProfileActivity.this, getString(R.string.app_name)), null);
-                        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-                        MediaSource audioSource = new ExtractorMediaSource(uri, dataSourceFactory, extractorsFactory, null, null);
+                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
+                        MediaSource audioSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
                         player.prepare(audioSource);
                         setPlayPause(true);
 
@@ -476,30 +455,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private String stringForTime(int timeMs) {
-        StringBuilder mFormatBuilder;
-        Formatter mFormatter;
-        mFormatBuilder = new StringBuilder();
-        mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
-        int totalSeconds = timeMs / 1000;
-
-        int seconds = totalSeconds % 60;
-        int minutes = (totalSeconds / 60) % 60;
-        int hours = totalSeconds / 3600;
-
-        mFormatBuilder.setLength(0);
-        if (hours > 0) {
-            return mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
-        } else {
-            return mFormatter.format("%02d:%02d", minutes, seconds).toString();
-        }
-    }
-
     private void setProgress() {
-//        seek_bar.setProgress(0);
         seek_bar.setMax((int) player.getDuration() / 1000);
-        txt_track_current_time.setText(stringForTime((int) player.getCurrentPosition()));
-        txt_track_end_time.setText(stringForTime((int) player.getDuration()));
+        txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
+        txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
 
         if (handler == null) handler = new Handler();
         //Make sure you update Seekbar on UI thread
@@ -510,14 +469,12 @@ public class ProfileActivity extends AppCompatActivity {
                     seek_bar.setMax((int) player.getDuration() / 1000);
                     int mCurrentPosition = (int) player.getCurrentPosition() / 1000;
                     seek_bar.setProgress(mCurrentPosition);
-                    txt_track_current_time.setText(stringForTime((int) player.getCurrentPosition()));
-                    txt_track_end_time.setText(stringForTime((int) player.getDuration()));
+                    txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
+                    txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
 
                     handler.postDelayed(this, 1000);
                 }
             }
         });
     }
-
 }
-

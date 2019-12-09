@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.ProfileActivity;
+import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
@@ -30,6 +30,7 @@ import com.google.firebase.auth.AuthResult;
 import java.util.Calendar;
 import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.user_model;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
@@ -62,9 +63,9 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActivity() instanceof  ProfileActivity) {
+        if (getActivity() instanceof ParentActivity) {
             isRegistration = false;
-            extra_user = ((ProfileActivity) getActivity()).getUserModel();
+            extra_user = user_model;
         }
     }
 

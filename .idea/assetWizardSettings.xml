@@ -173,8 +173,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_play" />
-                            <entry key="sourceFile" value="E:\Downloads\whatsapp-brands.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_logo_main" />
+                            <entry key="sourceFile" value="E:\Downloads\0dUKQ4DNUC.svg" />
                           </map>
                         </option>
                       </PersistentState>

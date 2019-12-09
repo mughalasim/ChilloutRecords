@@ -1,14 +1,14 @@
 package com.chilloutrecords.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.fragments.ForgotPasswordFragment;
@@ -16,12 +16,8 @@ import com.chilloutrecords.fragments.LoginFragment;
 import com.chilloutrecords.fragments.RegisterFragment;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 
 public class StartUpActivity extends AppCompatActivity {
 
@@ -44,12 +40,20 @@ public class StartUpActivity extends AppCompatActivity {
             new RegisterFragment(),
             new ForgotPasswordFragment()
     };
+    private RelativeLayout rl_splash;
+    private LinearLayout ll_start_up;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_start_up);
+
+        ll_start_up = findViewById(R.id.ll_start_up);
+        rl_splash = findViewById(R.id.rl_splash);
+
+        rl_splash.setVisibility(View.VISIBLE);
+        StaticMethods.animate_slide_out(rl_splash, 3000, ll_start_up);
 
         setupViewPager(fragment_list, fragment_title_list, fragment_extras);
 

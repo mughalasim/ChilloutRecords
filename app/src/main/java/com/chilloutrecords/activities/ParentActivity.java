@@ -1,6 +1,5 @@
 package com.chilloutrecords.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,21 +14,29 @@ import androidx.fragment.app.Fragment;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
+import com.chilloutrecords.fragments.ProfileFragment;
 import com.chilloutrecords.fragments.TextFragment;
 import com.chilloutrecords.interfaces.GeneralInterface;
+import com.chilloutrecords.interfaces.TrackInterface;
+import com.chilloutrecords.models.TrackModel;
+import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.services.LoginStateService;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
-public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TrackInterface {
 
     DialogMethods dialogs;
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigation_view;
+
+    public static UserModel user_model = new UserModel();
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -66,7 +73,7 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_profile:
-                startActivity(new Intent(this, ProfileActivity.class));
+                loadFragment(new ProfileFragment(), id, "");
                 break;
 
             case R.id.nav_share:
@@ -137,4 +144,8 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
                 });
     }
 
+    @Override
+    public void success(TrackModel model, String db_path, String storage_path) {
+        ((ProfileFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.ll_fragment))).showPlayer(model, db_path, storage_path);
+    }
 }

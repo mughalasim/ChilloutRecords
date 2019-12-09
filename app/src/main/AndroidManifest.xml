@@ -40,8 +40,6 @@
 
         <activity android:name=".activities.ParentActivity" />
 
-        <activity android:name=".activities.ProfileActivity" />
-
         <activity android:name=".activities.VideoActivity"/>
 
 

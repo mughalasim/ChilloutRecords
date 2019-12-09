@@ -13,27 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.ProfileActivity;
 import com.chilloutrecords.adapters.TrackAdapter;
 import com.chilloutrecords.interfaces.TrackInterface;
-import com.chilloutrecords.interfaces.UrlInterface;
-import com.chilloutrecords.models.ListingModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
-import com.chilloutrecords.utils.StaticMethods;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
-public class TrackFragment extends Fragment {private View root_view;
+public class TrackFragment extends Fragment {
+    private View root_view;
     private CustomRecyclerView recycler_view;
     private TrackAdapter adapter;
     private RecyclerView.LayoutManager layout_manager;
     private ArrayList<String> STR_IDS = new ArrayList<>();
     private String STR_PATH = "";
+    private TrackInterface listener;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -43,6 +40,13 @@ public class TrackFragment extends Fragment {private View root_view;
 
                 root_view = inflater.inflate(R.layout.layout_custom_recycler, container, false);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
+
+                try {
+                    listener = (TrackInterface) getActivity();
+                } catch (ClassCastException e) {
+                    throw new ClassCastException(getActivity().toString()
+                            + " must implement TextClicked");
+                }
 
                 Bundle bundle = this.getArguments();
                 if (bundle != null) {
@@ -61,13 +65,11 @@ public class TrackFragment extends Fragment {private View root_view;
                 adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackInterface() {
                     @Override
                     public void success(TrackModel model, String db_path, String storage_path) {
-                        ((ProfileActivity) Objects.requireNonNull(getActivity())).showPlayer(model, db_path, storage_path);
+                        listener.success(model, db_path, storage_path);
                     }
                 });
 
                 recycler_view.setAdapter(adapter);
-
-
 
             } catch (InflateException e) {
                 e.printStackTrace();
@@ -77,4 +79,5 @@ public class TrackFragment extends Fragment {private View root_view;
         }
         return root_view;
     }
+
 }

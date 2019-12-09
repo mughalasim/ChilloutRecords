@@ -4,13 +4,13 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/main_logo"
+        android:id="@+id/img_logo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/img_size_x_large"
+        android:layout_height="@dimen/img_size_large"
         android:layout_centerInParent="true"
-        android:contentDescription="@string/app_name"
-        android:padding="@dimen/padding_medium"
+        android:padding="@dimen/padding_large"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_logo_black" />
+        android:src="@drawable/ic_logo_main"
+        android:contentDescription="@string/app_name"/>
 
 </RelativeLayout>
