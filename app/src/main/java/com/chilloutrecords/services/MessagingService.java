@@ -22,16 +22,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
-import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+
+import com.chilloutrecords.R;
+import com.chilloutrecords.activities.StartUpActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
 
-import com.chilloutrecords.R;
-import com.chilloutrecords.activities.SplashScreenActivity;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MessagingService extends FirebaseMessagingService {
@@ -61,7 +62,7 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String MessageTitle, String messageBody) {
-        Intent intent = new Intent(this, SplashScreenActivity.class);
+        Intent intent = new Intent(this, StartUpActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("notification_title", MessageTitle);
         intent.putExtra("notification_body", messageBody);

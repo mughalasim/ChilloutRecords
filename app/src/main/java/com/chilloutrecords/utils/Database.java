@@ -43,6 +43,16 @@ public class Database {
     }
 
     // CHECK IF USER IS AUTHENTICATED ==============================================================
+    public static Boolean isUserLoggedIn() {
+        FIREBASE_USER = FIREBASE_AUTH.getCurrentUser();
+        if (FIREBASE_USER != null) {
+            StaticMethods.logg("FETCH USER", FIREBASE_USER.getUid());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static void getUserIdAndLogin(Activity context) {
         FIREBASE_USER = FIREBASE_AUTH.getCurrentUser();
         if (FIREBASE_USER != null) {

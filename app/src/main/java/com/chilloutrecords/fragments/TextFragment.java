@@ -24,7 +24,6 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 public class TextFragment extends Fragment {
     private View root_view;
     private TextView
-            txt_page_title,
             txt_info;
     String STR_EXTRA = "";
 
@@ -35,7 +34,6 @@ public class TextFragment extends Fragment {
             try {
 
                 root_view = inflater.inflate(R.layout.frag_text, container, false);
-                txt_page_title = root_view.findViewById(R.id.txt_page_title);
                 txt_info = root_view.findViewById(R.id.txt_info);
 
                 Bundle bundle = this.getArguments();
@@ -44,7 +42,6 @@ public class TextFragment extends Fragment {
                     fetchText();
                 } else {
                     txt_info.setText(getString(R.string.error_500));
-                    txt_page_title.setText(getString(R.string.error));
                 }
 
             } catch (InflateException e) {
@@ -62,14 +59,12 @@ public class TextFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 TextModel object = dataSnapshot.getValue(TextModel.class);
                 assert object != null;
-                txt_page_title.setText(object.title);
                 txt_info.setText(Html.fromHtml(object.info).toString());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 txt_info.setText(getString(R.string.error_500));
-                txt_page_title.setText(getString(R.string.error));
                 Database.handleDatabaseError(databaseError);
             }
         });

@@ -1,50 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="end">
+    android:paddingBottom="@dimen/padding_medium">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txt_info"
+        style="@style/TextBody"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/padding_medium"
+        android:gravity="center"
+        android:padding="@dimen/padding_medium"
+        android:text="@string/progress_loading"
+        android:textColor="@color/colorPrimary" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_page_title"
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/bckgrd_tab_black"
-                android:gravity="center"
-                android:textColor="@color/colorAccent" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/padding_medium">
-
-                <TextView
-                    android:id="@+id/txt_info"
-                    style="@style/TextBody"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/progress_loading"
-                    android:layout_margin="@dimen/padding_medium"
-                    android:padding="@dimen/padding_medium"
-                    android:textColor="@color/colorPrimary" />
-
-            </ScrollView>
-
-        </LinearLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <include layout="@layout/navigation_view" />
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</ScrollView>

@@ -1,5 +1,6 @@
 package com.chilloutrecords.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.fragments.ForgotPasswordFragment;
 import com.chilloutrecords.fragments.LoginFragment;
 import com.chilloutrecords.fragments.RegisterFragment;
+import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.tabs.TabLayout;
 
@@ -53,9 +55,15 @@ public class StartUpActivity extends AppCompatActivity {
         rl_splash = findViewById(R.id.rl_splash);
 
         rl_splash.setVisibility(View.VISIBLE);
-        StaticMethods.animate_slide_out(rl_splash, 3000, ll_start_up);
 
-        setupViewPager(fragment_list, fragment_title_list, fragment_extras);
+        // CHECK IF THE USER IS LOGGED IN
+        if (Database.isUserLoggedIn()) {
+            startActivity(new Intent(StartUpActivity.this, ParentActivity.class));
+            finish();
+        } else{
+            setupViewPager(fragment_list, fragment_title_list, fragment_extras);
+            StaticMethods.animate_slide_out(rl_splash, 3000, ll_start_up);
+        }
 
     }
 
@@ -84,7 +92,7 @@ public class StartUpActivity extends AppCompatActivity {
         view_pager.setCurrentItem(2);
     }
 
-    public void backToLogin(){
+    public void backToLogin() {
         view_pager.setCurrentItem(0);
     }
 }

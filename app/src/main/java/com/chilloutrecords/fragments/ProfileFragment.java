@@ -23,6 +23,7 @@ import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
@@ -53,6 +54,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE_EDIT;
 import static com.chilloutrecords.activities.ParentActivity.user_model;
 import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
@@ -69,7 +71,6 @@ public class ProfileFragment extends Fragment {
 
     private String IMG_PROFILE_URL = "";
     private TextView
-            txt_page_title,
             txt_name,
             txt_stage_name,
             txt_info,
@@ -182,7 +183,6 @@ public class ProfileFragment extends Fragment {
                 dialogs = new DialogMethods(getActivity());
 
                 // FIND ALL VIEWS
-                txt_page_title = root_view.findViewById(R.id.txt_page_title);
                 ll_bottom_sheet = root_view.findViewById(R.id.ll_bottom_sheet);
                 bs_behaviour = BottomSheetBehavior.from(ll_bottom_sheet);
                 bs_behaviour.setHideable(true);
@@ -213,12 +213,10 @@ public class ProfileFragment extends Fragment {
                 Bundle bundle = this.getArguments();
                 if (bundle != null) {
                     STR_ID = bundle.getString(EXTRA_STRING);
-                    txt_page_title.setText("PROFILE VIEW");
                     btn_edit_picture.hide();
                     btn_edit_profile.hide();
                 } else {
                     STR_ID = FIREBASE_USER.getUid();
-                    txt_page_title.setText("MY PROFILE");
                     btn_edit_picture.show();
                     btn_edit_profile.show();
                 }
@@ -229,7 +227,7 @@ public class ProfileFragment extends Fragment {
                 btn_edit_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new RegisterFragment(), R.id.nav_profile, "");
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new RegisterFragment(), PAGE_TITLE_PROFILE_EDIT, ""), true);
                     }
                 });
 

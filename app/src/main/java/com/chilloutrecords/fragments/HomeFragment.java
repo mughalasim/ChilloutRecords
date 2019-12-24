@@ -1,6 +1,5 @@
 package com.chilloutrecords.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -9,32 +8,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
-import com.chilloutrecords.activities.VideoActivity;
 import com.chilloutrecords.adapters.ListingAdapter;
-import com.chilloutrecords.interfaces.UrlInterface;
+import com.chilloutrecords.interfaces.GeneralInterface;
+import com.chilloutrecords.interfaces.HomeInterface;
 import com.chilloutrecords.models.ListingModel;
-import com.chilloutrecords.models.UserModel;
-import com.chilloutrecords.models.VideoModel;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
-import com.chilloutrecords.utils.Database;
+import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ABOUT;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ARTISTS;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_LOGOUT;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POLICY;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_SHARE;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_VIDEOS;
 
 public class HomeFragment extends Fragment {
     private View root_view;
@@ -42,10 +40,8 @@ public class HomeFragment extends Fragment {
     private ListingAdapter adapter;
     private ListingModel model;
     private ArrayList<ListingModel> models = new ArrayList<>();
-    private String PATH_URL = "";
     private TextView txt_no_results;
-    private AppCompatImageView
-            btn_back;
+    DialogMethods dialogs;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -53,71 +49,50 @@ public class HomeFragment extends Fragment {
         if (root_view == null && getActivity() != null) {
             try {
 
-                root_view = inflater.inflate(R.layout.frag_home, container, false);
-                TextView txt_page_title = root_view.findViewById(R.id.txt_page_title);
+                dialogs = new DialogMethods(getActivity());
+
+                root_view = inflater.inflate(R.layout.layout_custom_recycler, container, false);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
-                btn_back = root_view.findViewById(R.id.btn_back);
-
-                Bundle bundle = this.getArguments();
-                if (bundle != null) {
-                    PATH_URL = bundle.getString(EXTRA_STRING);
-                    if (PATH_URL != null && PATH_URL.equals(BuildConfig.DB_REF_USERS)) {
-                        txt_page_title.setText(getString(R.string.nav_artists));
-                        btn_back.setVisibility(View.VISIBLE);
-                        fetchArtists();
-                    } else if (PATH_URL != null && PATH_URL.equals(BuildConfig.DB_REF_VIDEOS)) {
-                        txt_page_title.setText(getString(R.string.nav_videos));
-                        btn_back.setVisibility(View.VISIBLE);
-                        fetchVideos();
-                    }
-                } else {
-                    models.clear();
-
-                    model = new ListingModel();
-                    model.txt = "Artists";
-                    model.img = "home_artists.jpg";
-                    model.url = BuildConfig.DB_REF_USERS;
-                    models.add(model);
-
-                    model = new ListingModel();
-                    model.txt = "Videos";
-                    model.img = "home_videos.jpg";
-                    model.url = BuildConfig.DB_REF_VIDEOS;
-                    models.add(model);
-
-                    txt_page_title.setText(getString(R.string.nav_home));
-                    btn_back.setVisibility(View.GONE);
-                }
-
-                recycler_view.setHasFixedSize(true);
-
-                RecyclerView.LayoutManager layout_manager = new LinearLayoutManager(getContext());
-                recycler_view.setLayoutManager(layout_manager);
-
                 txt_no_results = root_view.findViewById(R.id.txt_no_results);
-                recycler_view.setTextView(txt_no_results, getString(R.string.progress_loading));
 
-                adapter = new ListingAdapter(getActivity(), models, new UrlInterface() {
+                fetchHome();
+
+                recycler_view.setTextView(txt_no_results, getString(R.string.progress_loading));
+                recycler_view.setHasFixedSize(true);
+                recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                adapter = new ListingAdapter(getActivity(), models, new HomeInterface() {
                     @Override
-                    public void completed(Boolean success, String url) {
-                        if (btn_back.getVisibility() == View.GONE) {
-                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), R.id.nav_home, url);
-                        } else if (PATH_URL.equals(BuildConfig.DB_REF_USERS)) {
-                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new ProfileFragment(), R.id.nav_home, url);
-                        } else if (PATH_URL.equals(BuildConfig.DB_REF_VIDEOS)) {
-                            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), VideoActivity.class).putExtra(EXTRA_STRING, url));
+                    public void clicked(String page_title, String url) {
+                        switch (page_title) {
+                            case PAGE_TITLE_ARTISTS:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ArtistFragment(), page_title, url), true);
+                                break;
+
+                            case PAGE_TITLE_VIDEOS:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new VideosFragment(), page_title, url), true);
+                                break;
+
+                            case PAGE_TITLE_PROFILE:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ProfileFragment(), page_title, url), true);
+                                break;
+
+                            case PAGE_TITLE_ABOUT:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url), true);
+                                break;
+
+                            case PAGE_TITLE_POLICY:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url), true);
+                                break;
+
+                            case PAGE_TITLE_LOGOUT:
+                                logout();
+                                break;
                         }
                     }
                 });
 
                 recycler_view.setAdapter(adapter);
-
-                btn_back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new HomeFragment(), 0, "");
-                    }
-                });
 
             } catch (InflateException e) {
                 e.printStackTrace();
@@ -129,74 +104,77 @@ public class HomeFragment extends Fragment {
     }
 
     // CLASS METHODS ===============================================================================
-    private void fetchArtists() {
-        FIREBASE_DB.getReference().child(BuildConfig.DB_REF_USERS).orderByChild("is_artist").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+    private void fetchHome() {
+        models.clear();
 
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    UserModel artist = child.getValue(UserModel.class);
+        model = new ListingModel();
+        model.txt = "Artists";
+        model.img = "home_artists.jpg";
+        model.url = BuildConfig.DB_REF_USERS;
+        model.page_title = PAGE_TITLE_ARTISTS;
+        models.add(model);
 
-                    model = new ListingModel();
-                    assert artist != null;
-                    model.txt = artist.stage_name;
-                    model.img = artist.p_pic;
-                    model.url = artist.id;
+        model = new ListingModel();
+        model.txt = "Videos";
+        model.img = "home_videos.jpg";
+        model.url = BuildConfig.DB_REF_VIDEOS;
+        model.page_title = PAGE_TITLE_VIDEOS;
+        models.add(model);
 
-                    models.add(model);
+        model = new ListingModel();
+        model.txt = "My Profile";
+        model.img = "home_videos.jpg";
+        model.url = "";
+        model.page_title = PAGE_TITLE_PROFILE;
+        models.add(model);
 
-                }
+        model = new ListingModel();
+        model.txt = "About us";
+        model.img = "home_videos.jpg";
+        model.url = BuildConfig.DB_REF_ABOUT_US;
+        model.page_title = PAGE_TITLE_ABOUT;
+        models.add(model);
 
-                if (models.size() < 1) {
-                    recycler_view.setTextView(txt_no_results, getString(R.string.error_no_data));
-                }
+        model = new ListingModel();
+        model.txt = "Privacy Policy";
+        model.img = "home_videos.jpg";
+        model.url = BuildConfig.DB_REF_POLICY;
+        model.page_title = PAGE_TITLE_POLICY;
+        models.add(model);
 
-                adapter.notifyDataSetChanged();
+        model = new ListingModel();
+        model.txt = "Share";
+        model.img = "home_videos.jpg";
+        model.url = "";
+        model.page_title = PAGE_TITLE_SHARE;
+        models.add(model);
 
-                StaticMethods.logg(PATH_URL, dataSnapshot.toString());
-            }
+        model = new ListingModel();
+        model.txt = "Logout";
+        model.img = "home_videos.jpg";
+        model.url = "";
+        model.page_title = PAGE_TITLE_LOGOUT;
+        models.add(model);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Database.handleDatabaseError(databaseError);
-                recycler_view.setTextView(txt_no_results, getString(R.string.error_500));
-            }
-        });
     }
 
-    private void fetchVideos() {
-        FIREBASE_DB.getReference().child(BuildConfig.DB_REF_VIDEOS).orderByChild("is_live").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+    private void logout() {
+        dialogs.setDialogConfirm(
+                getString(R.string.nav_logout),
+                getString(R.string.txt_logout),
+                getString(R.string.nav_logout),
+                new GeneralInterface() {
+                    @Override
+                    public void success() {
+                        StaticMethods.logOutUser(false);
+                        Objects.requireNonNull(getActivity()).finish();
+                    }
 
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    VideoModel video = child.getValue(VideoModel.class);
+                    @Override
+                    public void failed() {
 
-                    model = new ListingModel();
-                    assert video != null;
-                    model.txt = video.name;
-                    model.img = video.art;
-                    model.url = video.id;
-
-                    models.add(model);
-
-                }
-
-                if (models.size() < 1) {
-                    recycler_view.setTextView(txt_no_results, getString(R.string.error_no_data));
-                }
-
-                adapter.notifyDataSetChanged();
-
-                StaticMethods.logg(PATH_URL, dataSnapshot.toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Database.handleDatabaseError(databaseError);
-                recycler_view.setTextView(txt_no_results, getString(R.string.error_500));
-            }
-        });
+                    }
+                });
     }
 
 }

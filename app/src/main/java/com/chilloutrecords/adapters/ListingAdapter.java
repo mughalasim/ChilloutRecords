@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.interfaces.HomeInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.ListingModel;
 import com.chilloutrecords.utils.Database;
@@ -24,7 +25,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
 
     private Context
             context;
-    private UrlInterface listener;
+    private HomeInterface listener;
     private ArrayList<ListingModel>
             models;
 
@@ -41,7 +42,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         }
     }
 
-    public ListingAdapter(Context context, ArrayList<ListingModel> models, UrlInterface listener) {
+    public ListingAdapter(Context context, ArrayList<ListingModel> models, HomeInterface listener) {
         this.context = context;
         this.models = models;
         this.listener = listener;
@@ -76,7 +77,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.completed (true, model.url);
+                listener.clicked (model.page_title, model.url);
             }
         });
 

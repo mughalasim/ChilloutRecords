@@ -1,40 +1,46 @@
 package com.chilloutrecords.activities;
 
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
-import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
 import com.chilloutrecords.fragments.ProfileFragment;
-import com.chilloutrecords.fragments.TextFragment;
-import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.interfaces.TrackInterface;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.services.LoginStateService;
-import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
-import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
-public class ParentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TrackInterface {
+public class ParentActivity extends AppCompatActivity implements TrackInterface {
 
-    DialogMethods dialogs;
     Toolbar toolbar;
-    DrawerLayout drawer;
-    NavigationView navigation_view;
+    TextView txt_page_title;
+
+    public ArrayList<NavigationModel> navigation_list = new ArrayList<>();
+
+    public final static String
+            PAGE_TITLE_HOME = "Home",
+            PAGE_TITLE_ARTISTS = "Home / Artists",
+            PAGE_TITLE_VIDEOS = "Home / Videos",
+            PAGE_TITLE_PROFILE = "Home / Profile",
+            PAGE_TITLE_PROFILE_EDIT = "Home / Profile Edit",
+            PAGE_TITLE_SHARE = "Home / Share",
+            PAGE_TITLE_ABOUT = "Home / About us",
+            PAGE_TITLE_POLICY = "Home / Privacy Policy",
+            PAGE_TITLE_LOGOUT = "Home / Logout";
 
     public static UserModel user_model = new UserModel();
 
@@ -47,102 +53,63 @@ public class ParentActivity extends AppCompatActivity implements NavigationView.
 
         StaticMethods.startServiceIfNotRunning(this, LoginStateService.class);
 
-        dialogs = new DialogMethods(ParentActivity.this);
+        ShortcutBadger.applyCount(ParentActivity.this, 0);
 
         toolbar = findViewById(R.id.toolbar);
+        txt_page_title = findViewById(R.id.txt_page_navigation);
 
-        drawer = findViewById(R.id.drawer_layout);
-        navigation_view = findViewById(R.id.nav_view);
+        // SETUP TOOLBAR
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        loadFragment(new NavigationModel(new HomeFragment(), PAGE_TITLE_HOME, ""), true);
 
-        navigation_view.setNavigationItemSelectedListener(this);
-
-        loadFragment(new HomeFragment(), R.id.nav_home, "");
-
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.nav_home:
-                loadFragment(new HomeFragment(), id, "");
-                break;
-
-            case R.id.nav_profile:
-                loadFragment(new ProfileFragment(), id, "");
-                break;
-
-            case R.id.nav_share:
-//                TODO - Make share fragment
-//                loadFragment(new ShareFragment(), id, "");
-                break;
-
-            case R.id.nav_about_us:
-                loadFragment(new TextFragment(), id, BuildConfig.DB_REF_ABOUT_US);
-                break;
-
-            case R.id.nav_policy:
-                loadFragment(new TextFragment(), id, BuildConfig.DB_REF_POLICY);
-                break;
-
-            case R.id.nav_log_out:
-                logout();
-                break;
-
-        }
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (this.isTaskRoot()) {
-            logout();
+        int size = navigation_list.size();
+        if (size > 1) {
+            navigation_list.remove(size - 1);
+            loadFragment(navigation_list.get(size - 2), false);
+        } else {
+            finish();
         }
     }
 
     // BASIC METHODS ===============================================================================
-    public void loadFragment(Fragment fragment, int drawer_id, String extra_bundle) {
-        if (drawer_id!=0 && drawer_id != R.id.nav_log_out) {
-            navigation_view.getMenu().findItem(drawer_id).setChecked(true);
+    public void loadFragment(NavigationModel navigation, boolean add_to_stack) {
+        if (add_to_stack) {
+            navigation_list.add(navigation);
         }
-        if (!extra_bundle.equals("")) {
+
+        if (navigation_list.size() < 2) {
+            toolbar.setNavigationIcon(null);
+        } else {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
+        }
+
+        if (!navigation.extra_bundles.equals("")) {
             Bundle bundle = new Bundle();
-            bundle.putString(EXTRA_STRING, extra_bundle);
-            fragment.setArguments(bundle);
+            bundle.putString(EXTRA_STRING, navigation.extra_bundles);
+            navigation.fragment.setArguments(bundle);
         }
+
+        txt_page_title.setText(navigation.page_title);
 
         this.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.ll_fragment, fragment)
+                .setCustomAnimations(R.anim.exit, R.anim.enter)
+                .replace(R.id.ll_fragment, navigation.fragment)
                 .addToBackStack(null)
                 .commit();
     }
 
-    private void logout() {
-        dialogs.setDialogConfirm(
-                getString(R.string.nav_logout),
-                getString(R.string.txt_logout),
-                getString(R.string.nav_logout),
-                new GeneralInterface() {
-                    @Override
-                    public void success() {
-                        StaticMethods.logOutUser(false);
-                        finish();
-                    }
 
-                    @Override
-                    public void failed() {
-
-                    }
-                });
-    }
 
     @Override
     public void success(TrackModel model, String db_path, String storage_path) {

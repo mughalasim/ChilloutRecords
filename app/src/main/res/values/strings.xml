@@ -8,6 +8,8 @@
 
     <!--ERROR MESSAGES ==========================================================================-->
     <string name="error">Error</string>
+    <string name="error_no_artists">No artists to display at this time. Please try again later</string>
+    <string name="error_no_videos">No videos to display at this time. Please try again later</string>
     <string name="error_no_data">No data to display at this time. Please try again later</string>
     <string name="error_password_short">This password is too short</string>
     <string name="error_password_match">New password and confirm password do not match</string>

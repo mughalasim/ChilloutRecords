@@ -26,7 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.activities.SplashScreenActivity;
+import com.chilloutrecords.activities.StartUpActivity;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
@@ -40,7 +40,6 @@ import java.util.Formatter;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
@@ -114,7 +113,7 @@ public class StaticMethods {
         if (is_session_expired) {
             showToast("Your session has expired. Kindly login to continue");
         }
-        context.startActivity(new Intent(context, SplashScreenActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(EXTRA_STRING, is_session_expired));
+        context.startActivity(new Intent(context, StartUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     // VALIDATIONS =================================================================================

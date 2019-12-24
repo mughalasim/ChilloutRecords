@@ -19,7 +19,7 @@
 
         <!-- ACTIVITIES =========================================================================-->
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".activities.StartUpActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -35,8 +35,6 @@
             </intent-filter>
 
         </activity>
-
-        <activity android:name=".activities.StartUpActivity" />
 
         <activity android:name=".activities.ParentActivity" />
 
