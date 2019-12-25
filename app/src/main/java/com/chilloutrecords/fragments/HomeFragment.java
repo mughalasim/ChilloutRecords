@@ -109,49 +109,49 @@ public class HomeFragment extends Fragment {
 
         model = new ListingModel();
         model.txt = "Artists";
-        model.img = "home_artists.jpg";
+        model.img = "home/home_artists.jpg";
         model.url = BuildConfig.DB_REF_USERS;
         model.page_title = PAGE_TITLE_ARTISTS;
         models.add(model);
 
         model = new ListingModel();
         model.txt = "Videos";
-        model.img = "home_videos.jpg";
+        model.img = "home/home_videos.jpg";
         model.url = BuildConfig.DB_REF_VIDEOS;
         model.page_title = PAGE_TITLE_VIDEOS;
         models.add(model);
 
         model = new ListingModel();
         model.txt = "My Profile";
-        model.img = "home_videos.jpg";
+        model.img = "default_pic.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_PROFILE;
         models.add(model);
 
         model = new ListingModel();
         model.txt = "About us";
-        model.img = "home_videos.jpg";
+        model.img = "home/home_about.jpg";
         model.url = BuildConfig.DB_REF_ABOUT_US;
         model.page_title = PAGE_TITLE_ABOUT;
         models.add(model);
 
         model = new ListingModel();
         model.txt = "Privacy Policy";
-        model.img = "home_videos.jpg";
+        model.img = "home/home_privacy.png";
         model.url = BuildConfig.DB_REF_POLICY;
         model.page_title = PAGE_TITLE_POLICY;
         models.add(model);
 
         model = new ListingModel();
         model.txt = "Share";
-        model.img = "home_videos.jpg";
+        model.img = "home/home_share.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_SHARE;
         models.add(model);
 
         model = new ListingModel();
         model.txt = "Logout";
-        model.img = "home_videos.jpg";
+        model.img = "home/home_logout.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_LOGOUT;
         models.add(model);

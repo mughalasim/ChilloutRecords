@@ -30,6 +30,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_name"
                 style="@style/EditTextInput"
+                android:maxLength="@integer/max_profile_name"
                 android:inputType="textPersonName"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -43,6 +44,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_stage_name"
                 style="@style/EditTextInput"
+                android:maxLength="@integer/max_profile_name"
                 android:inputType="textPersonName"/>
 
         </com.google.android.material.textfield.TextInputLayout>

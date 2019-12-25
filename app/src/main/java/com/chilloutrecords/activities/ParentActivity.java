@@ -103,7 +103,7 @@ public class ParentActivity extends AppCompatActivity implements TrackInterface 
 
         this.getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.exit, R.anim.enter)
+                .setCustomAnimations(R.anim.enter, R.anim.exit)
                 .replace(R.id.ll_fragment, navigation.fragment)
                 .addToBackStack(null)
                 .commit();

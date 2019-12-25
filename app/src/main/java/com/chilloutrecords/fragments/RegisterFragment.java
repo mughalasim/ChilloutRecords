@@ -239,7 +239,7 @@ public class RegisterFragment extends Fragment {
         Database.setUser(extra_user, new GeneralInterface() {
             @Override
             public void success() {
-                StaticMethods.showToast(getString(R.string.toast_update_success));
+                Objects.requireNonNull(getActivity()).onBackPressed();
             }
 
             @Override
