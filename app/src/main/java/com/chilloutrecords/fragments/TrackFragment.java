@@ -30,7 +30,7 @@ public class TrackFragment extends Fragment {
     private RecyclerView.LayoutManager layout_manager;
     private ArrayList<String> STR_IDS = new ArrayList<>();
     private String STR_PATH = "";
-    private TrackInterface listener;
+//    private TrackInterface listener;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -41,12 +41,12 @@ public class TrackFragment extends Fragment {
                 root_view = inflater.inflate(R.layout.layout_custom_recycler, container, false);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
 
-                try {
-                    listener = (TrackInterface) getActivity();
-                } catch (ClassCastException e) {
-                    throw new ClassCastException(getActivity().toString()
-                            + " must implement TextClicked");
-                }
+//                try {
+//                    listener = (TrackInterface) getActivity();
+//                } catch (ClassCastException e) {
+//                    throw new ClassCastException(getActivity().toString()
+//                            + " must implement TextClicked");
+//                }
 
                 Bundle bundle = this.getArguments();
                 if (bundle != null) {
@@ -65,7 +65,9 @@ public class TrackFragment extends Fragment {
                 adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackInterface() {
                     @Override
                     public void success(TrackModel model, String db_path, String storage_path) {
-                        listener.success(model, db_path, storage_path);
+//                        listener.success(model, db_path, storage_path);
+//                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, url), true);
+
                     }
                 });
 

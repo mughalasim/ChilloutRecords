@@ -38,8 +38,6 @@
 
         <activity android:name=".activities.ParentActivity" />
 
-        <activity android:name=".activities.VideoActivity"/>
-
 
         <!-- SERVICES ===========================================================================-->
         <service

@@ -14,19 +14,19 @@ import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.interfaces.HomeInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
-import com.chilloutrecords.models.ListingModel;
+import com.chilloutrecords.models.HomeModel;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
-public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private Context
             context;
     private HomeInterface listener;
-    private ArrayList<ListingModel>
+    private ArrayList<HomeModel>
             models;
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -42,7 +42,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
         }
     }
 
-    public ListingAdapter(Context context, ArrayList<ListingModel> models, HomeInterface listener) {
+    public HomeAdapter(Context context, ArrayList<HomeModel> models, HomeInterface listener) {
         this.context = context;
         this.models = models;
         this.listener = listener;
@@ -60,7 +60,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        final ListingModel model = models.get(position);
+        final HomeModel model = models.get(position);
 
         Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.img, new UrlInterface() {
             @Override

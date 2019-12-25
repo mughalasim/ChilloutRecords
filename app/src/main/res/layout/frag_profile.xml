@@ -1,155 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="@dimen/screen_min_width"
+            android:layout_height="wrap_content">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_profile"
+                android:layout_width="@dimen/img_size_x_large"
+                android:layout_height="@dimen/img_size_x_large"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/padding_small"
+                android:padding="@dimen/line_thickness"
+                android:scaleType="centerCrop"
+                android:src="@color/colorAccent"
+                app:riv_border_color="@color/colorPrimary"
+                app:riv_border_width="@dimen/line_thickness"
+                app:riv_corner_radius="@dimen/img_size_x_large" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/padding_small"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="@dimen/elevation"
+                android:src="@drawable/ic_share"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/highlight" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="4dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="@dimen/elevation"
+                android:src="@drawable/ic_edit"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/highlight" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_edit_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_edit_profile"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="4dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="@dimen/elevation"
+                android:src="@drawable/ic_camera"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/highlight" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView style="@style/CardLayout">
+
+            <LinearLayout
+                android:layout_width="@dimen/screen_min_width"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_small">
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    style="@style/TextTitle" />
+
+                <TextView
+                    android:id="@+id/txt_stage_name"
+                    style="@style/TextBody"
+                    android:layout_marginTop="@dimen/text_margin" />
+
+                <TextView
+                    android:id="@+id/txt_member_since"
+                    style="@style/TextBody"
+                    android:layout_marginTop="@dimen/text_margin" />
+
+                <TextView
+                    android:id="@+id/txt_profile_visits"
+                    style="@style/TextBody"
+                    android:layout_marginTop="@dimen/text_margin" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardLayout"
+            android:layout_marginTop="@dimen/padding_tiny">
+
+            <LinearLayout
+                android:layout_width="@dimen/screen_min_width"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_small">
+
+                <TextView
+                    android:id="@+id/txt_info"
+                    style="@style/TextBody"
+                    android:layout_marginTop="@dimen/text_margin"
+                    android:maxLength="@integer/max_profile_info" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            style="@style/TabTextLayout"
+            android:layout_width="@dimen/screen_min_width"
+            android:layout_marginTop="@dimen/padding_small"
+            android:elevation="@dimen/elevation" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="@dimen/screen_min_width"
-                    android:layout_height="wrap_content">
-
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/img_profile"
-                        android:layout_width="@dimen/img_size_x_large"
-                        android:layout_height="@dimen/img_size_x_large"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="@dimen/padding_small"
-                        android:padding="@dimen/line_thickness"
-                        android:scaleType="centerCrop"
-                        android:src="@color/colorAccent"
-                        app:riv_border_color="@color/colorPrimary"
-                        app:riv_border_width="@dimen/line_thickness"
-                        app:riv_corner_radius="@dimen/img_size_x_large" />
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        app:rippleColor="@color/highlight"
-                        android:layout_marginTop="@dimen/padding_small"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:elevation="@dimen/elevation"
-                        android:src="@drawable/ic_share"
-                        app:elevation="@dimen/elevation" />
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/btn_edit_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/padding_small"
-                        android:layout_marginEnd="4dp"
-                        app:rippleColor="@color/highlight"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:elevation="@dimen/elevation"
-                        android:src="@drawable/ic_edit"
-                        app:elevation="@dimen/elevation"
-                        tools:ignore="RelativeOverlap" />
-
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/btn_edit_picture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/btn_edit_profile"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/padding_small"
-                        app:rippleColor="@color/highlight"
-                        android:layout_marginEnd="4dp"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:elevation="@dimen/elevation"
-                        android:src="@drawable/ic_camera"
-                        app:elevation="@dimen/elevation" />
-
-                </RelativeLayout>
-
-                <com.google.android.material.card.MaterialCardView style="@style/CardLayout">
-
-                    <LinearLayout
-                        android:layout_width="@dimen/screen_min_width"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/padding_small">
-
-                        <TextView
-                            android:id="@+id/txt_name"
-                            style="@style/TextTitle" />
-
-                        <TextView
-                            android:id="@+id/txt_stage_name"
-                            style="@style/TextBody"
-                            android:layout_marginTop="@dimen/text_margin" />
-
-                        <TextView
-                            android:id="@+id/txt_member_since"
-                            style="@style/TextBody"
-                            android:layout_marginTop="@dimen/text_margin" />
-
-                        <TextView
-                            android:id="@+id/txt_profile_visits"
-                            style="@style/TextBody"
-                            android:layout_marginTop="@dimen/text_margin" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_marginTop="@dimen/padding_tiny"
-                    style="@style/CardLayout">
-
-                    <LinearLayout
-                        android:layout_width="@dimen/screen_min_width"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/padding_small">
-
-                        <TextView
-                            android:id="@+id/txt_info"
-                            style="@style/TextBody"
-                            android:maxLength="@integer/max_profile_info"
-                            android:layout_marginTop="@dimen/text_margin" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabs"
-                    style="@style/TabTextLayout"
-                    android:layout_width="@dimen/screen_min_width"
-                    android:layout_marginTop="@dimen/padding_small"
-                    android:elevation="@dimen/elevation" />
-
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="600dp" />
-
-
-            </LinearLayout>
+                android:layout_height="match_parent" />
 
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
-    <include layout="@layout/layout_music_player" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>

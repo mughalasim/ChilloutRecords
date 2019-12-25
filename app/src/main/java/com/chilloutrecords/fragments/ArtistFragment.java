@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
-import com.chilloutrecords.adapters.ListingAdapter;
+import com.chilloutrecords.adapters.HomeAdapter;
 import com.chilloutrecords.interfaces.HomeInterface;
-import com.chilloutrecords.models.ListingModel;
+import com.chilloutrecords.models.HomeModel;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
@@ -34,9 +34,9 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 public class ArtistFragment extends Fragment {
     private View root_view;
     private CustomRecyclerView recycler_view;
-    private ListingAdapter adapter;
-    private ListingModel model;
-    private ArrayList<ListingModel> models = new ArrayList<>();
+    private HomeAdapter adapter;
+    private HomeModel model;
+    private ArrayList<HomeModel> models = new ArrayList<>();
     private TextView txt_no_results;
 
     // OVERRIDE METHODS ============================================================================
@@ -55,7 +55,7 @@ public class ArtistFragment extends Fragment {
                 recycler_view.setHasFixedSize(true);
                 recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                adapter = new ListingAdapter(getActivity(), models, new HomeInterface() {
+                adapter = new HomeAdapter(getActivity(), models, new HomeInterface() {
                     @Override
                     public void clicked(String page_title, String url) {
                         ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ProfileFragment(), page_title, url), true);
@@ -82,7 +82,7 @@ public class ArtistFragment extends Fragment {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     UserModel artist = child.getValue(UserModel.class);
 
-                    model = new ListingModel();
+                    model = new HomeModel();
                     assert artist != null;
                     model.txt = artist.stage_name;
                     model.img = artist.p_pic;

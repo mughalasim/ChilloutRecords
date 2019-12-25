@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/img_size_xx_large"
+            android:background="#000" />
+
+        <LinearLayout
+            android:id="@+id/media_controller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/player_view"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/img_size_small">
+
+            <ImageButton
+                android:id="@+id/btn_track_play"
+                style="@android:style/MediaButton.Play"
+                android:contentDescription="@string/app_name" />
+
+            <TextView
+                android:id="@+id/txt_track_current_time"
+                style="@style/TextSmall"
+                android:padding="@dimen/padding_mini"
+                android:text="00:00"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/seek_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/padding_medium"
+                android:layout_weight="1"
+                android:progressBackgroundTint="@color/colorPrimary"
+                android:thumbTint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/txt_track_end_time"
+                style="@style/TextSmall"
+                android:padding="@dimen/padding_mini"
+                android:text="00:00"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_large"
+        android:weightSum="3"
+        android:paddingEnd="@dimen/padding_large">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_track_title"
+                style="@style/TextBody"/>
+
+            <TextView
+                android:id="@+id/txt_track_release"
+                style="@style/TextSmall" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_track_plays"
+                style="@style/TextSmall" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_track_download"
+                android:layout_width="@dimen/img_size_small"
+                android:layout_height="@dimen/img_size_small"
+                android:padding="@dimen/padding_mini"
+                android:src="@drawable/ic_download" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_thickness"
+        android:layout_marginTop="@dimen/padding_tiny"
+        android:background="@color/highlight" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large"
+        android:paddingBottom="@dimen/padding_large">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_tiny"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_info"
+                style="@style/TextBody" />
+
+            <TextView
+                android:id="@+id/txt_track_lyrics"
+                style="@style/TextSmall"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/progress_loading" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

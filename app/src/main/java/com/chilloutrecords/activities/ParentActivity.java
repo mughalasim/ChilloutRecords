@@ -9,22 +9,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
-import com.chilloutrecords.fragments.ProfileFragment;
-import com.chilloutrecords.interfaces.TrackInterface;
 import com.chilloutrecords.models.NavigationModel;
-import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
+import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.services.LoginStateService;
 import com.chilloutrecords.utils.StaticMethods;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
-public class ParentActivity extends AppCompatActivity implements TrackInterface {
+public class ParentActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView txt_page_title;
@@ -43,6 +40,8 @@ public class ParentActivity extends AppCompatActivity implements TrackInterface 
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
     public static UserModel user_model = new UserModel();
+//    public static TrackModel track_model = new TrackModel();
+    public static VideoModel video_model = new VideoModel();
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -111,8 +110,8 @@ public class ParentActivity extends AppCompatActivity implements TrackInterface 
 
 
 
-    @Override
-    public void success(TrackModel model, String db_path, String storage_path) {
-        ((ProfileFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.ll_fragment))).showPlayer(model, db_path, storage_path);
-    }
+//    @Override
+//    public void success(TrackModel model, String db_path, String storage_path) {
+//        ((ProfileFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.ll_fragment))).showPlayer(model, db_path, storage_path);
+//    }
 }

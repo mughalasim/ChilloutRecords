@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
-import com.chilloutrecords.adapters.ListingAdapter;
+import com.chilloutrecords.adapters.HomeAdapter;
 import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.interfaces.HomeInterface;
-import com.chilloutrecords.models.ListingModel;
+import com.chilloutrecords.models.HomeModel;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
 import com.chilloutrecords.utils.DialogMethods;
@@ -37,9 +37,9 @@ import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_VIDEOS;
 public class HomeFragment extends Fragment {
     private View root_view;
     private CustomRecyclerView recycler_view;
-    private ListingAdapter adapter;
-    private ListingModel model;
-    private ArrayList<ListingModel> models = new ArrayList<>();
+    private HomeAdapter adapter;
+    private HomeModel model;
+    private ArrayList<HomeModel> models = new ArrayList<>();
     private TextView txt_no_results;
     DialogMethods dialogs;
 
@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
                 recycler_view.setHasFixedSize(true);
                 recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                adapter = new ListingAdapter(getActivity(), models, new HomeInterface() {
+                adapter = new HomeAdapter(getActivity(), models, new HomeInterface() {
                     @Override
                     public void clicked(String page_title, String url) {
                         switch (page_title) {
@@ -107,49 +107,49 @@ public class HomeFragment extends Fragment {
     private void fetchHome() {
         models.clear();
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "Artists";
         model.img = "home/home_artists.jpg";
         model.url = BuildConfig.DB_REF_USERS;
         model.page_title = PAGE_TITLE_ARTISTS;
         models.add(model);
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "Videos";
         model.img = "home/home_videos.jpg";
         model.url = BuildConfig.DB_REF_VIDEOS;
         model.page_title = PAGE_TITLE_VIDEOS;
         models.add(model);
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "My Profile";
         model.img = "default_pic.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_PROFILE;
         models.add(model);
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "About us";
         model.img = "home/home_about.jpg";
         model.url = BuildConfig.DB_REF_ABOUT_US;
         model.page_title = PAGE_TITLE_ABOUT;
         models.add(model);
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "Privacy Policy";
         model.img = "home/home_privacy.png";
         model.url = BuildConfig.DB_REF_POLICY;
         model.page_title = PAGE_TITLE_POLICY;
         models.add(model);
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "Share";
         model.img = "home/home_share.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_SHARE;
         models.add(model);
 
-        model = new ListingModel();
+        model = new HomeModel();
         model.txt = "Logout";
         model.img = "home/home_logout.jpg";
         model.url = "";

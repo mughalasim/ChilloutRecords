@@ -1,19 +1,13 @@
 package com.chilloutrecords.fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -24,25 +18,10 @@ import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.adapters.ViewPagerAdapter;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.NavigationModel;
-import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.source.TrackGroupArray;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +35,6 @@ import java.util.Objects;
 
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE_EDIT;
 import static com.chilloutrecords.activities.ParentActivity.user_model;
-import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
@@ -107,69 +85,6 @@ public class ProfileFragment extends Fragment {
     };
     private ArrayList<ArrayList<String>> extra_array_list = new ArrayList<>();
 
-    // MUSIC PLAYER LAYOUT ITEMS ===================================================================
-    private LinearLayout ll_bottom_sheet;
-    private BottomSheetBehavior bs_behaviour; // lol BS behavior
-    private TextView
-            txt_track_title,
-            txt_track_lyrics,
-            txt_track_current_time,
-            txt_track_end_time;
-    private AppCompatImageView
-            btn_track_download;
-    private SimpleExoPlayer player;
-    private SeekBar seek_bar;
-    private Handler handler;
-    private ImageButton btn_track_play;
-    private boolean
-            isPlaying = false,
-            initializeMediaControls = true;
-    private int INT_PLAY_COUNT = 0;
-    private String STR_TRACK_PATH = "";
-    private ExoPlayer.EventListener player_listener = new ExoPlayer.EventListener() {
-        @Override
-        public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-            StaticMethods.logg(TAG_LOG, "onTracksChanged");
-        }
-
-        @Override
-        public void onLoadingChanged(boolean isLoading) {
-            StaticMethods.logg(TAG_LOG, "onLoadingChanged");
-        }
-
-        @Override
-        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-            StaticMethods.logg(TAG_LOG, "onPlayerStateChanged: playWhenReady = " + String.valueOf(playWhenReady) + " playbackState = " + playbackState);
-            switch (playbackState) {
-                case ExoPlayer.STATE_ENDED:
-                    StaticMethods.logg(TAG_LOG, "Playback ended!");
-                    //Stop playback and return to start position
-                    setPlayPause(false);
-                    player.seekTo(0);
-                    break;
-                case ExoPlayer.STATE_READY:
-                    StaticMethods.logg(TAG_LOG, "ExoPlayer ready! pos: " + player.getCurrentPosition() + " max: " + getTimeFromMillis((int) player.getDuration()));
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (player != null && player.isPlaying()) {
-                                bs_behaviour.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
-                                Database.updateTrackPlayCount(STR_TRACK_PATH, INT_PLAY_COUNT);
-                            }
-                        }
-                    });
-                    setProgress();
-                    break;
-                case ExoPlayer.STATE_BUFFERING:
-                    StaticMethods.logg(TAG_LOG, "Playback buffering!");
-                    break;
-                case ExoPlayer.STATE_IDLE:
-                    StaticMethods.logg(TAG_LOG, "ExoPlayer idle!");
-                    break;
-            }
-        }
-    };
-
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -183,23 +98,6 @@ public class ProfileFragment extends Fragment {
                 dialogs = new DialogMethods(getActivity());
 
                 // FIND ALL VIEWS
-                ll_bottom_sheet = root_view.findViewById(R.id.ll_bottom_sheet);
-                bs_behaviour = BottomSheetBehavior.from(ll_bottom_sheet);
-                bs_behaviour.setHideable(true);
-                bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-                bs_behaviour.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-                    @Override
-                    public void onStateChanged(@NonNull View view, int i) {
-                        if (i == BottomSheetBehavior.STATE_HIDDEN) {
-                            setPlayPause(false);
-                        }
-                    }
-
-                    @Override
-                    public void onSlide(@NonNull View view, float v) {
-
-                    }
-                });
                 txt_name = root_view.findViewById(R.id.txt_name);
                 txt_stage_name = root_view.findViewById(R.id.txt_stage_name);
                 txt_info = root_view.findViewById(R.id.txt_info);
@@ -262,16 +160,6 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        if (player != null) {
-            player.release();
-            player = null;
-        }
-        super.onPause();
-
-    }
-
-    @Override
     public void onDestroy() {
         if (listener != null) {
             reference.child(STR_ID).removeEventListener(listener);
@@ -328,14 +216,9 @@ public class ProfileFragment extends Fragment {
                 extra_array_list.add(model.music.singles);
                 extra_array_list.add(model.music.collections);
                 setupViewPager(fragment_list, fragment_title_list, fragment_extras, extra_array_list);
-                if (initializeMediaControls) {
-                    initializeMediaControls = false;
-                    initMediaControls();
-                }
             } else {
                 tab_layout.setVisibility(View.GONE);
                 view_pager.setVisibility(View.GONE);
-                bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         }
     }
@@ -360,119 +243,4 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    // MUSIC PLAYER CONTROLS =======================================================================
-    private void initMediaControls() {
-        txt_track_title = root_view.findViewById(R.id.txt_track_title);
-        txt_track_lyrics = root_view.findViewById(R.id.txt_track_lyrics);
-        txt_track_current_time = root_view.findViewById(R.id.txt_track_current_time);
-        txt_track_end_time = root_view.findViewById(R.id.txt_track_end_time);
-        btn_track_download = root_view.findViewById(R.id.btn_track_download);
-        btn_track_download.setVisibility(View.GONE);
-        btn_track_play = root_view.findViewById(R.id.btn_track_play);
-        btn_track_play.requestFocus();
-        btn_track_play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setPlayPause(!isPlaying);
-            }
-        });
-        seek_bar = root_view.findViewById(R.id.seek_bar);
-        seek_bar.requestFocus();
-        seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (!fromUser) {
-                    // We're not interested in programmatically generated changes to
-                    // the progress bar's position.
-                    return;
-                }
-
-                player.seekTo(progress * 1000);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        seek_bar.setMax(0);
-        TrackSelector trackSelector = new DefaultTrackSelector();
-        LoadControl loadControl = new DefaultLoadControl();
-        player = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
-        player.addListener(player_listener);
-    }
-
-    public void showPlayer(TrackModel model, String full_path, String storage_path) {
-        STR_TRACK_PATH = full_path;
-        INT_PLAY_COUNT = model.play_count;
-        bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-        txt_track_title.setText(model.name);
-        txt_track_lyrics.setText(model.lyrics);
-
-        Database.getFileUrl(storage_path, model.url, new UrlInterface() {
-            @Override
-            public void completed(Boolean success, String url) {
-                try {
-                    if (success) {
-                        StaticMethods.logg(TAG_LOG, url);
-                        Uri uri = Uri.parse(url);
-                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
-                        MediaSource audioSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
-                        player.prepare(audioSource);
-                        setPlayPause(true);
-
-                    } else {
-                        bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-                        StaticMethods.showToast(getString(R.string.error_track));
-                        StaticMethods.logg(TAG_LOG, "EMPTY URL");
-                    }
-                } catch (Exception e) {
-                    bs_behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    StaticMethods.showToast(getString(R.string.error_track));
-                    StaticMethods.logg(TAG_LOG, e.toString());
-                }
-            }
-        });
-
-
-    }
-
-    private void setPlayPause(boolean play) {
-        isPlaying = play;
-        player.setPlayWhenReady(play);
-        if (!isPlaying) {
-            btn_track_play.setImageResource(android.R.drawable.ic_media_play);
-        } else {
-            setProgress();
-            btn_track_play.setImageResource(android.R.drawable.ic_media_pause);
-        }
-    }
-
-    private void setProgress() {
-        seek_bar.setMax((int) player.getDuration() / 1000);
-        txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
-        txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
-
-        if (handler == null) handler = new Handler();
-        //Make sure you update Seekbar on UI thread
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (player != null && isPlaying) {
-                    seek_bar.setMax((int) player.getDuration() / 1000);
-                    int mCurrentPosition = (int) player.getCurrentPosition() / 1000;
-                    seek_bar.setProgress(mCurrentPosition);
-                    txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
-                    txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
-
-                    handler.postDelayed(this, 1000);
-                }
-            }
-        });
-    }
 }

@@ -1,17 +1,19 @@
-package com.chilloutrecords.activities;
+package com.chilloutrecords.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
@@ -35,22 +37,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Formatter;
-import java.util.Locale;
-
+import static com.chilloutrecords.activities.ParentActivity.video_model;
+import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_SINGLE;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 
-public class VideoActivity extends AppCompatActivity {
-
-    private Toolbar toolbar;
-    private final String TAG_LOG = "VIDEO";
+public class PlayerFragment extends Fragment {
+    private View root_view;
+    private final String TAG_LOG = "PLAYER";
     private TextView
             txt_info,
             txt_track_title,
             txt_track_lyrics,
             txt_track_current_time,
-            txt_track_end_time;
+            txt_track_end_time,
+            txt_track_plays,
+            txt_track_release;
     private AppCompatImageView
             btn_track_download;
     private PlayerView player_view;
@@ -60,10 +65,13 @@ public class VideoActivity extends AppCompatActivity {
     private ImageButton btn_track_play;
     private boolean
             isPlaying = false;
-    private int INT_PLAY_COUNT = 0;
+    private int
+            INT_PLAY_COUNT = 0;
     private String
-            VIDEO_ID = "",
-            STR_TRACK_PATH = "";
+            STR_CONTENT_ID = "",
+            STR_CONTENT_DB_REFERENCE = "",
+            STR_CONTENT_DB_PATH = "",
+            STR_CONTENT_STORAGE_PATH = "";
     private ExoPlayer.EventListener player_listener = new ExoPlayer.EventListener() {
         @Override
         public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
@@ -86,12 +94,12 @@ public class VideoActivity extends AppCompatActivity {
                     player.seekTo(0);
                     break;
                 case ExoPlayer.STATE_READY:
-                    StaticMethods.logg(TAG_LOG, "ExoPlayer ready! pos: " + player.getCurrentPosition() + " max: " + stringForTime((int) player.getDuration()));
+                    StaticMethods.logg(TAG_LOG, "ExoPlayer ready! pos: " + player.getCurrentPosition() + " max: " + getTimeFromMillis((int) player.getDuration()));
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
                             if (player != null && player.isPlaying()) {
-//                                Database.updateTrackPlayCount(STR_TRACK_PATH, INT_PLAY_COUNT);
+                                Database.updateTrackPlayCount(STR_CONTENT_DB_PATH, INT_PLAY_COUNT);
                             }
                         }
                     });
@@ -109,49 +117,76 @@ public class VideoActivity extends AppCompatActivity {
 
     // OVERRIDE METHODS ============================================================================
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            VIDEO_ID = extras.getString(EXTRA_STRING);
-            setContentView(R.layout.activity_video);
-            findAllViews();
-            fetchVideo();
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (root_view == null && getActivity() != null) {
+            try {
+
+                root_view = inflater.inflate(R.layout.frag_player, container, false);
+
+                Bundle bundle = this.getArguments();
+
+                if (bundle != null) {
+                    String extra = bundle.getString(EXTRA_STRING);
+
+                    findAllViews();
+
+                    assert extra != null;
+                    switch (extra) {
+                        case EXTRA_VIDEO:
+                            STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_VIDEOS;
+                            STR_CONTENT_ID = video_model.id;
+                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + video_model.id;
+                            STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
+                            player_view.setVisibility(View.VISIBLE);
+                            fetchVideo();
+                            break;
+
+                        case EXTRA_TRACK_SINGLE:
+                            player_view.setVisibility(View.GONE);
+                            break;
+
+                        case EXTRA_TRACK_COLLECTION:
+                            player_view.setVisibility(View.GONE);
+                            break;
+                    }
+
+                    STR_CONTENT_ID = bundle.getString(EXTRA_STRING);
+
+
+
+                }
+
+            } catch (InflateException e) {
+                e.printStackTrace();
+            }
         } else {
-            StaticMethods.showToast(getString(R.string.error_500));
-            finish();
+            ((ViewGroup) container.getParent()).removeView(root_view);
         }
+        return root_view;
     }
 
     @Override
-    protected void onPause() {
+    public void onDestroyView() {
         if (player != null) {
             player.release();
             player = null;
         }
-        super.onPause();
+        super.onDestroyView();
     }
 
+    // CLASS METHODS ===============================================================================
     private void findAllViews() {
-        toolbar = findViewById(R.id.toolbar);
-        // SETUP TOOLBAR
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        txt_track_title = findViewById(R.id.txt_track_title);
-        txt_info = findViewById(R.id.txt_info);
-        txt_track_lyrics = findViewById(R.id.txt_track_lyrics);
-        txt_track_current_time = findViewById(R.id.txt_track_current_time);
-        txt_track_end_time = findViewById(R.id.txt_track_end_time);
-        btn_track_download = findViewById(R.id.btn_track_download);
+        txt_track_title = root_view.findViewById(R.id.txt_track_title);
+        txt_info = root_view.findViewById(R.id.txt_info);
+        txt_track_lyrics = root_view.findViewById(R.id.txt_track_lyrics);
+        txt_track_current_time = root_view.findViewById(R.id.txt_track_current_time);
+        txt_track_end_time = root_view.findViewById(R.id.txt_track_end_time);
+        txt_track_plays = root_view.findViewById(R.id.txt_track_plays);
+        txt_track_release = root_view.findViewById(R.id.txt_track_release);
+        btn_track_download = root_view.findViewById(R.id.btn_track_download);
         btn_track_download.setVisibility(View.GONE);
-        btn_track_play = findViewById(R.id.btn_track_play);
-        player_view = findViewById(R.id.player_view);
+        btn_track_play = root_view.findViewById(R.id.btn_track_play);
+        player_view = root_view.findViewById(R.id.player_view);
         btn_track_play.requestFocus();
         btn_track_play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +194,7 @@ public class VideoActivity extends AppCompatActivity {
                 setPlayPause(!isPlaying);
             }
         });
-        seek_bar = findViewById(R.id.seek_bar);
+        seek_bar = root_view.findViewById(R.id.seek_bar);
         seek_bar.requestFocus();
         seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -184,20 +219,19 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
         seek_bar.setMax(0);
-        player = ExoPlayerFactory.newSimpleInstance(VideoActivity.this,
-                new DefaultTrackSelector(), new DefaultLoadControl());
+        player = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector(), new DefaultLoadControl());
         player.addListener(player_listener);
         player_view.setPlayer(player);
         player_view.setUseController(false);
     }
 
     private void fetchVideo() {
-        FIREBASE_DB.getReference(BuildConfig.DB_REF_VIDEOS).child(VIDEO_ID).addListenerForSingleValueEvent(new ValueEventListener() {
+        FIREBASE_DB.getReference(STR_CONTENT_DB_REFERENCE).child(STR_CONTENT_ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 VideoModel model = dataSnapshot.getValue(VideoModel.class);
                 assert model != null;
-                startPlayer(model, BuildConfig.DB_REF_VIDEOS + "/" + model.id, BuildConfig.DB_REF_VIDEOS);
+                startVideoPlayer(model);
             }
 
             @Override
@@ -208,26 +242,26 @@ public class VideoActivity extends AppCompatActivity {
 
     }
 
-    public void startPlayer(VideoModel model, String full_path, String storage_path) {
-        STR_TRACK_PATH = full_path;
+    private void startVideoPlayer(VideoModel model) {
         INT_PLAY_COUNT = model.play_count;
         txt_track_title.setText(model.name);
         txt_info.setText(model.info);
-        if(model.lyrics.equals("")){
+        if (model.lyrics.equals("")) {
             txt_track_lyrics.setText(getString(R.string.txt_coming_soon));
-        }else{
+        } else {
             txt_track_lyrics.setText(model.lyrics);
         }
+        txt_track_plays.setText(String.valueOf(INT_PLAY_COUNT).concat(" Plays"));
+        txt_track_release.setText(StaticMethods.getDate(model.release_date));
 
-        Database.getFileUrl(storage_path, model.url, new UrlInterface() {
+        Database.getFileUrl(STR_CONTENT_STORAGE_PATH, model.url, new UrlInterface() {
             @Override
             public void completed(Boolean success, String url) {
                 try {
                     if (success) {
                         StaticMethods.logg(TAG_LOG, url);
                         Uri uri = Uri.parse(url);
-                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(VideoActivity.this, Util.getUserAgent(VideoActivity.this, getString(R.string.app_name)), null);
-//                        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
                         MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
                         player.prepare(videoSource);
                         setPlayPause(true);
@@ -257,30 +291,10 @@ public class VideoActivity extends AppCompatActivity {
         }
     }
 
-    private String stringForTime(int timeMs) {
-        StringBuilder mFormatBuilder;
-        Formatter mFormatter;
-        mFormatBuilder = new StringBuilder();
-        mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
-        int totalSeconds = timeMs / 1000;
-
-        int seconds = totalSeconds % 60;
-        int minutes = (totalSeconds / 60) % 60;
-        int hours = totalSeconds / 3600;
-
-        mFormatBuilder.setLength(0);
-        if (hours > 0) {
-            return mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString();
-        } else {
-            return mFormatter.format("%02d:%02d", minutes, seconds).toString();
-        }
-    }
-
     private void setProgress() {
-//        seek_bar.setProgress(0);
         seek_bar.setMax((int) player.getDuration() / 1000);
-        txt_track_current_time.setText(stringForTime((int) player.getCurrentPosition()));
-        txt_track_end_time.setText(stringForTime((int) player.getDuration()));
+        txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
+        txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
 
         if (handler == null) handler = new Handler();
         //Make sure you update Seekbar on UI thread
@@ -291,13 +305,12 @@ public class VideoActivity extends AppCompatActivity {
                     seek_bar.setMax((int) player.getDuration() / 1000);
                     int mCurrentPosition = (int) player.getCurrentPosition() / 1000;
                     seek_bar.setProgress(mCurrentPosition);
-                    txt_track_current_time.setText(stringForTime((int) player.getCurrentPosition()));
-                    txt_track_end_time.setText(stringForTime((int) player.getDuration()));
+                    txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
+                    txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
 
                     handler.postDelayed(this, 1000);
                 }
             }
         });
     }
-
 }

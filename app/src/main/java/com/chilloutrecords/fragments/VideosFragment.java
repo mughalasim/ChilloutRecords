@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.adapters.ListingAdapter;
-import com.chilloutrecords.interfaces.HomeInterface;
-import com.chilloutrecords.models.ListingModel;
+import com.chilloutrecords.activities.ParentActivity;
+import com.chilloutrecords.adapters.VideoListingAdapter;
+import com.chilloutrecords.interfaces.VideoListingInterface;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
 import com.chilloutrecords.utils.Database;
@@ -24,16 +25,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_VIDEOS;
+import static com.chilloutrecords.activities.ParentActivity.video_model;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 
 public class VideosFragment extends Fragment {
     private View root_view;
     private CustomRecyclerView recycler_view;
-    private ListingAdapter adapter;
-    private ListingModel model;
-    private ArrayList<ListingModel> models = new ArrayList<>();
+    private VideoListingAdapter adapter;
+    private ArrayList<VideoModel> models = new ArrayList<>();
     private TextView txt_no_results;
 
     // OVERRIDE METHODS ============================================================================
@@ -52,10 +54,11 @@ public class VideosFragment extends Fragment {
                 recycler_view.setHasFixedSize(true);
                 recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                adapter = new ListingAdapter(getActivity(), models, new HomeInterface() {
+                adapter = new VideoListingAdapter(getActivity(), models, new VideoListingInterface() {
                     @Override
-                    public void clicked(String page_title, String url) {
-//                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new VideosFragment(), url, page_title);
+                    public void clicked(VideoModel model, String page_title) {
+                        video_model = model;
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, EXTRA_VIDEO), true);
                     }
                 });
 
@@ -78,16 +81,8 @@ public class VideosFragment extends Fragment {
 
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     VideoModel video = child.getValue(VideoModel.class);
-
-                    model = new ListingModel();
                     assert video != null;
-                    model.txt = video.name;
-                    model.img = video.art;
-                    model.url = video.id;
-                    model.page_title = PAGE_TITLE_VIDEOS + " / " + video.name;
-
-                    models.add(model);
-
+                    models.add(video);
                 }
 
                 if (models.size() < 1) {
