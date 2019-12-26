@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
-import com.chilloutrecords.interfaces.TrackInterface;
+import com.chilloutrecords.interfaces.TrackListingInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.CollectionModel;
 import com.chilloutrecords.models.TrackModel;
@@ -28,15 +28,16 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_SINGLE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
-import static com.chilloutrecords.utils.StaticVariables.STR_IMAGE_URL;
 
 public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> {
 
     private Context
             context;
     private DialogMethods dialogs;
-    private TrackInterface
+    private TrackListingInterface
             listener;
     private String
             path;
@@ -68,7 +69,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         }
     }
 
-    public TrackAdapter(Context context, String path, ArrayList<String> models, TrackInterface listener) {
+    public TrackAdapter(Context context, String path, ArrayList<String> models, TrackListingInterface listener) {
         this.context = context;
         this.models = models;
         this.path = path;
@@ -168,11 +169,12 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                     child.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            listener.success(
-                                    track,
-                                    BuildConfig.DB_REF_COLLECTIONS + "/" + model.id + "/tracks/" + track.id,
-                                    BuildConfig.DB_REF_COLLECTIONS + "/" + model.id
-                            );
+//                            listener.success(
+//                                    track,
+//                                    BuildConfig.DB_REF_COLLECTIONS + "/" + model.id + "/tracks/" + track.id,
+//                                    BuildConfig.DB_REF_COLLECTIONS + "/" + model.id
+//                            );
+                            listener.success(track, EXTRA_TRACK_COLLECTION, model.id);
                         }
                     });
 
@@ -205,10 +207,11 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        listener.success(model,
-                                BuildConfig.DB_REF_SINGLES + "/" + model.id,
-                                BuildConfig.DB_REF_SINGLES
-                        );
+//                        listener.success(model,
+//                                BuildConfig.DB_REF_SINGLES + "/" + model.id,
+//                                BuildConfig.DB_REF_SINGLES
+//                        );
+                        listener.success(model, EXTRA_TRACK_SINGLE, "");
                     }
                 });
             } else {

@@ -15,7 +15,8 @@
     <string name="error_password_match">New password and confirm password do not match</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_500">Server Error, Please try again later</string>
-    <string name="error_track">The content may be temporarily unavailable. Please try again later</string>
+    <string name="error_track">An unexpected error has occurred, sorry for the inconvenience. Please try again later</string>
+    <string name="error_track_soon">This content will be available once we release it. So hang in there ;)</string>
     <string name="error_connection">Offline Mode, Please check your internet connection</string>
     <string name="error_session_expiry">Session Expired, Please Login again</string>
     <string name="error_login_failed">Failed to Login to the Chillout records App. Please check your credentials or try again later</string>

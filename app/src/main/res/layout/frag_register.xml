@@ -23,6 +23,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_name"
+            app:counterEnabled="true"
             style="@style/EditTextLayout"
             android:layout_marginTop="@dimen/padding_large"
             android:hint="@string/et_hint_name">
@@ -39,6 +40,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etl_stage_name"
             style="@style/EditTextLayout"
+            app:counterEnabled="true"
             android:hint="@string/et_hint_stage_name">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -111,6 +113,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirm"
+            android:layout_marginTop="@dimen/padding_small"
             style="@style/ButtonYes"
             android:layout_marginBottom="@dimen/padding_large"
             android:text="@string/nav_register" />

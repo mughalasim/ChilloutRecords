@@ -199,7 +199,7 @@ public class RegisterFragment extends Fragment {
         user.email = Objects.requireNonNull(et_email.getText()).toString().trim();
         user.info = "..tell us something about you..";
         user.gender = spinner_gender.getSelectedItemPosition();
-        user.p_pic = "default_pic.jpg";
+        user.p_pic = "users/default.jpg";
 
         // MUSIC INFO
         user.music.collections.add("0");

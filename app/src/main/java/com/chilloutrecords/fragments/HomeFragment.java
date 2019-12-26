@@ -66,23 +66,27 @@ public class HomeFragment extends Fragment {
                     public void clicked(String page_title, String url) {
                         switch (page_title) {
                             case PAGE_TITLE_ARTISTS:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ArtistFragment(), page_title, url), true);
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ArtistFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_VIDEOS:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new VideosFragment(), page_title, url), true);
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new VideosFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_PROFILE:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ProfileFragment(), page_title, url), true);
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ProfileFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_ABOUT:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url), true);
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_POLICY:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url), true);
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url, null, true));
+                                break;
+
+                            case PAGE_TITLE_SHARE:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ShareFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_LOGOUT:
@@ -123,7 +127,7 @@ public class HomeFragment extends Fragment {
 
         model = new HomeModel();
         model.txt = "My Profile";
-        model.img = "default_pic.jpg";
+        model.img = "users/default.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_PROFILE;
         models.add(model);

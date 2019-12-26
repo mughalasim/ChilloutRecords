@@ -13,13 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.adapters.TrackAdapter;
-import com.chilloutrecords.interfaces.TrackInterface;
+import com.chilloutrecords.interfaces.TrackListingInterface;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.STR_COLLECTION_ID;
+import static com.chilloutrecords.activities.ParentActivity.track_model;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
@@ -30,7 +35,7 @@ public class TrackFragment extends Fragment {
     private RecyclerView.LayoutManager layout_manager;
     private ArrayList<String> STR_IDS = new ArrayList<>();
     private String STR_PATH = "";
-//    private TrackInterface listener;
+    private TextView txt_no_results;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -40,13 +45,7 @@ public class TrackFragment extends Fragment {
 
                 root_view = inflater.inflate(R.layout.layout_custom_recycler, container, false);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
-
-//                try {
-//                    listener = (TrackInterface) getActivity();
-//                } catch (ClassCastException e) {
-//                    throw new ClassCastException(getActivity().toString()
-//                            + " must implement TextClicked");
-//                }
+                txt_no_results = root_view.findViewById(R.id.txt_no_results);
 
                 Bundle bundle = this.getArguments();
                 if (bundle != null) {
@@ -55,31 +54,34 @@ public class TrackFragment extends Fragment {
                 }
 
                 recycler_view.setHasFixedSize(true);
-
                 layout_manager = new LinearLayoutManager(getContext());
                 recycler_view.setLayoutManager(layout_manager);
-
-                TextView txt_no_results = root_view.findViewById(R.id.txt_no_results);
                 recycler_view.setTextView(txt_no_results, "No content to display");
-
-                adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackInterface() {
-                    @Override
-                    public void success(TrackModel model, String db_path, String storage_path) {
-//                        listener.success(model, db_path, storage_path);
-//                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, url), true);
-
-                    }
-                });
-
-                recycler_view.setAdapter(adapter);
 
             } catch (InflateException e) {
                 e.printStackTrace();
             }
         } else {
-            ((ViewGroup) container.getParent()).removeView(root_view);
+            container.removeView(root_view);
         }
         return root_view;
     }
 
+    @Override
+    public void onResume() {
+        recycler_view.removeAllViews();
+        adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackListingInterface() {
+            @Override
+            public void success(TrackModel model, String track_type, String collection_id) {
+                track_model = model;
+                STR_COLLECTION_ID = collection_id;
+                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), model.name, track_type, null, true));
+            }
+        });
+
+        recycler_view.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
 }

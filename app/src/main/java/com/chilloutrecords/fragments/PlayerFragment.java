@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.interfaces.UrlInterface;
+import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.StaticMethods;
@@ -33,17 +34,15 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
+import static com.chilloutrecords.activities.ParentActivity.STR_COLLECTION_ID;
+import static com.chilloutrecords.activities.ParentActivity.track_model;
 import static com.chilloutrecords.activities.ParentActivity.video_model;
 import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_SINGLE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
-import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 
 public class PlayerFragment extends Fragment {
     private View root_view;
@@ -138,24 +137,30 @@ public class PlayerFragment extends Fragment {
                             STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + video_model.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
                             player_view.setVisibility(View.VISIBLE);
-                            fetchVideo();
+                            startVideoPlayer(video_model);
                             break;
 
                         case EXTRA_TRACK_SINGLE:
+                            STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_SINGLES;
+                            STR_CONTENT_ID = track_model.id;
+                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + track_model.id;
+                            STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_SINGLES;
                             player_view.setVisibility(View.GONE);
+                            startMusicPlayer(track_model);
                             break;
 
                         case EXTRA_TRACK_COLLECTION:
+                            STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_COLLECTIONS;
+                            STR_CONTENT_ID = track_model.id;
+                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + track_model.id;
+                            STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID;
                             player_view.setVisibility(View.GONE);
+                            startMusicPlayer(track_model);
                             break;
                     }
 
                     STR_CONTENT_ID = bundle.getString(EXTRA_STRING);
-
-
-
                 }
-
             } catch (InflateException e) {
                 e.printStackTrace();
             }
@@ -225,23 +230,6 @@ public class PlayerFragment extends Fragment {
         player_view.setUseController(false);
     }
 
-    private void fetchVideo() {
-        FIREBASE_DB.getReference(STR_CONTENT_DB_REFERENCE).child(STR_CONTENT_ID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                VideoModel model = dataSnapshot.getValue(VideoModel.class);
-                assert model != null;
-                startVideoPlayer(model);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Database.handleDatabaseError(databaseError);
-            }
-        });
-
-    }
-
     private void startVideoPlayer(VideoModel model) {
         INT_PLAY_COUNT = model.play_count;
         txt_track_title.setText(model.name);
@@ -253,8 +241,25 @@ public class PlayerFragment extends Fragment {
         }
         txt_track_plays.setText(String.valueOf(INT_PLAY_COUNT).concat(" Plays"));
         txt_track_release.setText(StaticMethods.getDate(model.release_date));
+        getFile(model.url);
+    }
 
-        Database.getFileUrl(STR_CONTENT_STORAGE_PATH, model.url, new UrlInterface() {
+    private void startMusicPlayer(TrackModel model) {
+        INT_PLAY_COUNT = model.play_count;
+        txt_track_title.setText(model.name);
+        txt_info.setText(getString(R.string.app_name));
+        if (model.lyrics.equals("")) {
+            txt_track_lyrics.setText(getString(R.string.txt_coming_soon));
+        } else {
+            txt_track_lyrics.setText(model.lyrics);
+        }
+        txt_track_plays.setText(String.valueOf(INT_PLAY_COUNT).concat(" Plays"));
+        txt_track_release.setText(StaticMethods.getDate(model.release_date));
+        getFile(model.url);
+    }
+
+    private void getFile(String url) {
+        Database.getFileUrl(STR_CONTENT_STORAGE_PATH, url, new UrlInterface() {
             @Override
             public void completed(Boolean success, String url) {
                 try {
@@ -267,17 +272,17 @@ public class PlayerFragment extends Fragment {
                         setPlayPause(true);
 
                     } else {
-                        StaticMethods.showToast(getString(R.string.error_track));
                         StaticMethods.logg(TAG_LOG, "EMPTY URL");
+                        txt_info.setText(getString(R.string.txt_alert));
+                        txt_track_lyrics.setText(getString(R.string.error_track_soon));
                     }
                 } catch (Exception e) {
-                    StaticMethods.showToast(getString(R.string.error_track));
                     StaticMethods.logg(TAG_LOG, e.toString());
+                    txt_info.setText(getString(R.string.error));
+                    txt_track_lyrics.setText(getString(R.string.error_track));
                 }
             }
         });
-
-
     }
 
     private void setPlayPause(boolean play) {

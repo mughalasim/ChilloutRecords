@@ -4,14 +4,24 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/padding_medium">
 
-    <TextView
-        android:id="@+id/txt_info"
-        style="@style/TextBody"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/padding_medium"
-        android:gravity="center"
-        android:padding="@dimen/padding_medium"
-        android:text="@string/progress_loading"
-        android:textColor="@color/colorPrimary" />
+    <com.google.android.material.card.MaterialCardView
+        style="@style/CardLayout"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/padding_tiny">
+
+        <LinearLayout
+            android:layout_width="@dimen/screen_min_width"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_small">
+
+            <TextView
+                android:id="@+id/txt_info"
+                style="@style/TextBody"
+                android:layout_marginTop="@dimen/text_margin" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </ScrollView>

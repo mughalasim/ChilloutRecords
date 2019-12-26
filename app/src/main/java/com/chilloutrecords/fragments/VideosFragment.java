@@ -58,7 +58,7 @@ public class VideosFragment extends Fragment {
                     @Override
                     public void clicked(VideoModel model, String page_title) {
                         video_model = model;
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, EXTRA_VIDEO), true);
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, EXTRA_VIDEO, null, true));
                     }
                 });
 

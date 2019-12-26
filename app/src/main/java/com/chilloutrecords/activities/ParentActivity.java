@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
 import com.chilloutrecords.models.NavigationModel;
+import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.services.LoginStateService;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
 public class ParentActivity extends AppCompatActivity {
@@ -40,8 +42,9 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
     public static UserModel user_model = new UserModel();
-//    public static TrackModel track_model = new TrackModel();
+    public static TrackModel track_model = new TrackModel();
     public static VideoModel video_model = new VideoModel();
+    public static String STR_COLLECTION_ID = "";
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -65,7 +68,7 @@ public class ParentActivity extends AppCompatActivity {
             }
         });
 
-        loadFragment(new NavigationModel(new HomeFragment(), PAGE_TITLE_HOME, ""), true);
+        loadFragment(new NavigationModel(new HomeFragment(), PAGE_TITLE_HOME, "", null, true));
 
     }
 
@@ -74,15 +77,16 @@ public class ParentActivity extends AppCompatActivity {
         int size = navigation_list.size();
         if (size > 1) {
             navigation_list.remove(size - 1);
-            loadFragment(navigation_list.get(size - 2), false);
+            navigation_list.get(size - 2).add_to_back_stack = false;
+            loadFragment(navigation_list.get(size - 2));
         } else {
             finish();
         }
     }
 
     // BASIC METHODS ===============================================================================
-    public void loadFragment(NavigationModel navigation, boolean add_to_stack) {
-        if (add_to_stack) {
+    public void loadFragment(NavigationModel navigation) {
+        if (navigation.add_to_back_stack) {
             navigation_list.add(navigation);
         }
 
@@ -92,9 +96,14 @@ public class ParentActivity extends AppCompatActivity {
             toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
         }
 
+        Bundle bundle = new Bundle();
+
         if (!navigation.extra_bundles.equals("")) {
-            Bundle bundle = new Bundle();
             bundle.putString(EXTRA_STRING, navigation.extra_bundles);
+            navigation.fragment.setArguments(bundle);
+        }
+        if (navigation.extra_string_array != null) {
+            bundle.putStringArrayList(EXTRA_DATA, navigation.extra_string_array);
             navigation.fragment.setArguments(bundle);
         }
 
@@ -108,10 +117,4 @@ public class ParentActivity extends AppCompatActivity {
                 .commit();
     }
 
-
-
-//    @Override
-//    public void success(TrackModel model, String db_path, String storage_path) {
-//        ((ProfileFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.ll_fragment))).showPlayer(model, db_path, storage_path);
-//    }
 }

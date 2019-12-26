@@ -76,8 +76,8 @@ public class Database {
 
     // STORAGE FILE URL ============================================================================
     public static void getFileUrl(String path, String file_name, final UrlInterface listener) {
-        StorageReference file_reference = FIREBASE_STORAGE.getReference().child(path).child(file_name);
         try {
+            StorageReference file_reference = FIREBASE_STORAGE.getReference().child(path).child(file_name);
             file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {

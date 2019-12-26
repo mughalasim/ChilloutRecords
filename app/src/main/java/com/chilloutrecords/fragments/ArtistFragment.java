@@ -58,7 +58,7 @@ public class ArtistFragment extends Fragment {
                 adapter = new HomeAdapter(getActivity(), models, new HomeInterface() {
                     @Override
                     public void clicked(String page_title, String url) {
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ProfileFragment(), page_title, url), true);
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ProfileFragment(), page_title, url, null, true));
                     }
                 });
 
