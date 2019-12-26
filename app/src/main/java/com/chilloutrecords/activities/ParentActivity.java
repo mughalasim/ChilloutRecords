@@ -10,9 +10,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
 import com.chilloutrecords.models.NavigationModel;
-import com.chilloutrecords.models.TrackModel;
-import com.chilloutrecords.models.UserModel;
-import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.services.LoginStateService;
 import com.chilloutrecords.utils.StaticMethods;
 
@@ -40,11 +37,6 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_ABOUT = "Home / About us",
             PAGE_TITLE_POLICY = "Home / Privacy Policy",
             PAGE_TITLE_LOGOUT = "Home / Logout";
-
-    public static UserModel user_model = new UserModel();
-    public static TrackModel track_model = new TrackModel();
-    public static VideoModel video_model = new VideoModel();
-    public static String STR_COLLECTION_ID = "";
 
     // OVERRIDE METHODS ============================================================================
     @Override

@@ -16,14 +16,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class Database {
 
@@ -38,6 +41,28 @@ public class Database {
                 } else {
                     listener.failed();
                 }
+            }
+        });
+    }
+
+    // GET USER INFO ===============================================================================
+    public static void getUser(final GeneralInterface listener) {
+        FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS).child(FIREBASE_USER.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final UserModel model = dataSnapshot.getValue(UserModel.class);
+                if (model != null) {
+                    USER_MODEL = model;
+                    listener.success();
+                } else {
+                    listener.failed();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Database.handleDatabaseError(databaseError);
+                listener.failed();
             }
         });
     }

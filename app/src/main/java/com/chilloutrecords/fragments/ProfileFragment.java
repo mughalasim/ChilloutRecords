@@ -18,7 +18,6 @@ import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.UserModel;
 import com.chilloutrecords.utils.Database;
-import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,17 +31,16 @@ import java.util.Objects;
 
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE_EDIT;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_SHARE;
-import static com.chilloutrecords.activities.ParentActivity.user_model;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class ProfileFragment extends Fragment {
     private View root_view;
 
     private String STR_ID = "";
-    private final String TAG_LOG = "PROFILE";
-    private DialogMethods dialogs;
+    private boolean is_me;
 
     private String IMG_PROFILE_URL = "";
     private TextView
@@ -54,11 +52,6 @@ public class ProfileFragment extends Fragment {
     private MaterialButton
             btn_singles,
             btn_collections;
-
-    private FloatingActionButton
-            btn_share,
-            btn_edit_picture,
-            btn_edit_profile;
 
     private RoundedImageView
             img_profile;
@@ -76,7 +69,6 @@ public class ProfileFragment extends Fragment {
                 root_view = inflater.inflate(R.layout.frag_profile, container, false);
 
                 reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
-                dialogs = new DialogMethods(getActivity());
 
                 // FIND ALL VIEWS
                 txt_name = root_view.findViewById(R.id.txt_name);
@@ -86,9 +78,8 @@ public class ProfileFragment extends Fragment {
                 txt_member_since = root_view.findViewById(R.id.txt_member_since);
 
                 img_profile = root_view.findViewById(R.id.img_profile);
-                btn_edit_picture = root_view.findViewById(R.id.btn_edit_picture);
-                btn_edit_profile = root_view.findViewById(R.id.btn_edit_profile);
-                btn_share = root_view.findViewById(R.id.btn_share);
+                final FloatingActionButton btn_edit_picture = root_view.findViewById(R.id.btn_edit_picture);
+                FloatingActionButton btn_edit_profile = root_view.findViewById(R.id.btn_edit_profile);
 
                 btn_singles = root_view.findViewById(R.id.btn_singles);
                 btn_collections = root_view.findViewById(R.id.btn_collections);
@@ -101,12 +92,15 @@ public class ProfileFragment extends Fragment {
                     STR_ID = bundle.getString(EXTRA_STRING);
                     btn_edit_picture.hide();
                     btn_edit_profile.hide();
+                    is_me = false;
                 } else {
                     STR_ID = FIREBASE_USER.getUid();
                     btn_edit_picture.show();
                     btn_edit_profile.show();
+                    is_me = true;
                 }
-                btn_share.setOnClickListener(new View.OnClickListener() {
+
+                root_view.findViewById(R.id.btn_share).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ShareFragment(), PAGE_TITLE_SHARE, "", null, true));
@@ -119,12 +113,6 @@ public class ProfileFragment extends Fragment {
                     }
                 });
 
-                btn_edit_picture.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
 
                 img_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -132,6 +120,21 @@ public class ProfileFragment extends Fragment {
                         ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ImageViewFragment(), "", IMG_PROFILE_URL, null, true));
                     }
                 });
+
+
+                btn_edit_picture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_confirm, null);
+//                        final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//                        popupWindow.setWidth(200);
+//                        popupWindow.setHeight(150);
+//                        popupWindow.showAtLocation(btn_edit_picture, Gravity.CENTER, 10, 10);
+//                        popupWindow.showAsDropDown(popupView, 0, 0);
+
+                    }
+                });
+
 
             } catch (InflateException e) {
                 e.printStackTrace();
@@ -155,13 +158,15 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final UserModel model = dataSnapshot.getValue(UserModel.class);
                 if (model != null) {
-                    user_model = model;
+                    if (is_me) {
+                        USER_MODEL = model;
+                    }
                     // Image
                     Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.p_pic, BuildConfig.DEFAULT_PROFILE_ART, new UrlInterface() {
                         @Override
                         public void completed(Boolean success, String url) {
                             if (success) {
-                                Glide.with(getActivity()).load(url).into(img_profile);
+                                Glide.with(Objects.requireNonNull(getActivity())).load(url).into(img_profile);
                                 IMG_PROFILE_URL = url;
                             }
                         }

@@ -30,9 +30,9 @@ import com.google.firebase.auth.AuthResult;
 import java.util.Calendar;
 import java.util.Objects;
 
-import static com.chilloutrecords.activities.ParentActivity.user_model;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class RegisterFragment extends Fragment {
     private View root_view;
@@ -65,7 +65,7 @@ public class RegisterFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getActivity() instanceof ParentActivity) {
             isRegistration = false;
-            extra_user = user_model;
+            extra_user = USER_MODEL;
         }
     }
 

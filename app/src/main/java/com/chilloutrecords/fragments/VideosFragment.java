@@ -27,9 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.chilloutrecords.activities.ParentActivity.video_model;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
+import static com.chilloutrecords.utils.StaticVariables.VIDEO_MODEL;
 
 public class VideosFragment extends Fragment {
     private View root_view;
@@ -57,7 +57,7 @@ public class VideosFragment extends Fragment {
                 adapter = new VideoListingAdapter(getActivity(), models, new VideoListingInterface() {
                     @Override
                     public void clicked(VideoModel model, String page_title) {
-                        video_model = model;
+                        VIDEO_MODEL = model;
                         ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, EXTRA_VIDEO, null, true));
                     }
                 });

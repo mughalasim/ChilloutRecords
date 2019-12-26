@@ -10,64 +10,19 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_profile"
             android:layout_width="@dimen/screen_min_width"
-            android:layout_height="wrap_content">
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/img_profile"
-                android:layout_width="@dimen/img_size_x_large"
-                android:layout_height="@dimen/img_size_x_large"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/padding_small"
-                android:padding="@dimen/line_thickness"
-                android:scaleType="centerCrop"
-                android:src="@color/colorAccent"
-                app:riv_border_color="@color/colorPrimary"
-                app:riv_border_width="@dimen/line_thickness"
-                app:riv_corner_radius="@dimen/img_size_x_large" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="@dimen/padding_small"
-                android:backgroundTint="@color/colorPrimary"
-                android:elevation="@dimen/elevation"
-                android:src="@drawable/ic_share"
-                app:elevation="@dimen/elevation"
-                app:rippleColor="@color/highlight" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_edit_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/padding_small"
-                android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:elevation="@dimen/elevation"
-                android:src="@drawable/ic_edit"
-                app:elevation="@dimen/elevation"
-                app:rippleColor="@color/highlight" />
-
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_edit_picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_edit_profile"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/padding_small"
-                android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:elevation="@dimen/elevation"
-                android:src="@drawable/ic_camera"
-                app:elevation="@dimen/elevation"
-                app:rippleColor="@color/highlight" />
-
-        </RelativeLayout>
+            android:layout_height="@dimen/img_size_x_large"
+            android:layout_marginTop="@dimen/padding_small"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:padding="@dimen/line_thickness"
+            android:scaleType="centerCrop"
+            android:src="@color/colorAccent"
+            android:elevation="@dimen/elevation"
+            app:riv_border_color="@color/colorPrimary"
+            app:riv_border_width="@dimen/line_thickness"
+            app:riv_corner_radius="@dimen/radius_corner" />
 
         <com.google.android.material.card.MaterialCardView style="@style/CardLayout">
 
@@ -99,7 +54,6 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
 
         <com.google.android.material.card.MaterialCardView
             style="@style/CardLayout"
@@ -135,6 +89,53 @@
             android:layout_marginTop="@dimen/padding_small"
             android:textAllCaps="false" />
 
+        <LinearLayout
+            android:layout_width="@dimen/screen_min_width"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_small"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_edit_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="@dimen/elevation"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:src="@drawable/ic_camera"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/highlight" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="@dimen/elevation"
+                app:fabSize="mini"
+                android:src="@drawable/ic_share"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/highlight" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_small"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="@dimen/elevation"
+                app:fabSize="mini"
+                android:src="@drawable/ic_edit"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/highlight" />
+
+
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

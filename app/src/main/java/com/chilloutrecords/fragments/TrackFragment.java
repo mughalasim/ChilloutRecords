@@ -23,10 +23,10 @@ import com.chilloutrecords.utils.CustomRecyclerView;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.chilloutrecords.activities.ParentActivity.STR_COLLECTION_ID;
-import static com.chilloutrecords.activities.ParentActivity.track_model;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+import static com.chilloutrecords.utils.StaticVariables.STR_COLLECTION_ID;
+import static com.chilloutrecords.utils.StaticVariables.TRACK_MODEL;
 
 public class TrackFragment extends Fragment {
     private View root_view;
@@ -73,7 +73,7 @@ public class TrackFragment extends Fragment {
         adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackListingInterface() {
             @Override
             public void success(TrackModel model, String track_type, String collection_id) {
-                track_model = model;
+                TRACK_MODEL = model;
                 STR_COLLECTION_ID = collection_id;
                 ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), model.name, track_type, null, true));
             }

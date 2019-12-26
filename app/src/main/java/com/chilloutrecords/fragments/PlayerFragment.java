@@ -35,14 +35,14 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import static com.chilloutrecords.activities.ParentActivity.STR_COLLECTION_ID;
-import static com.chilloutrecords.activities.ParentActivity.track_model;
-import static com.chilloutrecords.activities.ParentActivity.video_model;
 import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_SINGLE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
+import static com.chilloutrecords.utils.StaticVariables.STR_COLLECTION_ID;
+import static com.chilloutrecords.utils.StaticVariables.TRACK_MODEL;
+import static com.chilloutrecords.utils.StaticVariables.VIDEO_MODEL;
 
 public class PlayerFragment extends Fragment {
     private View root_view;
@@ -133,29 +133,29 @@ public class PlayerFragment extends Fragment {
                     switch (extra) {
                         case EXTRA_VIDEO:
                             STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_VIDEOS;
-                            STR_CONTENT_ID = video_model.id;
-                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + video_model.id;
+                            STR_CONTENT_ID = VIDEO_MODEL.id;
+                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + VIDEO_MODEL.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
                             player_view.setVisibility(View.VISIBLE);
-                            startVideoPlayer(video_model);
+                            startVideoPlayer(VIDEO_MODEL);
                             break;
 
                         case EXTRA_TRACK_SINGLE:
                             STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_SINGLES;
-                            STR_CONTENT_ID = track_model.id;
-                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + track_model.id;
+                            STR_CONTENT_ID = TRACK_MODEL.id;
+                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + TRACK_MODEL.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_SINGLES;
                             player_view.setVisibility(View.GONE);
-                            startMusicPlayer(track_model);
+                            startMusicPlayer(TRACK_MODEL);
                             break;
 
                         case EXTRA_TRACK_COLLECTION:
                             STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_COLLECTIONS;
-                            STR_CONTENT_ID = track_model.id;
-                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + track_model.id;
+                            STR_CONTENT_ID = TRACK_MODEL.id;
+                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + TRACK_MODEL.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID;
                             player_view.setVisibility(View.GONE);
-                            startMusicPlayer(track_model);
+                            startMusicPlayer(TRACK_MODEL);
                             break;
                     }
 

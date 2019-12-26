@@ -20,6 +20,7 @@ import com.chilloutrecords.interfaces.HomeInterface;
 import com.chilloutrecords.models.HomeModel;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
+import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 
@@ -33,6 +34,7 @@ import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POLICY;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_SHARE;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_VIDEOS;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class HomeFragment extends Fragment {
     private View root_view;
@@ -54,8 +56,6 @@ public class HomeFragment extends Fragment {
                 root_view = inflater.inflate(R.layout.layout_custom_recycler, container, false);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
                 txt_no_results = root_view.findViewById(R.id.txt_no_results);
-
-                fetchHome();
 
                 recycler_view.setTextView(txt_no_results, getString(R.string.progress_loading));
                 recycler_view.setHasFixedSize(true);
@@ -98,6 +98,8 @@ public class HomeFragment extends Fragment {
 
                 recycler_view.setAdapter(adapter);
 
+
+
             } catch (InflateException e) {
                 e.printStackTrace();
             }
@@ -105,6 +107,23 @@ public class HomeFragment extends Fragment {
             ((ViewGroup) container.getParent()).removeView(root_view);
         }
         return root_view;
+    }
+
+    @Override
+    public void onResume() {
+        Database.getUser(new GeneralInterface() {
+            @Override
+            public void success() {
+                fetchHome();
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void failed() {
+                recycler_view.setTextView(txt_no_results, getString(R.string.error_500));
+            }
+        });
+        super.onResume();
     }
 
     // CLASS METHODS ===============================================================================
@@ -127,7 +146,7 @@ public class HomeFragment extends Fragment {
 
         model = new HomeModel();
         model.txt = "My Profile";
-        model.img = "users/default.jpg";
+        model.img = USER_MODEL.p_pic;
         model.url = "";
         model.page_title = PAGE_TITLE_PROFILE;
         models.add(model);
