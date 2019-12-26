@@ -1,29 +1,16 @@
 package com.chilloutrecords.utils;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.chilloutrecords.R;
-import com.chilloutrecords.fragments.ImageViewFragment;
 import com.chilloutrecords.interfaces.GeneralInterface;
-import com.chilloutrecords.models.UserModel;
 import com.google.android.material.button.MaterialButton;
-
-import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
-import static com.chilloutrecords.utils.StaticVariables.STR_IMAGE_URL;
 
 import java.util.Objects;
 
@@ -114,41 +101,6 @@ public class DialogMethods {
             }
         });
         dialog.show();
-    }
-
-    public void setDialogImagePreview(String image_url) {
-        STR_IMAGE_URL = image_url;
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_image_view);
-        dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                Fragment fragment = ((AppCompatActivity) context).getSupportFragmentManager().findFragmentById(R.id.fragment_image_view);
-                if (fragment != null) {
-                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
-            }
-        });
-    }
-
-    public void setDialogProfileUpdate() {
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_update_profile);
-        dialog.setCancelable(true);
-        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                Fragment fragment = ((AppCompatActivity) context).getSupportFragmentManager().findFragmentById(R.id.fragment_register);
-                if (fragment != null) {
-                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
-            }
-        });
     }
 
 

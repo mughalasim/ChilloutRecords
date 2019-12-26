@@ -75,7 +75,7 @@ public class Database {
     }
 
     // STORAGE FILE URL ============================================================================
-    public static void getFileUrl(String path, String file_name, final UrlInterface listener) {
+    public static void getFileUrl(final String path, final String file_name, final String default_file, final UrlInterface listener) {
         try {
             StorageReference file_reference = FIREBASE_STORAGE.getReference().child(path).child(file_name);
             file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -86,14 +86,54 @@ public class Database {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    listener.completed(false, "");
+                    if (default_file != null && !default_file.equals("")) {
+                        try {
+                            StorageReference file_reference = FIREBASE_STORAGE.getReference().child(path).child(default_file);
+                            file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    listener.completed(true, uri.toString());
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    listener.completed(false, "");
+                                }
+                            });
+                        } catch (Exception f) {
+                            StaticMethods.logg("STATIC METHOD", "File not found");
+                            listener.completed(false, "");
+                        }
+                    } else {
+                        StaticMethods.logg("STATIC METHOD", "File not found");
+                        listener.completed(false, "");
+                    }
                 }
             });
         } catch (Exception e) {
-            StaticMethods.logg("STATIC METHOD", "File not found");
-            listener.completed(false, "");
+            if (default_file != null && !default_file.equals("")) {
+                try {
+                    StorageReference file_reference = FIREBASE_STORAGE.getReference().child(path).child(default_file);
+                    file_reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            listener.completed(true, uri.toString());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            listener.completed(false, "");
+                        }
+                    });
+                } catch (Exception f) {
+                    StaticMethods.logg("STATIC METHOD", "File not found");
+                    listener.completed(false, "");
+                }
+            } else {
+                StaticMethods.logg("STATIC METHOD", "File not found");
+                listener.completed(false, "");
+            }
         }
-
 
     }
 

@@ -64,7 +64,7 @@ public class VideoListingAdapter extends RecyclerView.Adapter<VideoListingAdapte
 
         final VideoModel model = models.get(position);
 
-        Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, new UrlInterface() {
+        Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, BuildConfig.DEFAULT_VIDEO_ART, new UrlInterface() {
             @Override
             public void completed (Boolean success, String url) {
                 if (context != null && success)

@@ -129,7 +129,7 @@ public class ProfileFragment extends Fragment {
                 img_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        dialogs.setDialogImagePreview(IMG_PROFILE_URL);
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ImageViewFragment(), "", IMG_PROFILE_URL, null, true));
                     }
                 });
 
@@ -157,7 +157,7 @@ public class ProfileFragment extends Fragment {
                 if (model != null) {
                     user_model = model;
                     // Image
-                    Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.p_pic, new UrlInterface() {
+                    Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.p_pic, BuildConfig.DEFAULT_PROFILE_ART, new UrlInterface() {
                         @Override
                         public void completed(Boolean success, String url) {
                             if (success) {

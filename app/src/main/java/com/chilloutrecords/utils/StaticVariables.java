@@ -22,7 +22,4 @@ public class StaticVariables {
     public static final String EXTRA_TRACK_SINGLE = "EXTRA_TRACK_SINGLE";
     public static final String EXTRA_TRACK_COLLECTION = "EXTRA_TRACK_COLLECTION";
 
-    // IMAGE FOR IMAGE_FRAGMENT ====================================================================
-    public static String STR_IMAGE_URL = "";
-
 }

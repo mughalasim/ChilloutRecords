@@ -14,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.ParentActivity;
+import com.chilloutrecords.fragments.ImageViewFragment;
 import com.chilloutrecords.interfaces.TrackListingInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.CollectionModel;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.utils.Database;
-import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_SINGLE;
@@ -36,7 +39,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
 
     private Context
             context;
-    private DialogMethods dialogs;
     private TrackListingInterface
             listener;
     private String
@@ -74,7 +76,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
         this.models = models;
         this.path = path;
         this.listener = listener;
-        dialogs = new DialogMethods(context);
     }
 
     @NonNull
@@ -123,7 +124,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 holder.txt_collection_name.setText(model.name);
                 holder.txt_collection_release_year.setText(context.getString(R.string.txt_released_on).concat(StaticMethods.getDate(model.release_date)));
                 holder.txt_collection_type.setText(model.type.concat(" (").concat(String.valueOf(model.tracks.size())).concat(" tracks)"));
-                Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, new UrlInterface() {
+                Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, BuildConfig.DEFAULT_TRACK_ART,  new UrlInterface() {
                     @Override
                     public void completed(Boolean success, final String url) {
                         if (success)
@@ -131,7 +132,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                         holder.img_art.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                dialogs.setDialogImagePreview(url);
+                                ((ParentActivity) Objects.requireNonNull(context)).loadFragment(new NavigationModel(new ImageViewFragment(), "", url, null, true));
                             }
                         });
                     }
@@ -169,11 +170,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                     child.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-//                            listener.success(
-//                                    track,
-//                                    BuildConfig.DB_REF_COLLECTIONS + "/" + model.id + "/tracks/" + track.id,
-//                                    BuildConfig.DB_REF_COLLECTIONS + "/" + model.id
-//                            );
                             listener.success(track, EXTRA_TRACK_COLLECTION, model.id);
                         }
                     });
@@ -190,15 +186,17 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 holder.txt_collection_name.setText(model.name);
                 holder.txt_collection_release_year.setText(context.getString(R.string.txt_released_on).concat(StaticMethods.getDate(model.release_date)));
                 holder.txt_collection_type.setText(String.valueOf(model.play_count).concat(" plays"));
-                Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, new UrlInterface() {
+                Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.art, BuildConfig.DEFAULT_ALBUM_ART, new UrlInterface() {
                     @Override
                     public void completed(Boolean success, final String url) {
-                        if (success)
+                        if (success) {
                             Glide.with(context).load(url).into(holder.img_art);
+                        }
+
                         holder.img_art.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                dialogs.setDialogImagePreview(url);
+                                ((ParentActivity) Objects.requireNonNull(context)).loadFragment(new NavigationModel(new ImageViewFragment(), "", url, null, true));
                             }
                         });
                     }
@@ -207,10 +205,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        listener.success(model,
-//                                BuildConfig.DB_REF_SINGLES + "/" + model.id,
-//                                BuildConfig.DB_REF_SINGLES
-//                        );
                         listener.success(model, EXTRA_TRACK_SINGLE, "");
                     }
                 });

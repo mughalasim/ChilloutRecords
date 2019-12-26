@@ -52,6 +52,14 @@ android {
         // FIREBASE PATHS
         buildConfigField 'String', 'FB_DB_URL', FB_DB_URL
 
+        // DEFAULT PATHS
+        buildConfigField 'String', 'DEFAULT_HOME',          DEFAULT_HOME
+        buildConfigField 'String', 'DEFAULT_PROFILE_ART',   DEFAULT_PROFILE_ART
+        buildConfigField 'String', 'DEFAULT_TRACK_ART',     DEFAULT_TRACK_ART
+        buildConfigField 'String', 'DEFAULT_VIDEO_ART',     DEFAULT_VIDEO_ART
+        buildConfigField 'String', 'DEFAULT_ALBUM_ART',     DEFAULT_ALBUM_ART
+        buildConfigField 'String', 'DEFAULT_SHARE_LINK',    DEFAULT_SHARE_LINK
+
         // SIGN AND RENAME
         signingConfig signingConfigs.releaseSigning
         applicationVariants.all { variant -> renameAPKFile(variant) }
@@ -99,8 +107,6 @@ android {
             ]
             // FIREBASE APP ID
             buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_FREE
-            // APP IS FREE VERSION - WITH ADS
-//            buildConfigField 'Boolean', 'IS_PRO', false
         }
 
         pro {
@@ -113,8 +119,6 @@ android {
             ]
             // FIREBASE APP ID
             buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_PRO
-            // APP IS PRO VERSION - AD FREE
-//            buildConfigField 'Boolean', 'IS_PRO', true
         }
     }
 
@@ -140,7 +144,7 @@ def renameAPKFile(variant) {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.browser:browser:1.0.0'
+    implementation 'androidx.browser:browser:1.2.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
@@ -157,7 +161,7 @@ dependencies {
 
     // FIREBASE DEPENDENCIES
     implementation 'com.google.firebase:firebase-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
 

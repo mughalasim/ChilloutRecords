@@ -15,6 +15,7 @@ public class UserModel implements Serializable {
     public String info = "";
 
     public Boolean is_artist;
+//    public Boolean is_activated;
 
     public long member_since_date;
 

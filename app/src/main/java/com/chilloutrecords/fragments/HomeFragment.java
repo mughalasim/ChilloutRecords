@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment {
 
         model = new HomeModel();
         model.txt = "Share";
-        model.img = "home/home_share.jpg";
+        model.img = "";
         model.url = "";
         model.page_title = PAGE_TITLE_SHARE;
         models.add(model);

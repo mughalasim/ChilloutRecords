@@ -20,29 +20,35 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import java.io.InputStream;
 import java.net.URL;
 
-import static com.chilloutrecords.utils.StaticVariables.STR_IMAGE_URL;
+import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
 public class ImageViewFragment extends Fragment {
     private static final String TAG_LOG = "IMAGE VIEW";
     private View root_view;
+    private String STR_IMAGE_URL = "";
 
-    public ImageViewFragment() {}
+    public ImageViewFragment() {
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
             root_view = inflater.inflate(R.layout.frag_image_view, container, false);
 
-            SubsamplingScaleImageView image = root_view.findViewById(R.id.frag_image);
-            image.setMaxScale(20);
+            Bundle bundle = this.getArguments();
+            if (bundle != null) {
+                STR_IMAGE_URL = bundle.getString(EXTRA_STRING);
 
-            String IMAGE_NOT_LOADED = "0";
-            if (image.getTag().toString().equals(IMAGE_NOT_LOADED)) {
-                new DownLoadImageTask(image).execute(STR_IMAGE_URL);
-                String IMAGE_LOADED = "1";
-                image.setTag(IMAGE_LOADED);
+                SubsamplingScaleImageView image = root_view.findViewById(R.id.frag_image);
+                image.setMaxScale(20);
+
+                String IMAGE_NOT_LOADED = "0";
+                if (image.getTag().toString().equals(IMAGE_NOT_LOADED)) {
+                    new DownLoadImageTask(image).execute(STR_IMAGE_URL);
+                    String IMAGE_LOADED = "1";
+                    image.setTag(IMAGE_LOADED);
+                }
             }
-
         } else {
             container.removeView(root_view);
         }

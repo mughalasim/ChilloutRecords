@@ -259,7 +259,7 @@ public class PlayerFragment extends Fragment {
     }
 
     private void getFile(String url) {
-        Database.getFileUrl(STR_CONTENT_STORAGE_PATH, url, new UrlInterface() {
+        Database.getFileUrl(STR_CONTENT_STORAGE_PATH, url, "", new UrlInterface() {
             @Override
             public void completed(Boolean success, String url) {
                 try {

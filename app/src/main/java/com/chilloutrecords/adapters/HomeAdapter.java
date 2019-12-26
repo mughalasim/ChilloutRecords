@@ -62,7 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         final HomeModel model = models.get(position);
 
-        Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.img, new UrlInterface() {
+        Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.img, BuildConfig.DEFAULT_HOME, new UrlInterface() {
             @Override
             public void completed (Boolean success, String url) {
                 if (context != null && success)
