@@ -43,7 +43,7 @@ android {
         buildConfigField 'String', 'SONG_TYPE_ALBUM',   SONG_TYPE_ALBUM
 
         // APP VERSION
-        resValue "string", 'app_version', "Version: $rootProject.versionName"
+//        resValue "string", 'APP_VERSION', "Version: $rootProject.versionName"
 
         // FIREBASE INIT
         resValue "string", "FB_API_KEY", FB_API_KEY
@@ -70,6 +70,7 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             splits {
                 abi {
                     enable true
@@ -78,18 +79,20 @@ android {
                     universalApk false
                 }
             }
+            ndk {
+                abiFilters 'arm64-v8a', 'armeabi-v7a'
+            }
+
         }
 
         debug {
             debuggable true
             minifyEnabled false
             shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             splits {
                 abi {
-                    enable true
-                    reset()
-                    include 'armeabi-v7a', 'x86'
-                    universalApk false
+                    enable false
                 }
             }
         }
@@ -102,8 +105,8 @@ android {
             applicationIdSuffix = ".free"
             resValue "string", "app_name", "Chillout Records"
             manifestPlaceholders = [
-                    icon: "@mipmap/ic_launcher_free",
-                    icon_round: "@mipmap/ic_launcher_free_round"
+                    icon: "@mipmap/ic_launcher",
+                    icon_round: "@mipmap/ic_launcher_round"
             ]
             // FIREBASE APP ID
             buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_FREE
@@ -114,8 +117,8 @@ android {
             applicationIdSuffix = ".pro"
             resValue "string", "app_name", "Chillout Records (pro)"
             manifestPlaceholders = [
-                    icon: "@mipmap/ic_launcher_pro",
-                    icon_round: "@mipmap/ic_launcher_free_round"
+                    icon: "@mipmap/ic_launcher",
+                    icon_round: "@mipmap/ic_launcher_round"
             ]
             // FIREBASE APP ID
             buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_PRO

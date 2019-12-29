@@ -21,8 +21,8 @@ public class NavigationModel {
     }
 
     public Fragment fragment;
-    public String extra_bundles = "";
+    public String extra_bundles;
     public ArrayList<String> extra_string_array;
-    public String page_title = "";
+    public String page_title;
     public boolean add_to_back_stack;
 }

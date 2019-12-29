@@ -12,7 +12,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/ll_track_cover"
             android:layout_width="match_parent"
             android:minWidth="@dimen/screen_min_width"
             android:layout_height="wrap_content"
@@ -24,7 +23,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/img_size_large"
                 android:layout_weight="1"
-                android:src="@color/highlight"
+                android:src="@color/colorAccentHighlight"
                 app:riv_corner_radius="@dimen/radius_corner"
                 app:riv_mutate_background="true" />
 
@@ -38,18 +37,15 @@
 
                 <TextView
                     android:id="@+id/txt_collection_name"
-                    style="@style/TextBody"
-                    android:text="Dissimilitude" />
+                    style="@style/TextBody" />
 
                 <TextView
                     android:id="@+id/txt_collection_release_year"
-                    style="@style/TextBody"
-                    android:text="12 - 12 - 2019" />
+                    style="@style/TextBody" />
 
                 <TextView
                     android:id="@+id/txt_collection_type"
-                    style="@style/TextBody"
-                    android:text="Album" />
+                    style="@style/TextBody" />
 
             </LinearLayout>
 

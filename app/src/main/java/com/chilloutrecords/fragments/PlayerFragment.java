@@ -35,6 +35,8 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.Objects;
+
 import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
@@ -56,7 +58,7 @@ public class PlayerFragment extends Fragment {
             txt_track_plays,
             txt_track_release;
     private AppCompatImageView
-            btn_track_download;
+            btn_download;
     private PlayerView player_view;
     private SimpleExoPlayer player;
     private SeekBar seek_bar;
@@ -67,8 +69,6 @@ public class PlayerFragment extends Fragment {
     private int
             INT_PLAY_COUNT = 0;
     private String
-            STR_CONTENT_ID = "",
-            STR_CONTENT_DB_REFERENCE = "",
             STR_CONTENT_DB_PATH = "",
             STR_CONTENT_STORAGE_PATH = "";
     private ExoPlayer.EventListener player_listener = new ExoPlayer.EventListener() {
@@ -84,7 +84,7 @@ public class PlayerFragment extends Fragment {
 
         @Override
         public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-            StaticMethods.logg(TAG_LOG, "onPlayerStateChanged: playWhenReady = " + String.valueOf(playWhenReady) + " playbackState = " + playbackState);
+            StaticMethods.logg(TAG_LOG, "onPlayerStateChanged: playWhenReady = " + playWhenReady + " playbackState = " + playbackState);
             switch (playbackState) {
                 case ExoPlayer.STATE_ENDED:
                     StaticMethods.logg(TAG_LOG, "Playback ended!");
@@ -132,8 +132,6 @@ public class PlayerFragment extends Fragment {
                     assert extra != null;
                     switch (extra) {
                         case EXTRA_VIDEO:
-                            STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_VIDEOS;
-                            STR_CONTENT_ID = VIDEO_MODEL.id;
                             STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + VIDEO_MODEL.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
                             player_view.setVisibility(View.VISIBLE);
@@ -141,8 +139,6 @@ public class PlayerFragment extends Fragment {
                             break;
 
                         case EXTRA_TRACK_SINGLE:
-                            STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_SINGLES;
-                            STR_CONTENT_ID = TRACK_MODEL.id;
                             STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + TRACK_MODEL.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_SINGLES;
                             player_view.setVisibility(View.GONE);
@@ -150,16 +146,12 @@ public class PlayerFragment extends Fragment {
                             break;
 
                         case EXTRA_TRACK_COLLECTION:
-                            STR_CONTENT_DB_REFERENCE = BuildConfig.DB_REF_COLLECTIONS;
-                            STR_CONTENT_ID = TRACK_MODEL.id;
                             STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + TRACK_MODEL.id;
                             STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID;
                             player_view.setVisibility(View.GONE);
                             startMusicPlayer(TRACK_MODEL);
                             break;
                     }
-
-                    STR_CONTENT_ID = bundle.getString(EXTRA_STRING);
                 }
             } catch (InflateException e) {
                 e.printStackTrace();
@@ -188,8 +180,8 @@ public class PlayerFragment extends Fragment {
         txt_track_end_time = root_view.findViewById(R.id.txt_track_end_time);
         txt_track_plays = root_view.findViewById(R.id.txt_track_plays);
         txt_track_release = root_view.findViewById(R.id.txt_track_release);
-        btn_track_download = root_view.findViewById(R.id.btn_track_download);
-        btn_track_download.setVisibility(View.GONE);
+        btn_download = root_view.findViewById(R.id.btn_download);
+        btn_download.setVisibility(View.GONE);
         btn_track_play = root_view.findViewById(R.id.btn_track_play);
         player_view = root_view.findViewById(R.id.player_view);
         btn_track_play.requestFocus();
@@ -224,7 +216,7 @@ public class PlayerFragment extends Fragment {
             }
         });
         seek_bar.setMax(0);
-        player = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector(), new DefaultLoadControl());
+        player = ExoPlayerFactory.newSimpleInstance(Objects.requireNonNull(getActivity()), new DefaultTrackSelector(), new DefaultLoadControl());
         player.addListener(player_listener);
         player_view.setPlayer(player);
         player_view.setUseController(false);
@@ -247,7 +239,7 @@ public class PlayerFragment extends Fragment {
     private void startMusicPlayer(TrackModel model) {
         INT_PLAY_COUNT = model.play_count;
         txt_track_title.setText(model.name);
-        txt_info.setText(getString(R.string.app_name));
+        txt_info.setText(getString(R.string.txt_lyrics));
         if (model.lyrics.equals("")) {
             txt_track_lyrics.setText(getString(R.string.txt_coming_soon));
         } else {
@@ -266,7 +258,7 @@ public class PlayerFragment extends Fragment {
                     if (success) {
                         StaticMethods.logg(TAG_LOG, url);
                         Uri uri = Uri.parse(url);
-                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
+                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(Objects.requireNonNull(getActivity()), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
                         MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
                         player.prepare(videoSource);
                         setPlayPause(true);

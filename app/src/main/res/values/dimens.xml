@@ -1,12 +1,11 @@
 <resources>
     <!-- BORDER CORNERS =========================================================================-->
-    <dimen name="radius_corner">5sp</dimen>
+    <dimen name="radius_corner">8sp</dimen>
 
     <!-- LINE THICKNESS =========================================================================-->
     <dimen name="line_thickness">1sp</dimen>
 
     <!--ANGLES ==================================================================================-->
-    <dimen name="angle_color">315</dimen>
 
     <!-- SCREEN MAX WIDTH =======================================================================-->
     <dimen name="screen_min_width">320dp</dimen>
@@ -18,8 +17,6 @@
     <dimen name="img_size_xx_large">300sp</dimen>
     <dimen name="img_size_x_large">148sp</dimen>
     <dimen name="img_size_large">108sp</dimen>
-    <dimen name="img_size_medium_large">78sp</dimen>
-    <dimen name="img_size_medium">68sp</dimen>
     <dimen name="img_size_normal">48sp</dimen>
     <dimen name="img_size_small">28sp</dimen>
 
@@ -32,7 +29,5 @@
 
     <!--TEXT MARGINS AND SPACINGS ===============================================================-->
     <dimen name="text_margin">2sp</dimen>
-    <dimen name="text_line_spacing">1sp</dimen>
-    <dimen name="text_line_multiplier">1.2</dimen>
 
 </resources>

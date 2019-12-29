@@ -1,10 +1,12 @@
 package com.chilloutrecords.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +33,19 @@ public class ShareFragment extends Fragment {
                     STR_SHARE_LINK = BuildConfig.DEFAULT_SHARE_LINK;
                 }
 
+                TextView txt_link = root_view.findViewById(R.id.txt_link);
+                txt_link.setText(STR_SHARE_LINK);
+
+                root_view.findViewById(R.id.btn_share_link).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("text/plain");
+                        share.putExtra(Intent.EXTRA_TEXT, STR_SHARE_LINK);
+                        startActivity(Intent.createChooser(share, "Share " + getString(R.string.app_name)));
+                    }
+                });
+
             } catch (InflateException e) {
                 e.printStackTrace();
             }
@@ -39,6 +54,5 @@ public class ShareFragment extends Fragment {
         }
         return root_view;
     }
-
 
 }

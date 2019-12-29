@@ -14,32 +14,25 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
 
 # MAPPING
--printmapping proguard_mapping.txt
--verbose
+-printmapping mapping.txt
+-printusage build/usage.txt
+-printseeds build/seeds.txt
 
 # GLIDE CLASSES
 -dontwarn javax.annotation.**
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
-# FIREBASE MODELS
+# FIREBASE NEEDS THE MODELS
 -keepattributes Signature
 -keepattributes *Annotation*
--keepclassmembers class com.chilloutrecords.models.** {
-  *;
-}
-
-# GOOGLE PLAY ADS
--dontwarn com.google.android.gms.**
-
-# USELESS WARNINGS
--ignorewarnings
+-keepclassmembers class com.chilloutrecords.models.** {*;}
 
 # YOYO ANIMATION CLASSES
 -keep class com.daimajia.* { *; }

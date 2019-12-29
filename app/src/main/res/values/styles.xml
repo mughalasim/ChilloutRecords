@@ -9,7 +9,7 @@
         <item name="android:windowBackground">@color/colorAccent</item>
         <item name="android:windowMinWidthMajor">75%</item>
         <item name="android:windowMinWidthMinor">75%</item>
-        <item name="android:textColorHighlight">@color/highlight</item>
+        <item name="android:textColorHighlight">@color/colorAccentHighlight</item>
         <item name="windowActionBar">false</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
@@ -57,7 +57,7 @@
         <item name="android:paddingEnd">@dimen/text_margin</item>
         <item name="android:maxLines">1</item>
         <item name="android:background">@drawable/bckgrd_edit_text</item>
-        <item name="android:textColorHint">@color/highlight</item>
+        <item name="android:textColorHint">@color/colorAccentHighlight</item>
     </style>
 
 

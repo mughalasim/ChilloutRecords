@@ -107,7 +107,7 @@
                 android:layout_marginEnd="@dimen/padding_small"
                 android:src="@drawable/ic_camera"
                 app:elevation="@dimen/elevation"
-                app:rippleColor="@color/highlight" />
+                app:rippleColor="@color/colorAccentHighlight" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_share"
@@ -118,7 +118,7 @@
                 app:fabSize="mini"
                 android:src="@drawable/ic_share"
                 app:elevation="@dimen/elevation"
-                app:rippleColor="@color/highlight" />
+                app:rippleColor="@color/colorAccentHighlight" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_edit_profile"
@@ -130,7 +130,7 @@
                 app:fabSize="mini"
                 android:src="@drawable/ic_edit"
                 app:elevation="@dimen/elevation"
-                app:rippleColor="@color/highlight" />
+                app:rippleColor="@color/colorAccentHighlight" />
 
 
 

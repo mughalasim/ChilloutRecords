@@ -15,7 +15,6 @@
             android:background="#000" />
 
         <LinearLayout
-            android:id="@+id/media_controller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/player_view"
@@ -33,7 +32,6 @@
                 android:id="@+id/txt_track_current_time"
                 style="@style/TextSmall"
                 android:padding="@dimen/padding_mini"
-                android:text="00:00"
                 android:textStyle="bold" />
 
             <SeekBar
@@ -49,7 +47,6 @@
                 android:id="@+id/txt_track_end_time"
                 style="@style/TextSmall"
                 android:padding="@dimen/padding_mini"
-                android:text="00:00"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -62,7 +59,8 @@
         android:layout_marginTop="@dimen/padding_small"
         android:paddingStart="@dimen/padding_large"
         android:weightSum="3"
-        android:paddingEnd="@dimen/padding_large">
+        android:paddingEnd="@dimen/padding_large"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -92,7 +90,7 @@
                 style="@style/TextSmall" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/btn_track_download"
+                android:id="@+id/btn_download"
                 android:layout_width="@dimen/img_size_small"
                 android:layout_height="@dimen/img_size_small"
                 android:padding="@dimen/padding_mini"
@@ -106,7 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_thickness"
         android:layout_marginTop="@dimen/padding_tiny"
-        android:background="@color/highlight" />
+        android:background="@color/colorAccentHighlight" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

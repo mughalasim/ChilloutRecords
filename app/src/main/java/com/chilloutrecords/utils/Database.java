@@ -178,4 +178,20 @@ public class Database {
         });
     }
 
+    // UPDATE TRACK PLAY COUNT =====================================================================
+    public static void updateProfileVisitCount(String path, int current_visit_count) {
+        current_visit_count++;
+        DatabaseReference reference = FIREBASE_DB.getReference();
+        reference.child(path).child("profile_visits").setValue(current_visit_count).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    StaticMethods.logg("Database", "Updated play count");
+                } else {
+                    StaticMethods.logg("Database", "Failed to update play count");
+                }
+            }
+        });
+    }
+
 }

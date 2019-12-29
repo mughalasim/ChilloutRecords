@@ -44,7 +44,9 @@ public class ProfileFragment extends Fragment {
     private View root_view;
 
     private String STR_ID = "";
-    private boolean is_me;
+    private boolean
+            first_open = true,
+            is_me;
 
     private String IMG_PROFILE_URL = "";
     private TextView
@@ -62,7 +64,6 @@ public class ProfileFragment extends Fragment {
 
     private DatabaseReference
             reference;
-
 
 
     // OVERRIDE METHODS ============================================================================
@@ -182,8 +183,6 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
-
     // CLASS METHODS ===============================================================================
     private void loadProfile() {
         reference.child(STR_ID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,6 +193,8 @@ public class ProfileFragment extends Fragment {
                     if (is_me) {
                         USER_MODEL = model;
                     }
+
+                    updateProfileVisitCount(model.profile_visits);
 
                     updateArt(model.p_pic);
 
@@ -264,5 +265,12 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void updateProfileVisitCount(int count) {
+        if (!is_me && first_open) {
+            first_open = false;
+            Database.updateProfileVisitCount(BuildConfig.DB_REF_USERS + "/" + STR_ID, count);
+        }
     }
 }

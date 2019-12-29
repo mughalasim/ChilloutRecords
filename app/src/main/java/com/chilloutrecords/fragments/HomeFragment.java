@@ -152,6 +152,13 @@ public class HomeFragment extends Fragment {
         models.add(model);
 
         model = new HomeModel();
+        model.txt = "Share";
+        model.img = "home/home_share.jpg";
+        model.url = "";
+        model.page_title = PAGE_TITLE_SHARE;
+        models.add(model);
+
+        model = new HomeModel();
         model.txt = "About us";
         model.img = "home/home_about.jpg";
         model.url = BuildConfig.DB_REF_ABOUT_US;
@@ -163,13 +170,6 @@ public class HomeFragment extends Fragment {
         model.img = "home/home_privacy.png";
         model.url = BuildConfig.DB_REF_POLICY;
         model.page_title = PAGE_TITLE_POLICY;
-        models.add(model);
-
-        model = new HomeModel();
-        model.txt = "Share";
-        model.img = "";
-        model.url = "";
-        model.page_title = PAGE_TITLE_SHARE;
         models.add(model);
 
         model = new HomeModel();
