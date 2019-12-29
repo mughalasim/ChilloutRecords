@@ -255,7 +255,6 @@ public class ProfileFragment extends Fragment {
     }
 
     public void updateArt(String image_url) {
-        // Image
         Database.getFileUrl(BuildConfig.STORAGE_IMAGES, image_url, BuildConfig.DEFAULT_PROFILE_ART, new UrlInterface() {
             @Override
             public void completed(Boolean success, String url) {

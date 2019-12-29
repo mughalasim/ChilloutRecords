@@ -59,10 +59,6 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_POLICY = "Home / Privacy Policy",
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
-    private final int
-            RESULT_GALLERY = 222,
-            RESULT_CAMERA = 333;
-
     final String[] perms = {
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -147,7 +143,7 @@ public class ParentActivity extends AppCompatActivity {
 
                                         @Override
                                         public void failed() {
-
+                                            StaticMethods.showToast(getString(R.string.error_unknown));
                                         }
                                     });
 
