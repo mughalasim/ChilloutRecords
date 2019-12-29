@@ -26,6 +26,10 @@ public class StaticVariables {
     // ANIMATION TIME ==============================================================================
     public static int INT_ANIMATION_TIME = 800;
 
+    // PERMISSION VARIABLES ========================================================================
+    public final static int INT_PERMISSIONS_CAMERA = 601;
+    public final static int INT_PERMISSIONS_STORAGE = 604;
+
     // BUNDLE EXTRA VARIABLES ======================================================================
     public static final String EXTRA_STRING = "EXTRA_STRING";
     public static final String EXTRA_DATA = "EXTRA_DATA";

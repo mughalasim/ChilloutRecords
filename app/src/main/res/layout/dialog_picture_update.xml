@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/bckgrd_card"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_large">
+
+    <TextView
+        android:id="@+id/txt_title"
+        style="@style/TextTitle"
+        android:text="@string/txt_update_photo" />
+
+    <TextView
+        android:id="@+id/txt_message"
+        style="@style/TextBody"
+        android:layout_marginTop="@dimen/padding_large"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:gravity="center"
+        android:text="@string/txt_update_photo_desc" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_update"
+        style="@style/ButtonNo"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextBody"
+        android:text="@string/txt_photo_update" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete"
+        style="@style/ButtonYes"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextBody"
+        android:text="@string/txt_delete_photo" />
+
+</LinearLayout>

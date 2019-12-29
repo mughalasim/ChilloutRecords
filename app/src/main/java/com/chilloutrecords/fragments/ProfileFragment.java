@@ -1,5 +1,8 @@
 package com.chilloutrecords.fragments;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
+import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.UserModel;
@@ -60,12 +64,12 @@ public class ProfileFragment extends Fragment {
             reference;
 
 
+
     // OVERRIDE METHODS ============================================================================
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
             try {
-
                 root_view = inflater.inflate(R.layout.frag_profile, container, false);
 
                 reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
@@ -125,13 +129,39 @@ public class ProfileFragment extends Fragment {
                 btn_edit_picture.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_confirm, null);
-//                        final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-//                        popupWindow.setWidth(200);
-//                        popupWindow.setHeight(150);
-//                        popupWindow.showAtLocation(btn_edit_picture, Gravity.CENTER, 10, 10);
-//                        popupWindow.showAsDropDown(popupView, 0, 0);
+                        final Dialog dialog = new Dialog(Objects.requireNonNull(getActivity()));
+                        dialog.setContentView(R.layout.dialog_picture_update);
+                        dialog.setCancelable(true);
+                        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+                        dialog.findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                USER_MODEL.p_pic = BuildConfig.DEFAULT_PROFILE_ART;
+                                Database.setUser(USER_MODEL, new GeneralInterface() {
+                                    @Override
+                                    public void success() {
+                                        updateArt(USER_MODEL.p_pic);
+                                    }
+
+                                    @Override
+                                    public void failed() {
+                                        StaticMethods.showToast(getString(R.string.error_update_failed));
+                                    }
+                                });
+                                dialog.cancel();
+                            }
+                        });
+
+                        dialog.findViewById(R.id.btn_update).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.cancel();
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).checkImagePermissions();
+                            }
+                        });
+
+                        dialog.show();
                     }
                 });
 
@@ -151,6 +181,9 @@ public class ProfileFragment extends Fragment {
         super.onResume();
     }
 
+
+
+
     // CLASS METHODS ===============================================================================
     private void loadProfile() {
         reference.child(STR_ID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -161,16 +194,9 @@ public class ProfileFragment extends Fragment {
                     if (is_me) {
                         USER_MODEL = model;
                     }
-                    // Image
-                    Database.getFileUrl(BuildConfig.STORAGE_IMAGES, model.p_pic, BuildConfig.DEFAULT_PROFILE_ART, new UrlInterface() {
-                        @Override
-                        public void completed(Boolean success, String url) {
-                            if (success) {
-                                Glide.with(Objects.requireNonNull(getActivity())).load(url).into(img_profile);
-                                IMG_PROFILE_URL = url;
-                            }
-                        }
-                    });
+
+                    updateArt(model.p_pic);
+
                     // General info
                     txt_name.setText(model.name);
                     txt_stage_name.setText(getString(R.string.txt_stage_name).concat(model.stage_name));
@@ -224,6 +250,19 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Database.handleDatabaseError(databaseError);
+            }
+        });
+    }
+
+    public void updateArt(String image_url) {
+        // Image
+        Database.getFileUrl(BuildConfig.STORAGE_IMAGES, image_url, BuildConfig.DEFAULT_PROFILE_ART, new UrlInterface() {
+            @Override
+            public void completed(Boolean success, String url) {
+                if (success) {
+                    Glide.with(Objects.requireNonNull(getActivity())).load(url).into(img_profile);
+                    IMG_PROFILE_URL = url;
+                }
             }
         });
     }

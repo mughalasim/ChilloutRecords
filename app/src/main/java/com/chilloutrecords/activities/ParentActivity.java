@@ -1,29 +1,50 @@
 package com.chilloutrecords.activities;
 
+import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.fragments.HomeFragment;
+import com.chilloutrecords.fragments.ProfileFragment;
+import com.chilloutrecords.interfaces.GeneralInterface;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.services.LoginStateService;
+import com.chilloutrecords.utils.Database;
+import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.ArrayList;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
+import static com.chilloutrecords.utils.StaticVariables.INT_PERMISSIONS_CAMERA;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class ParentActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView txt_page_title;
+    DialogMethods dialog;
 
     public ArrayList<NavigationModel> navigation_list = new ArrayList<>();
 
@@ -38,6 +59,15 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_POLICY = "Home / Privacy Policy",
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
+    private final int
+            RESULT_GALLERY = 222,
+            RESULT_CAMERA = 333;
+
+    final String[] perms = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE};
+
     // OVERRIDE METHODS ============================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +78,8 @@ public class ParentActivity extends AppCompatActivity {
         StaticMethods.startServiceIfNotRunning(this, LoginStateService.class);
 
         ShortcutBadger.applyCount(ParentActivity.this, 0);
+
+        dialog = new DialogMethods(ParentActivity.this);
 
         toolbar = findViewById(R.id.toolbar);
         txt_page_title = findViewById(R.id.txt_page_navigation);
@@ -73,6 +105,81 @@ public class ParentActivity extends AppCompatActivity {
             loadFragment(navigation_list.get(size - 2));
         } else {
             finish();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        dialog.setDialogPermissions(grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_CANCELED)
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                if (resultCode == RESULT_OK) {
+                    Uri resultUri = result.getUri();
+
+                    final String file_name = "/users/" +FIREBASE_USER.getUid() + ".jpg";
+
+                    FIREBASE_STORAGE.getReference()
+                            .child(BuildConfig.STORAGE_IMAGES +  file_name)
+                            .putFile(resultUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    StaticMethods.logg("FILE", "SUCCESSFULLY UPLOADED");
+                                    USER_MODEL.p_pic = file_name;
+                                    Database.setUser(USER_MODEL, new GeneralInterface() {
+                                        @Override
+                                        public void success() {
+                                            try {
+                                                ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentById(R.id.ll_fragment);
+                                                assert fragment != null;
+                                                fragment.updateArt(file_name);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void failed() {
+
+                                        }
+                                    });
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    StaticMethods.logg("FILE", "FAILED TO UPLOAD");
+                                    StaticMethods.showToast(getString(R.string.error_unknown));
+                                }
+                            });
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    StaticMethods.showToast(getString(R.string.error_unknown));
+                }
+            }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @AfterPermissionGranted(INT_PERMISSIONS_CAMERA)
+    private void startImageActivity() {
+        CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .start(ParentActivity.this);
+    }
+
+    public void checkImagePermissions() {
+        if (EasyPermissions.hasPermissions(ParentActivity.this, perms)) {
+            startImageActivity();
+        } else {
+            EasyPermissions.requestPermissions(ParentActivity.this, getString(R.string.rationale_image),
+                    INT_PERMISSIONS_CAMERA, perms);
         }
     }
 

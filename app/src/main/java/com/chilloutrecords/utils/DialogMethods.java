@@ -2,8 +2,11 @@ package com.chilloutrecords.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -101,6 +104,43 @@ public class DialogMethods {
             }
         });
         dialog.show();
+    }
+
+    public void setDialogPermissions(int[] grant_results){
+        for (int result : grant_results) {
+            if (result == -1) {
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_confirm);
+                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                final TextView txt_message = dialog.findViewById(R.id.txt_message);
+                final MaterialButton btn_confirm = dialog.findViewById(R.id.btn_confirm);
+                final MaterialButton btn_cancel = dialog.findViewById(R.id.btn_cancel);
+                final TextView txt_title = dialog.findViewById(R.id.txt_title);
+                txt_title.setText(R.string.txt_alert);
+                txt_message.setText(R.string.error_permissions);
+                btn_confirm.setText(R.string.txt_take_me_there);
+                btn_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+                btn_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+                        intent.setData(uri);
+                        context.startActivity(intent);
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+                break;
+            }
+        }
     }
 
 

@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources[<!ENTITY appname "Chillout Records"><!ENTITY author "Asim Mughal">]>
+
 <resources>
     <!--ARRAY GENDER ============================================================================-->
     <string-array name="select_gender">
@@ -8,6 +10,7 @@
 
     <!--ERROR MESSAGES ==========================================================================-->
     <string name="error">Error</string>
+    <string name="error_unknown">An unexpected error occurred</string>
     <string name="error_no_artists">No artists to display at this time. Please try again later</string>
     <string name="error_no_videos">No videos to display at this time. Please try again later</string>
     <string name="error_no_data">No data to display at this time. Please try again later</string>
@@ -19,10 +22,14 @@
     <string name="error_track_soon">This content will be available once we release it. So hang in there ;)</string>
     <string name="error_connection">Offline Mode, Please check your internet connection</string>
     <string name="error_session_expiry">Session Expired, Please Login again</string>
-    <string name="error_login_failed">Failed to Login to the Chillout records App. Please check your credentials or try again later</string>
+    <string name="error_login_failed">Failed to Login to the &appname; App. Please check your credentials or try again later</string>
     <string name="error_reset_failed">Failed to sent a rest link to the provided email address. Please check your credentials or try again later</string>
-    <string name="error_register_failed">Failed to Register your account into the Chillout records App. Please try again later</string>
+    <string name="error_register_failed">Failed to Register your account into the &appname; App. Please try again later</string>
     <string name="error_update_failed">Failed to update your account information. Please try again later</string>
+    <string name="error_permissions">Dear user, App permissions have not been granted! The App cannot function without these permissions. Please grant them from the phone settings</string>
+
+    <!--PERMISSION RATIONALS ====================================================================-->
+    <string name="rationale_image">&appname; needs to access your Camera and write to your external storage for Images that you would like to set. Please grant these permissions in order to use the feature</string>
 
     <!--LOADING DIALOGS =========================================================================-->
     <string name="progress_login">Logging in. Please wait…</string>
@@ -87,8 +94,8 @@
     <string name="txt_forgot_pass">Forgot password</string>
     <string name="txt_forgot">Kindly enter your registered email address and well send you a password reset link</string>
     <string name="txt_share">Select what platform you wish to share the app on</string>
-    <string name="txt_register">Kindly give us some details so we may create your account on the chillout records platform</string>
-    <string name="txt_terms">By tapping LOGIN or REGISTER you agree to the terms and Conditions of the Chillout Records App</string>
+    <string name="txt_register">Kindly give us some details so we may create your account on the &appname; platform</string>
+    <string name="txt_terms">By tapping LOGIN or REGISTER you agree to the terms and Conditions of the &appname; App</string>
     <string name="txt_stats">Stats</string>
     <string name="txt_email">Email:&#160;</string>
     <string name="txt_member_since">Member since:&#160;</string>
@@ -98,5 +105,10 @@
     <string name="txt_lyrics">Lyrics</string>
     <string name="txt_update_profile">Update your profile</string>
     <string name="txt_coming_soon">Coming soon…</string>
+    <string name="txt_take_me_there">Show me</string>
+    <string name="txt_update_photo">Update Photo</string>
+    <string name="txt_update_photo_desc">Change your profile picture through one of the options provided</string>
+    <string name="txt_photo_update">Update photo</string>
+    <string name="txt_delete_photo">Delete photo</string>
 
 </resources>
