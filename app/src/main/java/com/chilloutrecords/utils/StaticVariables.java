@@ -14,6 +14,7 @@ public class StaticVariables {
     public static FirebaseUser FIREBASE_USER;
     public static FirebaseDatabase FIREBASE_DB;
     public static FirebaseStorage FIREBASE_STORAGE;
+    public static final String FIREBASE_TOKEN = "FIREBASE_TOKEN";
 
     // STATIC MODELS ===============================================================================
     public static UserModel USER_MODEL = new UserModel();

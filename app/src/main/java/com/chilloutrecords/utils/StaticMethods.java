@@ -87,6 +87,7 @@ public class StaticMethods {
 
         FIREBASE_AUTH.signOut();
         FIREBASE_USER = null;
+        SharedPrefs.deleteAllSharedPrefs();
 
         if (is_session_expired) {
             showToast("Your session has expired. Kindly login to continue");

@@ -1,132 +1,88 @@
 package com.chilloutrecords.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
+
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class SharedPrefs {
-    private static Context context;
-    private static final String MYPREFS = "CHILLOUT_SHARED_PREFS";
+    private static final String SHARED_PREFS = "SHARED_PREFS";
+    private static final int MODE = Activity.MODE_PRIVATE;
 
-    static {
-        context = ChilloutRecords.getAppContext();
+    private static SharedPreferences prefs = ChilloutRecords.getAppContext().getSharedPreferences(SHARED_PREFS, MODE);
+    private static SharedPreferences.Editor editor = ChilloutRecords.getAppContext().getSharedPreferences(SHARED_PREFS, MODE).edit();
+
+
+    // GENERIC GET AND SET INTEGER VARIABLES =======================================================
+    public static int getInt(String name) {
+        return prefs.getInt(name, 0);
+    }
+
+    public static void setInt(String name, int value) {
+        editor.putInt(name, value).apply();
     }
 
 
-// USER ID INFORMATION =============================================================================
-
-    public static String getUserID() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("USERID", "");
+    // GENERIC GET AND SET STRING VARIABLES ========================================================
+    public static String getString(String name) {
+        return prefs.getString(name, "");
     }
-    public static void setUSerID(String userID) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("USERID", userID);
-        editor.apply();
+
+    public static void setString(String name, String value) {
+        editor.putString(name, value).apply();
     }
 
 
-// USER INFORMATION ================================================================================
-
-    public static String getUserFullName() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("FIRSTNAME", "") + " " + mySharedPreferences.getString("LASTNAME", "");
-    }
-    public static void setUserFullName(String full_name) {
-        if (full_name.contains(" ")) {
-            String[] names = full_name.split(" ");
-            setUserFirstName(names[0]);
-            setUserLastName(names[1]);
+    // GENERIC GET AND SET ARRAY LIST VARIABLES ====================================================
+    public static ArrayList<String> getArrayList(String name) {
+        HashSet<String> set = (HashSet<String>) prefs.getStringSet(name, null);
+        if (set != null) {
+            return new ArrayList<>(set);
         } else {
-            setUserFirstName(full_name);
+            return new ArrayList<>();
         }
     }
 
-    public static String getUserFirstName() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("FIRSTNAME", "");
-    }
-    public static void setUserFirstName(String name) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("FIRSTNAME", name);
-        editor.apply();
+    public static void setArrayList(String name, ArrayList<String> value) {
+        HashSet<String> set = new HashSet<>(value);
+        editor.putStringSet(name, set).apply();
     }
 
-    public static String getUserLastName() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("LASTNAME", "");
-    }
-    public static void setUserLastName(String name) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("LASTNAME", name);
-        editor.apply();
+
+    // GENERIC GET AND SET BOOLEAN VARIABLES =======================================================
+    @NonNull
+    public static Boolean getBool(String name) {
+        return prefs.getBoolean(name, false);
     }
 
-    public static String getUserPic() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("USERPIC", "");
-    }
-    public static void setUserPic(String userPIC) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("USERPIC", userPIC);
-        editor.apply();
-    }
-
-    public static String getUserDOB() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("USERDOB", "");
-    }
-    public static void setUserDOB(String userDOB) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("USERDOB", userDOB);
-        editor.apply();
-    }
-
-    public static String getUserPhone() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("USERPHONE", "");
-    }
-    public static void setUserPhone(String tel) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("USERPHONE", tel);
-        editor.apply();
-    }
-
-    public static String getUserEmail() {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        return mySharedPreferences.getString("EMAIL", "");
-    }
-    public static void setUserEmail(String email) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("EMAIL", email);
+    public static void setBool(String name, Boolean value) {
+        editor.putBoolean(name, value);
         editor.apply();
     }
 
 
-// OTHER FUNCTIONS =================================================================================
-
-    public static String getDownLoadURL() {
-    SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-    return mySharedPreferences.getString("DLURL", "");
-}
-    public static void setDownLoadURL(String dl_url) {
-        SharedPreferences mySharedPreferences = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mySharedPreferences.edit();
-        editor.putString("DLURL", dl_url);
-        editor.apply();
+    // GENERIC GET AND SET DOUBLE ==================================================================
+    public static Double getDouble(String name) {
+        String value = prefs.getString(name, "0.0");
+        if (value != null) {
+            return Double.parseDouble(value);
+        } else {
+            return 0.0;
+        }
     }
 
-    public static void deleteAllSharedPrefs(){
-        SharedPreferences settings = context.getSharedPreferences(MYPREFS, Activity.MODE_PRIVATE);
-        settings.edit().clear().apply();
+    public static void setDouble(String name, Double longitude) {
+        editor.putString(name, String.valueOf(longitude)).apply();
+    }
+
+
+    // DELETE FUNCTION =============================================================================
+    public static void deleteAllSharedPrefs() {
+        editor.clear().apply();
     }
 
 }

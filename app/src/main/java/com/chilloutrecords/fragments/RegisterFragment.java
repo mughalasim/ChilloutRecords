@@ -107,11 +107,11 @@ public class RegisterFragment extends Fragment {
                     etl_password_confirm.setVisibility(View.VISIBLE);
 
                 if (BuildConfig.DEBUG) {
-                        et_name.setText("Asim");
-                        et_stage_name.setText("Speedy");
-                        et_email.setText("user@test.com");
-                        et_password.setText("password");
-                        et_password_confirm.setText("password");
+                        et_name.setText("User");
+                        et_stage_name.setText("Test user");
+                        et_email.setText(BuildConfig.TEST_EMAIL);
+                        et_password.setText(BuildConfig.TEST_PASSWORD);
+                        et_password_confirm.setText(BuildConfig.TEST_PASSWORD);
                         spinner_gender.setSelection(1);
                 }
 
@@ -200,6 +200,8 @@ public class RegisterFragment extends Fragment {
         user.info = "..tell us something about you..";
         user.gender = spinner_gender.getSelectedItemPosition();
         user.p_pic = BuildConfig.DEFAULT_PROFILE_ART;
+        user.is_activated = false;
+        user.fcm_token = "";
 
         // MUSIC INFO
         user.music.collections.add("0");

@@ -12,6 +12,7 @@ public class UserModel implements Serializable {
     public String p_pic = "";
     public String email = "";
     public String info = "";
+    public String fcm_token = "";
 
     public Boolean is_artist;
     public Boolean is_activated;

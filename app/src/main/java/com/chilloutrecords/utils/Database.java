@@ -20,11 +20,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.StorageReference;
 
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
+import static com.chilloutrecords.utils.StaticVariables.FIREBASE_TOKEN;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
@@ -52,6 +55,7 @@ public class Database {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final UserModel model = dataSnapshot.getValue(UserModel.class);
                 if (model != null) {
+                    Database.updateFirebaseToken(model.fcm_token);
                     USER_MODEL = model;
                     listener.success();
                 } else {
@@ -65,6 +69,36 @@ public class Database {
                 listener.failed();
             }
         });
+    }
+
+    // UPDATE FIREBASE TOKEN =======================================================================
+    private static void updateFirebaseToken(String old_token) {
+        if (old_token.equals("") || SharedPrefs.getString(FIREBASE_TOKEN).equals("") || !old_token.equals(SharedPrefs.getString(FIREBASE_TOKEN))) {
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                String token = task.getResult().getToken();
+
+                                if (FIREBASE_USER != null) {
+                                    SharedPrefs.setString(FIREBASE_TOKEN, token);
+                                    DatabaseReference reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
+                                    reference.child(FIREBASE_USER.getUid()).child("fcm_token").setValue(token).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (!task.isSuccessful()) {
+                                                SharedPrefs.setString(FIREBASE_TOKEN, "");
+                                            }
+                                        }
+                                    });
+                                }
+                            } else {
+                                SharedPrefs.setString(FIREBASE_TOKEN, "");
+                            }
+                        }
+                    });
+        }
     }
 
     // CHECK IF USER IS AUTHENTICATED ==============================================================

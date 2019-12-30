@@ -62,14 +62,16 @@
                 android:id="@+id/et_info"
                 style="@style/EditTextInput"
                 android:maxLength="@integer/max_profile_info"
-                android:maxLines="15"
-                android:inputType="textLongMessage|textMultiLine"/>
+                android:maxLines="10"
+                android:maxWidth="@dimen/screen_min_width"
+                android:inputType="textMultiLine"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
             android:id="@+id/spinner_gender"
             style="@style/EditText"
+            android:layout_marginTop="@dimen/text_margin"
             android:entries="@array/select_gender" />
 
         <com.google.android.material.textfield.TextInputLayout

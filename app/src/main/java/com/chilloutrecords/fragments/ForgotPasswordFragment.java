@@ -49,7 +49,7 @@ public class ForgotPasswordFragment extends Fragment {
                 btn_reset = root_view.findViewById(R.id.btn_reset);
 
                 if(BuildConfig.DEBUG){
-                    et_email.setText("user@test.com");
+                    et_email.setText(BuildConfig.TEST_EMAIL);
                 }
 
                 btn_reset.setOnClickListener(new View.OnClickListener() {

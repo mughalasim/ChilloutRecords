@@ -212,13 +212,6 @@ public class ParentActivity extends AppCompatActivity {
             transaction.setCustomAnimations(R.anim.enter_left, R.anim.exit_right);
         }
         transaction.replace(R.id.ll_fragment, navigation.fragment).addToBackStack(null).commit();
-
-//        this.getSupportFragmentManager()
-//                .beginTransaction()
-//                .setCustomAnimations(R.anim.enter_right, R.anim.exit_left)
-//                .replace(R.id.ll_fragment, navigation.fragment)
-//                .addToBackStack(null)
-//                .commit();
     }
 
 }
