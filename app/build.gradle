@@ -25,7 +25,6 @@ android {
         // FIREBASE DATABASE URLS
         buildConfigField 'String', 'DB_REF_APP_VERSION', DB_REF_APP_VERSION
         buildConfigField 'String', 'DB_REF_ABOUT_US', DB_REF_ABOUT_US
-        buildConfigField 'String', 'DB_REF_POLICY', DB_REF_POLICY
         buildConfigField 'String', 'DB_REF_USERS', DB_REF_USERS
         buildConfigField 'String', 'DB_REF_VIDEOS', DB_REF_VIDEOS
         buildConfigField 'String', 'DB_REF_COLLECTIONS', DB_REF_COLLECTIONS
@@ -35,7 +34,6 @@ android {
         buildConfigField 'String', 'STORAGE_IMAGES', STORAGE_IMAGES
         buildConfigField 'String', 'STORAGE_VIDEOS', STORAGE_VIDEOS
         buildConfigField 'String', 'STORAGE_MUSIC',  STORAGE_MUSIC
-        buildConfigField 'String', 'STORAGE_APK',  STORAGE_APK
 
         // SONG TYPES
         buildConfigField 'String', 'SONG_TYPE_SINGLE',  SONG_TYPE_SINGLE
@@ -53,12 +51,16 @@ android {
         buildConfigField 'String', 'FB_DB_URL', FB_DB_URL
 
         // DEFAULT PATHS
-        buildConfigField 'String', 'DEFAULT_HOME',          DEFAULT_HOME
-        buildConfigField 'String', 'DEFAULT_PROFILE_ART',   DEFAULT_PROFILE_ART
-        buildConfigField 'String', 'DEFAULT_TRACK_ART',     DEFAULT_TRACK_ART
-        buildConfigField 'String', 'DEFAULT_VIDEO_ART',     DEFAULT_VIDEO_ART
-        buildConfigField 'String', 'DEFAULT_ALBUM_ART',     DEFAULT_ALBUM_ART
-        buildConfigField 'String', 'DEFAULT_SHARE_LINK',    DEFAULT_SHARE_LINK
+        buildConfigField 'String', 'DEFAULT_HOME',       DEFAULT_HOME
+        buildConfigField 'String', 'DEFAULT_PROFILE_ART',DEFAULT_PROFILE_ART
+        buildConfigField 'String', 'DEFAULT_TRACK_ART',  DEFAULT_TRACK_ART
+        buildConfigField 'String', 'DEFAULT_VIDEO_ART',  DEFAULT_VIDEO_ART
+        buildConfigField 'String', 'DEFAULT_ALBUM_ART',  DEFAULT_ALBUM_ART
+        buildConfigField 'String', 'DEFAULT_SHARE_LINK', DEFAULT_SHARE_LINK
+
+        // TEST LOGIN CREDENTIALS
+        buildConfigField 'String', 'TEST_EMAIL',    TEST_EMAIL
+        buildConfigField 'String', 'TEST_PASSWORD', TEST_PASSWORD
 
         // SIGN AND RENAME
         signingConfig signingConfigs.releaseSigning

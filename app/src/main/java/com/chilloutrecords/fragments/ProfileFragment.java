@@ -34,7 +34,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.Objects;
 
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE_EDIT;
-import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_SHARE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
@@ -108,7 +107,7 @@ public class ProfileFragment extends Fragment {
                 root_view.findViewById(R.id.btn_share).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ShareFragment(), PAGE_TITLE_SHARE, "", null, true));
+                        StaticMethods.share(BuildConfig.DEFAULT_SHARE_LINK);
                     }
                 });
                 btn_edit_profile.setOnClickListener(new View.OnClickListener() {

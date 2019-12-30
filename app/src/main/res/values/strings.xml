@@ -3,7 +3,7 @@
 <resources>
     <!--ARRAY GENDER ============================================================================-->
     <string-array name="select_gender">
-        <item>Select Gender</item>
+        <item>Select gender</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
@@ -37,13 +37,14 @@
     <string name="nav_register">Register</string>
     <string name="nav_forgot_password">Reset</string>
 
-    <!-- PROFILE NAVIGATION =====================================================================-->
-
-    <!-- DRAWER NAV =============================================================================-->
-    <string name="nav_share">Share</string>
-    <string name="nav_logout">Logout</string>
-
     <!-- HOME NAVIGATION ========================================================================-->
+    <string name="nav_logout">Logout</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_artists">Artists</string>
+    <string name="nav_videos">Videos</string>
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_upgrade">Upgrade</string>
+    <string name="nav_about_us">About us</string>
 
     <!--EDIT TEXT HINTS =========================================================================-->
     <string name="et_hint_name">Name</string>
@@ -79,7 +80,7 @@
     <string name="txt_update_profile">Update your profile</string>
     <string name="txt_coming_soon">Coming soon…</string>
     <string name="txt_take_me_there">Show me</string>
-    <string name="txt_update_photo">Update Photo</string>
+    <string name="txt_update_photo">Update photo</string>
     <string name="txt_update_photo_desc">Change your profile picture through one of the options provided</string>
     <string name="txt_photo_update">Set new photo</string>
     <string name="txt_delete_photo">Delete photo</string>

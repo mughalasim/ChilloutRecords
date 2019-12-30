@@ -17,7 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
+import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.interfaces.UrlInterface;
+import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.utils.Database;
@@ -37,6 +39,7 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_UPGRADE;
 import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
@@ -44,6 +47,7 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_SINGLE;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
 import static com.chilloutrecords.utils.StaticVariables.STR_COLLECTION_ID;
 import static com.chilloutrecords.utils.StaticVariables.TRACK_MODEL;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 import static com.chilloutrecords.utils.StaticVariables.VIDEO_MODEL;
 
 public class PlayerFragment extends Fragment {
@@ -119,40 +123,7 @@ public class PlayerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
             try {
-
                 root_view = inflater.inflate(R.layout.frag_player, container, false);
-
-                Bundle bundle = this.getArguments();
-
-                if (bundle != null) {
-                    String extra = bundle.getString(EXTRA_STRING);
-
-                    findAllViews();
-
-                    assert extra != null;
-                    switch (extra) {
-                        case EXTRA_VIDEO:
-                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + VIDEO_MODEL.id;
-                            STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
-                            player_view.setVisibility(View.VISIBLE);
-                            startVideoPlayer(VIDEO_MODEL);
-                            break;
-
-                        case EXTRA_TRACK_SINGLE:
-                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + TRACK_MODEL.id;
-                            STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_SINGLES;
-                            player_view.setVisibility(View.GONE);
-                            startMusicPlayer(TRACK_MODEL);
-                            break;
-
-                        case EXTRA_TRACK_COLLECTION:
-                            STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + TRACK_MODEL.id;
-                            STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID;
-                            player_view.setVisibility(View.GONE);
-                            startMusicPlayer(TRACK_MODEL);
-                            break;
-                    }
-                }
             } catch (InflateException e) {
                 e.printStackTrace();
             }
@@ -163,12 +134,52 @@ public class PlayerFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            String extra = bundle.getString(EXTRA_STRING);
+            findAllViews();
+            assert extra != null;
+            switch (extra) {
+                case EXTRA_VIDEO:
+                    STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + VIDEO_MODEL.id;
+                    STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
+                    player_view.setVisibility(View.VISIBLE);
+                    startVideoPlayer(VIDEO_MODEL);
+                    break;
+
+                case EXTRA_TRACK_SINGLE:
+                    STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + TRACK_MODEL.id;
+                    STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_SINGLES;
+                    player_view.setVisibility(View.GONE);
+                    startMusicPlayer(TRACK_MODEL);
+                    break;
+
+                case EXTRA_TRACK_COLLECTION:
+                    STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + TRACK_MODEL.id;
+                    STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID;
+                    player_view.setVisibility(View.GONE);
+                    startMusicPlayer(TRACK_MODEL);
+                    break;
+            }
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onDestroyView() {
         if (player != null) {
             player.release();
-            player = null;
         }
         super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (player != null) {
+            player = null;
+        }
+        super.onDestroy();
     }
 
     // CLASS METHODS ===============================================================================
@@ -181,7 +192,6 @@ public class PlayerFragment extends Fragment {
         txt_track_plays = root_view.findViewById(R.id.txt_track_plays);
         txt_track_release = root_view.findViewById(R.id.txt_track_release);
         btn_download = root_view.findViewById(R.id.btn_download);
-        btn_download.setVisibility(View.GONE);
         btn_track_play = root_view.findViewById(R.id.btn_track_play);
         player_view = root_view.findViewById(R.id.player_view);
         btn_track_play.requestFocus();
@@ -191,6 +201,18 @@ public class PlayerFragment extends Fragment {
                 setPlayPause(!isPlaying);
             }
         });
+        btn_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (USER_MODEL.is_activated) {
+                    StaticMethods.showToast("Download will start momentarily");
+                } else {
+                    ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PayFragment(), PAGE_TITLE_UPGRADE, "", null, true));
+                }
+            }
+        });
+
+
         seek_bar = root_view.findViewById(R.id.seek_bar);
         seek_bar.requestFocus();
         seek_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

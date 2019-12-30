@@ -30,9 +30,9 @@ import java.util.Objects;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ABOUT;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ARTISTS;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_LOGOUT;
-import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POLICY;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_SHARE;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_UPGRADE;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_VIDEOS;
 import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
@@ -81,12 +81,12 @@ public class HomeFragment extends Fragment {
                                 ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url, null, true));
                                 break;
 
-                            case PAGE_TITLE_POLICY:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url, null, true));
+                            case PAGE_TITLE_UPGRADE:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PayFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_SHARE:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new ShareFragment(), page_title, url, null, true));
+                                StaticMethods.share(BuildConfig.DEFAULT_SHARE_LINK);
                                 break;
 
                             case PAGE_TITLE_LOGOUT:
@@ -131,49 +131,51 @@ public class HomeFragment extends Fragment {
         models.clear();
 
         model = new HomeModel();
-        model.txt = "Artists";
+        model.txt = getString(R.string.nav_artists);
         model.img = "home/home_artists.jpg";
         model.url = BuildConfig.DB_REF_USERS;
         model.page_title = PAGE_TITLE_ARTISTS;
         models.add(model);
 
         model = new HomeModel();
-        model.txt = "Videos";
+        model.txt = getString(R.string.nav_videos);
         model.img = "home/home_videos.jpg";
         model.url = BuildConfig.DB_REF_VIDEOS;
         model.page_title = PAGE_TITLE_VIDEOS;
         models.add(model);
 
         model = new HomeModel();
-        model.txt = "My Profile";
+        model.txt = getString(R.string.nav_my_profile);
         model.img = USER_MODEL.p_pic;
         model.url = "";
         model.page_title = PAGE_TITLE_PROFILE;
         models.add(model);
 
         model = new HomeModel();
-        model.txt = "Share";
+        model.txt = getString(R.string.nav_share);
         model.img = "home/home_share.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_SHARE;
         models.add(model);
 
         model = new HomeModel();
-        model.txt = "About us";
+        model.txt = getString(R.string.nav_about_us);
         model.img = "home/home_about.jpg";
         model.url = BuildConfig.DB_REF_ABOUT_US;
         model.page_title = PAGE_TITLE_ABOUT;
         models.add(model);
 
-        model = new HomeModel();
-        model.txt = "Privacy Policy";
-        model.img = "home/home_privacy.png";
-        model.url = BuildConfig.DB_REF_POLICY;
-        model.page_title = PAGE_TITLE_POLICY;
-        models.add(model);
+        if(!USER_MODEL.is_activated){
+            model = new HomeModel();
+            model.txt = getString(R.string.nav_upgrade);
+            model.img = "home/home_upgrade.jpg";
+            model.url = "";
+            model.page_title = PAGE_TITLE_UPGRADE;
+            models.add(model);
+        }
 
         model = new HomeModel();
-        model.txt = "Logout";
+        model.txt = getString(R.string.nav_logout);
         model.img = "home/home_logout.jpg";
         model.url = "";
         model.page_title = PAGE_TITLE_LOGOUT;

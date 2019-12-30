@@ -4,7 +4,7 @@ import androidx.annotation.Keep;
 
 public class TextModel {
     public String info = "";
-    public String title = "";
+//    public String title = "";
 
     @Keep
     public TextModel() {

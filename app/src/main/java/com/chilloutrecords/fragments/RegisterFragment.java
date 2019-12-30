@@ -208,7 +208,6 @@ public class RegisterFragment extends Fragment {
         // META DATA
         user.member_since_date = Calendar.getInstance().getTimeInMillis();
         user.is_artist = false;
-        user.play_count = 0;
         user.profile_visits = 0;
 
         // SET THE USER IN THE DATABASE

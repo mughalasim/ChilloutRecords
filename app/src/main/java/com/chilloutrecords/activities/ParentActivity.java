@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
@@ -56,7 +57,7 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_PROFILE_EDIT = "Home / Profile Edit",
             PAGE_TITLE_SHARE = "Home / Share",
             PAGE_TITLE_ABOUT = "Home / About us",
-            PAGE_TITLE_POLICY = "Home / Privacy Policy",
+            PAGE_TITLE_UPGRADE = "Home / Upgrade",
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
     final String[] perms = {
@@ -119,10 +120,10 @@ public class ParentActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Uri resultUri = result.getUri();
 
-                    final String file_name = "/users/" +FIREBASE_USER.getUid() + ".jpg";
+                    final String file_name = "/users/" + FIREBASE_USER.getUid() + ".jpg";
 
                     FIREBASE_STORAGE.getReference()
-                            .child(BuildConfig.STORAGE_IMAGES +  file_name)
+                            .child(BuildConfig.STORAGE_IMAGES + file_name)
                             .putFile(resultUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -204,12 +205,20 @@ public class ParentActivity extends AppCompatActivity {
 
         txt_page_title.setText(navigation.page_title);
 
-        this.getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.enter, R.anim.exit)
-                .replace(R.id.ll_fragment, navigation.fragment)
-                .addToBackStack(null)
-                .commit();
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+        if (navigation.add_to_back_stack) {
+            transaction.setCustomAnimations(R.anim.enter_right, R.anim.exit_left);
+        } else {
+            transaction.setCustomAnimations(R.anim.enter_left, R.anim.exit_right);
+        }
+        transaction.replace(R.id.ll_fragment, navigation.fragment).addToBackStack(null).commit();
+
+//        this.getSupportFragmentManager()
+//                .beginTransaction()
+//                .setCustomAnimations(R.anim.enter_right, R.anim.exit_left)
+//                .replace(R.id.ll_fragment, navigation.fragment)
+//                .addToBackStack(null)
+//                .commit();
     }
 
 }

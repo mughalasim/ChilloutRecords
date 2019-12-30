@@ -16,7 +16,6 @@ import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -36,7 +35,6 @@ public class LoginFragment extends Fragment {
     private TextInputLayout
             etl_email,
             etl_password;
-    private MaterialButton btn_login;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -53,14 +51,12 @@ public class LoginFragment extends Fragment {
                 etl_email = root_view.findViewById(R.id.etl_email);
                 etl_password = root_view.findViewById(R.id.etl_password);
 
-                btn_login = root_view.findViewById(R.id.btn_login);
-
                 if (BuildConfig.DEBUG) {
-                    et_email.setText("user@test.com");
-                    et_password.setText("password");
+                    et_email.setText(BuildConfig.TEST_EMAIL);
+                    et_password.setText(BuildConfig.TEST_PASSWORD);
                 }
 
-                btn_login.setOnClickListener(new View.OnClickListener() {
+                root_view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (StaticMethods.validateEmail(et_email, etl_email) && StaticMethods.validateEmptyEditText(et_password, etl_password, getString(R.string.error_field_required))) {
