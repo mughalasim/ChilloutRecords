@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_medium"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium">
 
     <com.google.android.material.card.MaterialCardView
         style="@style/CardLayout"
@@ -13,8 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/padding_medium"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
 
             <TextView
                 android:id="@+id/txt_title"
@@ -22,7 +22,6 @@
                 android:text="Upgrade" />
 
             <TextView
-                android:id="@+id/txt_message"
                 style="@style/TextBody"
                 android:layout_marginTop="@dimen/padding_large"
                 android:layout_marginBottom="@dimen/padding_large"
@@ -32,32 +31,34 @@
 
             <TextView
                 style="@style/TextTitle"
-                android:text="$5" />
+                android:text="£5 (GBP)" />
 
 
             <TextView
                 style="@style/TextBody"
-                android:text="(One time fee)" />
+                android:layout_marginBottom="@dimen/padding_large"
+                android:text="One time fee" />
 
             <TextView
+                android:id="@+id/txt_message"
                 style="@style/TextBody"
-                android:layout_marginTop="@dimen/padding_large"
-                android:layout_marginBottom="@dimen/padding_small"
-                android:text="Payment options" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_pay_google"
-                style="@style/ButtonYes"
-                android:textAllCaps="false"
-                android:text="Google Pay" />
+                android:gravity="center"
+                android:padding="@dimen/padding_mini"
+                android:background="@drawable/bckgrd_card"
+                android:layout_marginBottom="@dimen/padding_large"
+                android:text="@string/txt_google_pay_unavailable" />
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_pay_visa"
-                style="@style/ButtonYes"
-                android:textAllCaps="false"
-                android:text="Visa Debit" />
-
+            <ImageButton
+                android:id="@+id/btn_google_pay"
+                android:layout_width="wrap_content"
+                android:background="@drawable/bckgrd_google_pay"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/screen_min_width"
+                android:minHeight="?attr/actionBarSize"
+                android:src="@drawable/ic_google_pay"
+                android:visibility="gone"
+                android:contentDescription="@string/app_name" />
 
         </LinearLayout>
 

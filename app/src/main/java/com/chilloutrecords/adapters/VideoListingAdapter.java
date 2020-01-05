@@ -16,7 +16,6 @@ import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.interfaces.VideoListingInterface;
 import com.chilloutrecords.models.VideoModel;
 import com.chilloutrecords.utils.Database;
-import com.chilloutrecords.utils.StaticMethods;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class VideoListingAdapter extends RecyclerView.Adapter<VideoListingAdapte
 
         holder.txt.setText(model.name);
 
-        StaticMethods.animate_recycler_view(holder.itemView);
+//        StaticMethods.animate_recycler_view(holder.itemView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,11 +1,15 @@
 package com.chilloutrecords.activities;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,13 +26,20 @@ import com.chilloutrecords.services.LoginStateService;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.wallet.AutoResolveHelper;
+import com.google.android.gms.wallet.PaymentData;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -39,6 +50,7 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_PERMISSIONS_CAMERA;
+import static com.chilloutrecords.utils.StaticVariables.LOAD_PAYMENT_DATA_REQUEST_CODE;
 import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class ParentActivity extends AppCompatActivity {
@@ -114,53 +126,75 @@ public class ParentActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_CANCELED)
-            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-                CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                if (resultCode == RESULT_OK) {
-                    Uri resultUri = result.getUri();
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                // RESULT FOR PAYMENT ==============================================================
+                case LOAD_PAYMENT_DATA_REQUEST_CODE:
+                    switch (resultCode) {
+                        case Activity.RESULT_OK:
+                            PaymentData paymentData = PaymentData.getFromIntent(data);
+                            handlePaymentSuccess(Objects.requireNonNull(paymentData));
+                            break;
+                        case AutoResolveHelper.RESULT_ERROR:
+                            Status status = AutoResolveHelper.getStatusFromIntent(data);
+                            StaticMethods.showToast(Objects.requireNonNull(status).getStatusMessage());
+                            StaticMethods.logg("PAYMENT", "ERROR MESSAGE: " + status.getStatusMessage());
+                            break;
+                    }
+                    // Re-enables the Google Pay payment button.
+                    // btn_google_pay.setClickable(true);
+                    break;
 
-                    final String file_name = "/users/" + FIREBASE_USER.getUid() + ".jpg";
-
-                    FIREBASE_STORAGE.getReference()
-                            .child(BuildConfig.STORAGE_IMAGES + file_name)
-                            .putFile(resultUri)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    StaticMethods.logg("FILE", "SUCCESSFULLY UPLOADED");
-                                    USER_MODEL.p_pic = file_name;
-                                    Database.setUser(USER_MODEL, new GeneralInterface() {
-                                        @Override
-                                        public void success() {
-                                            try {
-                                                ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentById(R.id.ll_fragment);
-                                                assert fragment != null;
-                                                fragment.updateArt(file_name);
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
+                    // RESULT FOR IMAGE UPLOAD =====================================================
+                case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
+                    if (resultCode == RESULT_OK) {
+                        CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                        Uri resultUri = result.getUri();
+                        final String file_name = "/users/" + FIREBASE_USER.getUid() + ".jpg";
+                        FIREBASE_STORAGE.getReference()
+                                .child(BuildConfig.STORAGE_IMAGES + file_name)
+                                .putFile(resultUri)
+                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        StaticMethods.logg("FILE", "SUCCESSFULLY UPLOADED");
+                                        USER_MODEL.p_pic = file_name;
+                                        Database.setUser(USER_MODEL, new GeneralInterface() {
+                                            @Override
+                                            public void success() {
+                                                try {
+                                                    ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentById(R.id.ll_fragment);
+                                                    assert fragment != null;
+                                                    fragment.updateArt(file_name);
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                    StaticMethods.showToast(getString(R.string.error_unknown));
+                                                }
                                             }
-                                        }
 
-                                        @Override
-                                        public void failed() {
-                                            StaticMethods.showToast(getString(R.string.error_unknown));
-                                        }
-                                    });
+                                            @Override
+                                            public void failed() {
+                                                StaticMethods.showToast(getString(R.string.error_unknown));
+                                            }
+                                        });
 
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    StaticMethods.logg("FILE", "FAILED TO UPLOAD");
-                                    StaticMethods.showToast(getString(R.string.error_unknown));
-                                }
-                            });
-                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                    StaticMethods.showToast(getString(R.string.error_unknown));
-                }
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        StaticMethods.logg("FILE", "FAILED TO UPLOAD");
+                                        StaticMethods.showToast(getString(R.string.error_unknown));
+                                    }
+                                });
+                    } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                        StaticMethods.showToast(getString(R.string.error_unknown));
+                    }
+                    break;
             }
+        } else {
+            StaticMethods.showToast("Cancelled");
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -212,6 +246,51 @@ public class ParentActivity extends AppCompatActivity {
             transaction.setCustomAnimations(R.anim.enter_left, R.anim.exit_right);
         }
         transaction.replace(R.id.ll_fragment, navigation.fragment).addToBackStack(null).commit();
+    }
+
+    private void handlePaymentSuccess(PaymentData paymentData) {
+        String paymentInformation = paymentData.toJson();
+
+        // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
+        if (paymentInformation == null) {
+            return;
+        }
+        JSONObject paymentMethodData;
+
+        try {
+            paymentMethodData = new JSONObject(paymentInformation).getJSONObject("paymentMethodData");
+            // If the gateway is set to "example", no payment information is returned - instead, the
+            // token will only consist of "examplePaymentMethodToken".
+            if (paymentMethodData
+                    .getJSONObject("tokenizationData")
+                    .getString("type")
+                    .equals("PAYMENT_GATEWAY")
+                    && paymentMethodData
+                    .getJSONObject("tokenizationData")
+                    .getString("token")
+                    .equals("examplePaymentMethodToken")) {
+                AlertDialog alertDialog =
+                        new AlertDialog.Builder(this)
+                                .setTitle("Warning")
+                                .setMessage(
+                                        "Gateway name set to \"example\" - please modify "
+                                                + "Constants.java and replace it with your own gateway.")
+                                .setPositiveButton("OK", null)
+                                .create();
+                alertDialog.show();
+            }
+
+            String billingName =
+                    paymentMethodData.getJSONObject("info").getJSONObject("billingAddress").getString("name");
+            Log.d("BillingName", billingName);
+            Toast.makeText(this, "BILLING NAME:" + billingName, Toast.LENGTH_LONG)
+                    .show();
+
+            // Logging token string.
+            Log.d("GooglePaymentToken", paymentMethodData.getJSONObject("tokenizationData").getString("token"));
+        } catch (JSONException e) {
+            Log.e("handlePaymentSuccess", "Error: " + e.toString());
+        }
     }
 
 }

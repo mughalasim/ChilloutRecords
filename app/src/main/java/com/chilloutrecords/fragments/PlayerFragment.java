@@ -73,6 +73,7 @@ public class PlayerFragment extends Fragment {
     private int
             INT_PLAY_COUNT = 0;
     private String
+            STR_CONTENT_URL = "",
             STR_CONTENT_DB_PATH = "",
             STR_CONTENT_STORAGE_PATH = "";
     private ExoPlayer.EventListener player_listener = new ExoPlayer.EventListener() {
@@ -206,6 +207,7 @@ public class PlayerFragment extends Fragment {
             public void onClick(View view) {
                 if (USER_MODEL.is_activated) {
                     StaticMethods.showToast("Download will start momentarily");
+//                    Database.downloadFile(STR_CONTENT_NAME, STR_CONTENT_STORAGE_PATH);
                 } else {
                     ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PayFragment(), PAGE_TITLE_UPGRADE, "", null, true));
                 }

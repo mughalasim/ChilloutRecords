@@ -31,6 +31,9 @@ public class StaticVariables {
     public final static int INT_PERMISSIONS_CAMERA = 601;
     public final static int INT_PERMISSIONS_STORAGE = 604;
 
+    // RESULT CODES ================================================================================
+    public static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 991;
+
     // BUNDLE EXTRA VARIABLES ======================================================================
     public static final String EXTRA_STRING = "EXTRA_STRING";
     public static final String EXTRA_DATA = "EXTRA_DATA";

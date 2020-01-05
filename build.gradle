@@ -35,7 +35,7 @@ allprojects {
 
 ext {
     // SDK and tools
-    minSDK = 21
+    minSDK = 24
     targetSDK = 28
     compileSDK = 28
     buildTools = '28.0.3'

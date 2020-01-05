@@ -104,7 +104,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
             }
         });
 
-        StaticMethods.animate_recycler_view(holder.itemView);
+//        StaticMethods.animate_recycler_view(holder.itemView);
 
     }
 
