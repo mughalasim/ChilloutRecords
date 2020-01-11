@@ -18,6 +18,7 @@ package com.chilloutrecords.utils;
 
 import android.app.Activity;
 
+import com.chilloutrecords.R;
 import com.google.android.gms.wallet.PaymentsClient;
 import com.google.android.gms.wallet.Wallet;
 
@@ -99,23 +100,23 @@ public class PaymentsUtil {
    * @see <a
    *     href="https://developers.google.com/pay/api/android/reference/object#PaymentMethodTokenizationSpecification">PaymentMethodTokenizationSpecification</a>
    */
-  private static JSONObject getDirectTokenizationSpecification()
-      throws JSONException, RuntimeException {
-    if (Constants.DIRECT_TOKENIZATION_PARAMETERS.isEmpty()
-        || Constants.DIRECT_TOKENIZATION_PUBLIC_KEY.isEmpty()
-        || Constants.DIRECT_TOKENIZATION_PUBLIC_KEY == null
-        || Constants.DIRECT_TOKENIZATION_PUBLIC_KEY == "REPLACE_ME") {
-      throw new RuntimeException(
-          "Please edit the Constants.java file to add protocol version & public key.");
-    }
-    JSONObject tokenizationSpecification = new JSONObject();
-
-    tokenizationSpecification.put("type", "DIRECT");
-    JSONObject parameters = new JSONObject(Constants.DIRECT_TOKENIZATION_PARAMETERS);
-    tokenizationSpecification.put("parameters", parameters);
-
-    return tokenizationSpecification;
-  }
+//  private static JSONObject getDirectTokenizationSpecification()
+//      throws JSONException, RuntimeException {
+//    if (Constants.DIRECT_TOKENIZATION_PARAMETERS.isEmpty()
+//        || Constants.DIRECT_TOKENIZATION_PUBLIC_KEY.isEmpty()
+//        || Constants.DIRECT_TOKENIZATION_PUBLIC_KEY == null
+//        || Constants.DIRECT_TOKENIZATION_PUBLIC_KEY == "REPLACE_ME") {
+//      throw new RuntimeException(
+//          "Please edit the Constants.java file to add protocol version & public key.");
+//    }
+//    JSONObject tokenizationSpecification = new JSONObject();
+//
+//    tokenizationSpecification.put("type", "DIRECT");
+//    JSONObject parameters = new JSONObject(Constants.DIRECT_TOKENIZATION_PARAMETERS);
+//    tokenizationSpecification.put("parameters", parameters);
+//
+//    return tokenizationSpecification;
+//  }
 
   /**
    * Card networks supported by your app and your gateway.
@@ -163,12 +164,12 @@ public class PaymentsUtil {
     parameters.put("allowedAuthMethods", getAllowedCardAuthMethods());
     parameters.put("allowedCardNetworks", getAllowedCardNetworks());
     // Optionally, you can add billing address/phone number associated with a CARD payment method.
-    parameters.put("billingAddressRequired", true);
+    parameters.put("billingAddressRequired", false);
 
-    JSONObject billingAddressParameters = new JSONObject();
-    billingAddressParameters.put("format", "FULL");
+//    JSONObject billingAddressParameters = new JSONObject();
+//    billingAddressParameters.put("format", "FULL");
 
-    parameters.put("billingAddressParameters", billingAddressParameters);
+//    parameters.put("billingAddressParameters", billingAddressParameters);
 
     cardPaymentMethod.put("parameters", parameters);
 
@@ -237,7 +238,7 @@ public class PaymentsUtil {
    *     href="https://developers.google.com/pay/api/android/reference/object#MerchantInfo">MerchantInfo</a>
    */
   private static JSONObject getMerchantInfo() throws JSONException {
-    return new JSONObject().put("merchantName", "Example Merchant");
+    return new JSONObject().put("merchantName", ChilloutRecords.getAppContext().getString(R.string.app_name));
   }
 
   /**
@@ -257,7 +258,7 @@ public class PaymentsUtil {
 
       /* An optional shipping address requirement is a top-level property of the PaymentDataRequest
       JSON object. */
-      paymentDataRequest.put("shippingAddressRequired", true);
+      paymentDataRequest.put("shippingAddressRequired", false);
 
       JSONObject shippingAddressParameters = new JSONObject();
       shippingAddressParameters.put("phoneNumberRequired", false);

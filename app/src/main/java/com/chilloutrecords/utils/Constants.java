@@ -19,7 +19,6 @@ package com.chilloutrecords.utils;
 import com.google.android.gms.wallet.WalletConstants;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -69,8 +68,7 @@ public class Constants {
    *
    * @value #SUPPORTED_METHODS
    */
-  public static final List<String> SUPPORTED_METHODS =
-      Arrays.asList(
+  public static final List<String> SUPPORTED_METHODS = Arrays.asList(
           "PAN_ONLY",
           "CRYPTOGRAM_3DS");
 
@@ -79,7 +77,7 @@ public class Constants {
    *
    * @value #COUNTRY_CODE Your local country
    */
-  public static final String COUNTRY_CODE = "US";
+  public static final String COUNTRY_CODE = "UK";
 
   /**
    * Required by the API, but not visible to the user.
@@ -102,7 +100,7 @@ public class Constants {
    *
    * @value #PAYMENT_GATEWAY_TOKENIZATION_NAME
    */
-  public static final String PAYMENT_GATEWAY_TOKENIZATION_NAME = "example";
+//  public static final String PAYMENT_GATEWAY_TOKENIZATION_NAME = ChilloutRecords.getAppContext().getString(R.string.app_name);
 
   /**
    * Custom parameters required by the processor/gateway.
@@ -112,14 +110,14 @@ public class Constants {
    *
    * @value #PAYMENT_GATEWAY_TOKENIZATION_PARAMETERS
    */
-  public static final HashMap<String, String> PAYMENT_GATEWAY_TOKENIZATION_PARAMETERS =
-      new HashMap<String, String>() {
-        {
-          put("gateway", PAYMENT_GATEWAY_TOKENIZATION_NAME);
-          put("gatewayMerchantId", "exampleGatewayMerchantId");
-          // Your processor may require additional parameters.
-        }
-      };
+//  public static final HashMap<String, String> PAYMENT_GATEWAY_TOKENIZATION_PARAMETERS =
+//      new HashMap<String, String>() {
+//        {
+//          put("gateway", PAYMENT_GATEWAY_TOKENIZATION_NAME);
+//          put("gatewayMerchantId", "exampleGatewayMerchantId");
+//          // Your processor may require additional parameters.
+//        }
+//      };
 
   /**
    * Only used for {@code DIRECT} tokenization. Can be removed when using {@code PAYMENT_GATEWAY}
@@ -127,7 +125,7 @@ public class Constants {
    *
    * @value #DIRECT_TOKENIZATION_PUBLIC_KEY
    */
-  public static final String DIRECT_TOKENIZATION_PUBLIC_KEY = "REPLACE_ME";
+//  public static final String DIRECT_TOKENIZATION_PUBLIC_KEY = "REPLACE_ME";
 
   /**
    * Parameters required for {@code DIRECT} tokenization.
@@ -136,13 +134,13 @@ public class Constants {
    *
    * @value #DIRECT_TOKENIZATION_PARAMETERS
    */
-  public static final HashMap<String, String> DIRECT_TOKENIZATION_PARAMETERS =
-      new HashMap<String, String>() {
-        {
-          put("protocolVersion", "ECv2");
-          put("publicKey", DIRECT_TOKENIZATION_PUBLIC_KEY);
-        }
-      };
+//  public static final HashMap<String, String> DIRECT_TOKENIZATION_PARAMETERS =
+//      new HashMap<String, String>() {
+//        {
+//          put("protocolVersion", "ECv2");
+//          put("publicKey", DIRECT_TOKENIZATION_PUBLIC_KEY);
+//        }
+//      };
 
   private Constants() {}
 }

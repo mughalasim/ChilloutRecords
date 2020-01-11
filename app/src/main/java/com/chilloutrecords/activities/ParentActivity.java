@@ -2,14 +2,12 @@ package com.chilloutrecords.activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -145,7 +143,7 @@ public class ParentActivity extends AppCompatActivity {
                     // btn_google_pay.setClickable(true);
                     break;
 
-                    // RESULT FOR IMAGE UPLOAD =====================================================
+                // RESULT FOR IMAGE UPLOAD =====================================================
                 case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
                     if (resultCode == RESULT_OK) {
                         CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -259,37 +257,25 @@ public class ParentActivity extends AppCompatActivity {
 
         try {
             paymentMethodData = new JSONObject(paymentInformation).getJSONObject("paymentMethodData");
-            // If the gateway is set to "example", no payment information is returned - instead, the
-            // token will only consist of "examplePaymentMethodToken".
-            if (paymentMethodData
-                    .getJSONObject("tokenizationData")
-                    .getString("type")
-                    .equals("PAYMENT_GATEWAY")
-                    && paymentMethodData
-                    .getJSONObject("tokenizationData")
-                    .getString("token")
-                    .equals("examplePaymentMethodToken")) {
-                AlertDialog alertDialog =
-                        new AlertDialog.Builder(this)
-                                .setTitle("Warning")
-                                .setMessage(
-                                        "Gateway name set to \"example\" - please modify "
-                                                + "Constants.java and replace it with your own gateway.")
-                                .setPositiveButton("OK", null)
-                                .create();
-                alertDialog.show();
-            }
+            String description = paymentMethodData.getString("description");
+            StaticMethods.logg("Billing description", description);
 
-            String billingName =
-                    paymentMethodData.getJSONObject("info").getJSONObject("billingAddress").getString("name");
-            Log.d("BillingName", billingName);
-            Toast.makeText(this, "BILLING NAME:" + billingName, Toast.LENGTH_LONG)
-                    .show();
+            dialog.setDialogCancel("Success", "Thank you for your purchase. Your payment has been received");
+            USER_MODEL.is_activated = true;
+            Database.setUser(USER_MODEL, new GeneralInterface() {
+                @Override
+                public void success() {
+                    onBackPressed();
+                }
 
-            // Logging token string.
-            Log.d("GooglePaymentToken", paymentMethodData.getJSONObject("tokenizationData").getString("token"));
+                @Override
+                public void failed() {
+
+                }
+            });
         } catch (JSONException e) {
             Log.e("handlePaymentSuccess", "Error: " + e.toString());
+            dialog.setDialogCancel("Payment failed", getString(R.string.error_unknown) + ": " + e.toString());
         }
     }
 

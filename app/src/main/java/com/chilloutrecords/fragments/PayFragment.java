@@ -31,7 +31,6 @@ public class PayFragment extends Fragment {
     private TextView txt_message;
     private ImageButton btn_google_pay;
     private PaymentsClient payments_client;
-    private String TAG_LOG = "PAYMENT FRAGMENT";
 
     // OVERRIDE METHODS ============================================================================
     @Override
