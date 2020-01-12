@@ -204,12 +204,6 @@ public class ParentActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @AfterPermissionGranted(INT_PERMISSIONS_CAMERA)
-    private void startImageActivity() {
-        CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(ParentActivity.this);
-    }
 
     @AfterPermissionGranted(INT_PERMISSIONS_STORAGE)
     public void startFileDownload(){
@@ -220,10 +214,12 @@ public class ParentActivity extends AppCompatActivity {
                     INT_PERMISSIONS_STORAGE, permissions_storage);
         }
     }
-
-    public void checkImagePermissions() {
+    @AfterPermissionGranted(INT_PERMISSIONS_CAMERA)
+    public void updateProfileImage() {
         if (EasyPermissions.hasPermissions(ParentActivity.this, permissions_camera)) {
-            startImageActivity();
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .start(ParentActivity.this);
         } else {
             EasyPermissions.requestPermissions(ParentActivity.this, getString(R.string.rationale_image),
                     INT_PERMISSIONS_CAMERA, permissions_camera);

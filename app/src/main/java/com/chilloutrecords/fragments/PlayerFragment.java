@@ -100,6 +100,7 @@ public class PlayerFragment extends Fragment {
                     player.seekTo(0);
                     break;
                 case ExoPlayer.STATE_READY:
+                    btn_download.setVisibility(View.VISIBLE);
                     StaticMethods.logg(TAG_LOG, "ExoPlayer ready! pos: " + player.getCurrentPosition() + " max: " + getTimeFromMillis((int) player.getDuration()));
                     handler.post(new Runnable() {
                         @Override
@@ -134,6 +135,12 @@ public class PlayerFragment extends Fragment {
             ((ViewGroup) container.getParent()).removeView(root_view);
         }
         return root_view;
+    }
+
+    @Override
+    public void onPause() {
+        setPlayPause(false);
+        super.onPause();
     }
 
     @Override
@@ -175,6 +182,8 @@ public class PlayerFragment extends Fragment {
     @Override
     public void onDestroyView() {
         if (player != null) {
+            if (player.isPlaying())
+                player.stop();
             player.release();
         }
         super.onDestroyView();
@@ -198,6 +207,7 @@ public class PlayerFragment extends Fragment {
         txt_track_plays = root_view.findViewById(R.id.txt_track_plays);
         txt_track_release = root_view.findViewById(R.id.txt_track_release);
         btn_download = root_view.findViewById(R.id.btn_download);
+        btn_download.setVisibility(View.GONE);
         btn_track_play = root_view.findViewById(R.id.btn_track_play);
         player_view = root_view.findViewById(R.id.player_view);
         btn_track_play.requestFocus();
@@ -289,10 +299,9 @@ public class PlayerFragment extends Fragment {
                         STR_DOWNLOAD_URL = url;
                         Uri uri = Uri.parse(url);
                         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(Objects.requireNonNull(getActivity()), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
-                        MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
-                        player.prepare(videoSource);
+                        MediaSource source = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
+                        player.prepare(source);
                         setPlayPause(true);
-
                     } else {
                         StaticMethods.logg(TAG_LOG, "EMPTY URL");
                         txt_info.setText(getString(R.string.txt_alert));
@@ -334,7 +343,6 @@ public class PlayerFragment extends Fragment {
                     seek_bar.setProgress(mCurrentPosition);
                     txt_track_current_time.setText(getTimeFromMillis((int) player.getCurrentPosition()));
                     txt_track_end_time.setText(getTimeFromMillis((int) player.getDuration()));
-
                     handler.postDelayed(this, 1000);
                 }
             }

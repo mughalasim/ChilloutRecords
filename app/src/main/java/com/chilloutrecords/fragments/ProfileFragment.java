@@ -157,7 +157,7 @@ public class ProfileFragment extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 dialog.cancel();
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).checkImagePermissions();
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).updateProfileImage();
                             }
                         });
 
