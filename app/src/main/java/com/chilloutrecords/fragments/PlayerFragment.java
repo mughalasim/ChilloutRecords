@@ -40,6 +40,9 @@ import com.google.android.exoplayer2.util.Util;
 import java.util.Objects;
 
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_UPGRADE;
+import static com.chilloutrecords.activities.ParentActivity.STR_DOWNLOAD_URL;
+import static com.chilloutrecords.activities.ParentActivity.STR_FILE_NAME;
+import static com.chilloutrecords.activities.ParentActivity.STR_SAVE_TO_PATH;
 import static com.chilloutrecords.utils.StaticMethods.getTimeFromMillis;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_TRACK_COLLECTION;
@@ -73,7 +76,6 @@ public class PlayerFragment extends Fragment {
     private int
             INT_PLAY_COUNT = 0;
     private String
-            STR_CONTENT_URL = "",
             STR_CONTENT_DB_PATH = "",
             STR_CONTENT_STORAGE_PATH = "";
     private ExoPlayer.EventListener player_listener = new ExoPlayer.EventListener() {
@@ -145,6 +147,7 @@ public class PlayerFragment extends Fragment {
                 case EXTRA_VIDEO:
                     STR_CONTENT_DB_PATH = BuildConfig.DB_REF_VIDEOS + "/" + VIDEO_MODEL.id;
                     STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_VIDEOS;
+                    STR_SAVE_TO_PATH = "Chillout Records/Videos/";
                     player_view.setVisibility(View.VISIBLE);
                     startVideoPlayer(VIDEO_MODEL);
                     break;
@@ -152,6 +155,7 @@ public class PlayerFragment extends Fragment {
                 case EXTRA_TRACK_SINGLE:
                     STR_CONTENT_DB_PATH = BuildConfig.DB_REF_SINGLES + "/" + TRACK_MODEL.id;
                     STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_SINGLES;
+                    STR_SAVE_TO_PATH = "Chillout Records/Music/";
                     player_view.setVisibility(View.GONE);
                     startMusicPlayer(TRACK_MODEL);
                     break;
@@ -159,6 +163,7 @@ public class PlayerFragment extends Fragment {
                 case EXTRA_TRACK_COLLECTION:
                     STR_CONTENT_DB_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID + "/tracks/" + TRACK_MODEL.id;
                     STR_CONTENT_STORAGE_PATH = BuildConfig.DB_REF_COLLECTIONS + "/" + STR_COLLECTION_ID;
+                    STR_SAVE_TO_PATH = "Chillout Records/Music/";
                     player_view.setVisibility(View.GONE);
                     startMusicPlayer(TRACK_MODEL);
                     break;
@@ -206,8 +211,7 @@ public class PlayerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (USER_MODEL.is_activated) {
-                    StaticMethods.showToast("Download will start momentarily");
-//                    Database.downloadFile(STR_CONTENT_NAME, STR_CONTENT_STORAGE_PATH);
+                    ((ParentActivity) Objects.requireNonNull(getActivity())).startFileDownload();
                 } else {
                     ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PayFragment(), PAGE_TITLE_UPGRADE, "", null, true));
                 }
@@ -275,12 +279,14 @@ public class PlayerFragment extends Fragment {
     }
 
     private void getFile(String url) {
+        STR_FILE_NAME = url;
         Database.getFileUrl(STR_CONTENT_STORAGE_PATH, url, "", new UrlInterface() {
             @Override
             public void completed(Boolean success, String url) {
                 try {
                     if (success) {
                         StaticMethods.logg(TAG_LOG, url);
+                        STR_DOWNLOAD_URL = url;
                         Uri uri = Uri.parse(url);
                         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(Objects.requireNonNull(getActivity()), Util.getUserAgent(getActivity(), getString(R.string.app_name)), null);
                         MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);

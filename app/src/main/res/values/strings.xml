@@ -25,6 +25,7 @@
 
     <!--PERMISSION RATIONALS ====================================================================-->
     <string name="rationale_image">&appname; needs to access your Camera and write to your external storage for Images that you would like to set. Please grant these permissions in order to use the feature</string>
+    <string name="rationale_storage">&appname; needs to access your external storage to save the downloaded content. Please grant these permissions in order to download content</string>
 
     <!--LOADING DIALOGS =========================================================================-->
     <string name="progress_login">Logging in. Please wait…</string>

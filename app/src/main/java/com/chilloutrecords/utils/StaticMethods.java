@@ -4,10 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
@@ -27,12 +30,14 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Formatter;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
@@ -165,6 +170,34 @@ public class StaticMethods {
         }
         if (isNotRunning) {
             context.startService(new Intent(context, service_class));
+        }
+    }
+
+    // DOWNLOAD FRM URL
+    public static void downloadFileFromUrl(String url, String file_name, String save_path) {
+        try {
+            File directory = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS), save_path);
+            if (!directory.exists()) {
+                //noinspection ResultOfMethodCallIgnored
+                directory.mkdirs();
+            }
+
+            Context context = ChilloutRecords.getAppContext();
+            DownloadManager downloadmanager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            Uri uri = Uri.parse(url);
+
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS + File.separator, save_path + file_name);
+            request.setTitle("Chillout Records: "+ file_name);
+            request.setDescription("Download completed");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setVisibleInDownloadsUi(false);
+
+            downloadmanager.enqueue(request);
+            StaticMethods.showToast("Download will start momentarily, please wait...");
+        } catch (Exception e) {
+            showToast("Failed to download file, please try again later");
         }
     }
 

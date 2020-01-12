@@ -48,6 +48,7 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_PERMISSIONS_CAMERA;
+import static com.chilloutrecords.utils.StaticVariables.INT_PERMISSIONS_STORAGE;
 import static com.chilloutrecords.utils.StaticVariables.LOAD_PAYMENT_DATA_REQUEST_CODE;
 import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
@@ -70,8 +71,15 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_UPGRADE = "Home / Upgrade",
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
-    final String[] perms = {
-            Manifest.permission.CAMERA,
+    public static String
+            STR_FILE_NAME = "",
+            STR_SAVE_TO_PATH = "",
+            STR_DOWNLOAD_URL = "";
+
+    final String[] permissions_camera = {
+            Manifest.permission.CAMERA};
+
+    final String[] permissions_storage = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -203,12 +211,22 @@ public class ParentActivity extends AppCompatActivity {
                 .start(ParentActivity.this);
     }
 
+    @AfterPermissionGranted(INT_PERMISSIONS_STORAGE)
+    public void startFileDownload(){
+        if (EasyPermissions.hasPermissions(ParentActivity.this, permissions_storage)) {
+            StaticMethods.downloadFileFromUrl(STR_DOWNLOAD_URL, STR_FILE_NAME, STR_SAVE_TO_PATH);
+        } else {
+            EasyPermissions.requestPermissions(ParentActivity.this, getString(R.string.rationale_storage),
+                    INT_PERMISSIONS_STORAGE, permissions_storage);
+        }
+    }
+
     public void checkImagePermissions() {
-        if (EasyPermissions.hasPermissions(ParentActivity.this, perms)) {
+        if (EasyPermissions.hasPermissions(ParentActivity.this, permissions_camera)) {
             startImageActivity();
         } else {
             EasyPermissions.requestPermissions(ParentActivity.this, getString(R.string.rationale_image),
-                    INT_PERMISSIONS_CAMERA, perms);
+                    INT_PERMISSIONS_CAMERA, permissions_camera);
         }
     }
 
