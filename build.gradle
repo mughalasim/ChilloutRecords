@@ -41,8 +41,8 @@ ext {
     buildTools = '28.0.3'
 
     // App Versioning
-    versionCode = 20
-    versionName = 2.0
+    versionCode = 25
+    versionName = 2.5
 
 }
 

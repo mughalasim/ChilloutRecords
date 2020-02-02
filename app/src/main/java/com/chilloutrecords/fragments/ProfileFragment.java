@@ -34,6 +34,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.Objects;
 
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE_EDIT;
+import static com.chilloutrecords.utils.StaticVariables.BOOL_CAN_EDIT;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
@@ -44,8 +45,7 @@ public class ProfileFragment extends Fragment {
 
     private String STR_ID = "";
     private boolean
-            first_open = true,
-            is_me;
+            first_open = true;
 
     private String IMG_PROFILE_URL = "";
     private TextView
@@ -96,12 +96,12 @@ public class ProfileFragment extends Fragment {
                     STR_ID = bundle.getString(EXTRA_STRING);
                     btn_edit_picture.hide();
                     btn_edit_profile.hide();
-                    is_me = false;
+                    BOOL_CAN_EDIT = false;
                 } else {
                     STR_ID = FIREBASE_USER.getUid();
                     btn_edit_picture.show();
                     btn_edit_profile.show();
-                    is_me = true;
+                    BOOL_CAN_EDIT = true;
                 }
 
                 root_view.findViewById(R.id.btn_share).setOnClickListener(new View.OnClickListener() {
@@ -189,8 +189,11 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final UserModel model = dataSnapshot.getValue(UserModel.class);
                 if (model != null) {
-                    if (is_me) {
+                    if (BOOL_CAN_EDIT) {
                         USER_MODEL = model;
+                        BOOL_CAN_EDIT = true;
+                    }else{
+                        BOOL_CAN_EDIT = false;
                     }
 
                     updateProfileVisitCount(model.profile_visits);
@@ -267,7 +270,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateProfileVisitCount(int count) {
-        if (!is_me && first_open) {
+        if (!BOOL_CAN_EDIT && first_open) {
             first_open = false;
             Database.updateProfileVisitCount(BuildConfig.DB_REF_USERS + "/" + STR_ID, count);
         }

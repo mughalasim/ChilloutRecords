@@ -23,6 +23,7 @@ public class StaticVariables {
 
     // TRACK COLLECTION ID =========================================================================
     public static String STR_COLLECTION_ID = "";
+    public static Boolean BOOL_CAN_EDIT = false;
 
     // ANIMATION TIME ==============================================================================
     public static int INT_ANIMATION_TIME = 800;

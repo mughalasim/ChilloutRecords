@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:scrollbarThumbVertical="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_track"
+            android:layout_width="@dimen/screen_min_width"
+            android:layout_height="@dimen/img_size_x_large"
+            android:layout_marginTop="@dimen/padding_small"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:padding="@dimen/line_thickness"
+            android:scaleType="centerCrop"
+            android:src="@color/colorAccent"
+            android:elevation="@dimen/elevation"
+            app:riv_border_color="@color/colorPrimary"
+            app:riv_border_width="@dimen/line_thickness"
+            app:riv_corner_radius="@dimen/radius_corner" />
+
+        <Spinner
+            android:id="@+id/spinner_track_type"
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/text_margin"
+            android:entries="@array/select_track_type" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_track_name"
+            style="@style/EditTextLayout"
+            android:layout_marginTop="@dimen/padding_small"
+            android:hint="Track name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_track_name"
+                style="@style/EditTextInput"
+                android:inputType="textPersonName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_release_date"
+            style="@style/EditTextLayout"
+            android:hint="Track release date">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_release_date"
+                style="@style/EditTextInput"
+                android:inputType="date"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_info"
+            style="@style/EditTextLayout"
+            android:hint="Lyrics">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_info"
+                style="@style/EditTextInput"
+                android:maxLines="10"
+                android:maxWidth="@dimen/screen_min_width"
+                android:inputType="textMultiLine"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            style="@style/ButtonYes"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:text="@string/txt_update" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/ButtonNo"
+            android:layout_marginBottom="@dimen/padding_large"
+            android:text="@string/txt_delete" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -23,6 +23,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/img_size_large"
                 android:layout_weight="1"
+                android:scaleType="centerCrop"
                 android:src="@color/colorAccentHighlight"
                 app:riv_corner_radius="@dimen/radius_corner"
                 app:riv_mutate_background="true" />

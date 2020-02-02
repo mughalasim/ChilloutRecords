@@ -8,6 +8,15 @@
         <item>Female</item>
     </string-array>
 
+
+    <!--ARRAY TRACK TYPE ========================================================================-->
+    <string-array name="select_track_type">
+        <item>Select track type</item>
+        <item>Single</item>
+        <item>Album</item>
+        <item>Mixtape</item>
+    </string-array>
+
     <!--ERROR MESSAGES ==========================================================================-->
     <string name="error">Error</string>
     <string name="error_unknown">An unexpected error occurred</string>
@@ -57,6 +66,7 @@
 
     <!--APP VERSIONING ==========================================================================-->
     <string name="txt_update">Update</string>
+    <string name="txt_delete">Delete</string>
     <string name="txt_alert">Alert</string>
 
     <!-- TOASTS =================================================================================-->

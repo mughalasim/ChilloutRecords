@@ -41,9 +41,10 @@ android {
         buildConfigField 'String', 'SONG_TYPE_ALBUM',   SONG_TYPE_ALBUM
 
         // APP VERSION
-//        resValue "string", 'APP_VERSION', "Version: $rootProject.versionName"
+        resValue "string", 'APP_VERSION', "Version: $rootProject.versionName"
 
         // FIREBASE INIT
+        buildConfigField 'String', 'FB_APP_ID', FB_APP_ID
         resValue "string", "FB_API_KEY", FB_API_KEY
         buildConfigField 'String', 'FB_STORE', FB_STORE
 
@@ -102,28 +103,13 @@ android {
 
     flavorDimensions "flavors"
     productFlavors {
-        free {
+        Cocoa {
             // APP NAME AND ICON
-            applicationIdSuffix = ".free"
             resValue "string", "app_name", "Chillout Records"
             manifestPlaceholders = [
                     icon: "@mipmap/ic_launcher",
                     icon_round: "@mipmap/ic_launcher_round"
             ]
-            // FIREBASE APP ID
-            buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_FREE
-        }
-
-        pro {
-            // APP NAME AND ICON
-            applicationIdSuffix = ".pro"
-            resValue "string", "app_name", "Chillout Records (pro)"
-            manifestPlaceholders = [
-                    icon: "@mipmap/ic_launcher",
-                    icon_round: "@mipmap/ic_launcher_round"
-            ]
-            // FIREBASE APP ID
-            buildConfigField 'String', 'FB_APP_ID', FB_APP_ID_PRO
         }
     }
 
