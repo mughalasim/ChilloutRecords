@@ -2,7 +2,6 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/CardLayout"
-    android:layout_marginTop="@dimen/padding_medium"
     android:padding="@dimen/padding_large">
 
     <RelativeLayout
@@ -13,8 +12,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:minWidth="@dimen/screen_min_width"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/img_size_x_large"
             android:scaleType="centerCrop"
             app:riv_corner_radius="@dimen/radius_corner" />

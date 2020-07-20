@@ -204,7 +204,6 @@ public class ParentActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     @AfterPermissionGranted(INT_PERMISSIONS_STORAGE)
     public void startFileDownload(){
         if (EasyPermissions.hasPermissions(ParentActivity.this, permissions_storage)) {

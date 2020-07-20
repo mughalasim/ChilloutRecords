@@ -54,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:background="@drawable/bckgrd_google_pay"
                 android:layout_height="wrap_content"
-                android:minWidth="@dimen/screen_min_width"
                 android:minHeight="?attr/actionBarSize"
                 android:src="@drawable/ic_google_pay"
                 android:visibility="gone"

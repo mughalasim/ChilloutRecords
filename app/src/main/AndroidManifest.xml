@@ -24,8 +24,7 @@
 
         <!-- ACTIVITIES =========================================================================-->
         <activity
-            android:name=".activities.StartUpActivity"
-            android:screenOrientation="portrait">
+            android:name=".activities.StartUpActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

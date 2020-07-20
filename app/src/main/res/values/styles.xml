@@ -19,12 +19,12 @@
 
     <!-- TAB TEXT STYLE =========================================================================-->
     <style name="TabTextLayout" parent="AppTheme">
-        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="tabSelectedTextColor">@color/colorAccent</item>
         <item name="tabTextColor">@color/colorPrimary</item>
         <item name="tabBackground">@drawable/tab_selector</item>
-        <item name="tabTextAppearance">@style/TextTitle</item>
+        <item name="tabTextAppearance">@style/TextBody</item>
         <item name="android:textAlignment">center</item>
         <item name="tabMode">fixed</item>
         <item name="tabGravity">fill</item>
@@ -34,14 +34,10 @@
     <!-- CARD STYLE =============================================================================-->
     <style name="CardLayout" parent="AppTheme">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:maxWidth">@dimen/screen_min_width</item>
-        <item name="android:minWidth">@dimen/screen_min_width</item>
-        <item name="android:layout_marginEnd">@dimen/padding_medium</item>
-        <item name="android:layout_marginStart">@dimen/padding_medium</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
-        <item name="cardElevation">4dp</item>
+        <item name="cardElevation">@dimen/elevation</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="android:shadowColor">@color/colorPrimary</item>
         <item name="cardCornerRadius">@dimen/radius_corner</item>
@@ -51,8 +47,7 @@
     <style name="EditText" parent="AppTheme">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:minWidth">@dimen/screen_min_width</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:paddingStart">@dimen/text_margin</item>
         <item name="android:paddingEnd">@dimen/text_margin</item>
         <item name="android:maxLines">1</item>
@@ -62,8 +57,7 @@
 
 
     <style name="EditTextLayout" parent="AppTheme">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:minWidth">@dimen/screen_min_width</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/radius_corner</item>
         <item name="boxCornerRadiusBottomStart">@dimen/radius_corner</item>
@@ -88,7 +82,6 @@
     <style name="TextTitle" parent="TextAppearance.AppCompat.Medium">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:maxWidth">@dimen/screen_min_width</item>
         <item name="android:gravity">start</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
@@ -98,7 +91,6 @@
     <style name="TextBody" parent="TextAppearance.AppCompat.Body2">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:maxWidth">@dimen/screen_min_width</item>
         <item name="android:gravity">start</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
@@ -106,7 +98,6 @@
     <style name="TextSmall" parent="TextAppearance.AppCompat.Caption">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:maxWidth">@dimen/screen_min_width</item>
         <item name="android:gravity">start</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
@@ -116,12 +107,10 @@
     <style name="ButtonYes" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:minWidth">@dimen/screen_min_width</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textAppearance">@style/TextTitle</item>
+        <item name="android:textAppearance">@style/TextBody</item>
         <item name="android:strokeColor">@color/colorPrimary</item>
         <item name="strokeWidth">@dimen/line_thickness</item>
         <item name="cornerRadius">@dimen/radius_corner</item>
@@ -131,11 +120,9 @@
     <style name="ButtonNo" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:minWidth">@dimen/screen_min_width</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textAppearance">@style/TextTitle</item>
+        <item name="android:textAppearance">@style/TextBody</item>
         <item name="strokeColor">@color/colorPrimary</item>
         <item name="strokeWidth">@dimen/line_thickness</item>
         <item name="cornerRadius">@dimen/radius_corner</item>

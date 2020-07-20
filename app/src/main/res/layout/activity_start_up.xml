@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="@dimen/screen_min_width"
+            android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="center"
             android:layout_margin="@dimen/padding_tiny"
@@ -19,13 +19,14 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            android:layout_marginStart="@dimen/padding_small"
+            android:layout_marginEnd="@dimen/padding_small"
             style="@style/TabTextLayout" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/padding_large" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -33,6 +34,7 @@
         android:id="@+id/rl_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="@color/colorAccent">
 
         <androidx.appcompat.widget.AppCompatImageView

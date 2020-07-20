@@ -8,9 +8,6 @@
                 android:centerColor="@color/colorAccent"
                 android:endColor="@color/colorAccent"
                 android:angle="@integer/color_angle" />
-            <stroke
-                android:width="@dimen/line_thickness"
-                android:color="@color/colorPrimary" />
             <corners
                 android:radius="@dimen/radius_corner" />
         </shape>

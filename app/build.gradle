@@ -74,18 +74,9 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            splits {
-                abi {
-                    enable true
-                    reset()
-                    include 'armeabi-v7a'
-                    universalApk false
-                }
-            }
             ndk {
                 abiFilters 'arm64-v8a', 'armeabi-v7a'
             }
-
         }
 
         debug {
@@ -93,10 +84,8 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            splits {
-                abi {
-                    enable false
-                }
+            ndk {
+                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86'
             }
         }
     }
@@ -117,7 +106,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
 
 def renameAPKFile(variant) {
     variant.outputs.all { output ->

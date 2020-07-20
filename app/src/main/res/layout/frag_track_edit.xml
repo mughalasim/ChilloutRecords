@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:paddingStart="@dimen/padding_large"
+    android:paddingEnd="@dimen/padding_large"
     android:scrollbarThumbVertical="@null">
 
     <LinearLayout
@@ -14,7 +16,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_track"
-            android:layout_width="@dimen/screen_min_width"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/img_size_x_large"
             android:layout_marginTop="@dimen/padding_small"
             android:layout_marginBottom="@dimen/padding_small"
@@ -66,7 +68,6 @@
                 android:id="@+id/et_info"
                 style="@style/EditTextInput"
                 android:maxLines="10"
-                android:maxWidth="@dimen/screen_min_width"
                 android:inputType="textMultiLine"/>
 
         </com.google.android.material.textfield.TextInputLayout>

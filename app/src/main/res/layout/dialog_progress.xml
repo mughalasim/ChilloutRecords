@@ -5,9 +5,9 @@
     android:layout_gravity="center"
     android:background="@drawable/bckgrd_card"
     android:gravity="center_vertical"
-    android:minWidth="@dimen/screen_min_width"
     android:orientation="vertical"
-    android:padding="@dimen/padding_medium">
+    android:layout_margin="@dimen/padding_large"
+    android:padding="@dimen/padding_small">
 
     <ProgressBar
         android:layout_width="wrap_content"

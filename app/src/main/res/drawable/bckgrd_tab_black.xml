@@ -11,6 +11,8 @@
             <stroke
                 android:width="@dimen/line_thickness"
                 android:color="@color/colorPrimary" />
+            <corners
+                android:radius="@dimen/radius_corner"/>
         </shape>
     </item>
 
