@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
     private View root_view;
     private CustomRecyclerView recycler_view;
     private HomeAdapter adapter;
-    private HomeModel model;
     private ArrayList<HomeModel> models = new ArrayList<>();
     private TextView txt_no_results;
     DialogMethods dialogs;
@@ -130,7 +129,7 @@ public class HomeFragment extends Fragment {
     private void fetchHome() {
         models.clear();
 
-        model = new HomeModel();
+        HomeModel model = new HomeModel();
         model.txt = getString(R.string.nav_artists);
         model.img = "home/home_artists.jpg";
         model.url = BuildConfig.DB_REF_USERS;

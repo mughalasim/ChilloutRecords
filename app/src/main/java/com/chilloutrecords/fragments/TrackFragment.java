@@ -31,11 +31,8 @@ import static com.chilloutrecords.utils.StaticVariables.TRACK_MODEL;
 public class TrackFragment extends Fragment {
     private View root_view;
     private CustomRecyclerView recycler_view;
-    private TrackAdapter adapter;
-    private RecyclerView.LayoutManager layout_manager;
     private ArrayList<String> STR_IDS = new ArrayList<>();
     private String STR_PATH = "";
-    private TextView txt_no_results;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -45,7 +42,7 @@ public class TrackFragment extends Fragment {
 
                 root_view = inflater.inflate(R.layout.layout_custom_recycler, container, false);
                 recycler_view = root_view.findViewById(R.id.recycler_view);
-                txt_no_results = root_view.findViewById(R.id.txt_no_results);
+                TextView txt_no_results = root_view.findViewById(R.id.txt_no_results);
 
                 Bundle bundle = this.getArguments();
                 if (bundle != null) {
@@ -54,7 +51,7 @@ public class TrackFragment extends Fragment {
                 }
 
                 recycler_view.setHasFixedSize(true);
-                layout_manager = new LinearLayoutManager(getContext());
+                RecyclerView.LayoutManager layout_manager = new LinearLayoutManager(getContext());
                 recycler_view.setLayoutManager(layout_manager);
                 recycler_view.setTextView(txt_no_results, "No content to display");
 
@@ -70,7 +67,7 @@ public class TrackFragment extends Fragment {
     @Override
     public void onResume() {
         recycler_view.removeAllViews();
-        adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackListingInterface() {
+        TrackAdapter adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackListingInterface() {
             @Override
             public void success(TrackModel model, String track_type, String collection_id) {
                 TRACK_MODEL = model;

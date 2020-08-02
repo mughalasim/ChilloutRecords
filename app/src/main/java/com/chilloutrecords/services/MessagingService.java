@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.StartUpActivity;
+import com.chilloutrecords.utils.ChilloutRecords;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -54,12 +56,12 @@ public class MessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, title)
-                .setSmallIcon(getNotificationIcon())
+                .setSmallIcon(R.drawable.ic_info)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setLights(getResources().getColor(R.color.colorPrimary), 1000, 1000)
+                .setLights(ContextCompat.getColor(ChilloutRecords.getAppContext(), R.color.colorPrimary), 1000, 1000)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
@@ -72,11 +74,6 @@ public class MessagingService extends FirebaseMessagingService {
 
         ShortcutBadger.applyCount(MessagingService.this, 1);
 
-    }
-
-    private int getNotificationIcon() {
-        boolean useWhiteIcon = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.drawable.ic_info : R.drawable.ic_info;
     }
 
 }

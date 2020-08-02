@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Formatter;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
@@ -112,7 +113,7 @@ public class StaticMethods {
     // VALIDATIONS =================================================================================
     public static boolean validateInternetConnection() {
         ConnectivityManager cm = (ConnectivityManager) ChilloutRecords.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        NetworkInfo netInfo = Objects.requireNonNull(cm).getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnected();
 
     }
@@ -194,7 +195,7 @@ public class StaticMethods {
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setVisibleInDownloadsUi(false);
 
-            downloadmanager.enqueue(request);
+            Objects.requireNonNull(downloadmanager).enqueue(request);
             StaticMethods.showToast("Download will start momentarily, please wait...");
         } catch (Exception e) {
             showToast("Failed to download file, please try again later");

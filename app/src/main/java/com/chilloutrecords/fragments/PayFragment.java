@@ -22,6 +22,7 @@ import com.google.android.gms.wallet.PaymentsClient;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.chilloutrecords.utils.StaticVariables.LOAD_PAYMENT_DATA_REQUEST_CODE;
@@ -77,7 +78,7 @@ public class PayFragment extends Fragment {
         // The call to isReadyToPay is asynchronous and returns a Task. We need to provide an
         // OnCompleteListener to be triggered when the result of the call is known.
         Task<Boolean> task = payments_client.isReadyToPay(request);
-        task.addOnCompleteListener(getActivity(),
+        task.addOnCompleteListener(Objects.requireNonNull(getActivity()),
                 new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
@@ -121,7 +122,7 @@ public class PayFragment extends Fragment {
         // onActivityResult will be called with the result.
         if (request != null) {
             AutoResolveHelper.resolveTask(
-                    payments_client.loadPaymentData(request), getActivity(), LOAD_PAYMENT_DATA_REQUEST_CODE);
+                    payments_client.loadPaymentData(request), Objects.requireNonNull(getActivity()), LOAD_PAYMENT_DATA_REQUEST_CODE);
         }
     }
 

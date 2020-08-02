@@ -25,7 +25,6 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 public class ImageViewFragment extends Fragment {
     private static final String TAG_LOG = "IMAGE VIEW";
     private View root_view;
-    private String STR_IMAGE_URL = "";
 
     public ImageViewFragment() {
     }
@@ -37,7 +36,7 @@ public class ImageViewFragment extends Fragment {
 
             Bundle bundle = this.getArguments();
             if (bundle != null) {
-                STR_IMAGE_URL = bundle.getString(EXTRA_STRING);
+                String STR_IMAGE_URL = bundle.getString(EXTRA_STRING);
 
                 SubsamplingScaleImageView image = root_view.findViewById(R.id.frag_image);
                 image.setMaxScale(20);
@@ -57,7 +56,7 @@ public class ImageViewFragment extends Fragment {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class DownLoadImageTask extends AsyncTask<String, Void, Bitmap> {
+    private static class DownLoadImageTask extends AsyncTask<String, Void, Bitmap> {
         SubsamplingScaleImageView image_view;
 
         DownLoadImageTask(SubsamplingScaleImageView imageView) {

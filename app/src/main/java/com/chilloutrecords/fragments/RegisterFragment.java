@@ -53,10 +53,8 @@ public class RegisterFragment extends Fragment {
             etl_info,
             etl_password,
             etl_password_confirm;
-    private TextView txt_title;
     private boolean isRegistration = true;
     private Spinner spinner_gender;
-    private MaterialButton btn_confirm;
     private UserModel extra_user = new UserModel();
 
     // OVERRIDE METHODS ============================================================================
@@ -80,7 +78,7 @@ public class RegisterFragment extends Fragment {
 
                 spinner_gender = root_view.findViewById(R.id.spinner_gender);
 
-                txt_title = root_view.findViewById(R.id.txt_title);
+                TextView txt_title = root_view.findViewById(R.id.txt_title);
 
                 et_name = root_view.findViewById(R.id.et_name);
                 et_stage_name = root_view.findViewById(R.id.et_stage_name);
@@ -96,7 +94,7 @@ public class RegisterFragment extends Fragment {
                 etl_password = root_view.findViewById(R.id.etl_password);
                 etl_password_confirm = root_view.findViewById(R.id.etl_password_confirm);
 
-                btn_confirm = root_view.findViewById(R.id.btn_confirm);
+                MaterialButton btn_confirm = root_view.findViewById(R.id.btn_confirm);
 
                 if (isRegistration) {
                     txt_title.setText(getString(R.string.txt_register));

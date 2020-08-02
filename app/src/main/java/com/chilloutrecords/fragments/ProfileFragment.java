@@ -33,6 +33,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ADD_TRACK;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE_EDIT;
 import static com.chilloutrecords.utils.StaticVariables.BOOL_CAN_EDIT;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
@@ -84,6 +85,7 @@ public class ProfileFragment extends Fragment {
                 img_profile = root_view.findViewById(R.id.img_profile);
                 final FloatingActionButton btn_edit_picture = root_view.findViewById(R.id.btn_edit_picture);
                 FloatingActionButton btn_edit_profile = root_view.findViewById(R.id.btn_edit_profile);
+                FloatingActionButton btn_add_track = root_view.findViewById(R.id.btn_add_track);
 
                 btn_singles = root_view.findViewById(R.id.btn_singles);
                 btn_collections = root_view.findViewById(R.id.btn_collections);
@@ -96,12 +98,18 @@ public class ProfileFragment extends Fragment {
                     STR_ID = bundle.getString(EXTRA_STRING);
                     btn_edit_picture.hide();
                     btn_edit_profile.hide();
+                    btn_add_track.hide();
                     BOOL_CAN_EDIT = false;
                 } else {
                     STR_ID = FIREBASE_USER.getUid();
                     btn_edit_picture.show();
                     btn_edit_profile.show();
                     BOOL_CAN_EDIT = true;
+                    if(USER_MODEL.is_activated){
+                        btn_add_track.show();
+                    }else{
+                        btn_add_track.hide();
+                    }
                 }
 
                 root_view.findViewById(R.id.btn_share).setOnClickListener(new View.OnClickListener() {
@@ -117,6 +125,12 @@ public class ProfileFragment extends Fragment {
                     }
                 });
 
+                btn_add_track.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new AddTrackFragment(), PAGE_TITLE_ADD_TRACK, "", null, true));
+                    }
+                });
 
                 img_profile.setOnClickListener(new View.OnClickListener() {
                     @Override

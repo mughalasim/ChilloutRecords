@@ -33,7 +33,6 @@ public class ForgotPasswordFragment extends Fragment {
             et_email;
     private TextInputLayout
             etl_email;
-    private MaterialButton btn_reset;
 
     // OVERRIDE METHODS ============================================================================
     @Override
@@ -46,7 +45,7 @@ public class ForgotPasswordFragment extends Fragment {
 
                 et_email = root_view.findViewById(R.id.et_email);
                 etl_email = root_view.findViewById(R.id.etl_email);
-                btn_reset = root_view.findViewById(R.id.btn_reset);
+                MaterialButton btn_reset = root_view.findViewById(R.id.btn_reset);
 
                 if(BuildConfig.DEBUG){
                     et_email.setText(BuildConfig.TEST_EMAIL);

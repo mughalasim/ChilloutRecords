@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/padding_tiny"
+    android:paddingTop="@dimen/padding_small"
+    android:paddingEnd="@dimen/padding_tiny"
+    android:paddingBottom="@dimen/padding_small"
+    android:scrollbarThumbVertical="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinner_track_type"
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/text_margin"
+            android:entries="@array/select_track_type" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_track"
+            android:layout_width="@dimen/img_size_x_large"
+            android:layout_height="@dimen/img_size_x_large"
+            android:layout_marginTop="@dimen/padding_small"
+            android:padding="@dimen/line_thickness"
+            android:scaleType="centerCrop"
+            android:src="@color/colorAccent"
+            android:elevation="@dimen/elevation"
+            app:riv_border_color="@color/colorPrimary"
+            app:riv_border_width="@dimen/line_thickness"
+            app:riv_corner_radius="@dimen/radius_corner" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/padding_tiny"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_file_name"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:text="@string/txt_no_file_selected"
+                android:layout_toStartOf="@+id/btn_search_file"
+                style="@style/TextBody"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_search_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/padding_small"
+                android:backgroundTint="@color/colorAccentHighlight"
+                android:elevation="@dimen/elevation"
+                app:fabSize="mini"
+                android:src="@drawable/ic_upload"
+                app:elevation="@dimen/elevation"
+                app:rippleColor="@color/colorAccentHighlight" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_collection_name"
+            style="@style/EditTextLayout"
+            android:layout_marginTop="@dimen/padding_tiny"
+            android:hint="@string/et_hint_album_name"
+            app:counterEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_collection_name"
+                style="@style/EditTextInput"
+                android:inputType="textPersonName"
+                android:maxLength="@integer/max_profile_name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_track_name"
+            style="@style/EditTextLayout"
+            android:hint="@string/et_hint_track_name"
+            app:counterEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_track_name"
+                style="@style/EditTextInput"
+                android:inputType="textPersonName"
+                android:maxLength="@integer/max_profile_name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_release_date"
+            style="@style/EditTextLayout"
+            android:hint="@string/et_hint_release_date"
+            app:counterEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_release_date"
+                style="@style/EditTextInput"
+                android:inputType="date"
+                android:maxLength="@integer/max_profile_name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etl_lyrics"
+            style="@style/EditTextLayout"
+            android:hint="@string/txt_lyrics">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lyrics"
+                style="@style/EditTextInput"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_upload"
+            style="@style/ButtonYes"
+            android:layout_marginBottom="@dimen/padding_large"
+            android:text="@string/txt_upload" />
+
+    </LinearLayout>
+
+</ScrollView>

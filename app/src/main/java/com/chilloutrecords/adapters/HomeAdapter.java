@@ -28,7 +28,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private ArrayList<HomeModel>
             models;
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView
                 txt;
         private RoundedImageView

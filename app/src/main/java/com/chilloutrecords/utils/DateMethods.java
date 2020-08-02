@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class DateMethods {
@@ -18,7 +19,7 @@ public class DateMethods {
             old_format.setTimeZone(TimeZone.getTimeZone("UTC"));
             DateFormat new_format = new SimpleDateFormat("HH:mm", Locale.UK);
             new_format.setTimeZone(TimeZone.getDefault());
-            return new_format.format(old_date);
+            return new_format.format(Objects.requireNonNull(old_date));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -32,7 +33,7 @@ public class DateMethods {
             old_format.setTimeZone(TimeZone.getTimeZone("UTC"));
             DateFormat new_format = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
             new_format.setTimeZone(TimeZone.getDefault());
-            return new_format.format(old_date);
+            return new_format.format(Objects.requireNonNull(old_date));
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -45,7 +46,7 @@ public class DateMethods {
         try {
             Date date = old_format.parse(date_string);
             old_format.setTimeZone(TimeZone.getTimeZone("UTC"));
-            cal.setTime(date);
+            cal.setTime(Objects.requireNonNull(date));
             cal.setTimeZone(TimeZone.getDefault());
             return cal;
         } catch (ParseException e) {

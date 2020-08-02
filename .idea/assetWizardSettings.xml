@@ -163,7 +163,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_play_arrow_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/music_note/baseline_music_note_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -173,8 +173,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_instagram" />
+                            <entry key="outputName" value="ic_music" />
                             <entry key="sourceFile" value="E:\Downloads\instagram-brands.svg" />
                           </map>
                         </option>

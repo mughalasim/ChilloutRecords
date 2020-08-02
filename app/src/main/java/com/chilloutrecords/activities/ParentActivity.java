@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.chilloutrecords.BuildConfig;
@@ -66,6 +67,8 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_VIDEOS = "Home / Videos",
             PAGE_TITLE_PROFILE = "Home / Profile",
             PAGE_TITLE_PROFILE_EDIT = "Home / Profile Edit",
+            PAGE_TITLE_ADD_TRACK = "Profile / Add track",
+            PAGE_TITLE_EDIT_TRACK = "Profile / Edit track",
             PAGE_TITLE_SHARE = "Home / Share",
             PAGE_TITLE_ABOUT = "Home / About us",
             PAGE_TITLE_UPGRADE = "Home / Upgrade",
@@ -234,7 +237,7 @@ public class ParentActivity extends AppCompatActivity {
         if (navigation_list.size() < 2) {
             toolbar.setNavigationIcon(null);
         } else {
-            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
+            toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back));
         }
 
         Bundle bundle = new Bundle();

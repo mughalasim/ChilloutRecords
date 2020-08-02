@@ -68,11 +68,7 @@ public class SharedPrefs {
     // GENERIC GET AND SET DOUBLE ==================================================================
     public static Double getDouble(String name) {
         String value = prefs.getString(name, "0.0");
-        if (value != null) {
-            return Double.parseDouble(value);
-        } else {
-            return 0.0;
-        }
+        return Double.parseDouble(value);
     }
 
     public static void setDouble(String name, Double longitude) {

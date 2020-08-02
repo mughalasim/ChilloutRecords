@@ -23,8 +23,6 @@ import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 
 public class StartUpActivity extends AppCompatActivity {
 
-    private TabLayout
-            tab_layout;
     private ViewPager
             view_pager;
     private int[] fragment_title_list = {
@@ -42,8 +40,6 @@ public class StartUpActivity extends AppCompatActivity {
             new RegisterFragment(),
             new ForgotPasswordFragment()
     };
-    private RelativeLayout rl_splash;
-    private LinearLayout ll_start_up;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +47,8 @@ public class StartUpActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start_up);
 
-        ll_start_up = findViewById(R.id.ll_start_up);
-        rl_splash = findViewById(R.id.rl_splash);
+        LinearLayout ll_start_up = findViewById(R.id.ll_start_up);
+        RelativeLayout rl_splash = findViewById(R.id.rl_splash);
 
         rl_splash.setVisibility(View.VISIBLE);
 
@@ -69,7 +65,7 @@ public class StartUpActivity extends AppCompatActivity {
 
     public void setupViewPager(Fragment[] fragment_list, int[] fragment_title_list, String[] fragment_extras) {
         view_pager = findViewById(R.id.view_pager);
-        tab_layout = findViewById(R.id.tabs);
+        TabLayout tab_layout = findViewById(R.id.tabs);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 

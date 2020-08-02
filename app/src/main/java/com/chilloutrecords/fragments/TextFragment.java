@@ -1,7 +1,6 @@
 package com.chilloutrecords.fragments;
 
 import android.os.Bundle;
-import android.text.Html;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
 import com.chilloutrecords.R;
@@ -57,9 +57,9 @@ public class TextFragment extends Fragment {
         FIREBASE_DB.getReference().child(STR_EXTRA).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                TextModel object = dataSnapshot.getValue(TextModel.class);
-                assert object != null;
-                txt_info.setText(Html.fromHtml(object.info).toString());
+                TextModel model = dataSnapshot.getValue(TextModel.class);
+                assert model != null;
+                txt_info.setText(HtmlCompat.fromHtml(model.info, HtmlCompat.FROM_HTML_MODE_LEGACY));
             }
 
             @Override

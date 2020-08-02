@@ -30,7 +30,7 @@ public class VideoListingAdapter extends RecyclerView.Adapter<VideoListingAdapte
     private ArrayList<VideoModel>
             models;
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView
                 txt;
         private RoundedImageView

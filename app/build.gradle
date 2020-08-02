@@ -124,13 +124,13 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.browser:browser:1.2.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'com.android.support:design:28.0.0'
 
     // JSON PARSING
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
 
     // PICTURE LOADING
     implementation 'com.github.bumptech.glide:glide:4.9.0'
@@ -139,13 +139,13 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // FIREBASE DEPENDENCIES
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
-    implementation 'com.google.firebase:firebase-database:19.2.0'
-    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
 
     // GOOGLE
-    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
 
     // ANIMATIONS

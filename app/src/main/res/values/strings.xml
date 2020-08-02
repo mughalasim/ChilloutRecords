@@ -63,16 +63,17 @@
     <string name="et_hint_info">About you</string>
     <string name="et_hint_password">Password</string>
     <string name="et_hint_confirm_password">Confirm Password</string>
-
-    <!--APP VERSIONING ==========================================================================-->
-    <string name="txt_update">Update</string>
-    <string name="txt_delete">Delete</string>
-    <string name="txt_alert">Alert</string>
+    <string name="et_hint_track_name">Track name</string>
+    <string name="et_hint_album_name">Album / Mixtape name</string>
+    <string name="et_hint_release_date">Release date</string>
 
     <!-- TOASTS =================================================================================-->
     <string name="toast_reset_success">Successfully sent reset link to you inbox</string>
 
     <!-- BASIC TEXTS  ===========================================================================-->
+    <string name="txt_update">Update</string>
+    <string name="txt_delete">Delete</string>
+    <string name="txt_alert">Alert</string>
     <string name="txt_confirm">OK</string>
     <string name="txt_reset">Reset</string>
     <string name="txt_cancel">Cancel</string>
@@ -98,5 +99,7 @@
     <string name="txt_share_link">share link</string>
     <string name="txt_google_pay_unavailable">Google pay is unavailable. Sorry for the inconvenience caused</string>
     <string name="txt_google_pay_loading">One moment please…</string>
+    <string name="txt_no_file_selected">No file selected</string>
+    <string name="txt_upload">Upload</string>
 
 </resources>

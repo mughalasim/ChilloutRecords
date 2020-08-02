@@ -1,5 +1,6 @@
 package com.chilloutrecords.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,6 @@ import com.chilloutrecords.models.CollectionModel;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.utils.Database;
-import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,7 +49,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     private ArrayList<String>
             models;
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView
                 txt_collection_name,
                 txt_collection_release_year,
@@ -121,7 +121,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     }
 
     private void setView(@NonNull final ViewHolder holder, DataSnapshot dataSnapshot) {
-        final DialogMethods dialog = new DialogMethods(context);
+//        final DialogMethods dialog = new DialogMethods(context);
         if (path.equals(BuildConfig.DB_REF_COLLECTIONS)) {
             final CollectionModel model = dataSnapshot.getValue(CollectionModel.class);
             if (model != null) {
@@ -163,7 +163,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                 for (int i = 0; i < track_number; i++) {
                     final TrackModel track = model.tracks.get(i);
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View child = inflater.inflate(R.layout.list_item_track, null);
+                    @SuppressLint("InflateParams") View child = Objects.requireNonNull(inflater).inflate(R.layout.list_item_track, null);
                     TextView txt_track_number = child.findViewById(R.id.txt_track_number);
                     TextView txt_track_title = child.findViewById(R.id.txt_track_title);
                     TextView txt_track_play_count = child.findViewById(R.id.txt_track_play_count);
