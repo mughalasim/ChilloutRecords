@@ -8,9 +8,9 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
@@ -112,10 +112,17 @@ public class StaticMethods {
 
     // VALIDATIONS =================================================================================
     public static boolean validateInternetConnection() {
-        ConnectivityManager cm = (ConnectivityManager) ChilloutRecords.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = Objects.requireNonNull(cm).getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnected();
+        ConnectivityManager connectivityManager = (ConnectivityManager) ChilloutRecords.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+           Network[] networks = Objects.requireNonNull(connectivityManager).getAllNetworks();
+            NetworkInfo networkInfo;
+            for (Network mNetwork : networks) {
+                networkInfo = connectivityManager.getNetworkInfo(mNetwork);
+                if (Objects.requireNonNull(networkInfo).getState().equals(NetworkInfo.State.CONNECTED)) {
+                    return true;
+                }
+            }
 
+        return false;
     }
 
     public static boolean validateEmail(TextInputEditText edit_text, TextInputLayout layout) {
@@ -177,14 +184,7 @@ public class StaticMethods {
     // DOWNLOAD FRM URL
     public static void downloadFileFromUrl(String url, String file_name, String save_path) {
         try {
-            File directory = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS), save_path);
-            if (!directory.exists()) {
-                //noinspection ResultOfMethodCallIgnored
-                directory.mkdirs();
-            }
-
-            Context context = ChilloutRecords.getAppContext();
-            DownloadManager downloadmanager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            DownloadManager downloadmanager = (DownloadManager) ChilloutRecords.getAppContext().getSystemService(Context.DOWNLOAD_SERVICE);
             Uri uri = Uri.parse(url);
 
             DownloadManager.Request request = new DownloadManager.Request(uri);
@@ -193,7 +193,6 @@ public class StaticMethods {
             request.setTitle("Chillout Records: "+ file_name);
             request.setDescription("Download completed");
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setVisibleInDownloadsUi(false);
 
             Objects.requireNonNull(downloadmanager).enqueue(request);
             StaticMethods.showToast("Download will start momentarily, please wait...");

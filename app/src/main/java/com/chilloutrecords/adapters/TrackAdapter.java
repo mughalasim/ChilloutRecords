@@ -17,7 +17,7 @@ import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.fragments.ImageViewFragment;
-import com.chilloutrecords.fragments.TrackEditFragment;
+import com.chilloutrecords.fragments.TrackAddEditFragment;
 import com.chilloutrecords.interfaces.TrackListingInterface;
 import com.chilloutrecords.interfaces.UrlInterface;
 import com.chilloutrecords.models.CollectionModel;
@@ -182,7 +182,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                         child.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
                             public boolean onLongClick(View view) {
-                                ((ParentActivity) Objects.requireNonNull(context)).loadFragment(new NavigationModel(new TrackEditFragment(), "Track Edit", "", null, true ));
+                                ((ParentActivity) Objects.requireNonNull(context)).loadFragment(new NavigationModel(new TrackAddEditFragment(), "Track Edit", "", null, true ));
                                 return false;
                             }
                         });
@@ -225,7 +225,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                     holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            ((ParentActivity) Objects.requireNonNull(context)).loadFragment(new NavigationModel(new TrackEditFragment(), "Track Edit", "", null, true ));
+                            ((ParentActivity) Objects.requireNonNull(context)).loadFragment(new NavigationModel(new TrackAddEditFragment(), "Track Edit", "", null, true ));
                             return false;
                         }
                     });

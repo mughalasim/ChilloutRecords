@@ -128,7 +128,7 @@ public class ProfileFragment extends Fragment {
                 btn_add_track.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new AddTrackFragment(), PAGE_TITLE_ADD_TRACK, "", null, true));
+                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TrackAddEditFragment(), PAGE_TITLE_ADD_TRACK, "", null, true));
                     }
                 });
 

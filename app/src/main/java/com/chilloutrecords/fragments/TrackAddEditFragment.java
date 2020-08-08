@@ -21,16 +21,18 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class AddTrackFragment extends Fragment {
+public class TrackAddEditFragment extends Fragment {
     private View root_view;
     private DialogMethods dialogs;
-    private final String TAG_LOG = "ADD TRACK";
+    private final String TAG_LOG = "ADD / EDIT TRACK";
     private final String STR_AUDIO_LOCAL_PATH = "";
     private final String STR_IMAGE_LOCAL_PATH = "";
 
     private TextView txt_file_name;
     private FloatingActionButton btn_search_file;
-    private MaterialButton btn_upload;
+    private MaterialButton
+            btn_confirm,
+            btn_cancel;
     private RoundedImageView img_track;
 
     private TextInputEditText
@@ -52,7 +54,7 @@ public class AddTrackFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (root_view == null && getActivity() != null) {
             try {
-                root_view = inflater.inflate(R.layout.frag_add_track, container, false);
+                root_view = inflater.inflate(R.layout.frag_track_add_edit, container, false);
 
                 dialogs = new DialogMethods(getActivity());
 
@@ -60,7 +62,8 @@ public class AddTrackFragment extends Fragment {
                 img_track = root_view.findViewById(R.id.img_track);
                 txt_file_name = root_view.findViewById(R.id.txt_file_name);
                 btn_search_file = root_view.findViewById(R.id.btn_search_file);
-                btn_upload = root_view.findViewById(R.id.btn_upload);
+                btn_confirm = root_view.findViewById(R.id.btn_confirm);
+                btn_cancel = root_view.findViewById(R.id.btn_cancel);
 
                 et_track_name = root_view.findViewById(R.id.et_track_name);
                 et_collection_name = root_view.findViewById(R.id.et_collection_name);
@@ -85,14 +88,14 @@ public class AddTrackFragment extends Fragment {
                     }
                 });
 
-                btn_upload.setOnClickListener(new View.OnClickListener() {
+                btn_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(spinner_track_type.getSelectedItemPosition() == 0){
-                          dialogs.setDialogCancel(getString(R.string.txt_alert), "Please select a track type from the drop down");
+                            dialogs.setDialogCancel(getString(R.string.txt_alert), "Please select a track type from the drop down");
 
                         } else if (spinner_track_type.getSelectedItemPosition()>1 && StaticMethods.validateEmptyEditText(et_collection_name, etl_collection_name, getString(R.string.error_field_required))){
-                           // Upload collection
+                            // Upload collection
                             validateRemainingFields();
 
                         } else {
