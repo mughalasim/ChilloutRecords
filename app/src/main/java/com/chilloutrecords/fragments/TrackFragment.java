@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chilloutrecords.BuildConfig;
 import com.chilloutrecords.R;
 import com.chilloutrecords.activities.ParentActivity;
 import com.chilloutrecords.adapters.TrackAdapter;
@@ -19,14 +20,17 @@ import com.chilloutrecords.interfaces.TrackListingInterface;
 import com.chilloutrecords.models.NavigationModel;
 import com.chilloutrecords.models.TrackModel;
 import com.chilloutrecords.utils.CustomRecyclerView;
+import com.chilloutrecords.utils.Database;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POINTS;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_DATA;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_STRING;
 import static com.chilloutrecords.utils.StaticVariables.STR_COLLECTION_ID;
 import static com.chilloutrecords.utils.StaticVariables.TRACK_MODEL;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class TrackFragment extends Fragment {
     private View root_view;
@@ -70,9 +74,14 @@ public class TrackFragment extends Fragment {
         TrackAdapter adapter = new TrackAdapter(getActivity(), STR_PATH, STR_IDS, new TrackListingInterface() {
             @Override
             public void success(TrackModel model, String track_type, String collection_id) {
-                TRACK_MODEL = model;
-                STR_COLLECTION_ID = collection_id;
-                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), model.name, track_type, null, true));
+                if (USER_MODEL.points > BuildConfig.POINTS_FEE_PLAY) {
+                    Database.updateProfilePoints(-BuildConfig.POINTS_FEE_PLAY);
+                    TRACK_MODEL = model;
+                    STR_COLLECTION_ID = collection_id;
+                    ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), model.name, track_type, null, true));
+                } else {
+                    ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PointsFragment(), PAGE_TITLE_POINTS, "", null, true));
+                }
             }
         });
 

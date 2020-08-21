@@ -198,7 +198,7 @@ public class RegisterFragment extends Fragment {
         user.info = "..tell us something about you..";
         user.gender = spinner_gender.getSelectedItemPosition();
         user.p_pic = BuildConfig.DEFAULT_PROFILE_ART;
-        user.points = 5;
+        user.points = BuildConfig.POINTS_EARN_REGISTER;
         user.fcm_token = "";
 
         // MUSIC INFO

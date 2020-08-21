@@ -27,8 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POINTS;
 import static com.chilloutrecords.utils.StaticVariables.EXTRA_VIDEO;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
+import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 import static com.chilloutrecords.utils.StaticVariables.VIDEO_MODEL;
 
 public class VideosFragment extends Fragment {
@@ -57,8 +59,13 @@ public class VideosFragment extends Fragment {
                 adapter = new VideoListingAdapter(getActivity(), models, new VideoListingInterface() {
                     @Override
                     public void clicked(VideoModel model, String page_title) {
-                        VIDEO_MODEL = model;
-                        ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, EXTRA_VIDEO, null, true));
+                        if (USER_MODEL.points > BuildConfig.POINTS_FEE_PLAY) {
+                            Database.updateProfilePoints(-BuildConfig.POINTS_FEE_PLAY);
+                            VIDEO_MODEL = model;
+                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PlayerFragment(), page_title, EXTRA_VIDEO, null, true));
+                        } else {
+                            ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PointsFragment(), PAGE_TITLE_POINTS, "", null, true));
+                        }
                     }
                 });
 

@@ -214,9 +214,7 @@ public class PlayerFragment extends Fragment {
         btn_track_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (USER_MODEL.points>2){
                     setPlayPause(!isPlaying);
-//                }
             }
         });
         btn_download.setOnClickListener(new View.OnClickListener() {
