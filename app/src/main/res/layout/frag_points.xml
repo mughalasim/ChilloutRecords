@@ -18,24 +18,24 @@
             <TextView
                 android:id="@+id/txt_title"
                 style="@style/TextTitle"
-                android:text="Upgrade" />
+                android:text="Earn points" />
 
             <TextView
                 style="@style/TextBody"
                 android:layout_marginTop="@dimen/padding_large"
                 android:layout_marginBottom="@dimen/padding_large"
                 android:gravity="center"
-                android:text="Upgrade your account ONLY ONCE inorder to get free download access to all music and video content" />
+                android:text="Earn points by watching a small ad. \n\nYou can use these points to watch, play and download content from the app absolutely free" />
 
             <TextView
+                android:id="@+id/txt_points"
                 style="@style/TextTitle"
-                android:text="£5 (GBP)" />
-
+                android:text="5" />
 
             <TextView
                 style="@style/TextBody"
                 android:layout_marginBottom="@dimen/padding_large"
-                android:text="One time fee" />
+                android:text="@string/nav_points" />
 
             <TextView
                 android:id="@+id/txt_message"
@@ -44,17 +44,14 @@
                 android:padding="@dimen/padding_mini"
                 android:background="@drawable/bckgrd_card"
                 android:layout_marginBottom="@dimen/padding_large"
-                android:text="@string/txt_google_pay_unavailable" />
+                android:text="5 hours and 23 Mins to the next available ad" />
 
-            <ImageButton
-                android:id="@+id/btn_google_pay"
-                android:layout_width="match_parent"
-                android:background="@drawable/bckgrd_google_pay"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                android:src="@drawable/ic_google_pay"
-                android:visibility="gone"
-                android:contentDescription="@string/app_name" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_watch"
+                style="@style/ButtonYes"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginBottom="@dimen/padding_large"
+                android:text="Watch now" />
 
         </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.chilloutrecords.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
@@ -21,6 +22,7 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 
 public class ChilloutRecords extends Application {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     public void onCreate() {
@@ -29,6 +31,7 @@ public class ChilloutRecords extends Application {
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
+        // Initialise firebase
         initFireBase();
 
     }

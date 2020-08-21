@@ -17,6 +17,34 @@
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
+    <!-- TOAST STYLES ===========================================================================-->
+    <style name="ToastParent">
+        <item name="stTextBold">false</item>
+        <item name="stTextColor">#fff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">@dimen/line_thickness</item>
+        <item name="stStrokeColor">@color/colorPrimaryDark</item>
+        <item name="stLength">LONG</item>
+        <item name="stGravity">center</item>
+        <item name="stRadius">@dimen/radius_corner</item>
+    </style>
+
+    <style name="ToastSuccess" parent="ToastParent">
+        <item name="stColorBackground">@color/colorSuccess</item>
+        <item name="stIconStart">@drawable/ic_success</item>
+    </style>
+
+    <style name="ToastWarning" parent="ToastParent">
+        <item name="stTextColor">@color/colorPrimaryDark</item>
+        <item name="stColorBackground">@color/colorWarning</item>
+        <item name="stIconStart">@drawable/ic_info</item>
+    </style>
+
+    <style name="ToastError" parent="ToastParent">
+        <item name="stColorBackground">@color/colorError</item>
+        <item name="stIconStart">@drawable/ic_error</item>
+    </style>
+
     <!-- TAB TEXT STYLE =========================================================================-->
     <style name="TabTextLayout" parent="AppTheme">
         <item name="android:layout_height">wrap_content</item>

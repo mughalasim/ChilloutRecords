@@ -105,9 +105,9 @@ public class ProfileFragment extends Fragment {
                     btn_edit_picture.show();
                     btn_edit_profile.show();
                     BOOL_CAN_EDIT = true;
-                    if(USER_MODEL.is_activated){
+                    if(BuildConfig.DEBUG){
                         btn_add_track.show();
-                    }else{
+                    } else {
                         btn_add_track.hide();
                     }
                 }
@@ -160,7 +160,7 @@ public class ProfileFragment extends Fragment {
 
                                     @Override
                                     public void failed() {
-                                        StaticMethods.showToast(getString(R.string.error_update_failed));
+                                        StaticMethods.showToast(2, getString(R.string.error_update_failed));
                                     }
                                 });
                                 dialog.cancel();

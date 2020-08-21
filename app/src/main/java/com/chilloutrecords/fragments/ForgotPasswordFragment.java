@@ -68,7 +68,7 @@ public class ForgotPasswordFragment extends Fragment {
 
                                             if (task.isSuccessful()) {
                                                 StaticMethods.logg(TAG_LOG, "Reset link sent successfully");
-                                                StaticMethods.showToast(getString(R.string.toast_reset_success));
+                                                StaticMethods.showToast(1, getString(R.string.toast_reset_success));
                                                 ((StartUpActivity) getActivity()).backToLogin();
                                             } else {
                                                 if (task.getException() != null && !task.getException().toString().equals("") && task.getException().toString().contains(":")) {

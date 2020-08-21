@@ -11,9 +11,9 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -29,8 +29,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.muddzdev.styleabletoast.StyleableToast;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Formatter;
@@ -38,7 +38,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_ANIMATION_TIME;
@@ -54,13 +53,18 @@ public class StaticMethods {
         }
     }
 
-    public static void showToast(String message) {
-        if (toast != null) {
-            toast.cancel();
+    public static void showToast(int type, String message) {
+        switch (type) {
+            case 0:
+                StyleableToast.makeText(ChilloutRecords.getAppContext(), message, Toast.LENGTH_LONG, R.style.ToastSuccess).show();
+                break;
+            case 1:
+                StyleableToast.makeText(ChilloutRecords.getAppContext(), message, Toast.LENGTH_LONG, R.style.ToastWarning).show();
+                break;
+            case 2:
+                StyleableToast.makeText(ChilloutRecords.getAppContext(), message, Toast.LENGTH_LONG, R.style.ToastError).show();
+                break;
         }
-        toast = Toast.makeText(ChilloutRecords.getAppContext(), message, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 
     // ANIMATIONS ==================================================================================
@@ -96,7 +100,7 @@ public class StaticMethods {
         SharedPrefs.deleteAllSharedPrefs();
 
         if (is_session_expired) {
-            showToast("Your session has expired. Kindly login to continue");
+            showToast(2, "Your session has expired. Kindly login to continue");
         }
         context.startActivity(new Intent(context, StartUpActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
@@ -113,14 +117,14 @@ public class StaticMethods {
     // VALIDATIONS =================================================================================
     public static boolean validateInternetConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) ChilloutRecords.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-           Network[] networks = Objects.requireNonNull(connectivityManager).getAllNetworks();
-            NetworkInfo networkInfo;
-            for (Network mNetwork : networks) {
-                networkInfo = connectivityManager.getNetworkInfo(mNetwork);
-                if (Objects.requireNonNull(networkInfo).getState().equals(NetworkInfo.State.CONNECTED)) {
-                    return true;
-                }
+        Network[] networks = Objects.requireNonNull(connectivityManager).getAllNetworks();
+        NetworkInfo networkInfo;
+        for (Network mNetwork : networks) {
+            networkInfo = connectivityManager.getNetworkInfo(mNetwork);
+            if (Objects.requireNonNull(networkInfo).getState().equals(NetworkInfo.State.CONNECTED)) {
+                return true;
             }
+        }
 
         return false;
     }
@@ -181,7 +185,7 @@ public class StaticMethods {
         }
     }
 
-    // DOWNLOAD FRM URL
+    // DOWNLOAD FROM URL
     public static void downloadFileFromUrl(String url, String file_name, String save_path) {
         try {
             DownloadManager downloadmanager = (DownloadManager) ChilloutRecords.getAppContext().getSystemService(Context.DOWNLOAD_SERVICE);
@@ -189,15 +193,17 @@ public class StaticMethods {
 
             DownloadManager.Request request = new DownloadManager.Request(uri);
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-            request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS + File.separator, save_path + file_name);
-            request.setTitle("Chillout Records: "+ file_name);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, save_path + file_name);
+            request.setTitle(file_name);
             request.setDescription("Download completed");
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
             Objects.requireNonNull(downloadmanager).enqueue(request);
-            StaticMethods.showToast("Download will start momentarily, please wait...");
+            StaticMethods.showToast(0, "Download will start momentarily, please wait...");
+            Database.updateProfilePoints(-BuildConfig.POINTS_FEE_DOWNLOAD);
         } catch (Exception e) {
-            showToast("Failed to download file, please try again later");
+            StaticMethods.logg("Static Methods", e.toString());
+            showToast(2, "Failed to download file, please try again later");
         }
     }
 

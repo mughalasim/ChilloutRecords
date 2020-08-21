@@ -1,11 +1,9 @@
 package com.chilloutrecords.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,20 +23,13 @@ import com.chilloutrecords.services.LoginStateService;
 import com.chilloutrecords.utils.Database;
 import com.chilloutrecords.utils.DialogMethods;
 import com.chilloutrecords.utils.StaticMethods;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.wallet.AutoResolveHelper;
-import com.google.android.gms.wallet.PaymentData;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -50,7 +41,6 @@ import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_USER;
 import static com.chilloutrecords.utils.StaticVariables.INT_PERMISSIONS_CAMERA;
 import static com.chilloutrecords.utils.StaticVariables.INT_PERMISSIONS_STORAGE;
-import static com.chilloutrecords.utils.StaticVariables.LOAD_PAYMENT_DATA_REQUEST_CODE;
 import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
 public class ParentActivity extends AppCompatActivity {
@@ -70,7 +60,7 @@ public class ParentActivity extends AppCompatActivity {
             PAGE_TITLE_ADD_TRACK = "Add / Edit track",
             PAGE_TITLE_SHARE = "Home / Share",
             PAGE_TITLE_ABOUT = "Home / About us",
-            PAGE_TITLE_UPGRADE = "Home / Upgrade",
+            PAGE_TITLE_POINTS = "Home / Points",
             PAGE_TITLE_LOGOUT = "Home / Logout";
 
     public static String
@@ -135,79 +125,60 @@ public class ParentActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_CANCELED) {
-            switch (requestCode) {
-                // RESULT FOR PAYMENT ==============================================================
-                case LOAD_PAYMENT_DATA_REQUEST_CODE:
-                    switch (resultCode) {
-                        case Activity.RESULT_OK:
-                            PaymentData paymentData = PaymentData.getFromIntent(data);
-                            handlePaymentSuccess(Objects.requireNonNull(paymentData));
-                            break;
-                        case AutoResolveHelper.RESULT_ERROR:
-                            Status status = AutoResolveHelper.getStatusFromIntent(data);
-                            StaticMethods.showToast(Objects.requireNonNull(status).getStatusMessage());
-                            StaticMethods.logg("PAYMENT", "ERROR MESSAGE: " + status.getStatusMessage());
-                            break;
-                    }
-                    // Re-enables the Google Pay payment button.
-                    // btn_google_pay.setClickable(true);
-                    break;
-
-                // RESULT FOR IMAGE UPLOAD =====================================================
-                case CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE:
-                    if (resultCode == RESULT_OK) {
-                        CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                        Uri resultUri = result.getUri();
-                        final String file_name = "/users/" + FIREBASE_USER.getUid() + ".jpg";
-                        FIREBASE_STORAGE.getReference()
-                                .child(BuildConfig.STORAGE_IMAGES + file_name)
-                                .putFile(resultUri)
-                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        StaticMethods.logg("FILE", "SUCCESSFULLY UPLOADED");
-                                        USER_MODEL.p_pic = file_name;
-                                        Database.setUser(USER_MODEL, new GeneralInterface() {
-                                            @Override
-                                            public void success() {
-                                                try {
-                                                    ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentById(R.id.ll_fragment);
-                                                    assert fragment != null;
-                                                    fragment.updateArt(file_name);
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                    StaticMethods.showToast(getString(R.string.error_unknown));
-                                                }
+            // RESULT FOR IMAGE UPLOAD =====================================================
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                if (resultCode == RESULT_OK) {
+                    CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                    Uri resultUri = result.getUri();
+                    final String file_name = "/users/" + FIREBASE_USER.getUid() + ".jpg";
+                    FIREBASE_STORAGE.getReference()
+                            .child(BuildConfig.STORAGE_IMAGES + file_name)
+                            .putFile(resultUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    StaticMethods.logg("FILE", "SUCCESSFULLY UPLOADED");
+                                    USER_MODEL.p_pic = file_name;
+                                    Database.setUser(USER_MODEL, new GeneralInterface() {
+                                        @Override
+                                        public void success() {
+                                            try {
+                                                ProfileFragment fragment = (ProfileFragment) getSupportFragmentManager().findFragmentById(R.id.ll_fragment);
+                                                assert fragment != null;
+                                                fragment.updateArt(file_name);
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                                StaticMethods.showToast(2, getString(R.string.error_unknown));
                                             }
+                                        }
 
-                                            @Override
-                                            public void failed() {
-                                                StaticMethods.showToast(getString(R.string.error_unknown));
-                                            }
-                                        });
+                                        @Override
+                                        public void failed() {
+                                            StaticMethods.showToast (2, getString(R.string.error_unknown));
+                                        }
+                                    });
 
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        StaticMethods.logg("FILE", "FAILED TO UPLOAD");
-                                        StaticMethods.showToast(getString(R.string.error_unknown));
-                                    }
-                                });
-                    } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                        StaticMethods.showToast(getString(R.string.error_unknown));
-                    }
-                    break;
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    StaticMethods.logg("FILE", "FAILED TO UPLOAD");
+                                    StaticMethods.showToast(2, getString(R.string.error_unknown));
+                                }
+                            });
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    StaticMethods.showToast(2, getString(R.string.error_unknown));
+                }
             }
         } else {
-            StaticMethods.showToast("Cancelled");
+            StaticMethods.showToast(1, "Cancelled");
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @AfterPermissionGranted(INT_PERMISSIONS_STORAGE)
-    public void startFileDownload(){
+    public void startFileDownload() {
         if (EasyPermissions.hasPermissions(ParentActivity.this, permissions_storage)) {
             StaticMethods.downloadFileFromUrl(STR_DOWNLOAD_URL, STR_FILE_NAME, STR_SAVE_TO_PATH);
         } else {
@@ -215,6 +186,7 @@ public class ParentActivity extends AppCompatActivity {
                     INT_PERMISSIONS_STORAGE, permissions_storage);
         }
     }
+
     @AfterPermissionGranted(INT_PERMISSIONS_CAMERA)
     public void updateProfileImage() {
         if (EasyPermissions.hasPermissions(ParentActivity.this, permissions_camera)) {
@@ -259,39 +231,6 @@ public class ParentActivity extends AppCompatActivity {
             transaction.setCustomAnimations(R.anim.enter_left, R.anim.exit_right);
         }
         transaction.replace(R.id.ll_fragment, navigation.fragment).addToBackStack(null).commit();
-    }
-
-    private void handlePaymentSuccess(PaymentData paymentData) {
-        String paymentInformation = paymentData.toJson();
-
-        // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
-        if (paymentInformation == null) {
-            return;
-        }
-        JSONObject paymentMethodData;
-
-        try {
-            paymentMethodData = new JSONObject(paymentInformation).getJSONObject("paymentMethodData");
-            String description = paymentMethodData.getString("description");
-            StaticMethods.logg("Billing description", description);
-
-            dialog.setDialogCancel("Success", "Thank you for your purchase. Your payment has been received");
-            USER_MODEL.is_activated = true;
-            Database.setUser(USER_MODEL, new GeneralInterface() {
-                @Override
-                public void success() {
-                    onBackPressed();
-                }
-
-                @Override
-                public void failed() {
-
-                }
-            });
-        } catch (JSONException e) {
-            Log.e("handlePaymentSuccess", "Error: " + e.toString());
-            dialog.setDialogCancel("Payment failed", getString(R.string.error_unknown) + ": " + e.toString());
-        }
     }
 
 }

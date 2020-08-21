@@ -39,7 +39,7 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.util.Objects;
 
-import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_UPGRADE;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POINTS;
 import static com.chilloutrecords.activities.ParentActivity.STR_DOWNLOAD_URL;
 import static com.chilloutrecords.activities.ParentActivity.STR_FILE_NAME;
 import static com.chilloutrecords.activities.ParentActivity.STR_SAVE_TO_PATH;
@@ -214,16 +214,18 @@ public class PlayerFragment extends Fragment {
         btn_track_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setPlayPause(!isPlaying);
+//                if (USER_MODEL.points>2){
+                    setPlayPause(!isPlaying);
+//                }
             }
         });
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (USER_MODEL.is_activated) {
+                if (USER_MODEL.points > BuildConfig.POINTS_FEE_DOWNLOAD) {
                     ((ParentActivity) Objects.requireNonNull(getActivity())).startFileDownload();
                 } else {
-                    ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PayFragment(), PAGE_TITLE_UPGRADE, "", null, true));
+                    ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PointsFragment(), PAGE_TITLE_POINTS, "", null, true));
                 }
             }
         });

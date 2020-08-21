@@ -15,9 +15,9 @@ public class UserModel implements Serializable {
     public String fcm_token = "";
 
     public Boolean is_artist;
-    public Boolean is_activated;
 
     public long member_since_date;
+    public long points;
 
     public MusicModel music = new MusicModel();
 

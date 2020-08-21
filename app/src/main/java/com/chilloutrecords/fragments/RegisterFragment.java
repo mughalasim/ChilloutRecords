@@ -198,7 +198,7 @@ public class RegisterFragment extends Fragment {
         user.info = "..tell us something about you..";
         user.gender = spinner_gender.getSelectedItemPosition();
         user.p_pic = BuildConfig.DEFAULT_PROFILE_ART;
-        user.is_activated = false;
+        user.points = 5;
         user.fcm_token = "";
 
         // MUSIC INFO
@@ -243,7 +243,7 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void failed() {
-                StaticMethods.showToast(getString(R.string.error_update_failed));
+                StaticMethods.showToast(2, getString(R.string.error_update_failed));
             }
         });
     }

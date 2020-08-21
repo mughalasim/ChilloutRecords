@@ -127,7 +127,7 @@ public class Database {
     public static void handleDatabaseError(DatabaseError error) {
         int code = error.getCode();
         if (code == DatabaseError.DISCONNECTED || code == DatabaseError.NETWORK_ERROR || code == DatabaseError.UNAVAILABLE) {
-            StaticMethods.showToast("Network error");
+            StaticMethods.showToast(2, "Network error");
         } else if (code == DatabaseError.PERMISSION_DENIED || code == DatabaseError.EXPIRED_TOKEN || code == DatabaseError.INVALID_TOKEN) {
             StaticMethods.logOutUser(true);
         }
@@ -212,7 +212,7 @@ public class Database {
         });
     }
 
-    // UPDATE TRACK PLAY COUNT =====================================================================
+    // UPDATE PROFILE VISIT COUNT ==================================================================
     public static void updateProfileVisitCount(String path, int current_visit_count) {
         current_visit_count++;
         DatabaseReference reference = FIREBASE_DB.getReference();
@@ -228,4 +228,19 @@ public class Database {
         });
     }
 
+    // UPDATE POINTS ===============================================================================
+    public static void updateProfilePoints(long points) {
+        long current_points = USER_MODEL.points + points;
+        DatabaseReference reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
+        reference.child(USER_MODEL.id).child("points").setValue(current_points).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    StaticMethods.logg("Database", "Updated points");
+                } else {
+                    StaticMethods.logg("Database", "Failed to update points");
+                }
+            }
+        });
+    }
 }

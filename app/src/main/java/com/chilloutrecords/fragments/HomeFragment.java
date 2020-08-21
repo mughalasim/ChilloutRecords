@@ -30,9 +30,9 @@ import java.util.Objects;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ABOUT;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_ARTISTS;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_LOGOUT;
+import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_POINTS;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_PROFILE;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_SHARE;
-import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_UPGRADE;
 import static com.chilloutrecords.activities.ParentActivity.PAGE_TITLE_VIDEOS;
 import static com.chilloutrecords.utils.StaticVariables.USER_MODEL;
 
@@ -80,8 +80,8 @@ public class HomeFragment extends Fragment {
                                 ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new TextFragment(), page_title, url, null, true));
                                 break;
 
-                            case PAGE_TITLE_UPGRADE:
-                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PayFragment(), page_title, url, null, true));
+                            case PAGE_TITLE_POINTS:
+                                ((ParentActivity) Objects.requireNonNull(getActivity())).loadFragment(new NavigationModel(new PointsFragment(), page_title, url, null, true));
                                 break;
 
                             case PAGE_TITLE_SHARE:
@@ -164,14 +164,12 @@ public class HomeFragment extends Fragment {
         model.page_title = PAGE_TITLE_ABOUT;
         models.add(model);
 
-        if(!USER_MODEL.is_activated){
-            model = new HomeModel();
-            model.txt = getString(R.string.nav_upgrade);
-            model.img = "home/home_upgrade.jpg";
-            model.url = "";
-            model.page_title = PAGE_TITLE_UPGRADE;
-            models.add(model);
-        }
+        model = new HomeModel();
+        model.txt = getString(R.string.nav_points);
+        model.img = "home/home_points.jpg";
+        model.url = "";
+        model.page_title = PAGE_TITLE_POINTS;
+        models.add(model);
 
         model = new HomeModel();
         model.txt = getString(R.string.nav_logout);
