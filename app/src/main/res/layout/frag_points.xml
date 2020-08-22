@@ -49,7 +49,6 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_watch"
                 style="@style/ButtonYes"
-                android:layout_marginTop="@dimen/padding_small"
                 android:layout_marginBottom="@dimen/padding_large"
                 android:text="Watch now" />
 

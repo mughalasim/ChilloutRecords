@@ -24,6 +24,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Calendar;
+
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
@@ -239,6 +241,22 @@ public class Database {
                     StaticMethods.logg("Database", "Updated points");
                 } else {
                     StaticMethods.logg("Database", "Failed to update points");
+                }
+            }
+        });
+    }
+
+    // UPDATE POINTS ===============================================================================
+    public static void updateAdWatchedDate() {
+        long date_watched = Calendar.getInstance().getTimeInMillis() + BuildConfig.AD_WATCH_GRACE_PERIOD;
+        DatabaseReference reference = FIREBASE_DB.getReference(BuildConfig.DB_REF_USERS);
+        reference.child(USER_MODEL.id).child("ad_watch_date").setValue(date_watched).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    StaticMethods.logg("Database", "Updated watched date");
+                } else {
+                    StaticMethods.logg("Database", "Failed to update watched date");
                 }
             }
         });

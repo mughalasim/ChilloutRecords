@@ -62,9 +62,9 @@
 
         <!-- META DATA ==========================================================================-->
         <meta-data
-            android:name="com.google.android.gms.wallet.api.enabled"
-            android:value="true" />
-        
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ADMOB_APP_ID"/>
+
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ public class UserModel implements Serializable {
 
     public long member_since_date;
     public long points;
+    public long ad_watch_date;
 
     public MusicModel music = new MusicModel();
 

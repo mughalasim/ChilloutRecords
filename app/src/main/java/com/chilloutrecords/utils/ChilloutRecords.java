@@ -7,7 +7,9 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.chilloutrecords.BuildConfig;
-import com.chilloutrecords.R;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +36,13 @@ public class ChilloutRecords extends Application {
         // Initialise firebase
         initFireBase();
 
+        // Init mobile ads
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
     }
 
     public static Context getAppContext() {
@@ -43,7 +52,7 @@ public class ChilloutRecords extends Application {
     public static void initFireBase() {
         FirebaseOptions builder = new FirebaseOptions.Builder()
                 .setApplicationId(BuildConfig.FB_APP_ID)
-                .setApiKey(getAppContext().getString(R.string.FB_API_KEY))
+                .setApiKey(BuildConfig.FB_API_KEY)
                 .setDatabaseUrl(BuildConfig.FB_DB_URL)
                 .setStorageBucket(BuildConfig.FB_STORE)
                 .build();

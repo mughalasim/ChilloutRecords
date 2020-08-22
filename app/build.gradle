@@ -43,10 +43,13 @@ android {
         // APP VERSION
         resValue "string", 'APP_VERSION', "Version: $rootProject.versionName"
 
+        // GOOGLE AD MOB APP ID
+        resValue "string",   "ADMOB_APP_ID", ADMOB_APP_ID
+
         // FIREBASE INIT
-        resValue            "string",   "FB_API_KEY",   FB_API_KEY
-        buildConfigField    'String',   'FB_APP_ID',    FB_APP_ID
-        buildConfigField '  String',    'FB_STORE',     FB_STORE
+        buildConfigField 'String',  'FB_API_KEY',   FB_API_KEY
+        buildConfigField 'String',  'FB_APP_ID',    FB_APP_ID
+        buildConfigField 'String',  'FB_STORE',     FB_STORE
 
         // FIREBASE PATHS
         buildConfigField 'String', 'FB_DB_URL', FB_DB_URL
@@ -60,6 +63,7 @@ android {
         buildConfigField 'String', 'DEFAULT_SHARE_LINK', DEFAULT_SHARE_LINK
 
         // POINT SYSTEM
+        buildConfigField "int", "AD_WATCH_GRACE_PERIOD", AD_WATCH_GRACE_PERIOD
         buildConfigField "int", "POINTS_FEE_PLAY",       POINTS_FEE_PLAY
         buildConfigField "int", "POINTS_FEE_DOWNLOAD",   POINTS_FEE_DOWNLOAD
         buildConfigField "int", "POINTS_EARN_REGISTER",  POINTS_EARN_REGISTER
@@ -99,13 +103,24 @@ android {
 
     flavorDimensions "flavors"
     productFlavors {
-        Cocoa {
+        Production {
             // APP NAME AND ICON
             resValue "string", "app_name", "Chillout Records"
             manifestPlaceholders = [
                     icon: "@mipmap/ic_launcher",
                     icon_round: "@mipmap/ic_launcher_round"
             ]
+            buildConfigField 'String', 'AD_UNIT_ID', AD_UNIT_ID_LIVE
+        }
+
+        Admin {
+            // APP NAME AND ICON
+            resValue "string", "app_name", "Chillout Records (Admin)"
+            manifestPlaceholders = [
+                    icon: "@mipmap/ic_launcher",
+                    icon_round: "@mipmap/ic_launcher_round"
+            ]
+            buildConfigField 'String', 'AD_UNIT_ID', AD_UNIT_ID_TEST
         }
     }
 
@@ -150,10 +165,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.google.firebase:firebase-database:19.3.1'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
 
     // GOOGLE
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
 
     // ANIMATIONS
     implementation 'com.daimajia.easing:library:2.1@aar'
@@ -179,3 +196,4 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
