@@ -6,10 +6,6 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.chilloutrecords.BuildConfig;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +14,10 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.List;
 
+import static com.chilloutrecords.BuildConfig.FB_API_KEY;
+import static com.chilloutrecords.BuildConfig.FB_APP_ID;
+import static com.chilloutrecords.BuildConfig.FB_DB_URL;
+import static com.chilloutrecords.BuildConfig.FB_STORE;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_AUTH;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_DB;
 import static com.chilloutrecords.utils.StaticVariables.FIREBASE_STORAGE;
@@ -36,13 +36,6 @@ public class ChilloutRecords extends Application {
         // Initialise firebase
         initFireBase();
 
-        // Init mobile ads
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
     }
 
     public static Context getAppContext() {
@@ -51,10 +44,10 @@ public class ChilloutRecords extends Application {
 
     public static void initFireBase() {
         FirebaseOptions builder = new FirebaseOptions.Builder()
-                .setApplicationId(BuildConfig.FB_APP_ID)
-                .setApiKey(BuildConfig.FB_API_KEY)
-                .setDatabaseUrl(BuildConfig.FB_DB_URL)
-                .setStorageBucket(BuildConfig.FB_STORE)
+                .setApplicationId(FB_APP_ID)
+                .setApiKey(FB_API_KEY)
+                .setDatabaseUrl(FB_DB_URL)
+                .setStorageBucket(FB_STORE)
                 .build();
 
         List<FirebaseApp> fire_base_app_list = FirebaseApp.getApps(ChilloutRecords.getAppContext());

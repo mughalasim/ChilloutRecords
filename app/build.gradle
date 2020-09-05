@@ -43,9 +43,6 @@ android {
         // APP VERSION
         resValue "string", 'APP_VERSION', "Version: $rootProject.versionName"
 
-        // GOOGLE AD MOB APP ID
-        resValue "string",   "ADMOB_APP_ID", ADMOB_APP_ID
-
         // FIREBASE INIT
         buildConfigField 'String',  'FB_API_KEY',   FB_API_KEY
         buildConfigField 'String',  'FB_APP_ID',    FB_APP_ID
@@ -125,6 +122,7 @@ android {
     }
 
     compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
@@ -146,7 +144,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.browser:browser:1.2.0'
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'com.android.support:design:28.0.0'
@@ -163,14 +161,13 @@ dependencies {
     // FIREBASE DEPENDENCIES
     implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
-    implementation 'com.google.firebase:firebase-database:19.3.1'
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-database:19.4.0'
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
     implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
 
     // GOOGLE
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
-    implementation 'com.google.android.gms:play-services-ads:19.3.0'
 
     // ANIMATIONS
     implementation 'com.daimajia.easing:library:2.1@aar'
@@ -180,7 +177,7 @@ dependencies {
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"
 
     // VIDEO PAYER
-    implementation 'com.google.android.exoplayer:exoplayer:2.10.7'
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.0'
 
     // IMAGE SCALING
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
@@ -193,6 +190,11 @@ dependencies {
 
     // CUSTOMISED TOASTS
     implementation 'com.muddzdev:styleabletoast:2.2.3'
+
+    // MOPUB ADS
+    implementation('com.mopub:mopub-sdk:5.13.1') {
+        transitive = true
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'

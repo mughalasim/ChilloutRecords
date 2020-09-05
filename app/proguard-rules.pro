@@ -43,3 +43,11 @@
 -keep class com.nineoldandroids.* { *; }
 -keep interface com.nineoldandroids.* { *; }
 -keep public class com.nineoldandroids.* { *; }
+
+# Mobfox
+-keepclassmembers class * {
+   @android.webkit.JavascriptInterface <methods>;
+}
+# MobFox SDK
+-keep class com.mobfox.** { *; }
+-keepclassmembers class com.mobfox.** { *; }
