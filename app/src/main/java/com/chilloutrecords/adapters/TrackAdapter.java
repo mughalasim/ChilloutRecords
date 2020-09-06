@@ -107,8 +107,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
             }
         });
 
-//        StaticMethods.animate_recycler_view(holder.itemView);
-
     }
 
     @Override
@@ -142,8 +140,8 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
                     }
                 });
                 holder.btn_expand.setVisibility(View.VISIBLE);
-                holder.ll_tracks.setVisibility(View.GONE);
-                holder.btn_expand.setTag("0");
+                holder.ll_tracks.setVisibility(View.VISIBLE);
+                holder.btn_expand.setTag("1");
                 holder.btn_expand.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -234,6 +232,4 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
             }
         }
     }
-
-
 }

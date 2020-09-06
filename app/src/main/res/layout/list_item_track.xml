@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/img_size_small"
-    android:layout_weight="1"
+    android:minHeight="@dimen/img_size_normal"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/padding_mini">
@@ -11,30 +10,33 @@
     <TextView
         android:id="@+id/txt_track_number"
         style="@style/TextSmall"
-        android:layout_width="0dp"
-        android:maxLines="1"
-        android:layout_weight="0.1" />
+        android:layout_width="@dimen/padding_large"
+        android:maxLines="1" />
 
     <TextView
         android:id="@+id/txt_track_title"
         style="@style/TextSmall"
-        android:layout_width="0dp"
-        android:maxLines="1"
-        android:layout_weight="0.5" />
+        android:layout_toEndOf="@+id/txt_track_number"
+        android:layout_toStartOf="@+id/txt_track_play_count"
+        android:layout_marginEnd="@dimen/padding_tiny"
+        android:layout_width="wrap_content"
+        android:maxLines="1" />
 
     <TextView
         android:id="@+id/txt_track_play_count"
         style="@style/TextSmall"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="@dimen/padding_large"
+        android:layout_toStartOf="@+id/img_play"
         android:maxLines="1"
-        android:gravity="end"
-        android:layout_weight="0.1" />
+        android:gravity="end" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="0dp"
+        android:id="@+id/img_play"
+        android:layout_width="@dimen/img_size_small"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/ic_play"
         android:tint="@color/colorAccentHighlight"
-        android:layout_weight="0.05"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</RelativeLayout>
